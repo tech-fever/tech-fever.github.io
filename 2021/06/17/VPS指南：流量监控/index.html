@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="f4M613CNVfWg9fM_X3tG5jELt3D10Gk8E3R0ZUaMzd4">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"algolia":{"appID":"QVWTMTP22E","apiKey":"1a70640400cc23d9656c5fb60de60c0e","indexName":"dev_hexoBlog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="由于大部分VPS服务器都会限制流量，所以流量监控就非常重要了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VPS指南：流量监控">
+<meta property="og:url" content="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/index.html">
+<meta property="og:site_name" content="Rainbow">
+<meta property="og:description" content="由于大部分VPS服务器都会限制流量，所以流量监控就非常重要了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhujiget.com/wp-content/uploads/2020/03/%E5%9B%BE%E7%89%87-9.webp">
+<meta property="og:image" content="https://zhujiget.com/wp-content/uploads/2020/03/%E5%9B%BE%E7%89%87-10.webp">
+<meta property="og:image" content="https://zhujiget.com/wp-content/uploads/2020/03/%E5%9B%BE%E7%89%87-11.webp">
+<meta property="og:image" content="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/status.png">
+<meta property="og:image" content="https://zhujiget.com/wp-content/uploads/2020/03/%E5%9B%BE%E7%89%87-12.webp">
+<meta property="article:published_time" content="2021-06-17T05:05:15.000Z">
+<meta property="article:modified_time" content="2022-05-30T19:22:51.342Z">
+<meta property="article:author" content="Rainbow">
+<meta property="article:tag" content="VPS">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhujiget.com/wp-content/uploads/2020/03/%E5%9B%BE%E7%89%87-9.webp">
+
+<link rel="canonical" href="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>VPS指南：流量监控 | Rainbow</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Rainbow</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/tech-fever" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rainbow">
+      <meta itemprop="description" content="Tech Lover">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rainbow">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VPS指南：流量监控
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-17 13:05:15" itemprop="dateCreated datePublished" datetime="2021-06-17T13:05:15+08:00">2021-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-31 03:22:51" itemprop="dateModified" datetime="2022-05-31T03:22:51+08:00">2022-05-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>由于大部分VPS服务器都会限制流量，所以流量监控就非常重要了</p>
+<span id="more"></span>
+
+<h2 id="ServerStatus网页监控流量"><a href="#ServerStatus网页监控流量" class="headerlink" title="ServerStatus网页监控流量"></a>ServerStatus网页监控流量</h2><p>ServerStatus是一款适合监控多台服务器的探针程序，自带web前端界面；本篇教程采用的是 ServerStatus 的修改美化版，基于逗比大佬的一键脚本安装，可以让我们很方便上手，对于手上有很多台VPS服务器的MJJ们来说是个不错的监控工具。</p>
+<h4 id="下载脚本"><a href="#下载脚本" class="headerlink" title="下载脚本"></a>下载脚本</h4><p>脚本分服务端和客户端，即一个主要提供web前段界面的VPS服务端，其它均为客户端，通过SSH工具连接上服务器，运行下列命令下载脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/CokeMine/ServerStatus-Hotaru/master/status.sh &amp;&amp; <span class="built_in">chmod</span> +x status.sh</span><br></pre></td></tr></table></figure>
+<p>下载后根据自己的实际情况分别输入下列命令进行安装服务端和客户端：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 客户端管理菜单</span></span><br><span class="line">bash status.sh c</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 服务端管理菜单</span></span><br><span class="line">bash status.sh s </span><br></pre></td></tr></table></figure>
+<h4 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h4><p>所谓服务端就是用来挂载网页的服务器，运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 服务端管理菜单</span></span><br><span class="line">bash status.sh s </span><br></pre></td></tr></table></figure>
+<p>首先我们这里示例安装服务端，输入数字1开始安装<br>！<a target="_blank" rel="noopener" href="https://zhujiget.com/wp-content/uploads/2020/03/%E5%9B%BE%E7%89%87-8.webp"></a><br>然后输入服务端的监听端口，这个端口设置建议10000-60000之间即可，后面客户端连接需要用到，然后回车，安装过程中会提示是否配置HTTP服务，输入Y回车即可<br><img src="https://zhujiget.com/wp-content/uploads/2020/03/%E5%9B%BE%E7%89%87-9.webp"><br>安装后进入服务端管理菜单选择7设置服务器配置，然后选择1添加节点，每次增加客户端都需要在这里添加一条节点<br><img src="https://zhujiget.com/wp-content/uploads/2020/03/%E5%9B%BE%E7%89%87-10.webp"><br>接着输入节点的信息，也就是要监控的服务器名称等，后面客户端连接需要用到<br><img src="https://zhujiget.com/wp-content/uploads/2020/03/%E5%9B%BE%E7%89%87-11.webp">  </p>
+<p>如果caddy自动安装配置有问题，这里我们推荐自行配置网页。具体可参见后文<a target="_blank" rel="noopener" href="https://docwho22.github.io/DocWho22/2021/06/21/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8caddy/">VPS指南：安装使用caddy</a></p>
+<p><img src="/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/status.png"></p>
+<h4 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h4><p>在需要监控的服务器上安装上面的脚本，然后输入命令进入客户端管理界面，选择安装，接着配置下服务端的IP&#x2F;域名以及前面设置的监听端口，节点信息等等，如下图：<br><img src="https://zhujiget.com/wp-content/uploads/2020/03/%E5%9B%BE%E7%89%87-12.webp"> </p>
+<p>值得一提的是，该脚本已经集合了vnstat的流量统计功能，可以自动进行安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">对于流量计算是否使用Vnstat每月自动清零？ [y/N]</span><br><span class="line">(默认: N):y</span><br></pre></td></tr></table></figure>
+
+<p>其它说明：</p>
+<blockquote>
+<p>安装目录：&#x2F;usr&#x2F;local&#x2F;ServerStatus<br>网页文件：&#x2F;usr&#x2F;local&#x2F;ServerStatus&#x2F;web<br>配置文件：&#x2F;usr&#x2F;local&#x2F;ServerStatus&#x2F;server&#x2F;config.json<br>增加多个服务器节点，先在服务端添加节点，然后再到其它服务器上面部署连接客户端<br>修改网页标题或者网页顶部公告内容，打开服务端&#x2F;usr&#x2F;local&#x2F;ServerStatus&#x2F;web&#x2F;index.html文件修改即可</p>
+</blockquote>
+<h2 id="使用vnStat详细流量监控"><a href="#使用vnStat详细流量监控" class="headerlink" title="使用vnStat详细流量监控"></a>使用vnStat详细流量监控</h2><p>（如果已经安装了ServerStatus客户端，就不要用这个办法安装vnstat了，会导致冲突）<br>vnStat是一款非常好的Linux系统服务器下面的流量监控开源工具，可以很直观的统计监控每小时、每天、每月的流量详细使用情况；由于大部分VPS服务器都会限制流量，而服务商又没有提供一个详细的流量表，所以对于我们个人来说vnStat这款工具非常实用，这里给大家介绍下它的安装使用教程。</p>
+<blockquote>
+<p>vnStat项目github地址：<a target="_blank" rel="noopener" href="https://github.com/vergoh/vnstat">https://github.com/vergoh/vnstat</a></p>
+</blockquote>
+<h4 id="首先连接上服务器后，需要进行安装vnStat，执行下列命令"><a href="#首先连接上服务器后，需要进行安装vnStat，执行下列命令" class="headerlink" title="首先连接上服务器后，需要进行安装vnStat，执行下列命令"></a>首先连接上服务器后，需要进行安装vnStat，执行下列命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##centos系统要先安装 epel 源后才能用yum安装</span></span><br><span class="line">yum install epel-release -y &amp;&amp; yum install -y vnstat</span><br><span class="line"> </span><br><span class="line"><span class="comment">##ubuntu/debian系统直接apt-get命令安装即可</span></span><br><span class="line">apt-get install vnstat</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装后我们可以使用ifconfig命令查看下网卡名称，如果系统提示无此命令，则需要安装，执行下列命令："><a href="#安装后我们可以使用ifconfig命令查看下网卡名称，如果系统提示无此命令，则需要安装，执行下列命令：" class="headerlink" title="安装后我们可以使用ifconfig命令查看下网卡名称，如果系统提示无此命令，则需要安装，执行下列命令："></a>安装后我们可以使用ifconfig命令查看下网卡名称，如果系统提示无此命令，则需要安装，执行下列命令：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装net工具箱，包含ifconfig等网络命令</span></span><br><span class="line">yum install net-tools <span class="comment"># CentOS</span></span><br><span class="line">apt-get install net-tools <span class="comment"># Debian or ubuntu</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 查看网卡信息</span></span><br><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
+
+<h4 id="获得网卡名称后，创建监控数据库，eth0为需要监控的网卡名称"><a href="#获得网卡名称后，创建监控数据库，eth0为需要监控的网卡名称" class="headerlink" title="获得网卡名称后，创建监控数据库，eth0为需要监控的网卡名称"></a>获得网卡名称后，创建监控数据库，eth0为需要监控的网卡名称</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vnstat -u -i eth0</span><br></pre></td></tr></table></figure>
+<h4 id="最后启动服务并且设置为开机启动"><a href="#最后启动服务并且设置为开机启动" class="headerlink" title="最后启动服务并且设置为开机启动"></a>最后启动服务并且设置为开机启动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动服务</span></span><br><span class="line">service vnstat start</span><br></pre></td></tr></table></figure>
+<p>CentOS系统采用下列命令开机启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig vnstat on</span><br></pre></td></tr></table></figure>
+<p>debian或ubuntu则用这个</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> vnstat</span><br></pre></td></tr></table></figure>
+
+<h4 id="上述操作完成后不要着急，等个十几分钟直接输入vnstat命令或下列命令查看流量统计情况"><a href="#上述操作完成后不要着急，等个十几分钟直接输入vnstat命令或下列命令查看流量统计情况" class="headerlink" title="上述操作完成后不要着急，等个十几分钟直接输入vnstat命令或下列命令查看流量统计情况"></a>上述操作完成后不要着急，等个十几分钟直接输入vnstat命令或下列命令查看流量统计情况</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vnstat -l  <span class="comment"># 或者 `--live` 实时流量</span></span><br><span class="line">vnstat -h  <span class="comment"># 显示小时流量</span></span><br><span class="line">vnstat -d  <span class="comment"># 显示日流量信息</span></span><br><span class="line">vnstat -w  <span class="comment"># 显示周流量信息</span></span><br><span class="line">vnstat -m  <span class="comment"># 显示月流量信息</span></span><br><span class="line">vnstat -t  <span class="comment"># 显示流量最高top10天</span></span><br><span class="line">/etc/vnstat.conf <span class="comment"># 配置文件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="如果出错"><a href="#如果出错" class="headerlink" title="如果出错"></a>如果出错</h3><p>但我测试发现它会一直使用默认网卡名，也就是eth0<br>所以如果发现后面用不了的话，使用vim修改<code>/etc/vnstat.conf</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vnstat.conf</span><br></pre></td></tr></table></figure>
+
+<p>修改<code># default interface</code>下面的<code>Interface</code>后面的字符串为你自己的网卡<br>我的是ens5</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">head</span> /etc/vnstat.conf </span><br><span class="line"><span class="comment"># vnStat 1.13 config file</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># default interface</span></span><br><span class="line">Interface <span class="string">&quot;eth0&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># location of the database directory</span></span><br><span class="line">DatabaseDir <span class="string">&quot;/var/lib/vnstat&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># locale (LC_ALL) (&quot;-&quot; = use system locale)</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://askubuntu.com/questions/1031052/error-unable-to-read-database-var-lib-vnstat-eth0-no-such-file-or-directory">https://askubuntu.com/questions/1031052/error-unable-to-read-database-var-lib-vnstat-eth0-no-such-file-or-directory</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Rainbow
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/" title="VPS指南：流量监控">https://pawswrite.xyz/2021/06/17/VPS指南：流量监控/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/VPS/" rel="tag"># VPS</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E8%A7%A3%E9%94%81%E7%BD%91%E6%98%93%E4%BA%91%E7%81%B0%E8%89%B2%E6%AD%8C%E6%9B%B2%E4%B9%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%90%AD%E5%BB%BA/" rel="prev" title="VPS指南：解锁网易云灰色歌曲之服务器端搭建">
+      <i class="fa fa-chevron-left"></i> VPS指南：解锁网易云灰色歌曲之服务器端搭建
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/21/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8caddy/" rel="next" title="VPS指南：安装使用caddy">
+      VPS指南：安装使用caddy <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            ------------- 本文结束 <i class="fa fa-heart-o"></i> 感谢您的阅读-------------
+     </div>
+    
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ServerStatus%E7%BD%91%E9%A1%B5%E7%9B%91%E6%8E%A7%E6%B5%81%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">ServerStatus网页监控流量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E8%84%9A%E6%9C%AC"><span class="nav-number">1.0.1.</span> <span class="nav-text">下载脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AE%89%E8%A3%85"><span class="nav-number">1.0.2.</span> <span class="nav-text">服务端安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.0.3.</span> <span class="nav-text">客户端连接</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8vnStat%E8%AF%A6%E7%BB%86%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7"><span class="nav-number">2.</span> <span class="nav-text">使用vnStat详细流量监控</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E8%BF%9E%E6%8E%A5%E4%B8%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%8E%EF%BC%8C%E9%9C%80%E8%A6%81%E8%BF%9B%E8%A1%8C%E5%AE%89%E8%A3%85vnStat%EF%BC%8C%E6%89%A7%E8%A1%8C%E4%B8%8B%E5%88%97%E5%91%BD%E4%BB%A4"><span class="nav-number">2.0.1.</span> <span class="nav-text">首先连接上服务器后，需要进行安装vnStat，执行下列命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%90%8E%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8ifconfig%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8B%E4%B8%8B%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0%EF%BC%8C%E5%A6%82%E6%9E%9C%E7%B3%BB%E7%BB%9F%E6%8F%90%E7%A4%BA%E6%97%A0%E6%AD%A4%E5%91%BD%E4%BB%A4%EF%BC%8C%E5%88%99%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85%EF%BC%8C%E6%89%A7%E8%A1%8C%E4%B8%8B%E5%88%97%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="nav-number">2.0.2.</span> <span class="nav-text">安装后我们可以使用ifconfig命令查看下网卡名称，如果系统提示无此命令，则需要安装，执行下列命令：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%BE%97%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0%E5%90%8E%EF%BC%8C%E5%88%9B%E5%BB%BA%E7%9B%91%E6%8E%A7%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%8Ceth0%E4%B8%BA%E9%9C%80%E8%A6%81%E7%9B%91%E6%8E%A7%E7%9A%84%E7%BD%91%E5%8D%A1%E5%90%8D%E7%A7%B0"><span class="nav-number">2.0.3.</span> <span class="nav-text">获得网卡名称后，创建监控数据库，eth0为需要监控的网卡名称</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E4%B8%BA%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8"><span class="nav-number">2.0.4.</span> <span class="nav-text">最后启动服务并且设置为开机启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E8%BF%B0%E6%93%8D%E4%BD%9C%E5%AE%8C%E6%88%90%E5%90%8E%E4%B8%8D%E8%A6%81%E7%9D%80%E6%80%A5%EF%BC%8C%E7%AD%89%E4%B8%AA%E5%8D%81%E5%87%A0%E5%88%86%E9%92%9F%E7%9B%B4%E6%8E%A5%E8%BE%93%E5%85%A5vnstat%E5%91%BD%E4%BB%A4%E6%88%96%E4%B8%8B%E5%88%97%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8B%E6%B5%81%E9%87%8F%E7%BB%9F%E8%AE%A1%E6%83%85%E5%86%B5"><span class="nav-number">2.0.5.</span> <span class="nav-text">上述操作完成后不要着急，等个十几分钟直接输入vnstat命令或下列命令查看流量统计情况</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E5%87%BA%E9%94%99"><span class="nav-number">2.1.</span> <span class="nav-text">如果出错</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rainbow"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Rainbow</p>
+  <div class="site-description" itemprop="description">Tech Lover</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://nz.pawswrite.xyz/" title="探针 → http:&#x2F;&#x2F;nz.pawswrite.xyz" rel="noopener" target="_blank"><i class="fas fa-server fa-fw"></i>探针</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">@rainbow</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">186k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:49</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '416e004749a692890792',
+      clientSecret: 'a51d95d68a7fddba31072393540e0e2c3b09d91f',
+      repo        : 'Gitalk',
+      owner       : 'tech-fever',
+      admin       : ['tech-fever'],
+      id          : 'bc9464a0481e9110e8fda98ed17cfc01',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

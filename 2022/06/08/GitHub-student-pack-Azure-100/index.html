@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="f4M613CNVfWg9fM_X3tG5jELt3D10Gk8E3R0ZUaMzd4">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"algolia":{"appID":"QVWTMTP22E","apiKey":"1a70640400cc23d9656c5fb60de60c0e","indexName":"dev_hexoBlog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文详解如何薅GitHub的学生包里的Azure给的100美金试用，有效期一年，不需要信用卡，而是学校的电子邮件地址。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitHub 学生包: Azure 100美金试用">
+<meta property="og:url" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/index.html">
+<meta property="og:site_name" content="Rainbow">
+<meta property="og:description" content="本文详解如何薅GitHub的学生包里的Azure给的100美金试用，有效期一年，不需要信用卡，而是学校的电子邮件地址。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/azure100.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/100.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/azurefree.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/link.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/join.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/start.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/create.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/VM.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/basic.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/passwd.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/ok.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/warn.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/stop.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/disk.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/adjust.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/inbound.png">
+<meta property="og:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/b1s.jpg">
+<meta property="article:published_time" content="2022-06-08T02:36:42.000Z">
+<meta property="article:modified_time" content="2022-06-28T13:40:13.234Z">
+<meta property="article:author" content="Rainbow">
+<meta property="article:tag" content="GitHub">
+<meta property="article:tag" content="web开发">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/azure100.PNG">
+
+<link rel="canonical" href="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>GitHub 学生包: Azure 100美金试用 | Rainbow</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Rainbow</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/tech-fever" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rainbow">
+      <meta itemprop="description" content="Tech Lover">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rainbow">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GitHub 学生包: Azure 100美金试用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-08 10:36:42" itemprop="dateCreated datePublished" datetime="2022-06-08T10:36:42+08:00">2022-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-28 21:40:13" itemprop="dateModified" datetime="2022-06-28T21:40:13+08:00">2022-06-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">学习是人生第一要务</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文详解如何薅GitHub的学生包里的Azure给的100美金试用，有效期一年，<font color="orange">不需要信用卡，而是学校的电子邮件地址</font>。<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/azure100.PNG"></p>
+<span id="more"></span>
+
+<h1 id="福利解释"><a href="#福利解释" class="headerlink" title="福利解释"></a>福利解释</h1><p>Azure这个福利主要是给了<strong>100美金</strong>的试用（为期一年），同时可以享受1年期的2个Azure虚拟机，Azure SQL数据库，和5GB的本地冗余存储热块。同时还有永久的Azure应用服务和云函数，集群容器管理Azure Kubernetes服务，静态页面部署（最多10个）等等。<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/100.PNG">  </p>
+<ol>
+<li>Linux 虚拟机 750 小时&#x2F;月，即套餐B1S VM（1核1GB内存）开一个免费用一年。</li>
+<li>Windows 虚拟机 750 小时&#x2F;月，即套餐B1S VM（1核1GB内存）开一个免费用一年。</li>
+<li>托管磁盘 两个 64 GB 的 P6 SDD ，Blob 存储 5 GB 。文件存储 5 GB。</li>
+<li>SQL 数据库 250 GB ，创建可提供内置智能功能的 SQL 数据库。</li>
+<li>Azure Cosmos DB 数据库 400 RU 数&#x2F;秒</li>
+</ol>
+<p>关于带宽的问题，Azure官方的 <a target="_blank" rel="noopener" href="https://azure.microsoft.com/zh-cn/pricing/details/bandwidth/">带宽定价</a> 有说明。下面是我的理解，不一定对：</p>
+<ul>
+<li>数据传入：免费</li>
+<li>数据传出：<ul>
+<li>前100GB免费</li>
+<li>后10TB：<ul>
+<li>$0.12&#x2F;GB</li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/azure/virtual-network/routing-preference-overview">路由首选传输 ISP 网络</a>：$0.12&#x2F;GB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>区域之间：<ul>
+<li>同区域免费</li>
+<li>跨区域 $0.02 ~ 0.16&#x2F;GB 不等</li>
+</ul>
+</li>
+</ul>
+<p>就是说前100GB免费，而100刀的话，基本每个月还可以超大概70GB的样子。</p>
+<p>参考：</p>
+<blockquote>
+<p>Azure $200（需要信用卡）：<a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/dev-essentials/">《Visual Studio Dev Essentials 免费工具. 云服务和培训》</a><br>Azure $100 （需要教育邮箱）：<a target="_blank" rel="noopener" href="https://azure.microsoft.com/zh-cn/free/students/">使用面向学生的 Azure 在云中免费生成内容</a></p>
+</blockquote>
+<p><img src="/2022/06/08/GitHub-student-pack-Azure-100/azurefree.PNG"></p>
+<h1 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h1><p>激活账号非常简单方便。</p>
+<p>从<strong>学生包的链接</strong>进入：<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/link.PNG">  </p>
+<p>之后可以选择使用已经有的微软账号登录或者新建账号登录，均可。最后选择自己需要的福利进行激活。</p>
+<p>一般来说用的最多的就是：</p>
+<ul>
+<li>Azure 免费帐户 + 100 美元信用额度</li>
+</ul>
+<p>但是之后又需要你用<strong>教育邮箱</strong>来进行激活：<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/join.PNG">  </p>
+<h1 id="创建虚拟机"><a href="#创建虚拟机" class="headerlink" title="创建虚拟机"></a>创建虚拟机</h1><p><img src="/2022/06/08/GitHub-student-pack-Azure-100/start.PNG"><br>进入首页，点击创建资源：<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/create.PNG"><br>选择虚拟机-创建：<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/VM.PNG"><br>如果使用私钥登录SSH的话，按照下图创建，并命名密钥对名字即可，如果使用密码登录，指定密码和用户名即可，新手建议后者：<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/basic.PNG"><br>改用密码登录：<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/passwd.PNG"> </p>
+<div class="note info">如果使用密钥连接SSH，一定要记得下载密钥！只有一次下载机会。</div>
+
+<p>之后对细节进行确认，再点击创建，即可。最后等待部署完成<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/ok.PNG"></p>
+<h1 id="更换磁盘"><a href="#更换磁盘" class="headerlink" title="更换磁盘"></a>更换磁盘</h1><p>Azure for Student包含两个免费的64GB的p6性能的磁盘。但创建实例的时候默认创建30GB的磁盘且不能更改，这个30GB是<strong>收费</strong>的，虽然我们有100刀可拿来扣，但实在亏啊，所以一定要修改成64GB。</p>
+<h2 id="停止实例"><a href="#停止实例" class="headerlink" title="停止实例"></a>停止实例</h2><p>直接修改会发现实例在运行的时候是不能改的。所以先停止实例。<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/warn.PNG"></p>
+<p>在资源中找到实例，点击概述，找到停止：<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/stop.PNG"></p>
+<div class="note info">面板上重启机器会导致IP变化。但静态IP是要收费的。不过一般来说也不会重启所以我个人觉得无所谓了。</div>
+
+<h2 id="更改磁盘容量【必须】"><a href="#更改磁盘容量【必须】" class="headerlink" title="更改磁盘容量【必须】"></a>更改磁盘容量【必须】</h2><p>点击磁盘：<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/disk.PNG"></p>
+<p>调整大小：<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/adjust.PNG"></p>
+<p>之后返回页面点击概述-开始，启动虚拟机即可~</p>
+<div class="note info">磁盘页面的磁盘容量如果没有变化，刷新就好。</div>
+
+<h1 id="防火墙设置"><a href="#防火墙设置" class="headerlink" title="防火墙设置"></a>防火墙设置</h1><p>点开刚创建的虚拟机 -&gt; 网络 -&gt; 入站端口规则 -&gt; 添加入站端口规则 + 添加出站端口规则，你需要用到什么端口就开什么端口，如果对安全要求不高且怕麻烦的话，建议一次性全开了。出入站都是如下图所设置，规则名字不要重复就好。<br><img src="/2022/06/08/GitHub-student-pack-Azure-100/inbound.png">  </p>
+<h1 id="增加磁盘【可选】"><a href="#增加磁盘【可选】" class="headerlink" title="增加磁盘【可选】"></a>增加磁盘【可选】</h1><p>因为b1s性能垃圾。一般我都不开windows，所以多出来一个64GB磁盘。点击 <code>磁盘</code> ，点击附加磁盘，</p>
+<p>之后按照官方教程来即可：<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/azure/virtual-machines/linux/attach-disk-portal">使用门户将数据磁盘附加到 Linux VM</a></p>
+<h2 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h2><p>列出磁盘：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk -o NAME,HCTL,SIZE,MOUNTPOINT | grep -i <span class="string">&quot;sd&quot;</span></span><br></pre></td></tr></table></figure>
+<p>输出类似于以下示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sda     0:0:0:0      30G</span><br><span class="line">├─sda1             29.9G /</span><br><span class="line">├─sda14               4M</span><br><span class="line">└─sda15             106M /boot/efi</span><br><span class="line">sdb     1:0:1:0      14G</span><br><span class="line">└─sdb1               14G /mnt</span><br><span class="line">sdc     3:0:0:0       4G</span><br></pre></td></tr></table></figure>
+<p>在此示例中，添加的磁盘是 <code>sdc</code>。 它的 LUN 为 0，大小为 4 GB。<br>如果附加新磁盘，需要对磁盘进行分区。</p>
+<p><code>parted</code> 实用程序可用于对数据磁盘进行分区和格式设置。</p>
+<ul>
+<li>建议使用适用于你的发行版的最新版 <code>parted</code>。</li>
+<li>如果磁盘大于或等于 2 TiB，必须使用 GPT 分区。 如果磁盘小于 2 TiB，则可以使用 MBR 或 GPT 分区。</li>
+</ul>
+<p>以下示例在 <code>/dev/sdc</code> 上使用 <code>parted</code>，那里是大多数 VM 上第一块数据磁盘通常所在的位置。 将 <code>sdc</code> 替换为磁盘的正确选项。 我们还使用 <a target="_blank" rel="noopener" href="https://xfs.wiki.kernel.org/">XFS</a> 文件系统对其进行格式设置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo parted /dev/sdc --script mklabel gpt mkpart xfspart xfs 0% 100%</span><br><span class="line">sudo mkfs.xfs /dev/sdc1</span><br><span class="line">sudo partprobe /dev/sdc1</span><br></pre></td></tr></table></figure>
+<h2 id="装载磁盘"><a href="#装载磁盘" class="headerlink" title="装载磁盘"></a>装载磁盘</h2><p>使用 <code>mkdir</code> 创建一个目录来装载文件系统。 以下示例在 <code>/datadrive</code> 处创建一个目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> /datadrive</span><br></pre></td></tr></table></figure>
+
+<p>然后，使用 <code>mount</code> 来装载文件系统。 以下示例将 <em>&#x2F;dev&#x2F;sdc1</em> 分区装载到 <code>/datadrive</code> 装入点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/sdc1 /datadrive</span><br></pre></td></tr></table></figure>
+
+<p>若要确保在重新引导后自动重新装载驱动器，必须将其添加到 <em>&#x2F;etc&#x2F;fstab</em> 文件。 强烈建议在 &#x2F;etc&#x2F;fstab 中使用 UUID（全局唯一标识符）来引用驱动器而不是只使用设备名称（例如 &#x2F;&#x2F;dev&#x2F;sdc1） 。 如果 OS 在启动过程中检测到磁盘错误，使用 UUID 可以避免将错误的磁盘装载到给定位置。 然后为剩余的数据磁盘分配这些设备 ID。 若要查找新驱动器的 UUID，请使用 <code>blkid</code> 实用工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid</span><br></pre></td></tr></table></figure>
+
+<p>输出与以下示例类似：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda1: LABEL=<span class="string">&quot;cloudimg-rootfs&quot;</span> UUID=<span class="string">&quot;11111111-1b1b-1c1c-1d1d-1e1e1e1e1e1e&quot;</span> TYPE=<span class="string">&quot;ext4&quot;</span> PARTUUID=<span class="string">&quot;1a1b1c1d-11aa-1234-1a1a1a1a1a1a&quot;</span></span><br><span class="line">/dev/sda15: LABEL=<span class="string">&quot;UEFI&quot;</span> UUID=<span class="string">&quot;BCD7-96A6&quot;</span> TYPE=<span class="string">&quot;vfat&quot;</span> PARTUUID=<span class="string">&quot;1e1g1cg1h-11aa-1234-1u1u1a1a1u1u&quot;</span></span><br><span class="line">/dev/sdb1: UUID=<span class="string">&quot;22222222-2b2b-2c2c-2d2d-2e2e2e2e2e2e&quot;</span> TYPE=<span class="string">&quot;ext4&quot;</span> TYPE=<span class="string">&quot;ext4&quot;</span> PARTUUID=<span class="string">&quot;1a2b3c4d-01&quot;</span></span><br><span class="line">/dev/sda14: PARTUUID=<span class="string">&quot;2e2g2cg2h-11aa-1234-1u1u1a1a1u1u&quot;</span></span><br><span class="line">/dev/sdc1: UUID=<span class="string">&quot;33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e&quot;</span> TYPE=<span class="string">&quot;xfs&quot;</span> PARTLABEL=<span class="string">&quot;xfspart&quot;</span> PARTUUID=<span class="string">&quot;c1c2c3c4-1234-cdef-asdf3456ghjk&quot;</span></span><br></pre></td></tr></table></figure>
+
+<div class="note info">错误地编辑 /etc/fstab 文件可能会导致系统无法引导。 如果没有把握，请参考分发的文档来获取有关如何正确编辑该文件的信息。 另外，建议在编辑前备份 /etc/fstab 文件。</div>
+
+<p>在文本编辑器中打开 <em>&#x2F;etc&#x2F;fstab</em> 文件，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/fstab</span><br></pre></td></tr></table></figure>
+
+<p>在此示例中，使用在之前的步骤中创建的 <code>/dev/sdc1</code> 设备的 UUID 值并使用 <code>/datadrive</code> 装入点。 在 <code>/etc/fstab</code> 文件的末尾添加以下行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   xfs   defaults,nofail   1   2</span><br></pre></td></tr></table></figure>
+
+<p>因为使用的是 nano 编辑器，所以在编辑完文件后，使用 <code>Ctrl+O</code> 写入该文件，然后使用 <code>Ctrl+X</code> 退出该编辑器。</p>
+<h2 id="验证磁盘"><a href="#验证磁盘" class="headerlink" title="验证磁盘"></a>验证磁盘</h2><p>现在可以再次使用 <code>lsblk</code> 来查看磁盘和装入点。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk -o NAME,HCTL,SIZE,MOUNTPOINT | grep -i <span class="string">&quot;sd&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>输出将如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sda     0:0:0:0      30G</span><br><span class="line">├─sda1             29.9G /</span><br><span class="line">├─sda14               4M</span><br><span class="line">└─sda15             106M /boot/efi</span><br><span class="line">sdb     1:0:1:0      14G</span><br><span class="line">└─sdb1               14G /mnt</span><br><span class="line">sdc     3:0:0:0       4G</span><br><span class="line">└─sdc1                4G /datadrive</span><br></pre></td></tr></table></figure>
+
+<p>可以看到 <code>sdc</code> 现在已装载到 <code>/datadrive</code>。</p>
+<p>查看总磁盘容量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sL yabs.sh | bash -s -- -fig</span><br></pre></td></tr></table></figure>
+
+<h2 id="多嘴一句"><a href="#多嘴一句" class="headerlink" title="多嘴一句"></a>多嘴一句</h2><p>B1s这个性能限制到了10%，硬盘性能也非常差。意思就是拿来玩玩就好了。实际上做不了啥。</p>
+<p><img src="/2022/06/08/GitHub-student-pack-Azure-100/b1s.jpg"></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Rainbow
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/" title="GitHub 学生包: Azure 100美金试用">https://pawswrite.xyz/2022/06/08/GitHub-student-pack-Azure-100/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/GitHub/" rel="tag"># GitHub</a>
+              <a href="/tags/web%E5%BC%80%E5%8F%91/" rel="tag"># web开发</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/06/03/Reverse-Proxy-for-Telegram-Bot-API/" rel="prev" title="Telegram机器人api被墙解决办法：自建反代">
+      <i class="fa fa-chevron-left"></i> Telegram机器人api被墙解决办法：自建反代
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/06/09/GitHub-Student-Pack-Netwise/" rel="next" title="GitHub 学生包：没用的Netwise服务器托管">
+      GitHub 学生包：没用的Netwise服务器托管 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            ------------- 本文结束 <i class="fa fa-heart-o"></i> 感谢您的阅读-------------
+     </div>
+    
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A6%8F%E5%88%A9%E8%A7%A3%E9%87%8A"><span class="nav-number">1.</span> <span class="nav-text">福利解释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">开始使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">3.</span> <span class="nav-text">创建虚拟机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2%E7%A3%81%E7%9B%98"><span class="nav-number">4.</span> <span class="nav-text">更换磁盘</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E5%AE%9E%E4%BE%8B"><span class="nav-number">4.1.</span> <span class="nav-text">停止实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E7%A3%81%E7%9B%98%E5%AE%B9%E9%87%8F%E3%80%90%E5%BF%85%E9%A1%BB%E3%80%91"><span class="nav-number">4.2.</span> <span class="nav-text">更改磁盘容量【必须】</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">防火墙设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E7%A3%81%E7%9B%98%E3%80%90%E5%8F%AF%E9%80%89%E3%80%91"><span class="nav-number">6.</span> <span class="nav-text">增加磁盘【可选】</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA"><span class="nav-number">6.1.</span> <span class="nav-text">磁盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%85%E8%BD%BD%E7%A3%81%E7%9B%98"><span class="nav-number">6.2.</span> <span class="nav-text">装载磁盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E7%A3%81%E7%9B%98"><span class="nav-number">6.3.</span> <span class="nav-text">验证磁盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%98%B4%E4%B8%80%E5%8F%A5"><span class="nav-number">6.4.</span> <span class="nav-text">多嘴一句</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rainbow"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Rainbow</p>
+  <div class="site-description" itemprop="description">Tech Lover</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://nz.pawswrite.xyz/" title="探针 → http:&#x2F;&#x2F;nz.pawswrite.xyz" rel="noopener" target="_blank"><i class="fas fa-server fa-fw"></i>探针</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">@rainbow</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">186k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:49</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '416e004749a692890792',
+      clientSecret: 'a51d95d68a7fddba31072393540e0e2c3b09d91f',
+      repo        : 'Gitalk',
+      owner       : 'tech-fever',
+      admin       : ['tech-fever'],
+      id          : 'eade39adf9a683d0e31ab57170c07009',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

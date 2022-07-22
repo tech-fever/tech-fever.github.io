@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="f4M613CNVfWg9fM_X3tG5jELt3D10Gk8E3R0ZUaMzd4">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"algolia":{"appID":"QVWTMTP22E","apiKey":"1a70640400cc23d9656c5fb60de60c0e","indexName":"dev_hexoBlog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="GitHub 学生包有很多福利。最近薅了一个，记录一下包里的内容~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2022最新最全GitHub学生包分析">
+<meta property="og:url" content="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/index.html">
+<meta property="og:site_name" content="Rainbow">
+<meta property="og:description" content="GitHub 学生包有很多福利。最近薅了一个，记录一下包里的内容~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets-global.website-files.com/5c7036349b5477bf13f828cf/5d25a8e546c1e328549f9e9b_GitHub%20icon.svg">
+<meta property="og:image" content="https://education.github.com/assets/experience/02/github-web-development-kit-logo-7b7457f9366e7e245815871a994d0e2ebacdbd84549a53182b308d795b46d88d.png">
+<meta property="og:image" content="https://education.github.com/assets/experience/01/virtual-event-kit-icon-37a665f41a85865fe51a9db5c9b050f4bdc684d42b379e80688ec078e11a6114.png">
+<meta property="og:image" content="https://assets-global.website-files.com/5c7036349b5477bf13f828cf/5ee98fcc9bc7df9d4b8f99d2_desktop_preview.png">
+<meta property="og:image" content="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/termius.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/MailGun.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/mailtester.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/datadog.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/product-features-network.avif">
+<meta property="og:image" content="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/datadog2.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/NewRelicAuth.PNG">
+<meta property="og:image" content="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/product-features-network.avif">
+<meta property="og:image" content="https://www.gitkraken.com/img/logos/github.svg">
+<meta property="og:image" content="https://www.gitkraken.com/img/happy-kraken.svg">
+<meta property="og:image" content="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/gk-gui-tab-example.png">
+<meta property="og:image" content="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/gk-terminal-tab-example.png">
+<meta property="og:image" content="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/GitLen.PNG">
+<meta property="article:published_time" content="2022-05-13T12:25:29.000Z">
+<meta property="article:modified_time" content="2022-05-30T19:24:13.141Z">
+<meta property="article:author" content="Rainbow">
+<meta property="article:tag" content="GitHub">
+<meta property="article:tag" content="web开发">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets-global.website-files.com/5c7036349b5477bf13f828cf/5d25a8e546c1e328549f9e9b_GitHub%20icon.svg">
+
+<link rel="canonical" href="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>2022最新最全GitHub学生包分析 | Rainbow</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Rainbow</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/tech-fever" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rainbow">
+      <meta itemprop="description" content="Tech Lover">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rainbow">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2022最新最全GitHub学生包分析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-05-13 20:25:29" itemprop="dateCreated datePublished" datetime="2022-05-13T20:25:29+08:00">2022-05-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-31 03:24:13" itemprop="dateModified" datetime="2022-05-31T03:24:13+08:00">2022-05-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">学习是人生第一要务</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>GitHub 学生包有很多福利。最近薅了一个，记录一下包里的内容~</p>
+<span id="more"></span>
+
+<h2 id="GitHub学生包简介"><a href="#GitHub学生包简介" class="headerlink" title="GitHub学生包简介"></a><code>GitHub</code>学生包简介<img src="https://assets-global.website-files.com/5c7036349b5477bf13f828cf/5d25a8e546c1e328549f9e9b_GitHub%20icon.svg"></h2><p><a target="_blank" rel="noopener" href="https://education.github.com/pack">GitHub 学生包</a>，也就是 <code>GitHub Student Developer Pack</code>是面向海内外高校学生的一项福利，一些公司免费提供给学生资源一段时间，或一定量。。不过因为被薅羊毛太过，现在审核很严格，原本白名单学校只需要edu邮箱验证即可，但现在基本都要学生证验证了。所以在校大学生珍惜这个机会，去尝试尝试吧。</p>
+<h2 id="学生包内容简介"><a href="#学生包内容简介" class="headerlink" title="学生包内容简介"></a>学生包内容简介</h2><p>这个包主要由两部分组成，Web 开发简介和虚拟化套件。除此之外还有其他的福利。这里对两个包简要介绍如下。<br><strong>微注</strong>：有用的会在下一部分详细介绍</p>
+<h3 id="Web-开发简介-Intro-to-Web-Dev"><a href="#Web-开发简介-Intro-to-Web-Dev" class="headerlink" title="Web 开发简介 Intro to Web Dev"></a>Web 开发简介 Intro to Web Dev</h3><img alt="Intro to Web Dev logo - purple computer monitor with yellow post-it featuring invertocat logo" class="width-fit experience__header__logo mb-4 mb-sm-0 ml-0 ml-sm-4" width="200" src="https://education.github.com/assets/experience/02/github-web-development-kit-logo-7b7457f9366e7e245815871a994d0e2ebacdbd84549a53182b308d795b46d88d.png">
+
+<p>官方介绍：构建下一个网站所需的一切。 在学习 Web 开发基础知识的同时，了解如何设计和构建自己的网站。 无论您目前拥有多少经验或技术知识，Web 开发体验简介都为学生提供了让您走上正轨的工具。</p>
+<p>包内优惠：</p>
+<blockquote>
+<p>🎒表示学生认证期间可享受福利</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">名字</th>
+<th align="left">简介</th>
+<th align="center">时长</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">bootstrap studio</td>
+<td align="left">用于使用 Bootstrap 框架创建响应式网站的桌面应用程序</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">🔥DigitalOcean</td>
+<td align="left">🖥️云托管商，但注册需信用卡</td>
+<td align="center">$100试用</td>
+</tr>
+<tr>
+<td align="left">🔥JetBrains</td>
+<td align="left">专业桌面 IDE，码农神器</td>
+<td align="center">1年</td>
+</tr>
+<tr>
+<td align="left">👩‍🏫🔥Microsoft Azure</td>
+<td align="left">微软Azure云服务和学习资源</td>
+<td align="center">$100试用</td>
+</tr>
+<tr>
+<td align="left">👩‍🏫educative</td>
+<td align="left">基于文本的交互式课程</td>
+<td align="center">6个月</td>
+</tr>
+<tr>
+<td align="left">Polypane</td>
+<td align="left">从头开始构建的浏览器，用于创建和测试网站和应用</td>
+<td align="center">1年</td>
+</tr>
+<tr>
+<td align="left">Twilio</td>
+<td align="left">将语音、视频和消息传递等功能添加到app的开发者平台</td>
+<td align="center">$50</td>
+</tr>
+<tr>
+<td align="left">Microsoft Visual Studio</td>
+<td align="left">桌面 IDE，码农神器，Visual Studio 社区访问权限</td>
+<td align="center">1 年 Azure 服务</td>
+</tr>
+<tr>
+<td align="left">GitHub Pages</td>
+<td align="left">通过GitHub Pages可以部署静态网站</td>
+<td align="center">本就免费</td>
+</tr>
+<tr>
+<td align="left">👩‍🏫开源课程</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://github.com/microsoft/Web-Dev-For-Beginners">JavaScript, CSS, and HTML 基础课程</a></td>
+<td align="center">本就免费</td>
+</tr>
+</tbody></table>
+<h3 id="虚拟化套件-Virtual-Event-Kit"><a href="#虚拟化套件-Virtual-Event-Kit" class="headerlink" title="虚拟化套件 Virtual Event Kit"></a>虚拟化套件 Virtual Event Kit</h3><img alt="Education laptop invertocat" class="width-fit experience__header__logo mb-4 mb-sm-0 ml-0 ml-sm-4" width="288" src="https://education.github.com/assets/experience/01/virtual-event-kit-icon-37a665f41a85865fe51a9db5c9b050f4bdc684d42b379e80688ec078e11a6114.png">
+
+<p>官方介绍：虚拟活动所需的一切。 为参与而设计，我们将负责这些工具。 虚拟活动工具包为学生提供了使在线活动变得简单且易于访问的资源。</p>
+<blockquote>
+<p>🎒表示学生认证期间可享受福利</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">名字</th>
+<th align="left">简介</th>
+<th align="center">时长</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">🔥Namecheap</td>
+<td align="left">经济实惠的注册、托管和域管理</td>
+<td align="center">1年的 <code>.me</code> 域名和SSL证书</td>
+</tr>
+<tr>
+<td align="left">🔥Name.com</td>
+<td align="left">域、电子邮件和托管。提供域名注册和高级安全。</td>
+<td align="center">一年</td>
+</tr>
+<tr>
+<td align="left">StreamYard</td>
+<td align="left">专业直播串流平台，提供Essential Plan</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">Canva</td>
+<td align="left">专业外观的图形和设计编辑器</td>
+<td align="center">12个月</td>
+</tr>
+<tr>
+<td align="left">Discord</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://discord.com/template/UqzZCTj2zfwy">黑客马拉松服务器模板</a></td>
+<td align="center">本就免费</td>
+</tr>
+</tbody></table>
+<h3 id="其他福利"><a href="#其他福利" class="headerlink" title="其他福利"></a>其他福利</h3><blockquote>
+<p>🎒表示学生认证期间可享受福利</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">名字</th>
+<th align="left">简介</th>
+<th align="center">时长</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">👩‍🏫<a target="_blank" rel="noopener" href="https://frontendmasters.com/welcome/github-student-developers/">FrontendMasters</a></td>
+<td align="left">JavaScript、Node.js 和前端工程课程</td>
+<td align="center">6个月</td>
+</tr>
+<tr>
+<td align="left">👩‍🏫DataCamp</td>
+<td align="left">专业数据科学课程</td>
+<td align="center">3个月</td>
+</tr>
+<tr>
+<td align="left">🔥<a href="#githubpro">GitHub Pro</a></td>
+<td align="left">Pro用户资格</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">🔥.TECH</td>
+<td align="left"><code>.tech</code>域名注册</td>
+<td align="center">1年 <code>.tech</code>域名，2个免费邮箱</td>
+</tr>
+<tr>
+<td align="left"><a href="#gitlens">GitLens</a></td>
+<td align="left">VS Code 的 Git 扩展</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left"><a href="#gitlens">GitKraken </a></td>
+<td align="left">Git 客户端，提供 GUI 和终端界面。</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">Polypane</td>
+<td align="left">功能强大的浏览器和开发工具</td>
+<td align="center">1年</td>
+</tr>
+<tr>
+<td align="left">PomoDone</td>
+<td align="left">跨平台番茄钟应用</td>
+<td align="center">Lite plan 2年</td>
+</tr>
+<tr>
+<td align="left">Iconscout</td>
+<td align="left">设计资源市场，可获取高质量的图标、插图和图像</td>
+<td align="center">1年</td>
+</tr>
+<tr>
+<td align="left">Icons8</td>
+<td align="left">提供图标、UI 插图、照片和软件的设计资源</td>
+<td align="center">3个月</td>
+</tr>
+<tr>
+<td align="left">🔥Termius</td>
+<td align="left">界面好看，适用于桌面和移动设备的 SSH 客户端</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">👩‍🏫OneMonth</td>
+<td align="left">HTML, CSS, JavaScript and Python的30天课程</td>
+<td align="center">30天</td>
+</tr>
+<tr>
+<td align="left">MongoDB</td>
+<td align="left">通用、基于文档的分布式数据库</td>
+<td align="center">$50试用</td>
+</tr>
+<tr>
+<td align="left">📧Testmail</td>
+<td align="left">使用自动化API和无限的邮箱地址来邮件测试</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">📧Mailgun</td>
+<td align="left">电子邮件服务商</td>
+<td align="center">12个月</td>
+</tr>
+<tr>
+<td align="left">DeepSource</td>
+<td align="left">静态分析Python和Go代码的各种风险的平台</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">Atom</td>
+<td align="left">GitHub上的开源编辑器</td>
+<td align="center">开源免费</td>
+</tr>
+<tr>
+<td align="left">🔥Netwise</td>
+<td align="left">英国的云服务商，提供免费服务器托管</td>
+<td align="center">12个月</td>
+</tr>
+<tr>
+<td align="left">Replit</td>
+<td align="left">超过 50 种语言代码的在线 IDE</td>
+<td align="center">3个月</td>
+</tr>
+<tr>
+<td align="left">👩‍🏫Covalence</td>
+<td align="left">全栈 Web 开发的独家开发者课程</td>
+<td align="center">前端课程</td>
+</tr>
+<tr>
+<td align="left">👩‍🏫InterviewCake</td>
+<td align="left">练习题、数据结构和算法题等使编码面试课程</td>
+<td align="center">3 周</td>
+</tr>
+<tr>
+<td align="left">Typeform</td>
+<td align="left">交互式表格、调查和测验工具</td>
+<td align="center">1年</td>
+</tr>
+<tr>
+<td align="left">🔥Strip</td>
+<td align="left">网上支付平台，帮你匿名收钱</td>
+<td align="center">前1000 美元免手续费</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://newrelic.com/">New Relic</a></td>
+<td align="left">提供服务器的性能监控功能</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">Pageclip</td>
+<td align="left">用于静态网站和 HTML 表单的服务器</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">HazeOver</td>
+<td align="left">Mac平台的多窗口管理工具，提高专注力</td>
+<td align="center">免费程序许可证</td>
+</tr>
+<tr>
+<td align="left">👩‍🏫GoRails</td>
+<td align="left">Ruby、Rails、Javascript、Turbolinks、Stimulus.js、Vue.js 等的教程</td>
+<td align="center">12个月</td>
+</tr>
+<tr>
+<td align="left">Arduino</td>
+<td align="left">单片机入门神器，提供Create Maker plan 和硬件折扣</td>
+<td align="center">6个月</td>
+</tr>
+<tr>
+<td align="left">👩‍🏫Thinkful</td>
+<td align="left">网站开发基础教程</td>
+<td align="center">1个月</td>
+</tr>
+<tr>
+<td align="left">Tower</td>
+<td align="left">Mac和Windows平台的Git客户端</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">🔥Datadog</td>
+<td align="left">云平台监控市场的老大，基于SaaS的数据分析平台</td>
+<td align="center">2年</td>
+</tr>
+<tr>
+<td align="left">Kodika</td>
+<td align="left">通过拖拽来打造iOS应用</td>
+<td align="center">6个月</td>
+</tr>
+<tr>
+<td align="left">PopSQL</td>
+<td align="left">SQL 语句编辑器，支持团队合作，可视化编程结果</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">🔥Imgbot</td>
+<td align="left">为GitHub的公开和私有仓库无损压缩优化图片</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">Dashlane</td>
+<td align="left">云端密码管理</td>
+<td align="center">6个月</td>
+</tr>
+<tr>
+<td align="left">Sentry</td>
+<td align="left">代码优化，错误检查</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">BrowserStack</td>
+<td align="left">App多设备、多浏览器测试</td>
+<td align="center">1年</td>
+</tr>
+<tr>
+<td align="left">Zyte</td>
+<td align="left">爬虫平台，代理、管理和自动化爬虫</td>
+<td align="center">永久免费</td>
+</tr>
+<tr>
+<td align="left">Blackfire</td>
+<td align="left">代码性能测量工具</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">🔥Travis CI</td>
+<td align="left">类似GitHub Actions的自动化部署平台</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">Gitpod</td>
+<td align="left">在线版Git客户端</td>
+<td align="center">6个月</td>
+</tr>
+<tr>
+<td align="left">Cryptolens</td>
+<td align="left">安全地许可和销售您的软件</td>
+<td align="center">10个许可证</td>
+</tr>
+<tr>
+<td align="left">Adafruit</td>
+<td align="left">开源硬件和开源教育电子公司</td>
+<td align="center">1年硬件折扣</td>
+</tr>
+<tr>
+<td align="left">Xojo</td>
+<td align="left">原生应用程序的跨平台开发工具</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">Freshpaint</td>
+<td align="left">营销和分析工具</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">Lingohub</td>
+<td align="left">翻译神器，翻译管理服务</td>
+<td align="center">🎒</td>
+</tr>
+<tr>
+<td align="left">Blockchair</td>
+<td align="left">区块链相关</td>
+<td align="center">10万个请求</td>
+</tr>
+<tr>
+<td align="left">👩‍🏫SymfonyCast</td>
+<td align="left">Symfony 和 PHP在线课程</td>
+<td align="center">3 个月</td>
+</tr>
+<tr>
+<td align="left">LambdaTest</td>
+<td align="left">在线对2000多个真实浏览器和操作系统执行自动化和交互式跨浏览器测试</td>
+<td align="center">1年</td>
+</tr>
+<tr>
+<td align="left">Honeybadger</td>
+<td align="left">网站监控，uptime和cron监控</td>
+<td align="center">1年</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h2 id="云服务器"><a href="#云服务器" class="headerlink" title="云服务器"></a>云服务器</h2><h3 id="DigitalOcean"><a href="#DigitalOcean" class="headerlink" title="DigitalOcean"></a>DigitalOcean</h3><p>Digital Ocean （简称为 DO）成立于 2012 年，是一家从 TechStars 孵化出来的<strong>大型</strong>云托管服务提供商。其特色服务是提供快速的固态硬盘服务器，宣称可在 55 秒钟搭建好一台云服务器。所有的服务器均拥有 1G 的网络接口，每月基础套餐为 1TB 流量，超出部分按每 GB2 美分计算。公司还提供了灵活的 API 供客户控制其私有虚拟服务器。控制面板也相当直观易用。</p>
+<p>Github 学生包一个比较吸引人的地方就是 DigitalOcean 的代金券。注册后使用offer code可拿到100美金，期限为一年。不过DigitalOcean 注册需要信用卡或者PayPal，且不允许一个 PayPal、信用卡 注册多个账户，否则会有封停的危险。</p>
+<h3 id="MicroSoft-Azure"><a href="#MicroSoft-Azure" class="headerlink" title="MicroSoft Azure"></a>MicroSoft Azure</h3><p>大名鼎鼎的Azure，本来需要信用卡注册，但学生包可以免信用卡，免费试用25+项云服务，并且获得100美金的试用。 Azure 的线路到国内非常优秀。拿来当梯子或者中转或者建站都是上上之选。</p>
+<h2 id="网站托管"><a href="#网站托管" class="headerlink" title="网站托管"></a>网站托管</h2><h3 id="PageClip"><a href="#PageClip" class="headerlink" title="PageClip"></a>PageClip</h3><p>PageClip是静态网站托管服务，可以托管类似本站Hexo博客之类的静态网站。用于 HTML 表单的灵活服务器 &#x2F; 后端. 在实时 Web 界面中查看数据，或使用 API获取 CSV 和 JSON 输出。</p>
+<p>虽然GItHub Pages也满足这个功能，但毕竟全开源。</p>
+<p>在学生期间一直可享受basic plan。</p>
+<blockquote>
+<p>静态网站：<a target="_blank" rel="noopener" href="https://asmcn.icopy.site/awesome/awesome-static-website-services/">https://asmcn.icopy.site/awesome/awesome-static-website-services/</a></p>
+</blockquote>
+<h2 id="SSH软件"><a href="#SSH软件" class="headerlink" title="SSH软件"></a>SSH软件</h2><h3 id="termius"><a href="#termius" class="headerlink" title="termius"></a>termius</h3><p>可用于桌面及移动端的SSH平台。<strong>当你为学生时，可以一直访问Premium计划（价值9.99美元&#x2F;月）。</strong></p>
+<p>进入<a target="_blank" rel="noopener" href="https://termius.com/education?utm_source=github+termius">termius</a>即可关联 <code>GitHub</code> 学生账号来解锁，link your account to unlock <strong>premium features</strong>!</p>
+<p>之后会要求你用 <code>GitHub</code> 的邮箱来创建termius账号，会发一封邮件给你，然后你登录，会记录你登录用的<strong>IP</strong>，记住要用<strong>同样的IP</strong>去验证此次登录。</p>
+<p><img src="https://assets-global.website-files.com/5c7036349b5477bf13f828cf/5ee98fcc9bc7df9d4b8f99d2_desktop_preview.png"></p>
+<p><img src="/2022/05/13/GitHub-Student-Developer-Pack/termius.PNG"></p>
+<h2 id="设计制作"><a href="#设计制作" class="headerlink" title="设计制作"></a>设计制作</h2><h3 id="Bootstrap-Studio"><a href="#Bootstrap-Studio" class="headerlink" title="Bootstrap Studio"></a>Bootstrap Studio</h3><p>Bootstrap Studio是一款非常方便的网页编辑工具，可支持用户通过该软件创建多种样式的网站页面，提供多种网页样式模板，这些模板全部都可以免费使用</p>
+<h2 id="邮件服务📧"><a href="#邮件服务📧" class="headerlink" title="邮件服务📧"></a>邮件服务📧</h2><h3 id="MailGun"><a href="#MailGun" class="headerlink" title="MailGun"></a>MailGun</h3><p>MailGun是依托AWS的邮件发送服务，提供US和EU两个区域，支持SMTP和API，可以使用自己的域名邮箱。建站非常需要相应的服务。<br>每月 20,000 封免费电子邮件和 100 封免费电子邮件验证，最长持续 12 个月。  </p>
+<blockquote>
+<p>邮件测试得分：</p>
+<blockquote>
+<p>mail tester: 9.2<br>TestMail:X-Spam-Status: No, score&#x3D;0.8 required&#x3D;5.0<br><img src="/2022/05/13/GitHub-Student-Developer-Pack/MailGun.PNG"><br>利用 <code>API</code> 发件代码如下</p>
+</blockquote>
+</blockquote>
+<div class="tabs" id="code"><ul class="nav-tabs"><li class="tab active"><a href="#code-1">bash</a></li><li class="tab"><a href="#code-2">python</a></li><li class="tab"><a href="#code-3">java</a></li><li class="tab"><a href="#code-4">go</a></li><li class="tab"><a href="#code-5">RUBY</a></li><li class="tab"><a href="#code-6">PHP</a></li><li class="tab"><a href="#code-7">C#</a></li><li class="tab"><a href="#code-8">javascript</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code-1"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -s --user <span class="string">&#x27;api:YOUR_API_KEY&#x27;</span> \</span><br><span class="line">	https://api.mailgun.net/v3/YOUR_DOMAIN_NAME/messages \</span><br><span class="line">	-F from=<span class="string">&#x27;Excited User &lt;mailgun@YOUR_DOMAIN_NAME&gt;&#x27;</span> \</span><br><span class="line">	-F to=YOU@YOUR_DOMAIN_NAME \</span><br><span class="line">	-F to=bar@example.com \</span><br><span class="line">	-F subject=<span class="string">&#x27;Hello&#x27;</span> \</span><br><span class="line">	-F text=<span class="string">&#x27;Testing some Mailgun awesomeness!&#x27;</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="code-2"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">send_simple_message</span>():</span><br><span class="line">	<span class="keyword">return</span> requests.post(</span><br><span class="line">		<span class="string">&quot;https://api.mailgun.net/v3/YOUR_DOMAIN_NAME/messages&quot;</span>,</span><br><span class="line">		auth=(<span class="string">&quot;api&quot;</span>, <span class="string">&quot;YOUR_API_KEY&quot;</span>),</span><br><span class="line">		data=&#123;<span class="string">&quot;from&quot;</span>: <span class="string">&quot;Excited User &lt;mailgun@YOUR_DOMAIN_NAME&gt;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;to&quot;</span>: [<span class="string">&quot;bar@example.com&quot;</span>, <span class="string">&quot;YOU@YOUR_DOMAIN_NAME&quot;</span>],</span><br><span class="line">			<span class="string">&quot;subject&quot;</span>: <span class="string">&quot;Hello&quot;</span>,</span><br><span class="line">			<span class="string">&quot;text&quot;</span>: <span class="string">&quot;Testing some Mailgun awesomness!&quot;</span>&#125;)</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="code-3"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> com.mashape.unirest.http.HttpResponse;</span><br><span class="line"><span class="keyword">import</span> com.mashape.unirest.http.JsonNode;</span><br><span class="line"><span class="keyword">import</span> com.mashape.unirest.http.Unirest;</span><br><span class="line"><span class="keyword">import</span> com.mashape.unirest.http.exceptions.UnirestException;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MGSample</span> &#123;</span><br><span class="line">	 <span class="comment">// ...</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> JsonNode <span class="title function_">sendSimpleMessage</span><span class="params">()</span> <span class="keyword">throws</span> UnirestException &#123;</span><br><span class="line">		HttpResponse&lt;JsonNode&gt; request = Unirest.post(<span class="string">&quot;https://api.mailgun.net/v3/&quot;</span> + YOUR_DOMAIN_NAME + <span class="string">&quot;/messages&quot;</span>),</span><br><span class="line">			.basicAuth(<span class="string">&quot;api&quot;</span>, API_KEY)</span><br><span class="line">			.queryString(<span class="string">&quot;from&quot;</span>, <span class="string">&quot;Excited User &lt;USER@YOURDOMAIN.COM&gt;&quot;</span>)</span><br><span class="line">			.queryString(<span class="string">&quot;to&quot;</span>, <span class="string">&quot;artemis@example.com&quot;</span>)</span><br><span class="line">			.queryString(<span class="string">&quot;subject&quot;</span>, <span class="string">&quot;hello&quot;</span>)</span><br><span class="line">			.queryString(<span class="string">&quot;text&quot;</span>, <span class="string">&quot;testing&quot;</span>)</span><br><span class="line">			.asJson();</span><br><span class="line">		<span class="keyword">return</span> request.getBody();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="code-4"><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SendSimpleMessage</span><span class="params">(domain, apiKey <span class="type">string</span>)</span></span> (<span class="type">string</span>, <span class="type">error</span>) &#123;</span><br><span class="line">	mg := mailgun.NewMailgun(domain, apiKey, publicApiKey)</span><br><span class="line">	m := mg.NewMessage(</span><br><span class="line">		<span class="string">&quot;Excited User &lt;mailgun@YOUR_DOMAIN_NAME&gt;&quot;</span>,</span><br><span class="line">		<span class="string">&quot;Hello&quot;</span>,</span><br><span class="line">		<span class="string">&quot;Testing some Mailgun awesomeness!&quot;</span>,</span><br><span class="line">		<span class="string">&quot;YOU@YOUR_DOMAIN_NAME&quot;</span>,</span><br><span class="line">	)</span><br><span class="line">	_, id, err := mg.Send(m)</span><br><span class="line">	<span class="keyword">return</span> id, err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="code-5"><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">send_simple_message</span></span><br><span class="line">	RestClient.post <span class="string">&quot;https://api:YOUR_API_KEY&quot;</span>\</span><br><span class="line">	<span class="string">&quot;@api.mailgun.net/v3/YOUR_DOMAIN_NAME/messages&quot;</span>,</span><br><span class="line">	<span class="symbol">:from</span> =&gt; <span class="string">&quot;Excited User &lt;mailgun@YOUR_DOMAIN_NAME&gt;&quot;</span></span><br><span class="line">	<span class="symbol">:to</span> =&gt; <span class="string">&quot;bar@example.com, YOU@YOUR_DOMAIN_NAME&quot;</span>,</span><br><span class="line">	<span class="symbol">:subject</span> =&gt; <span class="string">&quot;Hello&quot;</span>,</span><br><span class="line">	<span class="symbol">:text</span> =&gt; <span class="string">&quot;Testing some Mailgun awesomness!&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="code-6"><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Include the Autoloader (see &quot;Libraries&quot; for install instructions)</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;vendor/autoload.php&#x27;</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Mailgun</span>\<span class="title">Mailgun</span>;</span><br><span class="line"><span class="comment"># Instantiate the client.</span></span><br><span class="line"><span class="variable">$mgClient</span> = <span class="keyword">new</span> <span class="title class_">Mailgun</span>(<span class="string">&#x27;YOUR_API_KEY&#x27;</span>);</span><br><span class="line"><span class="variable">$domain</span> = <span class="string">&quot;YOUR_DOMAIN_NAME&quot;</span>;</span><br><span class="line"><span class="comment"># Make the call to the client.</span></span><br><span class="line"><span class="variable">$result</span> = <span class="variable">$mgClient</span>-&gt;<span class="title function_ invoke__">sendMessage</span>(<span class="variable">$domain</span>, <span class="keyword">array</span>(</span><br><span class="line">	<span class="string">&#x27;from&#x27;</span>	=&gt; <span class="string">&#x27;Excited User &lt;mailgun@YOUR_DOMAIN_NAME&gt;&#x27;</span>,</span><br><span class="line">	<span class="string">&#x27;to&#x27;</span>	=&gt; <span class="string">&#x27;Baz &lt;YOU@YOUR_DOMAIN_NAME&gt;&#x27;</span>,</span><br><span class="line">	<span class="string">&#x27;subject&#x27;</span> =&gt; <span class="string">&#x27;Hello&#x27;</span>,</span><br><span class="line">	<span class="string">&#x27;text&#x27;</span>	=&gt; <span class="string">&#x27;Testing some Mailgun awesomness!&#x27;</span></span><br><span class="line">));</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="code-7"><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">using</span> RestSharp;</span><br><span class="line"><span class="keyword">using</span> RestSharp.Authenticators;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">SendSimpleMessageChunk</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span> (<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		Console.WriteLine (SendSimpleMessage ().Content.ToString ())</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IRestResponse <span class="title">SendSimpleMessage</span> ()</span></span><br><span class="line">	&#123;</span><br><span class="line">		RestClient client = <span class="keyword">new</span> RestClient ();</span><br><span class="line">		client.BaseUrl = <span class="keyword">new</span> Uri (<span class="string">&quot;https://api.mailgun.net/v3&quot;</span>);<span class="string">&quot;</span></span><br><span class="line"><span class="string">		client.Authenticator =&#x27;</span></span><br><span class="line"><span class="string">			new HttpBasicAuthenticator (&quot;</span>api<span class="string">&quot;,</span></span><br><span class="line"><span class="string">				&quot;</span>YOUR_API_KEY<span class="string">&quot;);</span></span><br><span class="line"><span class="string">		RestRequest request = new RestRequest ();</span></span><br><span class="line"><span class="string">		request.AddParameter (&quot;</span>domain<span class="string">&quot;, &quot;</span>YOUR_DOMAIN_NAME<span class="string">&quot;, ParameterType.UrlSegment);</span></span><br><span class="line"><span class="string">		request.Resource = &quot;</span>&#123;domain&#125;/messages<span class="string">&quot;;</span></span><br><span class="line"><span class="string">		request.AddParameter (&quot;</span><span class="keyword">from</span><span class="string">&quot;, &quot;</span>Excited User &lt;mailgun@YOUR_DOMAIN_NAME&gt;<span class="string">&quot;);</span></span><br><span class="line"><span class="string">		request.AddParameter (&quot;</span>to<span class="string">&quot;, &quot;</span>bar@example.com<span class="string">&quot;);</span></span><br><span class="line"><span class="string">		request.AddParameter (&quot;</span>to<span class="string">&quot;, &quot;</span>YOU@YOUR_DOMAIN_NAME<span class="string">&quot;);</span></span><br><span class="line"><span class="string">		request.AddParameter (&quot;</span>subject<span class="string">&quot;, &quot;</span>Hello<span class="string">&quot;);</span></span><br><span class="line"><span class="string">		request.AddParameter (&quot;</span>text<span class="string">&quot;, &quot;</span>Testing some Mailgun awesomness!<span class="string">&quot;);</span></span><br><span class="line"><span class="string">		request.Method = Method.POST;</span></span><br><span class="line"><span class="string">		return client.Execute (request);</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="code-8"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mailgun = <span class="built_in">require</span>(<span class="string">&quot;mailgun-js&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">DOMAIN</span> = <span class="string">&#x27;YOUR_DOMAIN_NAME&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> mg = <span class="title function_">mailgun</span>(&#123;<span class="attr">apiKey</span>: api_key, <span class="attr">domain</span>: <span class="variable constant_">DOMAIN</span>&#125;);</span><br><span class="line"><span class="keyword">const</span> data = &#123;</span><br><span class="line">	<span class="attr">from</span>: <span class="string">&#x27;Excited User &lt;me@samples.mailgun.org&gt;&#x27;</span>,</span><br><span class="line">	<span class="attr">to</span>: <span class="string">&#x27;bar@example.com, YOU@YOUR_DOMAIN_NAME&#x27;</span>,</span><br><span class="line">	<span class="attr">subject</span>: <span class="string">&#x27;Hello&#x27;</span>,</span><br><span class="line">	<span class="attr">text</span>: <span class="string">&#x27;Testing some Mailgun awesomness!&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line">mg.<span class="title function_">messages</span>().<span class="title function_">send</span>(data, <span class="keyword">function</span> (<span class="params">error, body</span>) &#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(body);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></div></div></div>
+
+<h3 id="TestMail"><a href="#TestMail" class="headerlink" title="TestMail"></a>TestMail</h3><p>TestMail顾名思义就是用来测试你的邮件服务的，使用无限的邮箱和 GraphQL API 自动执行端到端的电子邮件测试。可以用来测试新用户注册，交易邮件和广告邮件的发送等等。邮件发多了可能会被识别为垃圾邮件，不含DKIM认证的邮件域名可能会被标记为冒充，等等，因此需要进行邮箱测试。</p>
+<blockquote>
+<p>与之对应的还有DebugMail和Mailosaur，都可以使用虚拟 SMTP 服务器进行电子邮件测试，而不会真正发出邮件。前者免费，后者还可以进行 SMS 和垃圾邮件测试，以用于企业级用途。  </p>
+</blockquote>
+<p>TestMail就是通过API 获取无限的电子邮件地址和邮箱，以自动进行电子邮件测试。测试你的邮件质量如何。  </p>
+<ul>
+<li>10,000 * emails&#x2F;month</li>
+<li>Unlimited users, email addresses, and mailboxes</li>
+<li>1-3 days retention</li>
+<li>One random namespace</li>
+<li>Full API access</li>
+</ul>
+<p>我使用MailGun托管的邮件服务的测试结果是：<br><code>X-Spam-Status: No, score=0.8 required=5.0</code>  </p>
+<p>在学生认证期间，testmail.app将一直提供Essential计划。</p>
+<blockquote>
+<p>其他免费邮件测试服务还有：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.mail-tester.com/">https://www.mail-tester.com/</a><br><a target="_blank" rel="noopener" href="https://senderscore.org/">https://senderscore.org/</a> （测试IP）<br><a target="_blank" rel="noopener" href="https://mxtoolbox.com/">https://mxtoolbox.com/</a>    (查找邮件域名提供商和提供简单的问题解决方案)</p>
+</blockquote>
+</blockquote>
+<!-- >> http://bin.mailgun.net/  （暂时下线） -->
+<p><img src="/2022/05/13/GitHub-Student-Developer-Pack/mailtester.PNG"></p>
+<h2 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h2><h3 id="DataDog"><a href="#DataDog" class="headerlink" title="DataDog"></a>DataDog</h3><p>Datadog是云平台监控市场的老大，基于SaaS的数据分析平台，实现对服务器、数据库、工具和服务的监控，同时提供日志记录、应用性能管理、基础设施监测、 <code>serverless</code> 云函数和安全服务等等。<br><img src="/2022/05/13/GitHub-Student-Developer-Pack/datadog.PNG"><br><img src="/2022/05/13/GitHub-Student-Developer-Pack/product-features-network.avif"><br>美中不足是没有免费计划。但是GitHub学生包提供了2年的 <code>Pro Account</code> ( $15 每月)，包括免费的10台服务器监控 （datadog的服务器监控是按服务器数量计费）。相当划算。<br><img src="/2022/05/13/GitHub-Student-Developer-Pack/datadog2.PNG"></p>
+<h3 id="New-Relic"><a href="#New-Relic" class="headerlink" title="New Relic"></a>New Relic</h3><p><a target="_blank" rel="noopener" href="https://developer.newrelic.com/students/">New Relic</a> 也是依托于AWS，和Datadog功能比较重叠，选一个用就行。</p>
+<p>它目前专注于SaaS和App性能管理业务，它支持支持agent和API传送数据，能够对部署在本地或在云中的web应用程序进行监控、故障修复、诊断、线程分析以及容量计划。</p>
+<p>笔者现在用的就是这款。</p>
+<h4 id="New-Relic-认证流程"><a href="#New-Relic-认证流程" class="headerlink" title="New Relic 认证流程"></a>New Relic 认证流程</h4><p>New Relic认证很坑，点击 <a target="_blank" rel="noopener" href="https://education.github.com/pack/redeem/newrelic-student">Get access by connecting your GitHub account on New Relic</a>后，会让你创建新账户（但其实旧帐户也可以），创建完账户就是免费计划，之后进入的是创建新监控的引导流程，而不是GitHub学生认证的流程。我找了老半天才找到学生认证的<a target="_blank" rel="noopener" href="https://one.newrelic.com/nr1-core/students-edition">入口</a>。如下图：<br><img src="/2022/05/13/GitHub-Student-Developer-Pack/NewRelicAuth.PNG"></p>
+<blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://discuss.newrelic.com/t/how-can-i-connect-my-github-account-with-existing-new-relic-account-for-student-pack/153617">https://discuss.newrelic.com/t/how-can-i-connect-my-github-account-with-existing-new-relic-account-for-student-pack/153617</a>  </p>
+</blockquote>
+<p>跟GitHub认证完，还要再次提交学校名、邮箱认证，真的很烦了。<br><img src="/2022/05/13/GitHub-Student-Developer-Pack/product-features-network.avif"></p>
+<h4 id="New-Relic-学生包福利"><a href="#New-Relic-学生包福利" class="headerlink" title="New Relic 学生包福利"></a>New Relic 学生包福利</h4><ul>
+<li>3 个标准的全栈可观察性用户</li>
+<li>每月 500GB 的数据储存 （这个网站一向以储存数据量定价,但是要提交500GB的数据也不是几个机器就能做到的）</li>
+</ul>
+<h3 id="Raygun"><a href="#Raygun" class="headerlink" title="Raygun"></a>Raygun</h3><p>Web 和移动应用程序的错误、崩溃和性能监控。Startup Platform plan免费一年。</p>
+<h2 id="开发和设计"><a href="#开发和设计" class="headerlink" title="开发和设计"></a>开发和设计</h2><h3 id="zyte爬虫平台"><a href="#zyte爬虫平台" class="headerlink" title="zyte爬虫平台"></a>zyte爬虫平台</h3><p>zyte 就是之前的Scrapinghub，爬虫费时费力费IP，自己买服务器的话，很多VPS提供商不允许爬虫的存在，对IP有负面影响。但是zyte就可以解决这个问题。</p>
+<p>之前是提供免费套餐的Scrapy Cloud的，现在要9美元一个月了。好在学生包福利还在。提供一个永久免费的Scrapy Cloud单元，无限团队成员、项目、请求、抓取时间，数据保留时间120天。</p>
+<p>1个Scrapy Cloud单元 &#x3D; 1 GB的RAM + 2.5GB磁盘空间 + 1个CPU + 1个运行中任务</p>
+<h2 id="GitHub相关"><a href="#GitHub相关" class="headerlink" title="GitHub相关"></a>GitHub相关</h2><h3 id="GitHub-Pro"><a href="#GitHub-Pro" class="headerlink" title="GitHub Pro"></a><span id="githubpro">GitHub Pro</span></h3><p>♾️ Unlimited public&#x2F;private repos<br>♾️ Unlimited collaborators<br>✔️ 3,000 Actions minutes&#x2F;month<br>✔️ 2GB of Packages storage<br>✔️ Code owners, required reviewers, GitHub Pages, and more <a target="_blank" rel="noopener" href="https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/githubs-products#github-team">advanced tools</a>.</p>
+<h3 id="GitLens-和-GitKraken"><a href="#GitLens-和-GitKraken" class="headerlink" title="GitLens 和 GitKraken"></a><span id="gitlens">GitLens 和 GitKraken</span></h3><p><img class="auth-logo ease-in-shared" src="https://www.gitkraken.com/img/logos/github.svg" style="height:5.1rem;">&lt;span style&#x3D;”color:#D0D0D2;font-family:”font-size:17px;background-color:#141422;”&gt;&amp;nbsp;<img class="auth-logo ease-in-shared" src="https://www.gitkraken.com/img/happy-kraken.svg" style="height:5.1rem;"></p>
+<p><code>GitLens</code> 是一个开源的 <code>VS Code</code> 的插件，功能丰富。注册免费账号后可以在公开 repo 使用高级功能，私有 repo 才需要付费使用追加的高级功能。<br><code>GitKraken</code> 适用于 Windows、Mac 和 Linux 的最流行的 Git 客户端，提供 GUI 和终端界面。 与 GitHub 存储库和问题的深度集成支持直接在客户端中进行交互式拉取请求管理和问题管理。<br><img src="/2022/05/13/GitHub-Student-Developer-Pack/gk-gui-tab-example.png">   <img src="/2022/05/13/GitHub-Student-Developer-Pack/gk-terminal-tab-example.png"></p>
+<p>进入<a target="_blank" rel="noopener" href="https://www.gitkraken.com/github-student-developer-pack">GitKraken</a>，点击<a target="_blank" rel="noopener" href="https://app.gitkraken.com/"><strong>create a GitKraken account</strong></a>，创建账号，再用GitHub学生包账号认证就好。<br><img src="/2022/05/13/GitHub-Student-Developer-Pack/GitLen.PNG"></p>
+<h2 id="课程学习"><a href="#课程学习" class="headerlink" title="课程学习"></a>课程学习</h2><h3 id="GoRails"><a href="#GoRails" class="headerlink" title="GoRails"></a>GoRails</h3><p><a target="_blank" rel="noopener" href="https://gorails.com/">GoRails</a>是一个在线课程平台，提供面向 Web 开发人员的 Ruby、Rails、Javascript、Turbolinks、Stimulus.js、Vue.js 等课程。学生包在 <strong>12 个月</strong>内免费访问所有视频和课程。</p>
+<h2 id="效率"><a href="#效率" class="headerlink" title="效率"></a>效率</h2><h3 id="HazeOver"><a href="#HazeOver" class="headerlink" title="HazeOver"></a>HazeOver</h3><p><a target="_blank" rel="noopener" href="https://hazeover.com/">HazeOver</a> 是 Mac OS X 上的一款小工具,它可以在激活的窗口区域以外显示阴影,这可以让你很方便聚焦在当前的任务上,再也不用担心所有窗口叠在一起了。通过强调活跃的窗口，淡出不活跃的窗口来帮助你集中注意力。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="软件加密"><a href="#软件加密" class="headerlink" title="软件加密"></a>软件加密</h3><p>Cryptolens<br>NetLicensing</p>
+<h3 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h3><ol>
+<li>Blackfire 代码性能测量工具</li>
+<li>Codecov</li>
+<li>BetterCodeHub</li>
+<li>DeepScan</li>
+</ol>
+<h3 id="多语言翻译"><a href="#多语言翻译" class="headerlink" title="多语言翻译"></a>多语言翻译</h3><ol>
+<li>Lingohub 翻译管理服务</li>
+<li>POEditor</li>
+<li>Transifex</li>
+<li>Crowdin</li>
+<li>Phrase</li>
+</ol>
+<h3 id="应用测试"><a href="#应用测试" class="headerlink" title="应用测试"></a>应用测试</h3><ol>
+<li>LambdaTest</li>
+<li>AccessLint</li>
+<li>SOFY</li>
+<li>Coveralls</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Rainbow
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/" title="2022最新最全GitHub学生包分析">https://pawswrite.xyz/2022/05/13/GitHub-Student-Developer-Pack/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/GitHub/" rel="tag"># GitHub</a>
+              <a href="/tags/web%E5%BC%80%E5%8F%91/" rel="tag"># web开发</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/11/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E8%AF%BB%E5%8F%96%E5%86%99%E5%85%A5%E9%80%9F%E5%BA%A6%E4%B8%8D%E7%AC%A6%E5%90%88%E8%A6%81%E6%B1%82%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" rel="prev" title="【华硕路由器】虚拟内存读取写入速度不符合要求的解决办法">
+      <i class="fa fa-chevron-left"></i> 【华硕路由器】虚拟内存读取写入速度不符合要求的解决办法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/17/mastodon-maintenance/" rel="next" title="rclone自动备份数据库">
+      rclone自动备份数据库 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            ------------- 本文结束 <i class="fa fa-heart-o"></i> 感谢您的阅读-------------
+     </div>
+    
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub%E5%AD%A6%E7%94%9F%E5%8C%85%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">GitHub学生包简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E7%94%9F%E5%8C%85%E5%86%85%E5%AE%B9%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">学生包内容简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-%E5%BC%80%E5%8F%91%E7%AE%80%E4%BB%8B-Intro-to-Web-Dev"><span class="nav-number">2.1.</span> <span class="nav-text">Web 开发简介 Intro to Web Dev</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E5%A5%97%E4%BB%B6-Virtual-Event-Kit"><span class="nav-number">2.2.</span> <span class="nav-text">虚拟化套件 Virtual Event Kit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%A6%8F%E5%88%A9"><span class="nav-number">2.3.</span> <span class="nav-text">其他福利</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">云服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DigitalOcean"><span class="nav-number">3.1.</span> <span class="nav-text">DigitalOcean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MicroSoft-Azure"><span class="nav-number">3.2.</span> <span class="nav-text">MicroSoft Azure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E6%89%98%E7%AE%A1"><span class="nav-number">4.</span> <span class="nav-text">网站托管</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PageClip"><span class="nav-number">4.1.</span> <span class="nav-text">PageClip</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH%E8%BD%AF%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">SSH软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#termius"><span class="nav-number">5.1.</span> <span class="nav-text">termius</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E5%88%B6%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">设计制作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bootstrap-Studio"><span class="nav-number">6.1.</span> <span class="nav-text">Bootstrap Studio</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%F0%9F%93%A7"><span class="nav-number">7.</span> <span class="nav-text">邮件服务📧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MailGun"><span class="nav-number">7.1.</span> <span class="nav-text">MailGun</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TestMail"><span class="nav-number">7.2.</span> <span class="nav-text">TestMail</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%91%E6%8E%A7"><span class="nav-number">8.</span> <span class="nav-text">监控</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DataDog"><span class="nav-number">8.1.</span> <span class="nav-text">DataDog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#New-Relic"><span class="nav-number">8.2.</span> <span class="nav-text">New Relic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#New-Relic-%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B"><span class="nav-number">8.2.1.</span> <span class="nav-text">New Relic 认证流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#New-Relic-%E5%AD%A6%E7%94%9F%E5%8C%85%E7%A6%8F%E5%88%A9"><span class="nav-number">8.2.2.</span> <span class="nav-text">New Relic 学生包福利</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Raygun"><span class="nav-number">8.3.</span> <span class="nav-text">Raygun</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%92%8C%E8%AE%BE%E8%AE%A1"><span class="nav-number">9.</span> <span class="nav-text">开发和设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zyte%E7%88%AC%E8%99%AB%E5%B9%B3%E5%8F%B0"><span class="nav-number">9.1.</span> <span class="nav-text">zyte爬虫平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub%E7%9B%B8%E5%85%B3"><span class="nav-number">10.</span> <span class="nav-text">GitHub相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Pro"><span class="nav-number">10.1.</span> <span class="nav-text">GitHub Pro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitLens-%E5%92%8C-GitKraken"><span class="nav-number">10.2.</span> <span class="nav-text">GitLens 和 GitKraken</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0"><span class="nav-number">11.</span> <span class="nav-text">课程学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GoRails"><span class="nav-number">11.1.</span> <span class="nav-text">GoRails</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%88%E7%8E%87"><span class="nav-number">12.</span> <span class="nav-text">效率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HazeOver"><span class="nav-number">12.1.</span> <span class="nav-text">HazeOver</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">13.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%8A%A0%E5%AF%86"><span class="nav-number">13.1.</span> <span class="nav-text">软件加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">13.2.</span> <span class="nav-text">代码优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%AF%AD%E8%A8%80%E7%BF%BB%E8%AF%91"><span class="nav-number">13.3.</span> <span class="nav-text">多语言翻译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E6%B5%8B%E8%AF%95"><span class="nav-number">13.4.</span> <span class="nav-text">应用测试</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rainbow"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Rainbow</p>
+  <div class="site-description" itemprop="description">Tech Lover</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://nz.pawswrite.xyz/" title="探针 → http:&#x2F;&#x2F;nz.pawswrite.xyz" rel="noopener" target="_blank"><i class="fas fa-server fa-fw"></i>探针</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">@rainbow</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">186k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:49</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '416e004749a692890792',
+      clientSecret: 'a51d95d68a7fddba31072393540e0e2c3b09d91f',
+      repo        : 'Gitalk',
+      owner       : 'tech-fever',
+      admin       : ['tech-fever'],
+      id          : '46e79cfcdaecd0cadf48de0ff1617496',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
