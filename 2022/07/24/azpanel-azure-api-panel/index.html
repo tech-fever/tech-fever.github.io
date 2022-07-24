@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="f4M613CNVfWg9fM_X3tG5jELt3D10Gk8E3R0ZUaMzd4">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"algolia":{"appID":"QVWTMTP22E","apiKey":"1a70640400cc23d9656c5fb60de60c0e","indexName":"dev_hexoBlog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="azpanel是一个免费开源的azure api面板。官方给的安装教程有用lnmp和bt面板的，这两种我都不太喜欢，所以写一下手动安装教程。 项目信息 项目地址：https:&#x2F;&#x2F;github.com&#x2F;azpanel&#x2F;azpanel 演示站点：https:&#x2F;&#x2F;azpanel.net telegram 频道：https:&#x2F;&#x2F;t.me&#x2F;azpanel telegram 群聊：https:&#x2F;&#x2F;t.me&#x2F;+">
+<meta property="og:type" content="article">
+<meta property="og:title" content="azpanel: 免费开源的azure api面板">
+<meta property="og:url" content="https://pawswrite.xyz/2022/07/24/azpanel-azure-api-panel/index.html">
+<meta property="og:site_name" content="Rainbow">
+<meta property="og:description" content="azpanel是一个免费开源的azure api面板。官方给的安装教程有用lnmp和bt面板的，这两种我都不太喜欢，所以写一下手动安装教程。 项目信息 项目地址：https:&#x2F;&#x2F;github.com&#x2F;azpanel&#x2F;azpanel 演示站点：https:&#x2F;&#x2F;azpanel.net telegram 频道：https:&#x2F;&#x2F;t.me&#x2F;azpanel telegram 群聊：https:&#x2F;&#x2F;t.me&#x2F;+">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pawswrite.xyz/2022/07/24/azpanel-azure-api-panel/azpanel.jpg">
+<meta property="og:image" content="https://pawswrite.xyz/2022/07/24/azpanel-azure-api-panel/azpanel2.jpg">
+<meta property="article:published_time" content="2022-07-24T09:21:58.000Z">
+<meta property="article:modified_time" content="2022-07-24T10:54:14.854Z">
+<meta property="article:author" content="Rainbow">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="Azure">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pawswrite.xyz/2022/07/24/azpanel-azure-api-panel/azpanel.jpg">
+
+<link rel="canonical" href="https://pawswrite.xyz/2022/07/24/azpanel-azure-api-panel/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>azpanel: 免费开源的azure api面板 | Rainbow</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Rainbow</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/tech-fever" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://pawswrite.xyz/2022/07/24/azpanel-azure-api-panel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rainbow">
+      <meta itemprop="description" content="Tech Lover">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rainbow">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          azpanel: 免费开源的azure api面板
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-24 17:21:58 / 修改时间：18:54:14" itemprop="dateCreated datePublished" datetime="2022-07-24T17:21:58+08:00">2022-07-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">学习是人生第一要务</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>azpanel是一个免费开源的azure api面板。官方给的安装教程有用lnmp和bt面板的，这两种我都不太喜欢，所以写一下手动安装教程。</p>
+<h1 id="项目信息"><a href="#项目信息" class="headerlink" title="项目信息"></a>项目信息</h1><ul>
+<li>项目地址：<a target="_blank" rel="noopener" href="https://github.com/azpanel/azpanel">https://github.com/azpanel/azpanel</a></li>
+<li>演示站点：<a target="_blank" rel="noopener" href="https://azpanel.net/">https://azpanel.net</a></li>
+<li>telegram 频道：<a target="_blank" rel="noopener" href="https://t.me/azpanel">https://t.me/azpanel</a></li>
+<li>telegram 群聊：<a target="_blank" rel="noopener" href="https://t.me/+w_DuAFGop4kzOGYx">https://t.me/+w_DuAFGop4kzOGYx</a></li>
+</ul>
+<h1 id="官方安装教程"><a href="#官方安装教程" class="headerlink" title="官方安装教程"></a>官方安装教程</h1><ul>
+<li><p>lnmp.org<br><a target="_blank" rel="noopener" href="https://github.com/azpanel/azpanel/wiki/lnmp.org">https://github.com/azpanel/azpanel/wiki/lnmp.org</a></p>
+</li>
+<li><p>bt.cn<br><a target="_blank" rel="noopener" href="https://github.com/azpanel/azpanel/wiki/bt.cn">https://github.com/azpanel/azpanel/wiki/bt.cn</a></p>
+</li>
+</ul>
+<h1 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h1><h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2><p>理论上配置不要太低的Linux服务器都可以。我是在Ubuntu 20.04 LTS上安装的，本文命令也是基于此。</p>
+<h2 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h2><p>我们需要安装的东西有：<br>☑️ Nginx 1.17<br>☑️ MySQL 5.6 (或者mariadb)<br>☑️ PHP 7.2.5+</p>
+<h2 id="安装PHP和nginx"><a href="#安装PHP和nginx" class="headerlink" title="安装PHP和nginx"></a>安装PHP和nginx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade -y</span><br><span class="line">apt install php-fpm php-mysql php-curl php-xml nginx -y</span><br></pre></td></tr></table></figure>
+<p>验证是否安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">php -v</span><br><span class="line">nginx -v</span><br></pre></td></tr></table></figure>
+<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><p>这里我是采用docker安装，其实直接安装也很方便啦。</p>
+<h3 id="安装docker和docker-compose"><a href="#安装docker和docker-compose" class="headerlink" title="安装docker和docker-compose"></a>安装docker和docker-compose</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash</span><br><span class="line">apt install docker-compose</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker -v</span><br><span class="line">docker-compose -v</span><br></pre></td></tr></table></figure>
+<h3 id="docker-compose启动mysql"><a href="#docker-compose启动mysql" class="headerlink" title="docker-compose启动mysql"></a>docker-compose启动mysql</h3><p>先新建文件夹：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /opt/azpanel &amp;&amp; <span class="built_in">cd</span> /opt/azpanel</span><br><span class="line">vim /opt/azpanel/docker-compose.yml</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql:oracle</span> <span class="comment"># 这是针对arm的镜像，amd请更改</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:3306:3306</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./db/mysql:/var/lib/mysql</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="string">写你的root密码</span></span><br><span class="line">      <span class="attr">MYSQL_DATABASE:</span> <span class="string">azpanel</span></span><br><span class="line">      <span class="attr">MYSQL_USER:</span> <span class="string">azpanel</span></span><br><span class="line">      <span class="attr">MYSQL_PASSWORD:</span> <span class="string">写你的数据库密码</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
+<p>再运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<h2 id="下载azpanel"><a href="#下载azpanel" class="headerlink" title="下载azpanel"></a>下载azpanel</h2><p>下载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /www/wwwroot/azpanel &amp;&amp; <span class="built_in">mkdir</span> /www/wwwlogs/ &amp;&amp; <span class="built_in">cd</span> /www/wwwroot/azpanel</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/azpanel/azpanel.git ./</span><br></pre></td></tr></table></figure>
+<p>修改权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /www/wwwroot/azpanel</span><br><span class="line"><span class="built_in">chmod</span> 755 -R *</span><br><span class="line"><span class="built_in">chown</span> -R www-data *</span><br><span class="line"><span class="comment"># www-data 是php-fpm和nginx的用户</span></span><br><span class="line"><span class="comment"># 可以用下面命令查看：</span></span><br><span class="line"><span class="built_in">cat</span> /etc/php/7.4/fpm/pool.d/www.conf | grep <span class="string">&quot;user = &quot;</span></span><br><span class="line"><span class="built_in">cat</span> /etc/nginx/nginx.conf | grep <span class="string">&quot;user&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装Composer"><a href="#安装Composer" class="headerlink" title="安装Composer"></a>安装Composer</h2><p>Composer 是PHP的一个依赖管理工具。 它能管理你的PHP项目所需要的所有依赖关系。 也就是说，Composer 会将你的PHP项目需要的所有代码库、依赖项从网上全部拉取下来，放到一起进行管理。</p>
+<blockquote>
+<p>参考：How to Install Composer: A Step-By-Step Guide and Best Practices</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /www/wwwroot/azpanel</span><br><span class="line">php -r <span class="string">&quot;copy(&#x27;https://getcomposer.org/installer&#x27;, &#x27;composer-setup.php&#x27;);&quot;</span></span><br><span class="line">php composer-setup.php <span class="comment"># 也可以全局安装：php composer-setup.php --install-dir=/usr/local/bin --filename=composer</span></span><br><span class="line">php -r <span class="string">&quot;unlink(&#x27;composer-setup.php&#x27;);&quot;</span> <span class="comment"># 移除installer</span></span><br><span class="line">php composer.phar <span class="comment"># 测试</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php composer.phar install</span><br></pre></td></tr></table></figure>
+<p>安装成功的输出请看附录：<a href="#jump1">点击跳转</a><br><span id="jump2">继续安装</span></p>
+<h2 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h2><p>导入数据库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/azpanel/</span><br><span class="line"><span class="built_in">cp</span> /www/wwwroot/azpanel/database/*.sql /opt/azpanel/db/mysql/azpanel/</span><br><span class="line">docker-compose down &amp;&amp; docker-compose up -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it azpanel_db_1 sh</span><br></pre></td></tr></table></figure>
+<p>这里输入你的<strong>root</strong>密码，登入数据库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sh-4.4<span class="comment"># mysql -uroot -p</span></span><br><span class="line">Enter password: (输入你的root密码)</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection <span class="built_in">id</span> is 8</span><br><span class="line">Server version: 8.0.29 MySQL Community Server - GPL</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2022, Oracle and/or its affiliates.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type <span class="string">&#x27;help;&#x27;</span> or <span class="string">&#x27;\h&#x27;</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">&#x27;\c&#x27;</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+<p>数据库操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use azpanel;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; <span class="built_in">source</span> /var/lib/mysql/azpanel/azure.sql;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="built_in">source</span> /var/lib/mysql/azpanel/config.sql;</span><br><span class="line">Query OK, 12 rows affected (0.01 sec)</span><br><span class="line">Records: 12  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; show tables;</span><br><span class="line">+----------------------+</span><br><span class="line">| Tables_in_azpanel    |</span><br><span class="line">+----------------------+</span><br><span class="line">| ann                  |</span><br><span class="line">| azure                |</span><br><span class="line">| azure_server         |</span><br><span class="line">| azure_server_traffic |</span><br><span class="line">| config               |</span><br><span class="line">| login_log            |</span><br><span class="line">| task                 |</span><br><span class="line">| user                 |</span><br><span class="line">| verify               |</span><br><span class="line">+----------------------+</span><br><span class="line">9 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; \q</span><br><span class="line">Bye</span><br><span class="line">sh-4.4<span class="comment"># exit</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>复制配置文件模板并编辑配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /www/wwwroot/azpanel/</span><br><span class="line"><span class="built_in">cp</span> .example.env .<span class="built_in">env</span></span><br><span class="line">vim .<span class="built_in">env</span></span><br></pre></td></tr></table></figure>
+<p>如下修改</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">APP_DEBUG</span> = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="section">[APP]</span></span><br><span class="line"><span class="attr">DEFAULT_TIMEZONE</span> = Asia/Shanghai</span><br><span class="line"><span class="attr">APP_NAME</span> = Azure</span><br><span class="line"></span><br><span class="line"><span class="section">[DATABASE]</span></span><br><span class="line"><span class="attr">TYPE</span> = mysql</span><br><span class="line"><span class="attr">HOSTNAME</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">DATABASE</span> = azpanel</span><br><span class="line"><span class="attr">USERNAME</span> = azpanel</span><br><span class="line"><span class="attr">PASSWORD</span> = 你的azpanel密码</span><br><span class="line"><span class="attr">HOSTPORT</span> = <span class="number">3306</span></span><br><span class="line"><span class="attr">CHARSET</span> = utf8</span><br><span class="line"><span class="attr">DEBUG</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="section">[THEME]</span></span><br><span class="line"><span class="attr">CARD_WIDTH</span> = <span class="number">10</span></span><br><span class="line"><span class="attr">CARD_RIGHT_OFFSET</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="section">[LANG]</span></span><br><span class="line"><span class="attr">default_lang</span> = zh-cn</span><br></pre></td></tr></table></figure>
+<h2 id="创建管理员"><a href="#创建管理员" class="headerlink" title="创建管理员"></a>创建管理员</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">php think createAdmin --email admin@azpanel.net --passwd 你的登陆密码</span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line"><span class="comment"># An administrator account has been created.</span></span><br></pre></td></tr></table></figure>
+<p>如果数据库配置错误，会这样</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[think\db\exception\PDOException]                                                      </span><br><span class="line">SQLSTATE[HY000] [1045] Access denied <span class="keyword">for</span> user <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> (using password: NO)</span><br></pre></td></tr></table></figure>
+<h2 id="导入更多数据库"><a href="#导入更多数据库" class="headerlink" title="导入更多数据库"></a>导入更多数据库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php think migrate:run</span><br></pre></td></tr></table></figure>
+<h2 id="添加定时任务"><a href="#添加定时任务" class="headerlink" title="添加定时任务"></a>添加定时任务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
+<p>然后输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0 0 * * * php /www/wwwroot/azpanel/think tools --action statisticsTraffic</span><br><span class="line">0 * * * * php /www/wwwroot/azpanel/think autoRefreshAccount</span><br><span class="line">0 * * * * php /www/wwwroot/azpanel/think closeTimeoutTask</span><br><span class="line">0 * * * * php /www/wwwroot/azpanel/think trafficControlStop</span><br><span class="line">*/5 * * * * php /www/wwwroot/azpanel/think trafficControlStart</span><br></pre></td></tr></table></figure>
+<h2 id="编辑-nginx-配置"><a href="#编辑-nginx-配置" class="headerlink" title="编辑 nginx 配置"></a>编辑 nginx 配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> /etc/nginx/sites-available/azpanel.conf</span><br><span class="line"></span><br><span class="line">vim /etc/nginx/sites-available/azpanel.conf</span><br></pre></td></tr></table></figure>
+<p>输入下面模板（把azpanel.net）改成你的域名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">server</span><br><span class="line">    &#123;</span><br><span class="line">        listen 80;</span><br><span class="line">        server_name azpanel.net ;</span><br><span class="line">        <span class="built_in">return</span> 301 https://$server_name<span class="variable">$request_uri</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">server</span><br><span class="line">    &#123;</span><br><span class="line">        listen 443 ssl http2;</span><br><span class="line">        <span class="comment">#listen [::]:443 ssl http2;</span></span><br><span class="line">        server_name azpanel.net ;</span><br><span class="line">        index index.html index.htm index.php default.html default.htm default.php;</span><br><span class="line">        root  /www/wwwroot/azpanel/public;</span><br><span class="line"></span><br><span class="line">        ssl_certificate /etc/letsencrypt/live/azpanel.net/fullchain.pem;</span><br><span class="line">        ssl_certificate_key /etc/letsencrypt/live/azpanel.net/privkey.pem;</span><br><span class="line">        ssl_session_timeout 5m;</span><br><span class="line">        ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;</span><br><span class="line">        ssl_prefer_server_ciphers on;</span><br><span class="line">        ssl_ciphers <span class="string">&quot;TLS13-AES-256-GCM-SHA384:TLS13-CHACHA20-POLY1305-SHA256:TLS13-AES-128-GCM-SHA256:TLS13-AES-128-CCM-8-SHA256:TLS13-AES-128-CCM-SHA256:EECDH+CHACHA20:EECDH+CHACHA20-draft:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5&quot;</span>;</span><br><span class="line">        ssl_session_cache <span class="built_in">builtin</span>:1000 shared:SSL:10m;</span><br><span class="line">        <span class="comment"># openssl dhparam -out /usr/local/nginx/conf/ssl/dhparam.pem 2048</span></span><br><span class="line">        <span class="comment"># ssl_dhparam /usr/local/nginx/conf/ssl/dhparam.pem;</span></span><br><span class="line"></span><br><span class="line">        include conf.d/azpanel/thinkphp.conf;</span><br><span class="line">        <span class="comment">#error_page   404   /404.html;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Deny access to PHP files in specific directory</span></span><br><span class="line">        <span class="comment">#location ~ /(wp-content|uploads|wp-includes|images)/.*\.php$ &#123; deny all; &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#include enable-php.conf;</span></span><br><span class="line">        location ~ \.php$ &#123;</span><br><span class="line">          fastcgi_pass unix:/var/run/php/php-fpm.sock;</span><br><span class="line">          include      conf.d/azpanel/php_fastcgi.conf;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$</span><br><span class="line">        &#123;</span><br><span class="line">            expires      30d;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ .*\.(js|css)?$</span><br><span class="line">        &#123;</span><br><span class="line">            expires      12h;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ /.well-known &#123;</span><br><span class="line">            allow all;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ /\.</span><br><span class="line">        &#123;</span><br><span class="line">            deny all;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        access_log  /www/wwwlogs/azpanel.net.log;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /etc/nginx/conf.d/azpanel/ &amp;&amp; vim /etc/nginx/conf.d/azpanel/thinkphp.conf</span><br></pre></td></tr></table></figure>
+<p>输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">  <span class="keyword">if</span> (!-e <span class="variable">$request_filename</span>)&#123;</span><br><span class="line">    rewrite ^(.*)$ /index.php?s=<span class="variable">$1</span> last; <span class="built_in">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/conf.d/azpanel/php_fastcgi.conf</span><br></pre></td></tr></table></figure>
+<p>输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 404</span><br><span class="line">try_files                     $fastcgi_script_name =404;</span><br><span class="line"></span><br><span class="line"># default fastcgi_params</span><br><span class="line">include                       fastcgi_params;</span><br><span class="line"></span><br><span class="line"># fastcgi settings</span><br><span class="line">fastcgi_index                 index.php;</span><br><span class="line">fastcgi_buffers               8 16k;</span><br><span class="line">fastcgi_buffer_size           32k;</span><br><span class="line"></span><br><span class="line"># fastcgi params</span><br><span class="line">fastcgi_param DOCUMENT_ROOT   $realpath_root;</span><br><span class="line">fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;</span><br></pre></td></tr></table></figure>
+<h2 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h2><p>先把你的域名进行dns解析到正确的ip</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install certbot python3-certbot-nginx -y</span><br><span class="line">certbot certonly --nginx -d 你的域名</span><br></pre></td></tr></table></figure>
+<h2 id="重启nginx"><a href="#重启nginx" class="headerlink" title="重启nginx"></a>重启nginx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /etc/nginx/sites-available/azpanel.conf /etc/nginx/sites-enabled/azpanel.conf</span><br><span class="line">systemctl restart nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成！"><a href="#完成！" class="headerlink" title="完成！"></a>完成！</h2><p><img src="/2022/07/24/azpanel-azure-api-panel/azpanel.jpg"></p>
+<p><img src="/2022/07/24/azpanel-azure-api-panel/azpanel2.jpg"></p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="安装成功输出"><a href="#安装成功输出" class="headerlink" title="安装成功输出"></a><span id="jump1">安装成功输出</span></h2><p>看完可跳转到继续安装 -&gt; <a href="#jump2">点击跳转</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line">root@ashburn:/www/wwwroot/azpanel<span class="comment"># php composer.phar install</span></span><br><span class="line">Do not run Composer as root/super user! See https://getcomposer.org/root <span class="keyword">for</span> details</span><br><span class="line">Continue as root/super user [<span class="built_in">yes</span>]? <span class="built_in">yes</span></span><br><span class="line">No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install <span class="keyword">for</span> more information.</span><br><span class="line">Loading composer repositories with package information</span><br><span class="line">Updating dependencies</span><br><span class="line">Lock file operations: 39 installs, 0 updates, 0 removals</span><br><span class="line">  - Locking adbario/php-dot-notation (2.3.0)</span><br><span class="line">  - Locking alibabacloud/client (1.5.31)</span><br><span class="line">  - Locking clagiordano/weblibs-configmanager (v1.2.0)</span><br><span class="line">  - Locking danielstjules/stringy (3.1.0)</span><br><span class="line">  - Locking guzzlehttp/guzzle (6.5.8)</span><br><span class="line">  - Locking guzzlehttp/promises (1.5.1)</span><br><span class="line">  - Locking guzzlehttp/psr7 (1.9.0)</span><br><span class="line">  - Locking league/flysystem (1.1.9)</span><br><span class="line">  - Locking league/flysystem-cached-adapter (1.1.0)</span><br><span class="line">  - Locking league/mime-type-detection (1.11.0)</span><br><span class="line">  - Locking mtdowling/jmespath.php (2.6.1)</span><br><span class="line">  - Locking nesbot/carbon (2.59.1)</span><br><span class="line">  - Locking paragonie/constant_time_encoding (v2.6.3)</span><br><span class="line">  - Locking paragonie/random_compat (v9.99.100)</span><br><span class="line">  - Locking phpmailer/phpmailer (v6.6.3)</span><br><span class="line">  - Locking phpseclib/phpseclib (3.0.14)</span><br><span class="line">  - Locking psr/cache (1.0.1)</span><br><span class="line">  - Locking psr/container (1.1.2)</span><br><span class="line">  - Locking psr/http-message (1.0.1)</span><br><span class="line">  - Locking psr/log (1.1.4)</span><br><span class="line">  - Locking psr/simple-cache (1.0.1)</span><br><span class="line">  - Locking ralouphie/getallheaders (3.0.3)</span><br><span class="line">  - Locking symfony/deprecation-contracts (v2.5.2)</span><br><span class="line">  - Locking symfony/polyfill-intl-idn (v1.26.0)</span><br><span class="line">  - Locking symfony/polyfill-intl-normalizer (v1.26.0)</span><br><span class="line">  - Locking symfony/polyfill-mbstring (v1.26.0)</span><br><span class="line">  - Locking symfony/polyfill-php72 (v1.26.0)</span><br><span class="line">  - Locking symfony/polyfill-php80 (v1.26.0)</span><br><span class="line">  - Locking symfony/translation (v5.4.9)</span><br><span class="line">  - Locking symfony/translation-contracts (v2.5.2)</span><br><span class="line">  - Locking symfony/var-dumper (v4.4.42)</span><br><span class="line">  - Locking topthink/framework (v6.0.13)</span><br><span class="line">  - Locking topthink/think-captcha (v3.0.7)</span><br><span class="line">  - Locking topthink/think-helper (v3.1.6)</span><br><span class="line">  - Locking topthink/think-migration (v3.0.3)</span><br><span class="line">  - Locking topthink/think-orm (v2.0.54)</span><br><span class="line">  - Locking topthink/think-template (v2.0.8)</span><br><span class="line">  - Locking topthink/think-trace (v1.4)</span><br><span class="line">  - Locking topthink/think-view (v1.0.14)</span><br><span class="line">Writing lock file</span><br><span class="line">Installing dependencies from lock file (including require-dev)</span><br><span class="line">Package operations: 39 installs, 0 updates, 0 removals</span><br><span class="line">  - Downloading symfony/polyfill-mbstring (v1.26.0)</span><br><span class="line">  - Downloading mtdowling/jmespath.php (2.6.1)</span><br><span class="line">  - Downloading symfony/polyfill-php72 (v1.26.0)</span><br><span class="line">  - Downloading symfony/polyfill-intl-normalizer (v1.26.0)</span><br><span class="line">  - Downloading symfony/polyfill-intl-idn (v1.26.0)</span><br><span class="line">  - Downloading ralouphie/getallheaders (3.0.3)</span><br><span class="line">  - Downloading psr/http-message (1.0.1)</span><br><span class="line">  - Downloading guzzlehttp/psr7 (1.9.0)</span><br><span class="line">  - Downloading guzzlehttp/promises (1.5.1)</span><br><span class="line">  - Downloading guzzlehttp/guzzle (6.5.8)</span><br><span class="line">  - Downloading danielstjules/stringy (3.1.0)</span><br><span class="line">  - Downloading clagiordano/weblibs-configmanager (v1.2.0)</span><br><span class="line">  - Downloading adbario/php-dot-notation (2.3.0)</span><br><span class="line">  - Downloading alibabacloud/client (1.5.31)</span><br><span class="line">  - Downloading psr/cache (1.0.1)</span><br><span class="line">  - Downloading league/mime-type-detection (1.11.0)</span><br><span class="line">  - Downloading league/flysystem (1.1.9)</span><br><span class="line">  - Downloading league/flysystem-cached-adapter (1.1.0)</span><br><span class="line">  - Downloading symfony/translation-contracts (v2.5.2)</span><br><span class="line">  - Downloading symfony/polyfill-php80 (v1.26.0)</span><br><span class="line">  - Downloading symfony/deprecation-contracts (v2.5.2)</span><br><span class="line">  - Downloading symfony/translation (v5.4.9)</span><br><span class="line">  - Downloading nesbot/carbon (2.59.1)</span><br><span class="line">  - Downloading phpmailer/phpmailer (v6.6.3)</span><br><span class="line">  - Downloading paragonie/random_compat (v9.99.100)</span><br><span class="line">  - Downloading paragonie/constant_time_encoding (v2.6.3)</span><br><span class="line">  - Downloading phpseclib/phpseclib (3.0.14)</span><br><span class="line">  - Downloading psr/container (1.1.2)</span><br><span class="line">  - Downloading symfony/var-dumper (v4.4.42)</span><br><span class="line">  - Downloading topthink/think-helper (v3.1.6)</span><br><span class="line">  - Downloading psr/simple-cache (1.0.1)</span><br><span class="line">  - Downloading psr/log (1.1.4)</span><br><span class="line">  - Downloading topthink/think-orm (v2.0.54)</span><br><span class="line">  - Downloading topthink/framework (v6.0.13)</span><br><span class="line">  - Downloading topthink/think-captcha (v3.0.7)</span><br><span class="line">  - Downloading topthink/think-migration (v3.0.3)</span><br><span class="line">  - Downloading topthink/think-trace (v1.4)</span><br><span class="line">  - Downloading topthink/think-template (v2.0.8)</span><br><span class="line">  - Downloading topthink/think-view (v1.0.14)</span><br><span class="line">  - Installing symfony/polyfill-mbstring (v1.26.0): Extracting archive</span><br><span class="line">  - Installing mtdowling/jmespath.php (2.6.1): Extracting archive</span><br><span class="line">  - Installing symfony/polyfill-php72 (v1.26.0): Extracting archive</span><br><span class="line">  - Installing symfony/polyfill-intl-normalizer (v1.26.0): Extracting archive</span><br><span class="line">  - Installing symfony/polyfill-intl-idn (v1.26.0): Extracting archive</span><br><span class="line">  - Installing ralouphie/getallheaders (3.0.3): Extracting archive</span><br><span class="line">  - Installing psr/http-message (1.0.1): Extracting archive</span><br><span class="line">  - Installing guzzlehttp/psr7 (1.9.0): Extracting archive</span><br><span class="line">  - Installing guzzlehttp/promises (1.5.1): Extracting archive</span><br><span class="line">  - Installing guzzlehttp/guzzle (6.5.8): Extracting archive</span><br><span class="line">  - Installing danielstjules/stringy (3.1.0): Extracting archive</span><br><span class="line">  - Installing clagiordano/weblibs-configmanager (v1.2.0): Extracting archive</span><br><span class="line">  - Installing adbario/php-dot-notation (2.3.0): Extracting archive</span><br><span class="line">  - Installing alibabacloud/client (1.5.31): Extracting archive</span><br><span class="line">  - Installing psr/cache (1.0.1): Extracting archive</span><br><span class="line">  - Installing league/mime-type-detection (1.11.0): Extracting archive</span><br><span class="line">  - Installing league/flysystem (1.1.9): Extracting archive</span><br><span class="line">  - Installing league/flysystem-cached-adapter (1.1.0): Extracting archive</span><br><span class="line">  - Installing symfony/translation-contracts (v2.5.2): Extracting archive</span><br><span class="line">  - Installing symfony/polyfill-php80 (v1.26.0): Extracting archive</span><br><span class="line">  - Installing symfony/deprecation-contracts (v2.5.2): Extracting archive</span><br><span class="line">  - Installing symfony/translation (v5.4.9): Extracting archive</span><br><span class="line">  - Installing nesbot/carbon (2.59.1): Extracting archive</span><br><span class="line">  - Installing phpmailer/phpmailer (v6.6.3): Extracting archive</span><br><span class="line">  - Installing paragonie/random_compat (v9.99.100): Extracting archive</span><br><span class="line">  - Installing paragonie/constant_time_encoding (v2.6.3): Extracting archive</span><br><span class="line">  - Installing phpseclib/phpseclib (3.0.14): Extracting archive</span><br><span class="line">  - Installing psr/container (1.1.2): Extracting archive</span><br><span class="line">  - Installing symfony/var-dumper (v4.4.42): Extracting archive</span><br><span class="line">  - Installing topthink/think-helper (v3.1.6): Extracting archive</span><br><span class="line">  - Installing psr/simple-cache (1.0.1): Extracting archive</span><br><span class="line">  - Installing psr/log (1.1.4): Extracting archive</span><br><span class="line">  - Installing topthink/think-orm (v2.0.54): Extracting archive</span><br><span class="line">  - Installing topthink/framework (v6.0.13): Extracting archive</span><br><span class="line">  - Installing topthink/think-captcha (v3.0.7): Extracting archive</span><br><span class="line">  - Installing topthink/think-migration (v3.0.3): Extracting archive</span><br><span class="line">  - Installing topthink/think-trace (v1.4): Extracting archive</span><br><span class="line">  - Installing topthink/think-template (v2.0.8): Extracting archive</span><br><span class="line">  - Installing topthink/think-view (v1.0.14): Extracting archive</span><br><span class="line">27 package suggestions were added by new dependencies, use `composer suggest` to see details.</span><br><span class="line">Generating <span class="built_in">autoload</span> files</span><br><span class="line">&gt; @php think service:discover</span><br><span class="line">Succeed!</span><br><span class="line">&gt; @php think vendor:publish</span><br><span class="line">File /www/wwwroot/azpanel/config/captcha.php exist!</span><br><span class="line">File /www/wwwroot/azpanel/config/trace.php exist!</span><br><span class="line">Succeed!</span><br><span class="line">17 packages you are using are looking <span class="keyword">for</span> funding.</span><br><span class="line">Use the `composer fund` <span class="built_in">command</span> to find out more!</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Rainbow
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://pawswrite.xyz/2022/07/24/azpanel-azure-api-panel/" title="azpanel: 免费开源的azure api面板">https://pawswrite.xyz/2022/07/24/azpanel-azure-api-panel/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
+              <a href="/tags/Azure/" rel="tag"># Azure</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/02/v2board-installation-without-bt/" rel="prev" title="v2board 免宝塔部署教程">
+      <i class="fa fa-chevron-left"></i> v2board 免宝塔部署教程
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            ------------- 本文结束 <i class="fa fa-heart-o"></i> 感谢您的阅读-------------
+     </div>
+    
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%BF%A1%E6%81%AF"><span class="nav-number">1.</span> <span class="nav-text">项目信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">官方安装教程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">手动安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82"><span class="nav-number">3.1.</span> <span class="nav-text">系统要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="nav-number">3.2.</span> <span class="nav-text">环境安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85PHP%E5%92%8Cnginx"><span class="nav-number">3.3.</span> <span class="nav-text">安装PHP和nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85MySQL"><span class="nav-number">3.4.</span> <span class="nav-text">安装MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85docker%E5%92%8Cdocker-compose"><span class="nav-number">3.4.1.</span> <span class="nav-text">安装docker和docker-compose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-compose%E5%90%AF%E5%8A%A8mysql"><span class="nav-number">3.4.2.</span> <span class="nav-text">docker-compose启动mysql</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDazpanel"><span class="nav-number">3.5.</span> <span class="nav-text">下载azpanel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Composer"><span class="nav-number">3.6.</span> <span class="nav-text">安装Composer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.7.</span> <span class="nav-text">配置数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.8.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%AE%A1%E7%90%86%E5%91%98"><span class="nav-number">3.9.</span> <span class="nav-text">创建管理员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E6%9B%B4%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.10.</span> <span class="nav-text">导入更多数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.11.</span> <span class="nav-text">添加定时任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%BE%91-nginx-%E9%85%8D%E7%BD%AE"><span class="nav-number">3.12.</span> <span class="nav-text">编辑 nginx 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B3%E8%AF%B7%E8%AF%81%E4%B9%A6"><span class="nav-number">3.13.</span> <span class="nav-text">申请证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AFnginx"><span class="nav-number">3.14.</span> <span class="nav-text">重启nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90%EF%BC%81"><span class="nav-number">3.15.</span> <span class="nav-text">完成！</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">4.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F%E8%BE%93%E5%87%BA"><span class="nav-number">4.1.</span> <span class="nav-text">安装成功输出</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rainbow"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Rainbow</p>
+  <div class="site-description" itemprop="description">Tech Lover</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://nz.pawswrite.xyz/" title="探针 → http:&#x2F;&#x2F;nz.pawswrite.xyz" rel="noopener" target="_blank"><i class="fas fa-server fa-fw"></i>探针</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">@rainbow</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">199k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:01</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '416e004749a692890792',
+      clientSecret: 'a51d95d68a7fddba31072393540e0e2c3b09d91f',
+      repo        : 'Gitalk',
+      owner       : 'tech-fever',
+      admin       : ['tech-fever'],
+      id          : '94d8206e54cc1dbbd5db54227619580e',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
