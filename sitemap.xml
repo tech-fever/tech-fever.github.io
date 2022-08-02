@@ -568,14 +568,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/fediverse/</loc>
+    <loc>https://pawswrite.xyz/tags/Notes/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Notes/</loc>
+    <loc>https://pawswrite.xyz/tags/fediverse/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -631,13 +631,6 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Azure/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pawswrite.xyz/tags/%E6%B8%B8%E6%88%8F/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -646,6 +639,13 @@
   
   <url>
     <loc>https://pawswrite.xyz/tags/Steam/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/Azure/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -736,13 +736,6 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/%E6%9C%BA%E5%9C%BA/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pawswrite.xyz/tags/%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -751,6 +744,13 @@
   
   <url>
     <loc>https://pawswrite.xyz/tags/Clash/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/%E6%9C%BA%E5%9C%BA/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
