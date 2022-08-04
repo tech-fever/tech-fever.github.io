@@ -6,7 +6,7 @@
   <link href="https://pawswrite.xyz/atom.xml" rel="self"/>
   
   <link href="https://pawswrite.xyz/"/>
-  <updated>2022-08-04T07:38:55.507Z</updated>
+  <updated>2022-08-04T08:36:51.865Z</updated>
   <id>https://pawswrite.xyz/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>nginx反代Scaleway s3对象储存媒体文件配置</title>
+    <link href="https://pawswrite.xyz/2022/08/04/nginx%E5%8F%8D%E4%BB%A3s3%E5%AF%B9%E8%B1%A1%E5%82%A8%E5%AD%98%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE/"/>
+    <id>https://pawswrite.xyz/2022/08/04/nginx%E5%8F%8D%E4%BB%A3s3%E5%AF%B9%E8%B1%A1%E5%82%A8%E5%AD%98%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE/</id>
+    <published>2022-08-04T08:34:41.000Z</published>
+    <updated>2022-08-04T08:36:51.865Z</updated>
+    
+    <content type="html"><![CDATA[<p>nginx反代Scaleway s3对象储存媒体文件的配置文件模板。</p><span id="more"></span><h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p>例如 <code>s3.nl-ams.scw.cloud</code> 是你的 YOUR_S3_HOSTNAME：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">proxy_cache_path</span> <span class="string">/tmp/nginx_mstdn_media</span> <span class="string">levels=1:2</span> <span class="string">keys_zone=mastodon_media:100m</span> <span class="string">max_size=1g</span> <span class="string">inactive=24h;</span></span><br><span class="line"></span><br><span class="line"><span class="string">server</span> &#123;</span><br><span class="line">  <span class="string">listen</span> <span class="number">443</span> <span class="string">ssl</span> <span class="string">http2;</span></span><br><span class="line">  <span class="string">listen</span> [<span class="string">::</span>]<span class="string">:443</span> <span class="string">ssl</span> <span class="string">http2;</span></span><br><span class="line">  <span class="string">server_name</span> <span class="string">YOUR_BUCKET_NAME;</span></span><br><span class="line">  <span class="string">root</span> <span class="string">/var/www/html;</span></span><br><span class="line"></span><br><span class="line">  <span class="string">ssl_certificate</span> <span class="string">/etc/letsencrypt/live/YOUR_BUCKET_NAME/fullchain.pem;</span></span><br><span class="line">  <span class="string">ssl_certificate_key</span> <span class="string">/etc/letsencrypt/live/YOUR_BUCKET_NAME/privkey.pem;</span></span><br><span class="line"></span><br><span class="line">  <span class="string">keepalive_timeout</span> <span class="number">30</span><span class="string">;</span></span><br><span class="line"></span><br><span class="line">  <span class="string">location</span> <span class="string">=</span> <span class="string">/</span> &#123;</span><br><span class="line">    <span class="string">index</span> <span class="string">index.html;</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="string">location</span> <span class="string">/</span> &#123;</span><br><span class="line">    <span class="string">try_files</span> <span class="string">$uri</span> <span class="string">@s3;</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="string">set</span> <span class="string">$s3_backend</span> <span class="string">&#x27;https://YOUR_BUCKET_NAME.s3.nl-ams.scw.cloud&#x27;</span><span class="string">;</span></span><br><span class="line"></span><br><span class="line">  <span class="string">location</span> <span class="string">@s3</span> &#123;</span><br><span class="line">    <span class="string">limit_except</span> <span class="string">GET</span> &#123;</span><br><span class="line">      <span class="string">deny</span> <span class="string">all;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="string">resolver</span> <span class="number">8.8</span><span class="number">.8</span><span class="number">.8</span><span class="string">;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">Host</span> <span class="string">YOUR_BUCKET_NAME.s3.nl-ams.scw.cloud;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">Connection</span> <span class="string">&#x27;&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">Authorization</span> <span class="string">&#x27;&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">Set-Cookie;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">x-amz-id-2;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">x-amz-request-id;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">x-amz-meta-server-side-encryption;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">x-amz-server-side-encryption;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">x-amz-bucket-region;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">x-amzn-requestid;</span></span><br><span class="line">    <span class="string">proxy_ignore_headers</span> <span class="string">Set-Cookie;</span></span><br><span class="line">    <span class="string">proxy_pass</span> <span class="string">$s3_backend$uri;</span></span><br><span class="line">    <span class="string">proxy_intercept_errors</span> <span class="string">off;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">proxy_cache</span> <span class="string">mastodon_media;</span></span><br><span class="line">    <span class="string">proxy_cache_valid</span> <span class="number">200</span> <span class="string">48h;</span></span><br><span class="line">    <span class="string">proxy_cache_use_stale</span> <span class="string">error</span> <span class="string">timeout</span> <span class="string">updating</span> <span class="string">http_500</span> <span class="string">http_502</span> <span class="string">http_503</span> <span class="string">http_504;</span></span><br><span class="line">    <span class="string">proxy_cache_lock</span> <span class="string">on;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">expires</span> <span class="string">1y;</span></span><br><span class="line">    <span class="string">add_header</span> <span class="string">Cache-Control</span> <span class="string">public;</span></span><br><span class="line">    <span class="string">add_header</span> <span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span> <span class="string">&#x27;*&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">add_header</span> <span class="string">X-Cache-Status</span> <span class="string">$upstream_cache_status;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;nginx反代Scaleway s3对象储存媒体文件的配置文件模板。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="学习是人生第一要务" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/"/>
+    
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="学习" scheme="https://pawswrite.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>解决Skipping acquire of configured file &#39;main/binary-i386/Packages&#39; as repository &#39;xxx&#39; doesn&#39;t support architecture &#39;i386&#39;</title>
     <link href="https://pawswrite.xyz/2022/08/04/%E8%A7%A3%E5%86%B3Skipping-acquire-of-configured-file-main-binary-i386-Packages-as-repository-xxx-doesn-t-support-architecture-i386/"/>
     <id>https://pawswrite.xyz/2022/08/04/%E8%A7%A3%E5%86%B3Skipping-acquire-of-configured-file-main-binary-i386-Packages-as-repository-xxx-doesn-t-support-architecture-i386/</id>
     <published>2022-08-04T07:23:12.000Z</published>
-    <updated>2022-08-04T07:38:55.507Z</updated>
+    <updated>2022-08-04T08:36:49.714Z</updated>
     
     <content type="html"><![CDATA[<p>在<a href="https://www.linuxcapable.com/how-to-install-upgrade-latest-nginx-mainline-stable-on-ubuntu-20-04/#gsc.tab=0">安装1.22版nginx</a>的时候遇到了个问题。编辑 <code>/etc/apt/sources.list.d/nginx.list</code> 的时候加进去的库，在 <code>apt update</code> 的时候报错：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">N: Skipping acquire of configured file <span class="string">&#x27;nginx/binary-i386/Packages&#x27;</span> as repository <span class="string">&#x27;http://nginx.org/packages/ubuntu focal InRelease&#x27;</span> doesn<span class="string">&#x27;t support architecture &#x27;</span>i386<span class="string">&#x27;</span></span><br></pre></td></tr></table></figure><span id="more"></span><h1 id="解决办法1"><a href="#解决办法1" class="headerlink" title="解决办法1"></a>解决办法1</h1><p>首先找到的解决办法是在 <code>nginx.list</code> 指定arch为amd，也就是：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb [arch=amd64] [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \</span></span><br><span class="line"><span class="string">http://nginx.org/packages/ubuntu `lsb_release -cs` nginx&quot;</span> \</span><br><span class="line">    | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/nginx.list</span><br></pre></td></tr></table></figure><p>但这样运行 <code>apt update</code> 依然会报错</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E: Malformed entry 1 <span class="keyword">in</span> list file /etc/apt/sources.list.d/nginx.list (URI parse)</span><br><span class="line">E: The list of sources could not be <span class="built_in">read</span>.</span><br></pre></td></tr></table></figure><h1 id="根本解决办法"><a href="#根本解决办法" class="headerlink" title="根本解决办法"></a>根本解决办法</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul><li><a href="https://askubuntu.com/questions/741410/skipping-acquire-of-configured-file-main-binary-i386-packages-as-repository-x">Skipping acquire of configured file ‘main&#x2F;binary-i386&#x2F;Packages’ as repository ‘xxx’ doesn’t support architecture ‘i386’</a></li><li><a href="https://blog.csdn.net/Leo_whj/article/details/111639223">Ubuntu dpkg查看与修改architecture</a></li></ul><h2 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h2><p>先找到出问题的库，比如说 <code>repository &#39;xxx&#39; doesn&#39;t support architecture &#39;i386&#39;</code> ，那么我们就运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/apt/sources.list.d</span><br><span class="line">grep -r xxx（出问题的库）  /etc/apt | grep -v amd64 </span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">grep xxx（出问题的库） * | grep -v amd64</span><br></pre></td></tr></table></figure><p>例如我这里可以用</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/apt/sources.list.d</span><br><span class="line">grep nginx * | grep -v amd64</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">grep nginx * | grep -v amd64</span><br></pre></td></tr></table></figure><p>输出：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/apt/sources.list.d/nginx.list:deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/ubuntu focal nginx</span><br></pre></td></tr></table></figure><p>那么我们就得到了.list文件名+路径 ： <code>/etc/apt/sources.list.d/nginx.list</code></p><p>这个就是出问题的。可以先试试在这个文件里面加上 <code>[arch=amd64]</code></p><p>例如我的例子，编辑 <code>/etc/apt/sources.list.d/nginx.list</code> 文件为：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deb [<span class="built_in">arch</span>=amd64] [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/ubuntu focal nginx</span><br></pre></td></tr></table></figure><p>我这样失败了。因为这个语法会被判定为木马，那我们先取消这个解决办法，来找找根本原因</p><h2 id="根本原因"><a href="#根本原因" class="headerlink" title="根本原因"></a>根本原因</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看本机的架构内核</span></span><br><span class="line">dpkg --print-architecture</span><br><span class="line"><span class="comment"># 查看多架构支持内核</span></span><br><span class="line">dpkg --print-foreign-architectures</span><br></pre></td></tr></table></figure><p>第二条命令输出i386是让64位ubuntu运行32位程序，也就是多架构支持。也就是这个地方，导致了我们会出现这样的报错。</p><p>如果你不想要多架构支持，可以移除。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg --remove-architecture i386</span><br></pre></td></tr></table></figure><p>之后再运行 <code>apt update</code> 即可。</p>]]></content>
     
@@ -37,8 +60,6 @@
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="学习" scheme="https://pawswrite.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-    <category term="Azure" scheme="https://pawswrite.xyz/tags/Azure/"/>
     
   </entry>
   
@@ -134,9 +155,9 @@
     
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
-    <category term="Notes" scheme="https://pawswrite.xyz/tags/Notes/"/>
-    
     <category term="科学上网" scheme="https://pawswrite.xyz/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+    <category term="Notes" scheme="https://pawswrite.xyz/tags/Notes/"/>
     
   </entry>
   
@@ -190,11 +211,11 @@
     
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
-    <category term="长毛象运维" scheme="https://pawswrite.xyz/tags/%E9%95%BF%E6%AF%9B%E8%B1%A1%E8%BF%90%E7%BB%B4/"/>
-    
     <category term="长毛象" scheme="https://pawswrite.xyz/tags/%E9%95%BF%E6%AF%9B%E8%B1%A1/"/>
     
     <category term="Notes" scheme="https://pawswrite.xyz/tags/Notes/"/>
+    
+    <category term="长毛象运维" scheme="https://pawswrite.xyz/tags/%E9%95%BF%E6%AF%9B%E8%B1%A1%E8%BF%90%E7%BB%B4/"/>
     
   </entry>
   
@@ -486,36 +507,6 @@
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>用服务器搭建你自己的SpeedTest测速服务器</title>
-    <link href="https://pawswrite.xyz/2022/06/01/Deploy-your-own-speedtest-website/"/>
-    <id>https://pawswrite.xyz/2022/06/01/Deploy-your-own-speedtest-website/</id>
-    <published>2022-06-01T09:30:21.000Z</published>
-    <updated>2022-06-06T06:42:49.943Z</updated>
-    
-    <content type="html"><![CDATA[<p>经常用Speedtest测速，但实际上你也可以用服务器搭建自己的测速网站。测试的是你上传&#x2F;下载流文件到测速服务器的速度。注意测速的上限是你服务器的带宽上限。</p><p>❗ <strong>注意</strong>：</p><div class="note info"><p>一定程度上存在被恶意刷流量的风险，在对外分享你的测速页面后，请注意观察服务器流量使用情况，避免流量使用异常。</p></div><p><img src="/2022/06/01/Deploy-your-own-speedtest-website/demo.png"></p><span id="more"></span><h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><ul><li><a href="https://github.com/BadApple9/speedtest-x">Speedtest-X</a></li><li><a href="https://github.com/librespeed/speedtest">LibreSpeed</a></li></ul><p>本文介绍的是<a href="https://github.com/BadApple9/speedtest-x">Speedtest-X</a>的搭建。</p><ul><li>用户测速会上传测速记录并保存至网站服务器</li><li>不依赖 MySQL，使用文件数据库</li><li>IP 库改用 ip.sb，运营商记录更为精确</li></ul><h1 id="Docker部署"><a href="#Docker部署" class="headerlink" title="Docker部署"></a>Docker部署</h1><p>使用<code>uname -m</code>或者<code>arch</code>命令查看你自己服务器的架构。然后在下面2选1。</p><h3 id="arm架构"><a href="#arm架构" class="headerlink" title="arm架构"></a>arm架构</h3><p>运行 <code>docker run -d -p 9001:80 -it --name speedtest-x stilleshan/speedtest-x</code></p><h3 id="amd架构"><a href="#amd架构" class="headerlink" title="amd架构"></a>amd架构</h3><p>运行 <code>docker run -d -p 9001:80 -it --name speedtest-x badapple9/speedtest-x</code></p><h2 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h2><ul><li><p><code>-d</code>：以常驻进程模式启动</p><p>9001: 默认容器开放端口，可改为其他端口</p></li></ul><p>启动时可指定的环境变量：</p><ul><li><p><code>-e WEBPORT=80:</code> 容器内使用的端口</p></li><li><p><code>-e MAX_LOG_COUNT=100:</code> 最大可保存多少条测速记录</p></li><li><p><code>-e IP_SERVICE=ip.sb:</code> 使用的 IP 运营商解析服务(<code>ip.sb</code> 或 <code>ipinfo.io</code>)</p></li><li><p><code>-e SAME_IP_MULTI_LOGS=false:</code> 是否允许同一IP记录多条测速结果</p></li></ul><h2 id="ipv6支持【不建议】"><a href="#ipv6支持【不建议】" class="headerlink" title="ipv6支持【不建议】"></a>ipv6支持【不建议】</h2><p>如果想让 <code>Docker</code> 容器支持 <code>ipv6</code>，可编辑 <code>/etc/docker/daemon.json</code> ，加上以下内容：（如果不存在这个文件则直接创建）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;ipv6&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">&quot;fixed-cidr-v6&quot;</span>: <span class="string">&quot;fd00::/80&quot;</span>,</span><br><span class="line">  <span class="string">&quot;experimental&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">&quot;ip6tables&quot;</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>注意，你在使用<code>docker run</code>命令的时候会读取这个文件内容，创建其他容器也会同时支持ipv6，如果创建完容器又删除这段内容，之前创建的docker容器依然会支持ipv6。所以如果不想要的话建议创建完容器就删除。以免其他容器出现错误。</p><h1 id="访问页面"><a href="#访问页面" class="headerlink" title="访问页面"></a>访问页面</h1><p>访问 <code>&#123;IP&#125;:&#123;端口&#125;/index.html</code> 进行测速。<br><img src="https://raw.githubusercontent.com/BadApple9/images/main/indexdemo.png"> <img src="https://raw.githubusercontent.com/BadApple9/images/main/resultsdemo.png"></p><h1 id="Nginx反代"><a href="#Nginx反代" class="headerlink" title="Nginx反代"></a>Nginx反代</h1><p>如果想要用域名来访问，可以采用Nginx反代的方法。</p><p>参考本站另一篇文章：<br><a href="https://pawswrite.xyz/2022/06/03/Simple-Reverse-Proxy-by-Nginx/">用Nginx做简单反向代理</a></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;经常用Speedtest测速，但实际上你也可以用服务器搭建自己的测速网站。测试的是你上传&amp;#x2F;下载流文件到测速服务器的速度。注意测速的上限是你服务器的带宽上限。&lt;/p&gt;
-&lt;p&gt;❗ &lt;strong&gt;注意&lt;/strong&gt;：&lt;/p&gt;
-&lt;div class=&quot;note info&quot;&gt;&lt;p&gt;一定程度上存在被恶意刷流量的风险，在对外分享你的测速页面后，请注意观察服务器流量使用情况，避免流量使用异常。
-&lt;/p&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/2022/06/01/Deploy-your-own-speedtest-website/demo.png&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Linux" scheme="https://pawswrite.xyz/categories/Linux/"/>
-    
-    
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
-    <category term="Speedtest" scheme="https://pawswrite.xyz/tags/Speedtest/"/>
     
   </entry>
   

@@ -23,22 +23,21 @@
     var CONFIG = {"hostname":"pawswrite.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"algolia":{"appID":"QVWTMTP22E","apiKey":"1a70640400cc23d9656c5fb60de60c0e","indexName":"dev_hexoBlog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="有东西被加密了, 请输入密码查看.">
+  <meta name="description" content="nginx反代Scaleway s3对象储存媒体文件的配置文件模板。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VPS指南：国内VPS修改hosts解决github被DNS污染问题">
-<meta property="og:url" content="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E5%9B%BD%E5%86%85VPS%E4%BF%AE%E6%94%B9hosts%E8%A7%A3%E5%86%B3github%E8%A2%ABDNS%E6%B1%A1%E6%9F%93%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="nginx反代Scaleway s3对象储存媒体文件配置">
+<meta property="og:url" content="https://pawswrite.xyz/2022/08/04/nginx%E5%8F%8D%E4%BB%A3s3%E5%AF%B9%E8%B1%A1%E5%82%A8%E5%AD%98%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Rainbow">
-<meta property="og:description" content="有东西被加密了, 请输入密码查看.">
+<meta property="og:description" content="nginx反代Scaleway s3对象储存媒体文件的配置文件模板。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-16T18:09:17.000Z">
-<meta property="article:modified_time" content="2022-05-30T19:26:44.217Z">
+<meta property="article:published_time" content="2022-08-04T08:34:41.000Z">
+<meta property="article:modified_time" content="2022-08-04T08:36:51.865Z">
 <meta property="article:author" content="Rainbow">
 <meta property="article:tag" content="Linux">
-<meta property="article:tag" content="VPS">
-<meta property="article:tag" content="科学上网">
+<meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E5%9B%BD%E5%86%85VPS%E4%BF%AE%E6%94%B9hosts%E8%A7%A3%E5%86%B3github%E8%A2%ABDNS%E6%B1%A1%E6%9F%93%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="https://pawswrite.xyz/2022/08/04/nginx%E5%8F%8D%E4%BB%A3s3%E5%AF%B9%E8%B1%A1%E5%82%A8%E5%AD%98%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE/">
 
 
 <script id="page-configurations">
@@ -51,7 +50,7 @@
   };
 </script>
 
-  <title>VPS指南：国内VPS修改hosts解决github被DNS污染问题 | Rainbow</title>
+  <title>nginx反代Scaleway s3对象储存媒体文件配置 | Rainbow</title>
   
 
 
@@ -210,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E5%9B%BD%E5%86%85VPS%E4%BF%AE%E6%94%B9hosts%E8%A7%A3%E5%86%B3github%E8%A2%ABDNS%E6%B1%A1%E6%9F%93%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://pawswrite.xyz/2022/08/04/nginx%E5%8F%8D%E4%BB%A3s3%E5%AF%B9%E8%B1%A1%E5%82%A8%E5%AD%98%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -223,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          VPS指南：国内VPS修改hosts解决github被DNS污染问题
+          nginx反代Scaleway s3对象储存媒体文件配置
         </h1>
 
         <div class="post-meta">
@@ -232,23 +231,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-06-17 02:09:17" itemprop="dateCreated datePublished" datetime="2021-06-17T02:09:17+08:00">2021-06-17</time>
+              <time title="创建时间：2022-08-04 16:34:41 / 修改时间：16:36:51" itemprop="dateCreated datePublished" datetime="2022-08-04T16:34:41+08:00">2022-08-04</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-31 03:26:44" itemprop="dateModified" datetime="2022-05-31T03:26:44+08:00">2022-05-31</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">学习是人生第一要务</span></a>
                 </span>
             </span>
 
@@ -265,14 +258,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>607</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -284,18 +277,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="f9958b8fd387ce2db310c101921a1d7d3393d34f4396b75cf4baf1a2f629e123">6d05a0a7f8f5f26ac1a0f788610c8c396478ca8fbe4f5e3e5544711475b950bf979115cb3828b851825905d4f4d7a210d9713af619b576fad31086732953f081d58d3c793ea8b89a1a878468a0bff168daa3db3454f9ee4286cbf2be972b6929af8e5545866f92ff01780686b681a7a54030ed63b462806b3eaebd6147b25d168a6f873aa297fbd2bf0224161caaf89c8fb8cb06a49791e103c30ccef15249379e686f8671eed87c45a0a990f8d4ccccd021882bbc0e2b2d219cb68f0b0c560495814dbd3297f55954b3904e80e9195e5e1581932685affa2091445a6801d6329604b417d9e3093143110d9be053d3e40455bb056b194722082960142bad1eb4f47400d65f14e3c9e68f6e38f16d31e17ee85b4a57c322d65ada021129116ef6cfebd66643b746707ba23f55817b4cb6e5656a40105da2db6581f9f370d56c0dd16f917fdfac8c5d4b1765b1e5cbcbb3e64b913bc71a4bbf4503f60a4e1be82e4d6d10a77c0203b22cc495dd3d20249d1f9d7ef5c3aa295c0f6aa3d2e78ca1ecb3dafdcdb1312029b59a8aed5e9705443024708f75de951469c90d7cded290e4223ae73642ff065636b8bcbc5cb89f10e5313a875a2c6e4ca2c35d89cabf9355225bc51a2332276ab87163ce1b6087a31efe0b3ba6b348e6dc05d19cc15a780654e6e87f2aac385332b9614207969f3aaead0ddfd82068036b4563e2ad0a2a0bac51d6e900a5cc0d8988a6108e51cc8e2ec353562ef3aade948bebfe74903d20e9e3c618fb43b18f20b97c5b721d89ec814d14ab254dd2d6f7438c3a35519aaa1a74d06c2165174cdca381dcac91185cc20a60f014475b26329e78f4f304d16e90d50ba0fbb31efd5c543c02f351065607d7aebff722c3057446a93036c609ac18085b44e3542aa2b3c0551234413dc28dab6aa6a72c948861cf5261958e816c6b295fa9f854d34db06e246c97e40074f632186b516bbf10819e62818c435409328b5e77ff95b06ec9303d07a9e4bd2ab31f526bd0cd7c493c7d32505d8362fba24694c229c4e518028da848a2888ec816e04e5338621fa7670e985fddf6a861183e38bb788c2eec9e241146db9dff8a30ac055b089311ce81d3ae1f4a97f8859c0df0a7151a97534c623b8df0aa841803f2ec28c11efe76d93dbc78f28d09027c102516d8b1bf025bc445679f7cd9fa5c097b08d9c029a2c6d7430daeb223244282a68a8b51b5db6b8f54fb84f20ce2e3c1d753e0395c4a052fe049cf1b2ef1f3305dcaedcbc15af898d64271a5111708cabd4cd522c6e2b587b3064b2d3d47efad15b8bafb966a8d679749e88d2c046019a4cb06ec6009ec4f03d18e474d66e2ac1582dcdf339939413e6456900e6ee7b761d55f537830b32ceed9058434be60913a2e93625d78132d0edda241e4bed21b02611b392576f8e3e1566d6616c3612161844b2daebc6480588177c1c798fe98358fc3146a9d2d573d8e5cb4bd299a6bef53b77b31cd159baa3203f4a20b04222e934a3b5d2094ff4f1605547604c8c69df34982a12029d507dde5dfa6ec3c10f1800e855acda60ffe2ae1c5565290f710c10f739dc2798f02d01cbe808dde34fbe3b08dcb03dacd9a5719922b686da8de1a46e79118ca1984542dcd0d085a49103cfa4233df00d0f0769fb2aaddc6bdfe48eab402d08e77e57df509cfbe90c6594c3cd4ca0e047da10d66194b6658b9928d913e614647babf6a641b109018927b09a620375564a92a7bdd0cb985af99c5de68b5c8f407ff034261316ed31633cf9cb91a7f8246cbca550fa3e25441f89093e2c24bd29d2fcc5f0f4908f61d7d2d54754a0562512a8ee00cf312689fa598da969de34a7032e61fb90e1ab144fc245657f9b496dea21659f601b6a30bf3a9546852b9dfb2f0e0a289e40d7b4d75b0733cca62e4af5ecca1e7c6125f4259e4f088081b1b400a8632abd3766382dab9cf2ab08d5bc49db771efd744b83d203fb4dadface913b302c9977005c908b1e391598ae24945da593874624bdc1286afceef43087062bd7fd2945051e4250ee7b235fb79b9cf975479d6c94d6a2d15e8ef7886b2394dcb9b0115db9c88e1c3236f79fa6b17b876511f65d36af40de829bd9e999b2ebb92dacfdb5763a5f008fb6bada242fcaee7ce652310f5a314c6d0f8652012316cedec237d20b575ff670ad57a033bf935b469de1a30d03205348a53b5ffcd86c78b28d843ddf2cc0fbcab0886e7d2c16fff84ffd89f3beb316bee8d0b947eb7efdd2c8249493a5ea65d511a4fb85a25ec43c6b4dc79737b1b5a06aa32119ed865b14b3c081ac7f11476fb31f1f5be79d640bc6c3d6b23522b1eeaa0e9c1ebb56c8113b4cde7bd3842da7c7d8d6d34d6be9390ad28dcbe50c2f7fbd20156abfcb9c59250e9116dce1d47e174da7c036c14b38dbb0fc6110e60a923a79763e5cf3402ccc1caaa728b170c1b9d3443e175335fae02d3e65da37a0d37dbbc20741f90afaa40a9648140cb288a50deb7374f16877682955b76f8c1c3799683200f5a7a464e26318becb66ec827021e20ca2e2d81af891afa9f4156af3f750d54219b119c521338414bf4f85534adefdd7d6b0c72e6b8624c9c47b84aee1ce4a3aad6c9bcaa71c279e763a85c26f3869e9088c6c178a287b43735bd3093063e76eaf2e36b95f914b04b0fb9dc424f6f88ebf647f912ea3d426de0f2a554a1e31872335cb5c4341e4271de280dadc014ca03cdc44a354f99803dbc10fb03d7bd7e20d86c4e1130493e32ef2f7dd38965073252ade18b87eb44917238cdb579d829c7701222bffa34596e557f520b02f7684ae5a6da6fd2ae15b9897ad95408a4fc1f2e4cec1c92e8b0c628c8a08ffbcdc736953d1a3fd9e5a128d6d0a7505d17750c7bebfd6ca37ba0c2edae4e12e34bb9f29ff00d217538413feeb92fedd0fb109d7b87f0e8739975ba333b6667e0489a119492f398e55267fec1d6a884e40919ab8ba739da36de2bcfca8b1404399ead821b54a2af5a10effb8b109919f63349a4a6fc7fc39a580d7def91f04316521e5e4e32ffbbdbf1fd7c0f18580ad01cc95061844341cca92c41ae3f4935e0a7fb69035fd3c422456d1293ea1efc5fb33667950df3fdef3c73f2ebff4969a52d489f130ef985d6959f4f1a831089e1e09749fbd8f62fa2f6831e12939a70b896815f6eb682c1ee026b8d6a80f2c6d246e4ea590126170d9bc80f53919c3db683114843721599217c1b47f39816752d690d328516032f6425e9959f07c0bd26c4b2746cef78a97cc6cbbfbb0bf2bc54b3ab68664167549b903587cc8b2767b602e1638e77f77f62ea491d6504f557613afaa280b2f833171ddabb3d2ed2e8ac632e452946500fed7ab4ce0898f724e0c054a1f6e2194e841743d6339dd14b50486baa632cdaaf8a6d962fd7cb66bf7ea0fcfde68ecdf29d0beffed7a81666ff6ab10067a893372015f6f14f8573889c92e7bfba1c244ab2eff7395e61b34d69cc15e4df3e255b842450598d31d7c204a4f02a9eb63aefa95461b7708695aa46810053a3efc2aa242e36710b</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好, 这里需要密码.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+        <p>nginx反代Scaleway s3对象储存媒体文件的配置文件模板。</p>
+<span id="more"></span>
+
+<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p>例如 <code>s3.nl-ams.scw.cloud</code> 是你的 YOUR_S3_HOSTNAME：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">proxy_cache_path</span> <span class="string">/tmp/nginx_mstdn_media</span> <span class="string">levels=1:2</span> <span class="string">keys_zone=mastodon_media:100m</span> <span class="string">max_size=1g</span> <span class="string">inactive=24h;</span></span><br><span class="line"></span><br><span class="line"><span class="string">server</span> &#123;</span><br><span class="line">  <span class="string">listen</span> <span class="number">443</span> <span class="string">ssl</span> <span class="string">http2;</span></span><br><span class="line">  <span class="string">listen</span> [<span class="string">::</span>]<span class="string">:443</span> <span class="string">ssl</span> <span class="string">http2;</span></span><br><span class="line">  <span class="string">server_name</span> <span class="string">YOUR_BUCKET_NAME;</span></span><br><span class="line">  <span class="string">root</span> <span class="string">/var/www/html;</span></span><br><span class="line"></span><br><span class="line">  <span class="string">ssl_certificate</span> <span class="string">/etc/letsencrypt/live/YOUR_BUCKET_NAME/fullchain.pem;</span></span><br><span class="line">  <span class="string">ssl_certificate_key</span> <span class="string">/etc/letsencrypt/live/YOUR_BUCKET_NAME/privkey.pem;</span></span><br><span class="line"></span><br><span class="line">  <span class="string">keepalive_timeout</span> <span class="number">30</span><span class="string">;</span></span><br><span class="line"></span><br><span class="line">  <span class="string">location</span> <span class="string">=</span> <span class="string">/</span> &#123;</span><br><span class="line">    <span class="string">index</span> <span class="string">index.html;</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="string">location</span> <span class="string">/</span> &#123;</span><br><span class="line">    <span class="string">try_files</span> <span class="string">$uri</span> <span class="string">@s3;</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="string">set</span> <span class="string">$s3_backend</span> <span class="string">&#x27;https://YOUR_BUCKET_NAME.s3.nl-ams.scw.cloud&#x27;</span><span class="string">;</span></span><br><span class="line"></span><br><span class="line">  <span class="string">location</span> <span class="string">@s3</span> &#123;</span><br><span class="line">    <span class="string">limit_except</span> <span class="string">GET</span> &#123;</span><br><span class="line">      <span class="string">deny</span> <span class="string">all;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="string">resolver</span> <span class="number">8.8</span><span class="number">.8</span><span class="number">.8</span><span class="string">;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">Host</span> <span class="string">YOUR_BUCKET_NAME.s3.nl-ams.scw.cloud;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">Connection</span> <span class="string">&#x27;&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">Authorization</span> <span class="string">&#x27;&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">Set-Cookie;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">x-amz-id-2;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">x-amz-request-id;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">x-amz-meta-server-side-encryption;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">x-amz-server-side-encryption;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">x-amz-bucket-region;</span></span><br><span class="line">    <span class="string">proxy_hide_header</span> <span class="string">x-amzn-requestid;</span></span><br><span class="line">    <span class="string">proxy_ignore_headers</span> <span class="string">Set-Cookie;</span></span><br><span class="line">    <span class="string">proxy_pass</span> <span class="string">$s3_backend$uri;</span></span><br><span class="line">    <span class="string">proxy_intercept_errors</span> <span class="string">off;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">proxy_cache</span> <span class="string">mastodon_media;</span></span><br><span class="line">    <span class="string">proxy_cache_valid</span> <span class="number">200</span> <span class="string">48h;</span></span><br><span class="line">    <span class="string">proxy_cache_use_stale</span> <span class="string">error</span> <span class="string">timeout</span> <span class="string">updating</span> <span class="string">http_500</span> <span class="string">http_502</span> <span class="string">http_503</span> <span class="string">http_504;</span></span><br><span class="line">    <span class="string">proxy_cache_lock</span> <span class="string">on;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">expires</span> <span class="string">1y;</span></span><br><span class="line">    <span class="string">add_header</span> <span class="string">Cache-Control</span> <span class="string">public;</span></span><br><span class="line">    <span class="string">add_header</span> <span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span> <span class="string">&#x27;*&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">add_header</span> <span class="string">X-Cache-Status</span> <span class="string">$upstream_cache_status;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -310,7 +296,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E5%9B%BD%E5%86%85VPS%E4%BF%AE%E6%94%B9hosts%E8%A7%A3%E5%86%B3github%E8%A2%ABDNS%E6%B1%A1%E6%9F%93%E9%97%AE%E9%A2%98/" title="VPS指南：国内VPS修改hosts解决github被DNS污染问题">https://pawswrite.xyz/2021/06/17/VPS指南：国内VPS修改hosts解决github被DNS污染问题/</a>
+    <a href="https://pawswrite.xyz/2022/08/04/nginx%E5%8F%8D%E4%BB%A3s3%E5%AF%B9%E8%B1%A1%E5%82%A8%E5%AD%98%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE/" title="nginx反代Scaleway s3对象储存媒体文件配置">https://pawswrite.xyz/2022/08/04/nginx反代s3对象储存媒体文件配置/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -322,8 +308,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Linux/" rel="tag"># Linux</a>
-              <a href="/tags/VPS/" rel="tag"># VPS</a>
-              <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag"># 科学上网</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
           </div>
 
         
@@ -332,13 +317,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9Abbr%E5%8A%A0%E9%80%9F/" rel="prev" title="VPS指南：bbr加速">
-      <i class="fa fa-chevron-left"></i> VPS指南：bbr加速
+    <a href="/2022/08/04/%E8%A7%A3%E5%86%B3Skipping-acquire-of-configured-file-main-binary-i386-Packages-as-repository-xxx-doesn-t-support-architecture-i386/" rel="prev" title="解决Skipping acquire of configured file 'main/binary-i386/Packages' as repository 'xxx' doesn't support architecture 'i386'">
+      <i class="fa fa-chevron-left"></i> 解决Skipping acquire of configured file 'main/binary-i386/Packages' as repository 'xxx' doesn't support architecture 'i386'
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E8%A7%A3%E9%94%81%E7%BD%91%E6%98%93%E4%BA%91%E7%81%B0%E8%89%B2%E6%AD%8C%E6%9B%B2%E4%B9%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%90%AD%E5%BB%BA/" rel="next" title="VPS指南：解锁网易云灰色歌曲之服务器端搭建">
-      VPS指南：解锁网易云灰色歌曲之服务器端搭建 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -404,6 +386,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">配置文件</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -578,7 +561,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'Gitalk',
       owner       : 'tech-fever',
       admin       : ['tech-fever'],
-      id          : 'f876370507ff1c16f1de95c79a2e289d',
+      id          : '4a202437f1db697b24f4e669f7b1c6e2',
         language: 'zh-CN',
       distractionFreeMode: true
     });

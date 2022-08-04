@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://pawswrite.xyz/2022/08/04/nginx%E5%8F%8D%E4%BB%A3s3%E5%AF%B9%E8%B1%A1%E5%82%A8%E5%AD%98%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE/</loc>
+    
+    <lastmod>2022-08-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://pawswrite.xyz/2022/08/04/%E8%A7%A3%E5%86%B3Skipping-acquire-of-configured-file-main-binary-i386-Packages-as-repository-xxx-doesn-t-support-architecture-i386/</loc>
     
     <lastmod>2022-08-04</lastmod>
@@ -558,14 +567,49 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/CloudFlare/</loc>
+    <loc>https://pawswrite.xyz/tags/VPS/</loc>
     <lastmod>2022-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/VPS/</loc>
+    <loc>https://pawswrite.xyz/tags/%E9%95%BF%E6%AF%9B%E8%B1%A1/</loc>
+    <lastmod>2022-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
+    <lastmod>2022-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2022-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/Notes/</loc>
+    <lastmod>2022-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/fediverse/</loc>
+    <lastmod>2022-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/CloudFlare/</loc>
     <lastmod>2022-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -635,42 +679,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/%E9%95%BF%E6%AF%9B%E8%B1%A1/</loc>
-    <lastmod>2022-08-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/tags/Notes/</loc>
-    <lastmod>2022-08-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
-    <lastmod>2022-08-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pawswrite.xyz/tags/Mastodon/</loc>
-    <lastmod>2022-08-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/tags/fediverse/</loc>
-    <lastmod>2022-08-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/tags/%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -747,14 +756,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/%E6%9C%BA%E5%9C%BA/</loc>
+    <loc>https://pawswrite.xyz/tags/Steam%E9%98%BF%E6%A0%B9%E5%BB%B7%E5%8C%BA/</loc>
     <lastmod>2022-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Steam%E9%98%BF%E6%A0%B9%E5%BB%B7%E5%8C%BA/</loc>
+    <loc>https://pawswrite.xyz/tags/%E6%9C%BA%E5%9C%BA/</loc>
     <lastmod>2022-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -777,6 +786,27 @@
 
   
   <url>
+    <loc>https://pawswrite.xyz/categories/NextCloud/</loc>
+    <lastmod>2022-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/categories/%E9%95%BF%E6%AF%9B%E8%B1%A1/</loc>
+    <lastmod>2022-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/categories/Linux/</loc>
+    <lastmod>2022-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/</loc>
     <lastmod>2022-08-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -791,28 +821,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/Linux/</loc>
-    <lastmod>2022-08-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pawswrite.xyz/categories/%E6%B8%B8%E6%88%8F/</loc>
-    <lastmod>2022-08-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/categories/%E9%95%BF%E6%AF%9B%E8%B1%A1/</loc>
-    <lastmod>2022-08-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/categories/NextCloud/</loc>
     <lastmod>2022-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
