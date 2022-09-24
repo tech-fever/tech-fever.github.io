@@ -23,21 +23,21 @@
     var CONFIG = {"hostname":"pawswrite.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"algolia":{"appID":"QVWTMTP22E","apiKey":"1a70640400cc23d9656c5fb60de60c0e","indexName":"dev_hexoBlog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="有东西被加密了, 请输入密码查看.">
+  <meta name="description" content="概述ProxyChains是一个Linux和Unix下的代理工具，允许TCP和DNS通过代理隧道，支持HTTP、SOCKS4、SOCKS5类型的代理服务器，且可配置多个代理。 ProxyChains通过用户自定义的代理列表强制连接指定的应用程序。 本文简述Linux下如何通过ProxyChains使用Clash主机代理。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 配置 ProxyChains 上网">
 <meta property="og:url" content="https://pawswrite.xyz/2022/05/31/ProxyChains/index.html">
 <meta property="og:site_name" content="Rainbow">
-<meta property="og:description" content="有东西被加密了, 请输入密码查看.">
+<meta property="og:description" content="概述ProxyChains是一个Linux和Unix下的代理工具，允许TCP和DNS通过代理隧道，支持HTTP、SOCKS4、SOCKS5类型的代理服务器，且可配置多个代理。 ProxyChains通过用户自定义的代理列表强制连接指定的应用程序。 本文简述Linux下如何通过ProxyChains使用Clash主机代理。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pawswrite.xyz/2022/05/31/ProxyChains/comment.png">
 <meta property="article:published_time" content="2022-05-30T19:27:26.000Z">
-<meta property="article:modified_time" content="2022-07-22T06:29:59.833Z">
+<meta property="article:modified_time" content="2022-08-28T09:54:02.443Z">
 <meta property="article:author" content="Rainbow">
 <meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Notes">
-<meta property="article:tag" content="科学上网">
 <meta property="article:tag" content="RaspberryPi">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pawswrite.xyz/2022/05/31/ProxyChains/comment.png">
 
 <link rel="canonical" href="https://pawswrite.xyz/2022/05/31/ProxyChains/">
 
@@ -241,7 +241,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-22 14:29:59" itemprop="dateModified" datetime="2022-07-22T14:29:59+08:00">2022-07-22</time>
+                <time title="修改时间：2022-08-28 17:54:02" itemprop="dateModified" datetime="2022-08-28T17:54:02+08:00">2022-08-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -285,18 +285,38 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="2c3c6887c62e8142c1950bf6587a4bad5fbf5f8f630eb4e2621e53d0f9ed97b7">6d05a0a7f8f5f26ac1a0f788610c8c39891650e360880e21f6503b92190abf4631f92fd91db8ef14cc52aa9680baa07b577f3893cd2d20e2a8d649b197d33d25908c719e8cf64a086b773d306cb35cdf03bb0e567f00e60343e08cbc2949a0a7efb41365dab567aaf6f260513fb63f1e464ff61dc2108bd1f51995c6572e8bf3342a3c95b6310a95378a90c6a03506c1afdd72c6caa400cc6d68ac3703a32a64175fcc1458626dcfdea958bb05b8208cf7062118ae0328de0d31e47a63684ec332b98d841b7c281099e1449efc0aafeb7cb8e2cb8c020d4d436d7af81269b8ff35bf77419802dec1bf2a79b4972657bb41cfc24b46b0f5a54b96177c6f2b769080ee6b552f3b1c57536fde451830c2efad23d95c4978a5b493ca06c475d2bd5f864fd3f6488e9a4b7656b2751004bd62b68233a6d4ac185ab929249a3fba15feaec5928a8fe33374067e0d33918ae5e574d639357ca5e227b6170ed87d6bf79b0ddfc0af6d6615b61be9f37dc5852b2b4e9c6eb9570228cc885bea364c2198b056b7824fc1fabb99b4e7c825fed2baa013592154da7a8c9af132b4a6a80f1f28b5d777c93a75704897d016e3fb68a98a9006576ad6a184912bad5ee792f6806cc1bcf95793c4bfbabc05000a045ca6adf82f61d61608fc7445df8ab96fbed6cb1bf1a15827efb9d007bb839263418e157e5b7b62d7b6f5813056f7c246d2ba972a44fd7095928c78561912829b58e8dcf4fbb894d94e36c3983df684038fc629423cd7e0a8b55490299bf804f531283832cc5276d8b7ad88e814f9bd75f29fc735078f4acd001c9855b8f74666b15a966ce74bcb7961ea4c970cc16b41040a22e1a3cb85119a7f8032bcb0ae0e2f188fbc80c3536ea34d5735dd403a2db88c2dc8ae8dc64a5e401e37dd13d2de2647d5c11309158f6afc25b473eb5508ae1d796c1b672a7df885d6d7b0fd9c884067eb2cbc7cb34374fceb86fe3505e454d772ad7556a9cd03f74f5c2fa6f833a30d23bb66643e439b4e512fceff4dc6a0479888d3aa7690afcee45169f1da4b84e7057c08b4409eaab9d03508c00e8836033391b5f0d62bcb1179ce09db397ce3e75589db9fb5c914fd34c0f6672e7b06fb2a2523a28b34fce34f91952d7738954aa080fe3c49fe8e23f37df12e141b83559d957882411cba8b892e59ac0b1bcfa74a3ee9c5a2ca87c3faf6d195d493e0abd9935e754795c97067b8b22b14ea41cb830fc0e31ebaa9b22e492dd86734478cce0b93426f99c031c123f163c5c95782172568b6efb33c086745304e6ed6b94f19f3333b302327ff883c379575887c34a2aebb63fed129c433281f392d695a58ee893e201ad05a02425466881afecffade2e415347427a6ad08733b5a473b83c538be88b0b78bb769db4759d52ad3fedae5f423a285c8d5cccd8a9460877617c1e0cc5e94a2b7f7aa84b6d155b4b23fc37eb5815473a6b23ef7a6e6d7b98ef169851e860565bc12655509e53c0e38d9c6192d3648b72159db1e9248c6b85a1b13cb8f786bda833034609c6ab1d041d3b26937898d95a825ca73f9898dad9a4e54ff58940e53f4f56915adffc0476ade4d42d3d88907ffd52f2f5af635efeacfd3f689f5669fb49563a7f2563bf0598bbd49a16901d0ea987df72e0586e54723daa8be540c569d24d9f104cac2fe704a0c13dbf2b04f5659ec799b76de18d392f59281e5d63bc2f1b2c416de4e296c6a9e4eaff99f8f93fb321b0b592732927c651c421850cb43797d17767f54b3fd75680c6e6882cb08fc9a26adc0b9da0348a895ca05593cdfaa30e3331f1c66f61083a5021f2eb21a6e71f918e0a88f0ad910092e01c59ef9536cd8ced97da908a4b21eeb2687c985eb5d9c4ea1000aa0bce0327c938d824bb70457fa5121fb28682487eff9e6ba15b9fc848b799a43c0aeb38c59ecd6fc8ad9140e5d6b632f1a413c0f4f0812c52c7cd4bc2e5839b8ddb696c0b03c80a96aad53da5679d8fb479e09059cac717142f5dd889baba783a0d1f764c436e60ac8e635c1057a7d8f2374c8573db658114ef68e9b764090f97c31d1a5e095098e3573fbd467e28ee19c5f27d54d95c498373f0899924c6abee97724a6888dbf78633c0890e05f422475409358212011f7f8cc57dacb0de797af84cd63ccaee0288c278e4012f8e301c795cfcf62d7655675eba52971734426cd2a6ebae0c72d9b50b4fd0a875d26929581e244a74de0ca9e8fd62bc7bca8da12348d94b4eec07328a927bcd490915ad500b678b97fae6b4aeafb62c78daecaa2e8a9a0af8724e83dd8993cb75b0e626f5cb2b2baae34a4412ec2511d4455cd351b7ca182df8137db76dc22e6dd91a976c9ab650d8f5233e8ee1a460c263c83bf77e03bf4ba9078f7e940ec6b6ab6d7a744051f84d962dfeab1d0b50e6ce5b755c1750ffbf1c7b402b324cf9a698beef89ab94636a412443af52ff46ec007cc365e5f8dffa18da476f14920dd29d35ec81a05b6d67f08b4e11be09555c69e01a7b38f2ff5f080c6ec59e12897ab2de03b8c296b6ca45ffddf1e3c4dd5ac405fe62d4fb6424123488f9fd077dc0624b8a1eea946f19718c8c3fe49a6428c41efa818df38389bbfd8fe9521c45fae5a66b0ce9510e0bf186c44cec2d24476d2781e5fb98ecfc2075b0eaed747e4ddd858544dcfa9ef036bbad146bc6cd2021113fded9318614507bcd65ebfee2d5a68241b9c1294fcf8aeb4d476347acc58d7e7d8b6ea5ab630c985aae0d3cf6826dfc929f6337e9cdbf3c0a6927d0648db8aba8074708fd5401e6a0e5f9206e871d02cbcb9979d9469f9ecc34193a79a5804c67e92b53908634a5d404b6bd8505b9ab75570a2b26b13dc47c1260ebcaf69fe73a4fe753811feb9c0213adf173c5123f3e1b4230e7f85a88bc61a5b4cc26e3fffcb3ed48b0abc71d45d985775dbff8962783328af093e169bef0d69e3583a0d0bbddc06ec387273355598317ef188b4c428bd512e5fac489e2cce79dde2fb22028bd1e852bb3afab3b71f8a7ad6322c7cf33e4ed0e22cbaea3e55a2d4f08e07dad0450a147541b0f4570d34464503626cf028893fd8f5c1872a96c490f44d323e4d0566f7417d3178960f5600bd6183e40ac724afe1dbc4e9391b8e417f530d75cae01f476c4b5cfa4d96f9959317d0b7abadbd196b31aa6798ad26dfceb3816cde557440c971f5aa146547c1c6b951485c4710b4d83e70d3c0db7bc54563bccc649533d30e81a7e1ea5f2bed95fbbb5c36e623c026a043480735bd05f6b8301728eafac3648ec4ec041b7f9491b945966628df86fcdb8e674605ddddfc1e59b4256503df3273b6e274db9bf67a9d0c16352020e840bd709df0924e264e1fb8d02c81cabfac1dff1398c3e869260782ddcce3fdc7ae92491097270751bc570cb0ddabd420a260205e775f06b8827b3bb1d83d5d2c128c8fe63086333b5eefb74ff01fa6f0cfdc20ea91ee9119af36b74318cb15ecc8383b8bde169d56d44015fae2773cb1cc10582697da122d742234e22cc1e4b0bcbfe0788fa79653bc371f22e69e4ed9623ef97ec3a13b22f30d918d3f8ac1a9198226f735d41170261c456b4fe02b523133df135964a63a3b46062968866aab9b0a2e3cb04d74c36fc9d10786f4944c8e0d4a46d85ef7f86aff422fafd1944a69ffa4d69eeea95e868dec9c4415c77c8908b969a9c54b95ae409017edf20707467e798c538a681ed4af0617491f323a23f24498e95f8e9414413c36b0ca8864597ec6250da48dd908dbbb8f0750389cc6e6964635fa3844cc038918e9f59ee722002a99d72a8109c63fa6e0ef232d7089f789431a757cc966d60fea9e485882570851b3614b5a8d322296e147242ad35a8c3d7f45f7b690b95f60c0bcb2a761c2a107f598cb45640586ff4057584911fc17865cb70fec6f25f0fe0752c2ca21bd3ce0c21b0977d30ae239a1817c2ab6614cb35748271e1e90f93d8f27f16a9b5b79fb20de967bd8153300d80345d79721a2482e98884999665d618b0f66088ac56ccc161808c5cd218098dfaaab25f628f8b7a1d04fbba948f92804c35917fe80aeb8b64439c0b4edfeaddd325332c7ac84beb44db5aca4e80a6343bde78f6df40f9d78af607843da641d5f94ba74764185fca8a94fa39bca5ca5a7033494b6194d64dd4ee599df30811ad90f14a9588167a4a31e276db9b447eaa7bc455338fb9d371b9a7c4484d4f9a3bdb5ba3412f64276bcc9a0cfcf09d3dfa298bd69bb39b866edcfc11b722e8515624418562b45eac9620c9ef2304fd076284015cd17c58922289077a20a619a267360e03479d4a4db51cca2d15d9f39ffcb2073a29f1135f55ffc865d7e8028d61cbef2ee0cec03c8842f3ad79af81f62d1815cde9cec3a87176bea2aea6c08ff7bc887cebabd91c86ebecfb4121fc997f7271cceb596cf9e0276709271d830972cb4e4050574a58d522b7860881b639a85f345869cca93ce6562f947314311b860d9da0fe2d565246549003db4a64061566c4d70fae21cad0c6d1220a4c69e48ff1b977ef4621a3283e48c5c2dc90dc2d2c912362a20832c6ff9a146093d27c9e6ad2b8a17bf877cfa549c69bfb9e38ed9164674f7cc91ced3b0aa3c5b6dd50eb924bb2c4adb29946b1c3e6dfe8856d740aca55752e9f20d9206d7e4b1539693fb3d90f6ff0edc493d85e5db2f6c70757a17f4d968811bb25d9dd996baf34a1d186c4d0d3e74f7d69225ef21e583e156b80b24d7ec1690d61575e8f95001c414c40be9fe9314cfcea39c3982b08cf1777ba904cb465636550f3d455357da07ff8727f6fe901aa18bc8a9d74db4af82f56c16aa226ba6f8d0bc60209d6b723001a3a173bf1750053ca76fab0da1786d4db1f6363a99f73b5e58a2ffd3758efe053d96135bc1410a6d83780586b55ed5fd2f336b194e1050648d149a1508fc9a18df14eb1e9807ae793cc1bec7b8821ebc70f06dd8c06e334e9fa20e360c30f4034391e5cfea50f357ff15f6e1246d6c7140d4658636447443921bc8a21ead0fe4ff35c6c28cd70a28c55d10b8e1bfc78637e45fa27fe820fbbdb8af2c86a8bc205912c45a8d99993d50f94cfbdcac090934479c26612596eef71ab1c60781767cb7bb9c56111f0b283d2834b81285661b65aac96dbf0a03c3a6aea804fcb6df02c44b33aafd28381f04654a1da5678981c8c652891fbefefe5fa55b3abf4b608e323d3023cd3a1c5c3814eed008114c3ff95fab7bd16c79231f102556c12f96c72a37687805aa1f752a9416c1b2fe72f463eb0e63152f21a262fa61c259c5b325de1df41caf9794422679bd70ea0c998aad07f92253eac2e115380f7860ab7d8849a624e8484a10754ce204b46632c0078a58c484f1f3279ce011e483e6f03c35a3472a4baa1e2b389e0d579052d957da1cfc1a7345710331c672c2e7a29ba0a3e6787f26f3de5dc7468589eb963fec502699cdec25b278164aa2a8c14f32bfe0a9669fb1e38765acd72b92f37361d04f08ba5b931bb8d8cd4c1d27ec53b56591ce7f5b14b4c7dd58b9aa5261ad9a70aa590bd456058c8f6d288342c2940dc15b0c271616cdeaa11f30e575c6d9ac10d9b426b662ada3928d444330c66014c1a84305f63a746ecace606a2b835f15474163328191305a3b8e6978f6739f2a6c766f618982808a6c8519e2cdbfdbacf9809fe50a925ab60ebc046fbd9cdb444e356967095861f3fb9ba2de8aafae93cb30eb38e646fcd5e9786ac0ea3091af1c1b34284bab1a1c0703e739eb4fb5f755c4b48dfdaebe23a18534518953f72715d7198b0db58537ad77b5e9e3b609e2da16caaf08aea6ade9e5e065dce23f69888b6c164088a6d58aa9f570877cc936019c7d3f36fa39f4c02fc6af52b6a9ceeb7f0f22e2bd5c125f5195db68004d0bf1ba32cd47d0a892a88f293ec7959d4f4d3eebdcae9fe3ecb380d8e5ac83c93a615a2730992dcffa122c6c6e547c1e9c3f6c656976d668fffe2f884692f75823a5442658fc905d5ae2652e00e9313efec3c145cff5d7d2e87df80e1a48f1bac339a012c3dd19f245d6e212dffa41f4f6115dfe5954b3b71896119b2c69b66937569de94d562411319cbef5403c522abfa9f30694314e417604e36b59ec3a58bfa98f6c637d4c8a13a8be2ccd0baa89471cc094edc1909ae0341e9d512f98378e07fa6402413fa13abaeb53688757d834bc9a2bc61248fb2a3cc70ada4a809613ba1d6977859a7ea3570f427dc65fb477ab84a767251c14e6927ada6a4c3c2df1913f3949bd16fcbe069d640fbc17b9958ddd71b7c4cda2e5ab0a5be8f63fe0108b09c55d8828956b2acd771ba232291e7e9686c7a257c59a80a8d874ac78c704ecba72fb5477f937e870eaca3b89082ed87958fec3cc99136f22d28895dfd8a8fb2be7ee03098f533c626ee441e3c9c5970b320a397ad86997988c74597f15864dbd7c63531575533335dc51eed53c11f65fb626eee64d4c0a6e5b835f4f4e71ba5642d61293aaffcbbee505df94ebc5000f563f6acf938131462d088d56fc6aab704fcca33f9f0d9e54650933baf272e925f38c8153314c7e8f904e57575d4b4df10fb5834917329519f7faf63531f423e0655162625530a54b5ede4189cdae7e15e52b199a5b54a6a2bc6f01ca231660de23ee4aa6b318f15505dc9493155204f27a30e7247d6b36c20243703aa183de67eea350f10bf9d30a37dec60d33e0064e8313eabac5215f7d9b911f3f81b33c4335275562d4f6521f1bec95da387dcf0e5ae46f120de84881dcec4c595c6a50d623df3604bb3623292d907a638cf0bb72831d5b5031135da89edd5a090a63066064ba14f354f96a425cf3d75f4232d806de47518ee702140d64432e96f0d9c8b2f23c0cfbb9dd8cf3e6f65e9a20ab888adbc6711269a96664f19811ce87987c65535452d06e3d9cb37359c0a34dc41d6ab60a8b1a6af955de0a732f0491408ad64a54ee8a8c022ac6adb2a6bed9551bfecaef257cc097eb3d4ee81ad09e35443d0687884e06f477b66738cc4555f0379504cb7b8f095b171ba01eadb744879ea7851420da6396d77f745d4b0cac2d29ced8be73bd6794e47c2325ff27f51006644d797df7c1981c9dfe34e48f06fa68d9512958c3aaef7218b079853e358d07d2ccdfee986644df53a6c26c58bbc399f0d6f32b8bc2cd64bbeea206817100acf27f8263560cb72955167ef47f111cea76548f340044c04f804a8e322b9e649157046a4730f1827401c7691e15794e2b7cdf4384b81c76715b51c6126e952d684c647a4242cffbb3f57dc7c3fb18a219abdf644a5547c86062ffd5523fbbd93f79d46293b8d5104dc097e1d53e0634b0af641060110942f6efb9ff065d3b9c929fb67980b1f07bd63c77f337686d8151f6241e415c8f4be81a3a3ecc2a989a4c3b3a9f119f40a274cabb92b88741ece9f58495f82bd1c7c7ec743977bf77137a1a1945d1aa6493fe8849f26a873b3fae9c5d308074f34250a0222928966c7ba741b8dc52cc81ea6296a85e568a036a63c6bf3f6235b26ef71773b2315c965810c3f3c44586f6948941893c0ed37a003e8e497918fd2848a980881bbd8f8720c1d1f79cdc4838214c99a112523d19c2589de081a2d0b69658c80d8be806fa285d5e2f4cf245af5ab45f9ed54a750d313f97f1e31a9478b8ba0de7fcd46ff0de2d5ea578c700a264450e285621f61b29326b63d2d92e5d1b7468e57c87e64429af0ad4d68c98efff2b1c6ca1e16c9b11eeb7b2c0226e35afff17c4288999b0e78c0d194bd6cf6bd25d4beb2630de7b00601a5d9f2fa7013597b46bcfb037d9fce7da7dae41b6c333d57d82620d081ff3eeca6aaa6a1e0de5f15b94a29e2e40cb6240ba211cd7f778d91a80281d74f6ecb0d09955da3b8</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好, 这里需要密码.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><code>ProxyChains</code>是一个<code>Linux</code>和<code>Unix</code>下的代理工具，允许<code>TCP</code>和<code>DNS</code>通过代理隧道，支持<code>HTTP</code>、<code>SOCKS4</code>、<code>SOCKS5</code>类型的代理服务器，且可配置多个代理。</p>
+<p><code>ProxyChains</code>通过用户自定义的代理列表强制连接指定的应用程序。</p>
+<p>本文简述<code>Linux</code>下如何通过<code>ProxyChains</code>使用<code>Clash</code>主机代理。</p>
+<span id="more"></span>
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><h2 id="GitHub项目地址"><a href="#GitHub项目地址" class="headerlink" title="GitHub项目地址"></a>GitHub项目地址</h2><p><code>ProxyChains</code>：<a target="_blank" rel="noopener" href="https://github.com/haad/proxychains">haad&#x2F;proxychains: proxychains - a tool that forces any TCP connection made by any given application to follow through proxy like TOR or any other SOCKS4, SOCKS5 or HTTP(S) proxy. Supported auth-types: “user&#x2F;pass” for SOCKS4&#x2F;5, “basic” for HTTP. (github.com)</a></p>
+<p><code>ProxyChains-ng</code>：<a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng">rofl0r&#x2F;proxychains-ng: proxychains ng (new generation) - a preloader which hooks calls to sockets in dynamically linked programs and redirects it through one or more socks&#x2F;http proxies. continuation of the unmaintained proxychains project. the sf.net page is currently not updated, use releases from github release page instead.</a></p>
+<h1 id="安装ProxyChains4"><a href="#安装ProxyChains4" class="headerlink" title="安装ProxyChains4"></a>安装ProxyChains4</h1><p><code>kali</code>默认预装<code>proxychains4</code>，其它基于<code>Debian</code>的<code>Linux</code>发行版可通过如下命令安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install proxychains4</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install proxychains</span><br></pre></td></tr></table></figure>
+
+<h1 id="文件配置"><a href="#文件配置" class="headerlink" title="文件配置"></a>文件配置</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/proxychains4.conf</span><br></pre></td></tr></table></figure>
+<p>如果刚刚是用<code>apt-get install proxychains</code>安装的话就是修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/proxychains.conf</span><br></pre></td></tr></table></figure>
+<p>取消<code>dynamic_chain</code>的注释，<del>也可以注释掉<code>strict_chain</code></del>:</p>
+<p><img src="/2022/05/31/ProxyChains/comment.png"></p>
+<p><font color="orange">注：请在代理软件上勾选<code>允许本地网络连接</code>选项。</font></p>
+<p>在这个配置文件最下面有[ProxyList]这么一行，在这行下面添加上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">socks5 127.0.0.1 7891 </span><br><span class="line"><span class="comment"># 7891 取决于yaml的配置</span></span><br></pre></td></tr></table></figure>
+<p>如果有别的比如<code>socks4 127.0.0.1 9050</code>那么就把它给注释掉。</p>
+<p>重启，若要在代理下使用某条命令，则</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains [<span class="built_in">command</span>]</span><br></pre></td></tr></table></figure>
+
+<p>即可在proxychains代理规则下启动。</p>
+<p>比如说使用curl的时候用代理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains curl -fsSL https://get.docker.com | sh</span><br></pre></td></tr></table></figure>
+
+<p>例如使用snap的时候用代理：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@raspberrypi:~# proxychains snap install docker</span><br><span class="line">[proxychains] config file found: /etc/proxychains4.conf</span><br><span class="line">[proxychains] preloading /usr/lib/aarch64-linux-gnu/libproxychains.so.4</span><br><span class="line">[proxychains] DLL init: proxychains-ng 4.16</span><br><span class="line">[proxychains] DLL init: proxychains-ng 4.16</span><br><span class="line">Download snap &quot;docker&quot; (1783) from channel</span><br></pre></td></tr></table></figure>
+
+<p>测试网络：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping google.com</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -323,8 +343,6 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Linux/" rel="tag"># Linux</a>
-              <a href="/tags/Notes/" rel="tag"># Notes</a>
-              <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag"># 科学上网</a>
               <a href="/tags/RaspberryPi/" rel="tag"># RaspberryPi</a>
           </div>
 
@@ -406,6 +424,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">相关资料</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80"><span class="nav-number">2.1.</span> <span class="nav-text">GitHub项目地址</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85ProxyChains4"><span class="nav-number">3.</span> <span class="nav-text">安装ProxyChains4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">文件配置</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -421,7 +440,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">65</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -434,7 +453,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -482,13 +501,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">212k</span>
+    <span title="站点总字数">226k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:13</span>
+    <span title="站点阅读时长">3:25</span>
 </div>
 
         
