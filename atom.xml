@@ -6,7 +6,7 @@
   <link href="https://pawswrite.xyz/atom.xml" rel="self"/>
   
   <link href="https://pawswrite.xyz/"/>
-  <updated>2022-09-24T10:34:43.863Z</updated>
+  <updated>2022-09-25T05:06:36.608Z</updated>
   <id>https://pawswrite.xyz/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>笔记：Django时区问题【非原创】</title>
+    <link href="https://pawswrite.xyz/2022/09/25/django-timezone/"/>
+    <id>https://pawswrite.xyz/2022/09/25/django-timezone/</id>
+    <published>2022-09-25T05:04:12.000Z</published>
+    <updated>2022-09-25T05:06:36.608Z</updated>
+    
+    <content type="html"><![CDATA[<p>Python的时区问题一直很烦，找到篇讲Django时区讲的很好的文章，存档一下。</p><p>《<a href="https://www.leavesongs.com/PYTHON/django-timezone-detail.html">Django中与时区相关的安全问题</a>》</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Python的时区问题一直很烦，找到篇讲Django时区讲的很好的文章，存档一下。&lt;/p&gt;
+&lt;p&gt;《&lt;a href=&quot;https://www.leavesongs.com/PYTHON/django-timezone-detail.html&quot;&gt;Django中与时区相关的安全</summary>
+      
+    
+    
+    
+    <category term="学习是人生第一要务" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/"/>
+    
+    
+    <category term="Django" scheme="https://pawswrite.xyz/tags/Django/"/>
+    
+    <category term="Python" scheme="https://pawswrite.xyz/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>【git实战入门】2. 小白的第一次提交</title>
@@ -471,34 +498,6 @@
     
     
     <summary type="html">&lt;p&gt;GitHub学生包赠送name.com免费一年的SSL证书。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="学习是人生第一要务" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/"/>
-    
-    
-    <category term="GitHub" scheme="https://pawswrite.xyz/tags/GitHub/"/>
-    
-    <category term="web开发" scheme="https://pawswrite.xyz/tags/web%E5%BC%80%E5%8F%91/"/>
-    
-    <category term="学习" scheme="https://pawswrite.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GitHub 学生包：没用的Netwise服务器托管</title>
-    <link href="https://pawswrite.xyz/2022/06/09/GitHub-Student-Pack-Netwise/"/>
-    <id>https://pawswrite.xyz/2022/06/09/GitHub-Student-Pack-Netwise/</id>
-    <published>2022-06-09T03:53:14.000Z</published>
-    <updated>2022-06-09T04:13:11.499Z</updated>
-    
-    <content type="html"><![CDATA[<p>GitHub 学生包有很多福利。netwise是英国的基础设施供应商。Github学生包可为学生提供12个月的基础 1U 服务器托管包。其实没啥用。</p><blockquote><p>Free single unit server colocation package free for 12 months.</p></blockquote><span id="more"></span><h1 id="福利介绍"><a href="#福利介绍" class="headerlink" title="福利介绍"></a>福利介绍</h1><p><strong>12个月</strong>的位于<strong>伦敦</strong>的服务器托管基础服务，这意味着要使用托管服务，您需要<strong>拥有自己的物理服务器</strong>。 </p><p>服务器将受益于数据中心设计的高正常运行时间冗余，例如弹性电源、运营商级连接、适当设计的冷却系统、增强的安全性和 24x7 技术支持。</p><div class="note info">请注意：我们不提供服务器，因此您必须拥有自己的物理服务器硬件才能使用此服务。</div><p>包含以下内容：  </p><ul><li>1U 安全空间？</li><li>0.5 安培功率分配？</li><li>1TB 流量</li><li>100 Mbps 带宽</li><li>一个 ipv4 地址</li></ul><p><img src="/2022/06/09/GitHub-Student-Pack-Netwise/benifits.PNG"></p><p>另外包括技术支持：</p><ul><li><input checked disabled type="checkbox"> 24 小时技术专家支持</li><li><input checked disabled type="checkbox"> 一流设施？</li><li><input checked disabled type="checkbox"> 高弹性低延迟网络</li><li><input checked disabled type="checkbox"> 冗余功率和冷却</li></ul><p><img src="/2022/06/09/GitHub-Student-Pack-Netwise/features.PNG"></p><h1 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h1><blockquote><p>官网链接：<a href="https://www.netwise.co.uk/students/">Netwise Students</a><br>点击右上角 <code>BOOK A TOUR</code> 注册账号。</p></blockquote><p>注意，这里选择 <code>London Central</code> 。<br><img src="/2022/06/09/GitHub-Student-Pack-Netwise/register.PNG"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;GitHub 学生包有很多福利。netwise是英国的基础设施供应商。Github学生包可为学生提供12个月的基础 1U 服务器托管包。其实没啥用。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Free single unit server colocation package free for 12 months.&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
     
     
     

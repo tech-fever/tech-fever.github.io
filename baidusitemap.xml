@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://pawswrite.xyz/2022/09/25/django-timezone/</loc>
+    <lastmod>2022-09-25</lastmod>
+  </url>
+  <url>
     <loc>https://pawswrite.xyz/2022/09/24/%E3%80%90git%E5%AE%9E%E6%88%98%E5%85%A5%E9%97%A8%E3%80%912-%E5%B0%8F%E7%99%BD%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%8F%90%E4%BA%A4/</loc>
     <lastmod>2022-09-24</lastmod>
   </url>
