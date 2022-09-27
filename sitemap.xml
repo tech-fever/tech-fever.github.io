@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://pawswrite.xyz/2022/08/12/selenium-%E6%A8%A1%E6%8B%9F%E7%82%B9%E5%87%BBhcaptcha%E5%92%8Crecaptcha%E9%AA%8C%E8%AF%81%E7%A0%81/</loc>
+    <loc>https://pawswrite.xyz/2022/06/02/VPS-aff/</loc>
     
     <lastmod>2022-09-27</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/2022/06/02/VPS-aff/</loc>
+    <loc>https://pawswrite.xyz/2022/08/12/selenium-%E6%A8%A1%E6%8B%9F%E7%82%B9%E5%87%BBhcaptcha%E5%92%8Crecaptcha%E9%AA%8C%E8%AF%81%E7%A0%81/</loc>
     
     <lastmod>2022-09-27</lastmod>
     
@@ -671,14 +671,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://pawswrite.xyz/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
+    <loc>https://pawswrite.xyz/tags/%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -720,6 +720,13 @@
   </url>
   
   <url>
+    <loc>https://pawswrite.xyz/tags/Docker/</loc>
+    <lastmod>2022-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://pawswrite.xyz/tags/GitHub/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -735,13 +742,6 @@
   
   <url>
     <loc>https://pawswrite.xyz/tags/%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/tags/Docker/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -797,6 +797,13 @@
   </url>
   
   <url>
+    <loc>https://pawswrite.xyz/tags/git/</loc>
+    <lastmod>2022-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://pawswrite.xyz/tags/%E5%8D%8E%E7%A1%95%E8%B7%AF%E7%94%B1%E5%99%A8/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -811,20 +818,6 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/git/</loc>
-    <lastmod>2022-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/tags/python/</loc>
-    <lastmod>2022-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pawswrite.xyz/tags/Django/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -833,6 +826,13 @@
   
   <url>
     <loc>https://pawswrite.xyz/tags/Python/</loc>
+    <lastmod>2022-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/python/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -909,13 +909,6 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Clash/</loc>
-    <lastmod>2022-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pawswrite.xyz/tags/%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -924,6 +917,13 @@
   
   <url>
     <loc>https://pawswrite.xyz/tags/%E6%9C%BA%E5%9C%BA/</loc>
+    <lastmod>2022-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/Clash/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
