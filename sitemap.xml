@@ -664,7 +664,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://pawswrite.xyz/tags/%E9%95%BF%E6%AF%9B%E8%B1%A1/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -678,14 +678,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/%E9%95%BF%E6%AF%9B%E8%B1%A1/</loc>
-    <lastmod>2022-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/tags/fediverse/</loc>
+    <loc>https://pawswrite.xyz/tags/%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -693,6 +686,13 @@
   
   <url>
     <loc>https://pawswrite.xyz/tags/Notes/</loc>
+    <lastmod>2022-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/fediverse/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -720,6 +720,13 @@
   </url>
   
   <url>
+    <loc>https://pawswrite.xyz/tags/Docker/</loc>
+    <lastmod>2022-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://pawswrite.xyz/tags/GitHub/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -735,13 +742,6 @@
   
   <url>
     <loc>https://pawswrite.xyz/tags/%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/tags/Docker/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -818,6 +818,13 @@
   </url>
   
   <url>
+    <loc>https://pawswrite.xyz/tags/python/</loc>
+    <lastmod>2022-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://pawswrite.xyz/tags/Django/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -832,7 +839,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/python/</loc>
+    <loc>https://pawswrite.xyz/tags/Hexo/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -840,13 +847,6 @@
   
   <url>
     <loc>https://pawswrite.xyz/tags/Object-Storage/</loc>
-    <lastmod>2022-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/tags/Hexo/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -902,14 +902,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6/</loc>
+    <loc>https://pawswrite.xyz/tags/Steam%E9%98%BF%E6%A0%B9%E5%BB%B7%E5%8C%BA/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Clash/</loc>
+    <loc>https://pawswrite.xyz/tags/%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -923,7 +923,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Steam%E9%98%BF%E6%A0%B9%E5%BB%B7%E5%8C%BA/</loc>
+    <loc>https://pawswrite.xyz/tags/Clash/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -939,14 +939,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/Linux/</loc>
+    <loc>https://pawswrite.xyz/categories/%E9%95%BF%E6%AF%9B%E8%B1%A1/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E9%95%BF%E6%AF%9B%E8%B1%A1/</loc>
+    <loc>https://pawswrite.xyz/categories/Linux/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
