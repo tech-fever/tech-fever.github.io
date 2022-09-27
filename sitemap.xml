@@ -713,20 +713,6 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Speedtest/</loc>
-    <lastmod>2022-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/tags/Docker/</loc>
-    <lastmod>2022-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pawswrite.xyz/tags/GitHub/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -748,6 +734,27 @@
   </url>
   
   <url>
+    <loc>https://pawswrite.xyz/tags/Docker/</loc>
+    <lastmod>2022-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/Speedtest/</loc>
+    <lastmod>2022-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/Azure/</loc>
+    <lastmod>2022-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://pawswrite.xyz/tags/%E6%B8%B8%E6%88%8F/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -756,13 +763,6 @@
   
   <url>
     <loc>https://pawswrite.xyz/tags/Steam/</loc>
-    <lastmod>2022-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/tags/Azure/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -839,14 +839,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Object-Storage/</loc>
+    <loc>https://pawswrite.xyz/tags/Hexo/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Hexo/</loc>
+    <loc>https://pawswrite.xyz/tags/Object-Storage/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -902,7 +902,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/%E6%9C%BA%E5%9C%BA/</loc>
+    <loc>https://pawswrite.xyz/tags/Steam%E9%98%BF%E6%A0%B9%E5%BB%B7%E5%8C%BA/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -916,7 +916,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Steam%E9%98%BF%E6%A0%B9%E5%BB%B7%E5%8C%BA/</loc>
+    <loc>https://pawswrite.xyz/tags/%E6%9C%BA%E5%9C%BA/</loc>
     <lastmod>2022-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
