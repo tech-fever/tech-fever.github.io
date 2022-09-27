@@ -1,34 +1,27 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.1.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <meta name="google-site-verification" content="f4M613CNVfWg9fM_X3tG5jELt3D10Gk8E3R0ZUaMzd4">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"algolia":{"appID":"QVWTMTP22E","apiKey":"1a70640400cc23d9656c5fb60de60c0e","indexName":"dev_hexoBlog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="有东西被加密了, 请输入密码查看.">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rainbow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="国内服务器连github常常缓慢，甚至连不上。这个问题可以通过修改hosts来解决">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VPS指南：国内VPS修改hosts解决github被DNS污染问题">
 <meta property="og:url" content="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E5%9B%BD%E5%86%85VPS%E4%BF%AE%E6%94%B9hosts%E8%A7%A3%E5%86%B3github%E8%A2%ABDNS%E6%B1%A1%E6%9F%93%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Rainbow">
-<meta property="og:description" content="有东西被加密了, 请输入密码查看.">
+<meta property="og:description" content="国内服务器连github常常缓慢，甚至连不上。这个问题可以通过修改hosts来解决">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-16T18:09:17.000Z">
 <meta property="article:modified_time" content="2022-05-30T19:26:44.217Z">
@@ -36,529 +29,414 @@
 <meta property="article:tag" content="VPS">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="科学上网">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>VPS指南：国内VPS修改hosts解决github被DNS污染问题 - Rainbow</title>
 
-<link rel="canonical" href="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E5%9B%BD%E5%86%85VPS%E4%BF%AE%E6%94%B9hosts%E8%A7%A3%E5%86%B3github%E8%A2%ABDNS%E6%B1%A1%E6%9F%93%E9%97%AE%E9%A2%98/">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
 
-  <title>VPS指南：国内VPS修改hosts解决github被DNS污染问题 | Rainbow</title>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
+<body>
+  
 
-  <div class="site-meta">
+  <header>
+    
 
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Rainbow</h1>
-      <span class="logo-line-after"><i></i></span>
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
     </a>
-      <p class="site-subtitle" itemprop="description">blog</p>
-  </div>
 
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-sitemap">
-
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
-
-  </li>
-        <li class="menu-item menu-item-commonweal">
-
-    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
 </nav>
 
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="VPS指南：国内VPS修改hosts解决github被DNS污染问题"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-06-17 02:09" pubdate>
+          2021年6月17日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          607 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          6 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container"></div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="algolia-results">
-  <div id="algolia-stats"></div>
-  <div id="algolia-hits"></div>
-  <div id="algolia-pagination" class="algolia-pagination"></div>
-</div>
+        
+      </div>
 
       
     </div>
   </div>
+</div>
 
 </div>
-    </header>
 
+  </header>
+
+  <main>
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+      
 
-  <a href="https://github.com/tech-fever" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
 
+    </div>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">VPS指南：国内VPS修改hosts解决github被DNS污染问题</h1>
             
+            
+              <div class="markdown-body">
+                
+                <p>国内服务器连github常常缓慢，甚至连不上。这个问题可以通过修改hosts来解决</p>
+<span id="more"></span>
 
-    
+<p>安装vim</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># debian或者ubuntu</span><br>apt-get install vim<br><br><span class="hljs-comment"># CentOS</span><br>yum install vim<br></code></pre></td></tr></table></figure>
+<p>修改hosts文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/hosts<br></code></pre></td></tr></table></figure>
+<p>按i切换到输入模式，在文件末尾加入三条记录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#github</span><br>140.82.112.3 github.com<br>185.199.110.153 assets-cdn.github.com<br>151.101.1.194 github.global.ssl.fastly.net<br></code></pre></td></tr></table></figure>
+
+<p>ip地址可以根据你自己VPS响应速度来定。<br>在 <a target="_blank" rel="noopener" href="http://ping.chinaz.com/github.com">http://ping.chinaz.com/github.com</a> ，查找以下域名的ip，挑选响应时间短的ip地址。</p>
+<p>github.com</p>
+<p>assets-cdn.github.com</p>
+<p>github.global.ssl.fastly.net </p>
+<p>raw.githubusercontent.com(这个域名我测试了下，腾讯云华为云都没有被DNS污染，很正常，选用)</p>
+<p>备用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">13.250.177.223 github.com<br>185.199.109.133 raw.githubusercontent.com<br>185.199.110.133 raw.githubusercontent.com<br>185.199.111.133 raw.githubusercontent.com<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
   
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E5%9B%BD%E5%86%85VPS%E4%BF%AE%E6%94%B9hosts%E8%A7%A3%E5%86%B3github%E8%A2%ABDNS%E6%B1%A1%E6%9F%93%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Rainbow">
-      <meta itemprop="description" content="Tech Lover">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rainbow">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          VPS指南：国内VPS修改hosts解决github被DNS污染问题
-        </h1>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-17 02:09:17" itemprop="dateCreated datePublished" datetime="2021-06-17T02:09:17+08:00">2021-06-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-31 03:26:44" itemprop="dateModified" datetime="2022-05-31T03:26:44+08:00">2022-05-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>607</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
       
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="f9958b8fd387ce2db310c101921a1d7d3393d34f4396b75cf4baf1a2f629e123">6d05a0a7f8f5f26ac1a0f788610c8c396478ca8fbe4f5e3e5544711475b950bf979115cb3828b851825905d4f4d7a210d9713af619b576fad31086732953f081d58d3c793ea8b89a1a878468a0bff168daa3db3454f9ee4286cbf2be972b6929af8e5545866f92ff01780686b681a7a54030ed63b462806b3eaebd6147b25d168a6f873aa297fbd2bf0224161caaf89c8fb8cb06a49791e103c30ccef15249379e686f8671eed87c45a0a990f8d4ccccd021882bbc0e2b2d219cb68f0b0c560495814dbd3297f55954b3904e80e9195e5e1581932685affa2091445a6801d6329604b417d9e3093143110d9be053d3e40455bb056b194722082960142bad1eb4f47400d65f14e3c9e68f6e38f16d31e17ee85b4a57c322d65ada021129116ef6cfebd66643b746707ba23f55817b4cb6e5656a40105da2db6581f9f370d56c0dd16f917fdfac8c5d4b1765b1e5cbcbb3e64b913bc71a4bbf4503f60a4e1be82e4d6d10a77c0203b22cc495dd3d20249d1f9d7ef5c3aa295c0f6aa3d2e78ca1ecb3dafdcdb1312029b59a8aed5e9705443024708f75de951469c90d7cded290e4223ae73642ff065636b8bcbc5cb89f10e5313a875a2c6e4ca2c35d89cabf9355225bc51a2332276ab87163ce1b6087a31efe0b3ba6b348e6dc05d19cc15a780654e6e87f2aac385332b9614207969f3aaead0ddfd82068036b4563e2ad0a2a0bac51d6e900a5cc0d8988a6108e51cc8e2ec353562ef3aade948bebfe74903d20e9e3c618fb43b18f20b97c5b721d89ec814d14ab254dd2d6f7438c3a35519aaa1a74d06c2165174cdca381dcac91185cc20a60f014475b26329e78f4f304d16e90d50ba0fbb31efd5c543c02f351065607d7aebff722c3057446a93036c609ac18085b44e3542aa2b3c0551234413dc28dab6aa6a72c948861cf5261958e816c6b295fa9f854d34db06e246c97e40074f632186b516bbf10819e62818c435409328b5e77ff95b06ec9303d07a9e4bd2ab31f526bd0cd7c493c7d32505d8362fba24694c229c4e518028da848a2888ec816e04e5338621fa7670e985fddf6a861183e38bb788c2eec9e241146db9dff8a30ac055b089311ce81d3ae1f4a97f8859c0df0a7151a97534c623b8df0aa841803f2ec28c11efe76d93dbc78f28d09027c102516d8b1bf025bc445679f7cd9fa5c097b08d9c029a2c6d7430daeb223244282a68a8b51b5db6b8f54fb84f20ce2e3c1d753e0395c4a052fe049cf1b2ef1f3305dcaedcbc15af898d64271a5111708cabd4cd522c6e2b587b3064b2d3d47efad15b8bafb966a8d679749e88d2c046019a4cb06ec6009ec4f03d18e474d66e2ac1582dcdf339939413e6456900e6ee7b761d55f537830b32ceed9058434be60913a2e93625d78132d0edda241e4bed21b02611b392576f8e3e1566d6616c3612161844b2daebc6480588177c1c798fe98358fc3146a9d2d573d8e5cb4bd299a6bef53b77b31cd159baa3203f4a20b04222e934a3b5d2094ff4f1605547604c8c69df34982a12029d507dde5dfa6ec3c10f1800e855acda60ffe2ae1c5565290f710c10f739dc2798f02d01cbe808dde34fbe3b08dcb03dacd9a5719922b686da8de1a46e79118ca1984542dcd0d085a49103cfa4233df00d0f0769fb2aaddc6bdfe48eab402d08e77e57df509cfbe90c6594c3cd4ca0e047da10d66194b6658b9928d913e614647babf6a641b109018927b09a620375564a92a7bdd0cb985af99c5de68b5c8f407ff034261316ed31633cf9cb91a7f8246cbca550fa3e25441f89093e2c24bd29d2fcc5f0f4908f61d7d2d54754a0562512a8ee00cf312689fa598da969de34a7032e61fb90e1ab144fc245657f9b496dea21659f601b6a30bf3a9546852b9dfb2f0e0a289e40d7b4d75b0733cca62e4af5ecca1e7c6125f4259e4f088081b1b400a8632abd3766382dab9cf2ab08d5bc49db771efd744b83d203fb4dadface913b302c9977005c908b1e391598ae24945da593874624bdc1286afceef43087062bd7fd2945051e4250ee7b235fb79b9cf975479d6c94d6a2d15e8ef7886b2394dcb9b0115db9c88e1c3236f79fa6b17b876511f65d36af40de829bd9e999b2ebb92dacfdb5763a5f008fb6bada242fcaee7ce652310f5a314c6d0f8652012316cedec237d20b575ff670ad57a033bf935b469de1a30d03205348a53b5ffcd86c78b28d843ddf2cc0fbcab0886e7d2c16fff84ffd89f3beb316bee8d0b947eb7efdd2c8249493a5ea65d511a4fb85a25ec43c6b4dc79737b1b5a06aa32119ed865b14b3c081ac7f11476fb31f1f5be79d640bc6c3d6b23522b1eeaa0e9c1ebb56c8113b4cde7bd3842da7c7d8d6d34d6be9390ad28dcbe50c2f7fbd20156abfcb9c59250e9116dce1d47e174da7c036c14b38dbb0fc6110e60a923a79763e5cf3402ccc1caaa728b170c1b9d3443e175335fae02d3e65da37a0d37dbbc20741f90afaa40a9648140cb288a50deb7374f16877682955b76f8c1c3799683200f5a7a464e26318becb66ec827021e20ca2e2d81af891afa9f4156af3f750d54219b119c521338414bf4f85534adefdd7d6b0c72e6b8624c9c47b84aee1ce4a3aad6c9bcaa71c279e763a85c26f3869e9088c6c178a287b43735bd3093063e76eaf2e36b95f914b04b0fb9dc424f6f88ebf647f912ea3d426de0f2a554a1e31872335cb5c4341e4271de280dadc014ca03cdc44a354f99803dbc10fb03d7bd7e20d86c4e1130493e32ef2f7dd38965073252ade18b87eb44917238cdb579d829c7701222bffa34596e557f520b02f7684ae5a6da6fd2ae15b9897ad95408a4fc1f2e4cec1c92e8b0c628c8a08ffbcdc736953d1a3fd9e5a128d6d0a7505d17750c7bebfd6ca37ba0c2edae4e12e34bb9f29ff00d217538413feeb92fedd0fb109d7b87f0e8739975ba333b6667e0489a119492f398e55267fec1d6a884e40919ab8ba739da36de2bcfca8b1404399ead821b54a2af5a10effb8b109919f63349a4a6fc7fc39a580d7def91f04316521e5e4e32ffbbdbf1fd7c0f18580ad01cc95061844341cca92c41ae3f4935e0a7fb69035fd3c422456d1293ea1efc5fb33667950df3fdef3c73f2ebff4969a52d489f130ef985d6959f4f1a831089e1e09749fbd8f62fa2f6831e12939a70b896815f6eb682c1ee026b8d6a80f2c6d246e4ea590126170d9bc80f53919c3db683114843721599217c1b47f39816752d690d328516032f6425e9959f07c0bd26c4b2746cef78a97cc6cbbfbb0bf2bc54b3ab68664167549b903587cc8b2767b602e1638e77f77f62ea491d6504f557613afaa280b2f833171ddabb3d2ed2e8ac632e452946500fed7ab4ce0898f724e0c054a1f6e2194e841743d6339dd14b50486baa632cdaaf8a6d962fd7cb66bf7ea0fcfde68ecdf29d0beffed7a81666ff6ab10067a893372015f6f14f8573889c92e7bfba1c244ab2eff7395e61b34d69cc15e4df3e255b842450598d31d7c204a4f02a9eb63aefa95461b7708695aa46810053a3efc2aa242e36710b</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好, 这里需要密码.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
-    </div>
 
+<span class="category-chains">
+  
+  
     
-    
-    
+      <span class="category-chain">
         
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
 
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Rainbow
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://pawswrite.xyz/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E5%9B%BD%E5%86%85VPS%E4%BF%AE%E6%94%B9hosts%E8%A7%A3%E5%86%B3github%E8%A2%ABDNS%E6%B1%A1%E6%9F%93%E9%97%AE%E9%A2%98/" title="VPS指南：国内VPS修改hosts解决github被DNS污染问题">https://pawswrite.xyz/2021/06/17/VPS指南：国内VPS修改hosts解决github被DNS污染问题/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/VPS/">#VPS</a>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+        <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">#科学上网</a>
+      
+    </div>
+  
 </div>
 
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/VPS/" rel="tag"># VPS</a>
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
-              <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag"># 科学上网</a>
-          </div>
+              
+  
 
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9Abbr%E5%8A%A0%E9%80%9F/" rel="prev" title="VPS指南：bbr加速">
-      <i class="fa fa-chevron-left"></i> VPS指南：bbr加速
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E8%A7%A3%E9%94%81%E7%BD%91%E6%98%93%E4%BA%91%E7%81%B0%E8%89%B2%E6%AD%8C%E6%9B%B2%E4%B9%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%90%AD%E5%BB%BA/" rel="next" title="VPS指南：解锁网易云灰色歌曲之服务器端搭建">
-      VPS指南：解锁网易云灰色歌曲之服务器端搭建 <i class="fa fa-chevron-right"></i>
-    </a></div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>VPS指南：国内VPS修改hosts解决github被DNS污染问题</div>
+      <div>https://pawswrite.xyz/2021/06/17/VPS指南：国内VPS修改hosts解决github被DNS污染问题/</div>
     </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-  <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">
-            ------------- 本文结束 <i class="fa fa-heart-o"></i> 感谢您的阅读-------------
-     </div>
-    
-  </div>
-
-
-          </div>
-          
-    <div class="comments" id="gitalk-container"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rainbow</div>
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年6月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
   </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9A%E8%A7%A3%E9%94%81%E7%BD%91%E6%98%93%E4%BA%91%E7%81%B0%E8%89%B2%E6%AD%8C%E6%9B%B2%E4%B9%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%90%AD%E5%BB%BA/" title="VPS指南：解锁网易云灰色歌曲之服务器端搭建">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VPS指南：解锁网易云灰色歌曲之服务器端搭建</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/17/VPS%E6%8C%87%E5%8D%97%EF%BC%9Abbr%E5%8A%A0%E9%80%9F/" title="VPS指南：bbr加速">
+                        <span class="hidden-mobile">VPS指南：bbr加速</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
       </div>
-      <!--/noindex-->
+    </div>
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Rainbow"
-      src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">Rainbow</p>
-  <div class="site-description" itemprop="description">Tech Lover</div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">67</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">40</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="http://nz.pawswrite.xyz/" title="探针 → http:&#x2F;&#x2F;nz.pawswrite.xyz" rel="noopener" target="_blank"><i class="fas fa-server fa-fw"></i>探针</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://boringbay.com/" title="无聊湾 → https:&#x2F;&#x2F;boringbay.com" rel="noopener" target="_blank"><i class="fa-solid fa-face-meh fa-fw"></i>无聊湾</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
 
 
 
-      </div>
+  </aside>
+
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">@rainbow</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">227k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
-</div>
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
   </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
-<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
-<script src="/js/algolia-search.js"></script>
-
-
-
-
-
-
-
-
-
+</div>
 
 
 
@@ -566,27 +444,256 @@
 
   
 
+
+
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
 
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '416e004749a692890792',
-      clientSecret: 'a51d95d68a7fddba31072393540e0e2c3b09d91f',
-      repo        : 'Gitalk',
-      owner       : 'tech-fever',
-      admin       : ['tech-fever'],
-      id          : 'f876370507ff1c16f1de95c79a2e289d',
-        language: 'zh-CN',
-      distractionFreeMode: true
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
     });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
+  });
 </script>
 
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

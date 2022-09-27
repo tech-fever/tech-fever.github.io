@@ -1,29 +1,22 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.1.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <meta name="google-site-verification" content="f4M613CNVfWg9fM_X3tG5jELt3D10Gk8E3R0ZUaMzd4">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"algolia":{"appID":"QVWTMTP22E","apiKey":"1a70640400cc23d9656c5fb60de60c0e","indexName":"dev_hexoBlog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="非原创，学习笔记。出处👉nginx location正则表达式写法">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rainbow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="非原创，学习笔记。出处👉nginx location正则表达式写法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx regex rules">
 <meta property="og:url" content="https://pawswrite.xyz/2022/08/16/nginx-regex-rules/index.html">
@@ -36,253 +29,259 @@
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="nginx">
 <meta property="article:tag" content="运维">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>nginx regex rules - Rainbow</title>
 
-<link rel="canonical" href="https://pawswrite.xyz/2022/08/16/nginx-regex-rules/">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
 
-  <title>nginx regex rules | Rainbow</title>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
+<body>
+  
 
-  <div class="site-meta">
+  <header>
+    
 
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Rainbow</h1>
-      <span class="logo-line-after"><i></i></span>
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
     </a>
-      <p class="site-subtitle" itemprop="description">blog</p>
-  </div>
 
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-sitemap">
-
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
-
-  </li>
-        <li class="menu-item menu-item-commonweal">
-
-    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
 </nav>
 
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="nginx regex rules"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-16 01:37" pubdate>
+          2022年8月16日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          71 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container"></div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="algolia-results">
-  <div id="algolia-stats"></div>
-  <div id="algolia-hits"></div>
-  <div id="algolia-pagination" class="algolia-pagination"></div>
-</div>
+        
+      </div>
 
       
     </div>
   </div>
+</div>
 
 </div>
-    </header>
 
+  </header>
+
+  <main>
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-  <a href="https://github.com/tech-fever" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://pawswrite.xyz/2022/08/16/nginx-regex-rules/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Rainbow">
-      <meta itemprop="description" content="Tech Lover">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rainbow">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          nginx regex rules
-        </h1>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-08-16 01:37:20 / 修改时间：01:48:43" itemprop="dateCreated datePublished" datetime="2022-08-16T01:37:20+08:00">2022-08-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">学习是人生第一要务</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>8.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>8 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-        <p>非原创，学习笔记。出处👉<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44299027/article/details/107286956">nginx location正则表达式写法</a></p>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">nginx regex rules</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>非原创，学习笔记。出处👉<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44299027/article/details/107286956">nginx location正则表达式写法</a></p>
 <span id="more"></span>
 
-<h1 id="常用规则"><a href="#常用规则" class="headerlink" title="常用规则"></a>常用规则</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">location</span>  <span class="string">=</span> <span class="string">/</span> &#123;</span><br><span class="line">  <span class="comment"># 精确匹配 / ，主机名后面不能带任何字符串</span></span><br><span class="line">  [ <span class="string">configuration</span> <span class="string">A</span> ] </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="string">location</span>  <span class="string">/</span> &#123;</span><br><span class="line">  <span class="comment"># 因为所有的地址都以 / 开头，所以这条规则将匹配到所有请求</span></span><br><span class="line">  <span class="comment"># 但是正则和最长字符串会优先匹配</span></span><br><span class="line">  [ <span class="string">configuration</span> <span class="string">B</span> ] </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="string">location</span> <span class="string">/documents/</span> &#123;</span><br><span class="line">  <span class="comment"># 匹配任何以 /documents/ 开头的地址，匹配符合以后，还要继续往下搜索</span></span><br><span class="line">  <span class="comment"># 只有后面的正则表达式没有匹配到时，这一条才会采用这一条</span></span><br><span class="line">  [ <span class="string">configuration</span> <span class="string">C</span> ] </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="string">location</span> <span class="string">~</span> <span class="string">/documents/Abc</span> &#123;</span><br><span class="line">  <span class="comment"># 匹配任何以 /documents/ 开头的地址，匹配符合以后，还要继续往下搜索</span></span><br><span class="line">  <span class="comment"># 只有后面的正则表达式没有匹配到时，这一条才会采用这一条</span></span><br><span class="line">  [ <span class="string">configuration</span> <span class="string">CC</span> ] </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="string">location</span> <span class="string">^~</span> <span class="string">/images/</span> &#123;</span><br><span class="line">  <span class="comment"># 匹配任何以 /images/ 开头的地址，匹配符合以后，停止往下搜索正则，采用这一条。</span></span><br><span class="line">  [ <span class="string">configuration</span> <span class="string">D</span> ] </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="string">location</span> <span class="string">~*</span> <span class="string">\.(gif|jpg|jpeg)$</span> &#123;</span><br><span class="line">  <span class="comment"># 匹配所有以 gif,jpg或jpeg 结尾的请求</span></span><br><span class="line">  <span class="comment"># 然而，所有请求 /images/ 下的图片会被 config D 处理，因为 ^~ 到达不了这一条正则</span></span><br><span class="line">  [ <span class="string">configuration</span> <span class="string">E</span> ] </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="string">location</span> <span class="string">/images/</span> &#123;</span><br><span class="line">  <span class="comment"># 字符匹配到 /images/，继续往下，会发现 ^~ 存在</span></span><br><span class="line">  [ <span class="string">configuration</span> <span class="string">F</span> ] </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="string">location</span> <span class="string">/images/abc</span> &#123;</span><br><span class="line">  <span class="comment"># 最长字符匹配到 /images/abc，继续往下，会发现 ^~ 存在</span></span><br><span class="line">  <span class="comment"># F与G的放置顺序是没有关系的</span></span><br><span class="line">  [ <span class="string">configuration</span> <span class="string">G</span> ] </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="string">location</span> <span class="string">~</span> <span class="string">/images/abc/</span> &#123;</span><br><span class="line">  <span class="comment"># 只有去掉 config D 才有效：先最长匹配 config G 开头的地址，继续往下搜索，匹配到这一条正则，采用</span></span><br><span class="line">    [ <span class="string">configuration</span> <span class="string">H</span> ] </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="string">location</span> <span class="string">~*</span> <span class="string">/js/.*/\.js</span></span><br></pre></td></tr></table></figure>
+<h1 id="常用规则"><a href="#常用规则" class="headerlink" title="常用规则"></a>常用规则</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">location</span>  <span class="hljs-string">=</span> <span class="hljs-string">/</span> &#123;<br>  <span class="hljs-comment"># 精确匹配 / ，主机名后面不能带任何字符串</span><br>  [ <span class="hljs-string">configuration</span> <span class="hljs-string">A</span> ] <br>&#125;<br> <br><span class="hljs-string">location</span>  <span class="hljs-string">/</span> &#123;<br>  <span class="hljs-comment"># 因为所有的地址都以 / 开头，所以这条规则将匹配到所有请求</span><br>  <span class="hljs-comment"># 但是正则和最长字符串会优先匹配</span><br>  [ <span class="hljs-string">configuration</span> <span class="hljs-string">B</span> ] <br>&#125;<br> <br><span class="hljs-string">location</span> <span class="hljs-string">/documents/</span> &#123;<br>  <span class="hljs-comment"># 匹配任何以 /documents/ 开头的地址，匹配符合以后，还要继续往下搜索</span><br>  <span class="hljs-comment"># 只有后面的正则表达式没有匹配到时，这一条才会采用这一条</span><br>  [ <span class="hljs-string">configuration</span> <span class="hljs-string">C</span> ] <br>&#125;<br> <br><span class="hljs-string">location</span> <span class="hljs-string">~</span> <span class="hljs-string">/documents/Abc</span> &#123;<br>  <span class="hljs-comment"># 匹配任何以 /documents/ 开头的地址，匹配符合以后，还要继续往下搜索</span><br>  <span class="hljs-comment"># 只有后面的正则表达式没有匹配到时，这一条才会采用这一条</span><br>  [ <span class="hljs-string">configuration</span> <span class="hljs-string">CC</span> ] <br>&#125;<br> <br><span class="hljs-string">location</span> <span class="hljs-string">^~</span> <span class="hljs-string">/images/</span> &#123;<br>  <span class="hljs-comment"># 匹配任何以 /images/ 开头的地址，匹配符合以后，停止往下搜索正则，采用这一条。</span><br>  [ <span class="hljs-string">configuration</span> <span class="hljs-string">D</span> ] <br>&#125;<br> <br><span class="hljs-string">location</span> <span class="hljs-string">~*</span> <span class="hljs-string">\.(gif|jpg|jpeg)$</span> &#123;<br>  <span class="hljs-comment"># 匹配所有以 gif,jpg或jpeg 结尾的请求</span><br>  <span class="hljs-comment"># 然而，所有请求 /images/ 下的图片会被 config D 处理，因为 ^~ 到达不了这一条正则</span><br>  [ <span class="hljs-string">configuration</span> <span class="hljs-string">E</span> ] <br>&#125;<br> <br><span class="hljs-string">location</span> <span class="hljs-string">/images/</span> &#123;<br>  <span class="hljs-comment"># 字符匹配到 /images/，继续往下，会发现 ^~ 存在</span><br>  [ <span class="hljs-string">configuration</span> <span class="hljs-string">F</span> ] <br>&#125;<br> <br><span class="hljs-string">location</span> <span class="hljs-string">/images/abc</span> &#123;<br>  <span class="hljs-comment"># 最长字符匹配到 /images/abc，继续往下，会发现 ^~ 存在</span><br>  <span class="hljs-comment"># F与G的放置顺序是没有关系的</span><br>  [ <span class="hljs-string">configuration</span> <span class="hljs-string">G</span> ] <br>&#125;<br> <br><span class="hljs-string">location</span> <span class="hljs-string">~</span> <span class="hljs-string">/images/abc/</span> &#123;<br>  <span class="hljs-comment"># 只有去掉 config D 才有效：先最长匹配 config G 开头的地址，继续往下搜索，匹配到这一条正则，采用</span><br>    [ <span class="hljs-string">configuration</span> <span class="hljs-string">H</span> ] <br>&#125;<br> <br><span class="hljs-string">location</span> <span class="hljs-string">~*</span> <span class="hljs-string">/js/.*/\.js</span><br></code></pre></td></tr></table></figure>
 
 <ul>
 <li>已&#x3D;开头表示精确匹配</li>
@@ -303,7 +302,7 @@
 <li>&#x2F;documents&#x2F;1.jpg -&gt; configuration E<br>匹配到C，往下正则匹配到E</li>
 <li>&#x2F;documents&#x2F;Abc.jpg -&gt; config CC<br>最长匹配到C，往下正则顺序匹配到CC，不会往下到E</li>
 </ul>
-<h1 id="实际使用建议"><a href="#实际使用建议" class="headerlink" title="实际使用建议"></a>实际使用建议</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">所以实际使用中，通常建议至少有三个匹配规则定义，如下：</span></span><br><span class="line"><span class="comment">#直接匹配网站根，通过域名访问网站首页比较频繁，使用这个会加速处理，比如说官网。</span></span><br><span class="line"><span class="comment">#这里是直接转发给后端应用服务器了，也可以是一个静态首页</span></span><br><span class="line"><span class="comment"># 第一个必选规则</span></span><br><span class="line"><span class="string">location</span> <span class="string">=</span> <span class="string">/</span> &#123;</span><br><span class="line">    <span class="string">proxy_pass</span> <span class="string">http://localhost:8080/index</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 第二个必选规则是处理静态文件请求，这是nginx作为http服务器的强项</span></span><br><span class="line"><span class="comment"># 有两种配置模式，目录匹配或后缀匹配,任选其一或搭配使用</span></span><br><span class="line"><span class="string">location</span> <span class="string">^~</span> <span class="string">/static/</span> &#123;</span><br><span class="line">    <span class="string">root</span> <span class="string">/webroot/static/;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="string">location</span> <span class="string">~*</span> <span class="string">\.(gif|jpg|jpeg|png|css|js|ico)$</span> &#123;</span><br><span class="line">    <span class="string">root</span> <span class="string">/webroot/res/;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#第三个规则就是通用规则，用来转发动态请求到后端应用服务器</span></span><br><span class="line"><span class="comment">#非静态文件请求就默认是动态请求，自己根据实际把握</span></span><br><span class="line"><span class="comment">#毕竟目前的一些框架的流行，带.php,.jsp后缀的情况很少了</span></span><br><span class="line"><span class="string">location</span> <span class="string">/</span> &#123;</span><br><span class="line">    <span class="string">proxy_pass</span> <span class="string">http://localhost:8080/</span></span><br></pre></td></tr></table></figure>
+<h1 id="实际使用建议"><a href="#实际使用建议" class="headerlink" title="实际使用建议"></a>实际使用建议</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">所以实际使用中，通常建议至少有三个匹配规则定义，如下：</span><br><span class="hljs-comment">#直接匹配网站根，通过域名访问网站首页比较频繁，使用这个会加速处理，比如说官网。</span><br><span class="hljs-comment">#这里是直接转发给后端应用服务器了，也可以是一个静态首页</span><br><span class="hljs-comment"># 第一个必选规则</span><br><span class="hljs-string">location</span> <span class="hljs-string">=</span> <span class="hljs-string">/</span> &#123;<br>    <span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://localhost:8080/index</span><br>&#125;<br><span class="hljs-comment"># 第二个必选规则是处理静态文件请求，这是nginx作为http服务器的强项</span><br><span class="hljs-comment"># 有两种配置模式，目录匹配或后缀匹配,任选其一或搭配使用</span><br><span class="hljs-string">location</span> <span class="hljs-string">^~</span> <span class="hljs-string">/static/</span> &#123;<br>    <span class="hljs-string">root</span> <span class="hljs-string">/webroot/static/;</span><br>&#125;<br><span class="hljs-string">location</span> <span class="hljs-string">~*</span> <span class="hljs-string">\.(gif|jpg|jpeg|png|css|js|ico)$</span> &#123;<br>    <span class="hljs-string">root</span> <span class="hljs-string">/webroot/res/;</span><br>&#125;<br><span class="hljs-comment">#第三个规则就是通用规则，用来转发动态请求到后端应用服务器</span><br><span class="hljs-comment">#非静态文件请求就默认是动态请求，自己根据实际把握</span><br><span class="hljs-comment">#毕竟目前的一些框架的流行，带.php,.jsp后缀的情况很少了</span><br><span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>    <span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://localhost:8080/</span><br></code></pre></td></tr></table></figure>
 
 <h1 id="Flag标志位"><a href="#Flag标志位" class="headerlink" title="Flag标志位"></a>Flag标志位</h1><ul>
 <li>last : 相当于Apache的[L]标记，表示完成rewrite</li>
@@ -325,7 +324,7 @@
 </ul>
 <p>-f和!-f用来判断是否存在文件<br>-d和!-d用来判断是否存在目录<br>-e和!-e用来判断是否存在文件或目录<br>-x和!-x用来判断文件是否可执行</p>
 <p>比如：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">if</span> <span class="string">($http_user_agent</span> <span class="string">~</span> <span class="string">MSIE)</span> &#123;</span><br><span class="line">    <span class="string">rewrite</span> <span class="string">^(.*)$</span> <span class="string">/msie/$1</span> <span class="string">break;</span></span><br><span class="line">&#125; <span class="string">//如果UA包含&quot;MSIE&quot;，rewrite请求到/msid/目录下</span></span><br><span class="line"> </span><br><span class="line"><span class="string">if</span> <span class="string">($http_cookie</span> <span class="string">~*</span> <span class="string">&quot;id=([^;]+)(?:;|$)&quot;</span><span class="string">)</span> &#123;</span><br><span class="line">    <span class="string">set</span> <span class="string">$id</span> <span class="string">$1;</span></span><br><span class="line"> &#125; <span class="string">//如果cookie匹配正则，设置变量$id等于正则引用部分</span></span><br><span class="line"> </span><br><span class="line"><span class="string">if</span> <span class="string">($request_method</span> <span class="string">=</span> <span class="string">POST)</span> &#123;</span><br><span class="line">    <span class="string">return</span> <span class="number">405</span><span class="string">;</span></span><br><span class="line">&#125; <span class="string">//如果提交方法为POST，则返回状态405（Method</span> <span class="string">not</span> <span class="string">allowed）。return不能返回301,302</span></span><br><span class="line"> </span><br><span class="line"><span class="string">if</span> <span class="string">($slow)</span> &#123;</span><br><span class="line">    <span class="string">limit_rate</span> <span class="string">10k;</span></span><br><span class="line">&#125; <span class="string">//限速，$slow可以通过</span> <span class="string">set</span> <span class="string">指令设置</span></span><br><span class="line"> </span><br><span class="line"><span class="string">if</span> <span class="string">(!-f</span> <span class="string">$request_filename)&#123;</span></span><br><span class="line">    <span class="string">break;</span></span><br><span class="line">    <span class="string">proxy_pass</span>  <span class="string">http://127.0.0.1;</span> </span><br><span class="line"><span class="string">&#125;</span> <span class="string">//如果请求的文件名不存在，则反向代理到localhost</span> <span class="string">。这里的break也是停止rewrite检查</span></span><br><span class="line"> </span><br><span class="line"><span class="string">if</span> <span class="string">($args</span> <span class="string">~</span> <span class="string">post=140)&#123;</span></span><br><span class="line">    <span class="string">rewrite</span> <span class="string">^</span> <span class="string">http://example.com/</span> <span class="string">permanent;</span></span><br><span class="line"><span class="string">&#125;</span> <span class="string">//如果query</span> <span class="string">string中包含&quot;post=140&quot;，永久重定向到example.com</span></span><br><span class="line"> </span><br><span class="line"><span class="string">location</span> <span class="string">~*</span> <span class="string">\.(gif|jpg|png|swf|flv)$</span> &#123;</span><br><span class="line">    <span class="string">valid_referers</span> <span class="string">none</span> <span class="string">blocked</span> <span class="string">www.jefflei.com</span> <span class="string">www.leizhenfang.com;</span></span><br><span class="line">    <span class="string">if</span> <span class="string">($invalid_referer)</span> &#123;</span><br><span class="line">        <span class="string">return</span> <span class="number">404</span><span class="string">;</span></span><br><span class="line">    &#125; <span class="string">//防盗链</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">if</span> <span class="hljs-string">($http_user_agent</span> <span class="hljs-string">~</span> <span class="hljs-string">MSIE)</span> &#123;<br>    <span class="hljs-string">rewrite</span> <span class="hljs-string">^(.*)$</span> <span class="hljs-string">/msie/$1</span> <span class="hljs-string">break;</span><br>&#125; <span class="hljs-string">//如果UA包含&quot;MSIE&quot;，rewrite请求到/msid/目录下</span><br> <br><span class="hljs-string">if</span> <span class="hljs-string">($http_cookie</span> <span class="hljs-string">~*</span> <span class="hljs-string">&quot;id=([^;]+)(?:;|$)&quot;</span><span class="hljs-string">)</span> &#123;<br>    <span class="hljs-string">set</span> <span class="hljs-string">$id</span> <span class="hljs-string">$1;</span><br> &#125; <span class="hljs-string">//如果cookie匹配正则，设置变量$id等于正则引用部分</span><br> <br><span class="hljs-string">if</span> <span class="hljs-string">($request_method</span> <span class="hljs-string">=</span> <span class="hljs-string">POST)</span> &#123;<br>    <span class="hljs-string">return</span> <span class="hljs-number">405</span><span class="hljs-string">;</span><br>&#125; <span class="hljs-string">//如果提交方法为POST，则返回状态405（Method</span> <span class="hljs-string">not</span> <span class="hljs-string">allowed）。return不能返回301,302</span><br> <br><span class="hljs-string">if</span> <span class="hljs-string">($slow)</span> &#123;<br>    <span class="hljs-string">limit_rate</span> <span class="hljs-string">10k;</span><br>&#125; <span class="hljs-string">//限速，$slow可以通过</span> <span class="hljs-string">set</span> <span class="hljs-string">指令设置</span><br> <br><span class="hljs-string">if</span> <span class="hljs-string">(!-f</span> <span class="hljs-string">$request_filename)&#123;</span><br>    <span class="hljs-string">break;</span><br>    <span class="hljs-string">proxy_pass</span>  <span class="hljs-string">http://127.0.0.1;</span> <br><span class="hljs-string">&#125;</span> <span class="hljs-string">//如果请求的文件名不存在，则反向代理到localhost</span> <span class="hljs-string">。这里的break也是停止rewrite检查</span><br> <br><span class="hljs-string">if</span> <span class="hljs-string">($args</span> <span class="hljs-string">~</span> <span class="hljs-string">post=140)&#123;</span><br>    <span class="hljs-string">rewrite</span> <span class="hljs-string">^</span> <span class="hljs-string">http://example.com/</span> <span class="hljs-string">permanent;</span><br><span class="hljs-string">&#125;</span> <span class="hljs-string">//如果query</span> <span class="hljs-string">string中包含&quot;post=140&quot;，永久重定向到example.com</span><br> <br><span class="hljs-string">location</span> <span class="hljs-string">~*</span> <span class="hljs-string">\.(gif|jpg|png|swf|flv)$</span> &#123;<br>    <span class="hljs-string">valid_referers</span> <span class="hljs-string">none</span> <span class="hljs-string">blocked</span> <span class="hljs-string">www.jefflei.com</span> <span class="hljs-string">www.leizhenfang.com;</span><br>    <span class="hljs-string">if</span> <span class="hljs-string">($invalid_referer)</span> &#123;<br>        <span class="hljs-string">return</span> <span class="hljs-number">404</span><span class="hljs-string">;</span><br>    &#125; <span class="hljs-string">//防盗链</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h1 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h1><p>下面是可以用作if判断的全局变量</p>
 <ul>
@@ -369,279 +368,158 @@
 </ol>
 <p>如果其中某步URI被重写，则重新循环执行1-3，直到找到真实存在的文件；循环超过10次，则返回500 Internal Server Error错误。</p>
 <h1 id="Rewrite实例"><a href="#Rewrite实例" class="headerlink" title="Rewrite实例"></a>Rewrite实例</h1><p>以下先写两个例子，后续再补充</p>
-<h2 id="实例1"><a href="#实例1" class="headerlink" title="实例1"></a>实例1</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">http</span> &#123;</span><br><span class="line">    <span class="comment"># 定义image日志格式</span></span><br><span class="line">    <span class="string">log_format</span> <span class="string">imagelog</span> <span class="string">&#x27;[$time_local] &#x27;</span> <span class="string">$image_file</span> <span class="string">&#x27; &#x27;</span> <span class="string">$image_type</span> <span class="string">&#x27; &#x27;</span> <span class="string">$body_bytes_sent</span> <span class="string">&#x27; &#x27;</span> <span class="string">$status;</span></span><br><span class="line">    <span class="comment"># 开启重写日志</span></span><br><span class="line">    <span class="string">rewrite_log</span> <span class="string">on;</span></span><br><span class="line"> </span><br><span class="line">    <span class="string">server</span> &#123;</span><br><span class="line">        <span class="string">root</span> <span class="string">/home/www;</span></span><br><span class="line"> </span><br><span class="line">        <span class="string">location</span> <span class="string">/</span> &#123;</span><br><span class="line">                <span class="comment"># 重写规则信息</span></span><br><span class="line">                <span class="string">error_log</span> <span class="string">logs/rewrite.log</span> <span class="string">notice;</span> </span><br><span class="line">                <span class="comment"># 注意这里要用‘’单引号引起来，避免&#123;&#125;</span></span><br><span class="line">                <span class="string">rewrite</span> <span class="string">&#x27;^/images/([a-z]&#123;2&#125;)/([a-z0-9]&#123;5&#125;)/(.*)\.(png|jpg|gif)$&#x27;</span> <span class="string">/data?file=$3.$4;</span></span><br><span class="line">                <span class="comment"># 注意不能在上面这条规则后面加上“last”参数，否则下面的set指令不会执行</span></span><br><span class="line">                <span class="string">set</span> <span class="string">$image_file</span> <span class="string">$3;</span></span><br><span class="line">                <span class="string">set</span> <span class="string">$image_type</span> <span class="string">$4;</span></span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="string">location</span> <span class="string">/data</span> &#123;</span><br><span class="line">                <span class="comment"># 指定针对图片的日志格式，来分析图片类型和大小</span></span><br><span class="line">                <span class="string">access_log</span> <span class="string">logs/images.log</span> <span class="string">mian;</span></span><br><span class="line">                <span class="string">root</span> <span class="string">/data/images;</span></span><br><span class="line">                <span class="comment"># 应用前面定义的变量。判断首先文件在不在，不在再判断目录在不在，如果还不在就跳转到最后一个url里</span></span><br><span class="line">                <span class="string">try_files</span> <span class="string">/$arg_file</span> <span class="string">/image404.html;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="string">location</span> <span class="string">=</span> <span class="string">/image404.html</span> &#123;</span><br><span class="line">                <span class="comment"># 图片不存在返回特定的信息</span></span><br><span class="line">                <span class="string">return</span> <span class="number">404</span> <span class="string">&quot;image not found\n&quot;</span><span class="string">;</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实例1"><a href="#实例1" class="headerlink" title="实例1"></a>实例1</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">http</span> &#123;<br>    <span class="hljs-comment"># 定义image日志格式</span><br>    <span class="hljs-string">log_format</span> <span class="hljs-string">imagelog</span> <span class="hljs-string">&#x27;[$time_local] &#x27;</span> <span class="hljs-string">$image_file</span> <span class="hljs-string">&#x27; &#x27;</span> <span class="hljs-string">$image_type</span> <span class="hljs-string">&#x27; &#x27;</span> <span class="hljs-string">$body_bytes_sent</span> <span class="hljs-string">&#x27; &#x27;</span> <span class="hljs-string">$status;</span><br>    <span class="hljs-comment"># 开启重写日志</span><br>    <span class="hljs-string">rewrite_log</span> <span class="hljs-string">on;</span><br> <br>    <span class="hljs-string">server</span> &#123;<br>        <span class="hljs-string">root</span> <span class="hljs-string">/home/www;</span><br> <br>        <span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>                <span class="hljs-comment"># 重写规则信息</span><br>                <span class="hljs-string">error_log</span> <span class="hljs-string">logs/rewrite.log</span> <span class="hljs-string">notice;</span> <br>                <span class="hljs-comment"># 注意这里要用‘’单引号引起来，避免&#123;&#125;</span><br>                <span class="hljs-string">rewrite</span> <span class="hljs-string">&#x27;^/images/([a-z]&#123;2&#125;)/([a-z0-9]&#123;5&#125;)/(.*)\.(png|jpg|gif)$&#x27;</span> <span class="hljs-string">/data?file=$3.$4;</span><br>                <span class="hljs-comment"># 注意不能在上面这条规则后面加上“last”参数，否则下面的set指令不会执行</span><br>                <span class="hljs-string">set</span> <span class="hljs-string">$image_file</span> <span class="hljs-string">$3;</span><br>                <span class="hljs-string">set</span> <span class="hljs-string">$image_type</span> <span class="hljs-string">$4;</span><br>        &#125;<br> <br>        <span class="hljs-string">location</span> <span class="hljs-string">/data</span> &#123;<br>                <span class="hljs-comment"># 指定针对图片的日志格式，来分析图片类型和大小</span><br>                <span class="hljs-string">access_log</span> <span class="hljs-string">logs/images.log</span> <span class="hljs-string">mian;</span><br>                <span class="hljs-string">root</span> <span class="hljs-string">/data/images;</span><br>                <span class="hljs-comment"># 应用前面定义的变量。判断首先文件在不在，不在再判断目录在不在，如果还不在就跳转到最后一个url里</span><br>                <span class="hljs-string">try_files</span> <span class="hljs-string">/$arg_file</span> <span class="hljs-string">/image404.html;</span><br>        &#125;<br>        <span class="hljs-string">location</span> <span class="hljs-string">=</span> <span class="hljs-string">/image404.html</span> &#123;<br>                <span class="hljs-comment"># 图片不存在返回特定的信息</span><br>                <span class="hljs-string">return</span> <span class="hljs-number">404</span> <span class="hljs-string">&quot;image not found\n&quot;</span><span class="hljs-string">;</span><br>        &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>对形如&#x2F;images&#x2F;ef&#x2F;uh7b3&#x2F;test.png的请求，重写到&#x2F;data?file&#x3D;test.png，于是匹配到location &#x2F;data，先看&#x2F;data&#x2F;images&#x2F;test.png文件存不存在，如果存在则正常响应，如果不存在则重写tryfiles到新的image404 location，直接返回404状态码。</p>
-<h2 id="实例二"><a href="#实例二" class="headerlink" title="实例二"></a>实例二</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">rewrite</span> <span class="string">^/images/(.*)_(\d+)x(\d+)\.(png|jpg|gif)$</span> <span class="string">/resizer/$1.$4?width=$2&amp;height=$3?</span> <span class="string">last;</span></span><br></pre></td></tr></table></figure>
+<h2 id="实例二"><a href="#实例二" class="headerlink" title="实例二"></a>实例二</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">rewrite</span> <span class="hljs-string">^/images/(.*)_(\d+)x(\d+)\.(png|jpg|gif)$</span> <span class="hljs-string">/resizer/$1.$4?width=$2&amp;height=$3?</span> <span class="hljs-string">last;</span><br></code></pre></td></tr></table></figure>
 <p>对形如&#x2F;images&#x2F;bla_500x400.jpg的文件请求，重写到&#x2F;resizer&#x2F;bla.jpg?width&#x3D;500&amp;height&#x3D;400地址，并会继续尝试匹配location。</p>
-<h1 id="项目实例"><a href="#项目实例" class="headerlink" title="项目实例"></a>项目实例</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="comment">#user  nobody;</span></span><br><span class="line"><span class="string">worker_processes</span>  <span class="number">1</span><span class="string">;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#error_log  logs/error.log;</span></span><br><span class="line"><span class="comment">#error_log  logs/error.log  notice;</span></span><br><span class="line"><span class="comment">#error_log  logs/error.log  info;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#pid        logs/nginx.pid;</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="string">events</span> &#123;</span><br><span class="line">    <span class="string">worker_connections</span>  <span class="number">1024</span><span class="string">;</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="string">http</span> &#123;</span><br><span class="line">    <span class="string">include</span>       <span class="string">mime.types;</span></span><br><span class="line">    <span class="string">default_type</span>  <span class="string">application/octet-stream;</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">#access_log  logs/access.log  main;</span></span><br><span class="line"> </span><br><span class="line">    <span class="string">sendfile</span>        <span class="string">on;</span></span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">#keepalive_timeout  0;</span></span><br><span class="line">    <span class="string">keepalive_timeout</span>  <span class="number">65</span><span class="string">;</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">#gzip  on;</span></span><br><span class="line"> </span><br><span class="line">    <span class="string">server</span> &#123;</span><br><span class="line">        <span class="string">listen</span>       <span class="number">9000</span><span class="string">;</span></span><br><span class="line">        <span class="string">server_name</span>  <span class="string">*.unisiot.com;</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment">#charset koi8-r;</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment">#access_log  logs/host.access.log  main;</span></span><br><span class="line">		</span><br><span class="line">		<span class="string">ssi</span> <span class="string">on;</span></span><br><span class="line">		<span class="string">ssi_silent_errors</span> <span class="string">on;</span></span><br><span class="line">		<span class="string">ssi_types</span> <span class="string">text/shtml;</span></span><br><span class="line">		<span class="string">expires</span> <span class="string">30d;</span></span><br><span class="line">		</span><br><span class="line">		<span class="string">location</span> <span class="string">/</span> &#123;</span><br><span class="line">		   </span><br><span class="line">		   <span class="string">if</span> <span class="string">($host</span> <span class="string">~</span> <span class="string">(^\S*?(?=\.\S*)))</span>&#123;</span><br><span class="line">			<span class="string">set</span> <span class="string">$dns</span> <span class="string">$1;</span></span><br><span class="line">		   &#125;</span><br><span class="line">		   <span class="string">alias</span> <span class="string">F:/upload_file_root/subsite/$dns;</span></span><br><span class="line">		   <span class="string">index</span> <span class="string">index.html;</span></span><br><span class="line">		   </span><br><span class="line">		   <span class="comment">#判断终端</span></span><br><span class="line">		    <span class="string">if</span> <span class="string">($http_user_agent</span> <span class="string">~*</span> <span class="string">&#x27;(Android|webOS|iPhone|iPod|BlackBerry|iPad)&#x27;</span><span class="string">)</span> &#123;</span><br><span class="line">               <span class="string">set</span> <span class="string">$mobile_request</span> <span class="string">&#x27;1&#x27;</span><span class="string">;</span></span><br><span class="line">               <span class="comment">#如果访问UA为移动终端类型则判断为mobile_request=1</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="string">if</span> <span class="string">($http_cookie</span> <span class="string">~</span> <span class="string">&#x27;mobile_request=full&#x27;</span><span class="string">)</span> &#123;</span><br><span class="line">               <span class="string">set</span> <span class="string">$mobile_request</span> <span class="string">&#x27;&#x27;</span><span class="string">;</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="string">if</span> <span class="string">($mobile_request</span> <span class="string">=</span> <span class="string">&#x27;&#x27;</span><span class="string">)</span> &#123;</span><br><span class="line">               <span class="comment">#proxy_pass http://139.196.188.213;</span></span><br><span class="line">			   <span class="comment">#判断mobile_request等于空则为PC终端</span></span><br><span class="line">			   <span class="string">root</span>   <span class="string">F:/upload_file_root/subsite/$dns/web;</span></span><br><span class="line">            &#125;</span><br><span class="line">        </span><br><span class="line">            <span class="comment">#break; </span></span><br><span class="line">			</span><br><span class="line">			<span class="string">if</span> <span class="string">($uri</span> <span class="string">~*</span> <span class="string">&#x27;(lobby|bedroom|livingroom|lavatory|kitchen|videoroom)&#x27;</span><span class="string">)</span> &#123;</span><br><span class="line">				<span class="string">root</span>   <span class="string">F:/upload_file_root/subsite/$dns;</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="string">location</span> <span class="string">/commonHtml</span> &#123;</span><br><span class="line">            <span class="string">alias</span>   <span class="string">F:/upload_file_root/common/;</span>     </span><br><span class="line">        &#125; </span><br><span class="line">	</span><br><span class="line">		<span class="string">location</span> <span class="string">~</span> <span class="string">^/(BJUI|ckeditor4.8|common|images|js|nice-validator|www|static)/</span> &#123;</span><br><span class="line">            <span class="string">root</span>   <span class="string">F:/upload_file_root/static;</span> </span><br><span class="line">            <span class="string">autoindex</span> <span class="string">on;</span></span><br><span class="line">            <span class="string">access_log</span>  <span class="string">off;</span></span><br><span class="line">            <span class="string">expires</span>     <span class="string">30d;</span>          </span><br><span class="line">        &#125;</span><br><span class="line">		</span><br><span class="line">		<span class="string">location</span> <span class="string">~</span> <span class="string">^/(upload)/</span> &#123;</span><br><span class="line">            <span class="string">root</span>   <span class="string">F:/upload_file_root/;</span> </span><br><span class="line">            <span class="string">autoindex</span> <span class="string">on;</span></span><br><span class="line">            <span class="string">access_log</span>  <span class="string">off;</span></span><br><span class="line">            <span class="string">expires</span>     <span class="string">30d;</span>          </span><br><span class="line">        &#125;</span><br><span class="line">		</span><br><span class="line">        <span class="comment">#error_page  404              /404.html;</span></span><br><span class="line">        <span class="comment"># redirect server error pages to the static page /50x.html</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="string">error_page</span>   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  <span class="string">/50x.html;</span></span><br><span class="line">        <span class="string">location</span> <span class="string">=</span> <span class="string">/50x.html</span> &#123;</span><br><span class="line">            <span class="string">root</span>   <span class="string">html;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="项目实例"><a href="#项目实例" class="headerlink" title="项目实例"></a>项目实例</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><code class="hljs yaml"> <br><span class="hljs-comment">#user  nobody;</span><br><span class="hljs-string">worker_processes</span>  <span class="hljs-number">1</span><span class="hljs-string">;</span><br> <br><span class="hljs-comment">#error_log  logs/error.log;</span><br><span class="hljs-comment">#error_log  logs/error.log  notice;</span><br><span class="hljs-comment">#error_log  logs/error.log  info;</span><br> <br><span class="hljs-comment">#pid        logs/nginx.pid;</span><br> <br> <br><span class="hljs-string">events</span> &#123;<br>    <span class="hljs-string">worker_connections</span>  <span class="hljs-number">1024</span><span class="hljs-string">;</span><br>&#125;<br> <br><span class="hljs-string">http</span> &#123;<br>    <span class="hljs-string">include</span>       <span class="hljs-string">mime.types;</span><br>    <span class="hljs-string">default_type</span>  <span class="hljs-string">application/octet-stream;</span><br> <br>    <span class="hljs-comment">#access_log  logs/access.log  main;</span><br> <br>    <span class="hljs-string">sendfile</span>        <span class="hljs-string">on;</span><br>    <span class="hljs-comment">#tcp_nopush     on;</span><br> <br>    <span class="hljs-comment">#keepalive_timeout  0;</span><br>    <span class="hljs-string">keepalive_timeout</span>  <span class="hljs-number">65</span><span class="hljs-string">;</span><br> <br>    <span class="hljs-comment">#gzip  on;</span><br> <br>    <span class="hljs-string">server</span> &#123;<br>        <span class="hljs-string">listen</span>       <span class="hljs-number">9000</span><span class="hljs-string">;</span><br>        <span class="hljs-string">server_name</span>  <span class="hljs-string">*.unisiot.com;</span><br> <br>        <span class="hljs-comment">#charset koi8-r;</span><br> <br>        <span class="hljs-comment">#access_log  logs/host.access.log  main;</span><br>		<br>		<span class="hljs-string">ssi</span> <span class="hljs-string">on;</span><br>		<span class="hljs-string">ssi_silent_errors</span> <span class="hljs-string">on;</span><br>		<span class="hljs-string">ssi_types</span> <span class="hljs-string">text/shtml;</span><br>		<span class="hljs-string">expires</span> <span class="hljs-string">30d;</span><br>		<br>		<span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>		   <br>		   <span class="hljs-string">if</span> <span class="hljs-string">($host</span> <span class="hljs-string">~</span> <span class="hljs-string">(^\S*?(?=\.\S*)))</span>&#123;<br>			<span class="hljs-string">set</span> <span class="hljs-string">$dns</span> <span class="hljs-string">$1;</span><br>		   &#125;<br>		   <span class="hljs-string">alias</span> <span class="hljs-string">F:/upload_file_root/subsite/$dns;</span><br>		   <span class="hljs-string">index</span> <span class="hljs-string">index.html;</span><br>		   <br>		   <span class="hljs-comment">#判断终端</span><br>		    <span class="hljs-string">if</span> <span class="hljs-string">($http_user_agent</span> <span class="hljs-string">~*</span> <span class="hljs-string">&#x27;(Android|webOS|iPhone|iPod|BlackBerry|iPad)&#x27;</span><span class="hljs-string">)</span> &#123;<br>               <span class="hljs-string">set</span> <span class="hljs-string">$mobile_request</span> <span class="hljs-string">&#x27;1&#x27;</span><span class="hljs-string">;</span><br>               <span class="hljs-comment">#如果访问UA为移动终端类型则判断为mobile_request=1</span><br>            &#125;<br>            <span class="hljs-string">if</span> <span class="hljs-string">($http_cookie</span> <span class="hljs-string">~</span> <span class="hljs-string">&#x27;mobile_request=full&#x27;</span><span class="hljs-string">)</span> &#123;<br>               <span class="hljs-string">set</span> <span class="hljs-string">$mobile_request</span> <span class="hljs-string">&#x27;&#x27;</span><span class="hljs-string">;</span><br>            &#125;<br>            <span class="hljs-string">if</span> <span class="hljs-string">($mobile_request</span> <span class="hljs-string">=</span> <span class="hljs-string">&#x27;&#x27;</span><span class="hljs-string">)</span> &#123;<br>               <span class="hljs-comment">#proxy_pass http://139.196.188.213;</span><br>			   <span class="hljs-comment">#判断mobile_request等于空则为PC终端</span><br>			   <span class="hljs-string">root</span>   <span class="hljs-string">F:/upload_file_root/subsite/$dns/web;</span><br>            &#125;<br>        <br>            <span class="hljs-comment">#break; </span><br>			<br>			<span class="hljs-string">if</span> <span class="hljs-string">($uri</span> <span class="hljs-string">~*</span> <span class="hljs-string">&#x27;(lobby|bedroom|livingroom|lavatory|kitchen|videoroom)&#x27;</span><span class="hljs-string">)</span> &#123;<br>				<span class="hljs-string">root</span>   <span class="hljs-string">F:/upload_file_root/subsite/$dns;</span><br>			&#125;<br>		&#125;<br>		<br>		<span class="hljs-string">location</span> <span class="hljs-string">/commonHtml</span> &#123;<br>            <span class="hljs-string">alias</span>   <span class="hljs-string">F:/upload_file_root/common/;</span>     <br>        &#125; <br>	<br>		<span class="hljs-string">location</span> <span class="hljs-string">~</span> <span class="hljs-string">^/(BJUI|ckeditor4.8|common|images|js|nice-validator|www|static)/</span> &#123;<br>            <span class="hljs-string">root</span>   <span class="hljs-string">F:/upload_file_root/static;</span> <br>            <span class="hljs-string">autoindex</span> <span class="hljs-string">on;</span><br>            <span class="hljs-string">access_log</span>  <span class="hljs-string">off;</span><br>            <span class="hljs-string">expires</span>     <span class="hljs-string">30d;</span>          <br>        &#125;<br>		<br>		<span class="hljs-string">location</span> <span class="hljs-string">~</span> <span class="hljs-string">^/(upload)/</span> &#123;<br>            <span class="hljs-string">root</span>   <span class="hljs-string">F:/upload_file_root/;</span> <br>            <span class="hljs-string">autoindex</span> <span class="hljs-string">on;</span><br>            <span class="hljs-string">access_log</span>  <span class="hljs-string">off;</span><br>            <span class="hljs-string">expires</span>     <span class="hljs-string">30d;</span>          <br>        &#125;<br>		<br>        <span class="hljs-comment">#error_page  404              /404.html;</span><br>        <span class="hljs-comment"># redirect server error pages to the static page /50x.html</span><br>        <span class="hljs-comment">#</span><br>        <span class="hljs-string">error_page</span>   <span class="hljs-number">500</span> <span class="hljs-number">502</span> <span class="hljs-number">503</span> <span class="hljs-number">504</span>  <span class="hljs-string">/50x.html;</span><br>        <span class="hljs-string">location</span> <span class="hljs-string">=</span> <span class="hljs-string">/50x.html</span> &#123;<br>            <span class="hljs-string">root</span>   <span class="hljs-string">html;</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>原文：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44299027/article/details/107286956">【Nginx用法】nginx location正则表达式写法，详解Nginx location 匹配规则（很详细哦）</a></p>
 <p>【参考资料】</p>
 <p>1、nginx平台初探(100%)：<a target="_blank" rel="noopener" href="http://tengine.taobao.org/book/chapter_02.html">nginx平台初探(100%) — Nginx开发从入门到精通</a></p>
 <p>2、Module ngx_http_rewrite_module：<a target="_blank" rel="noopener" href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html">Module ngx_http_rewrite_module</a></p>
 
-    </div>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
 
+<span class="category-chains">
+  
+  
     
-    
-    
+      <span class="category-chain">
         
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/" class="category-chain-item">学习是人生第一要务</a>
+  
+  
 
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Rainbow
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://pawswrite.xyz/2022/08/16/nginx-regex-rules/" title="nginx regex rules">https://pawswrite.xyz/2022/08/16/nginx-regex-rules/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+        <a href="/tags/nginx/">#nginx</a>
+      
+        <a href="/tags/%E8%BF%90%E7%BB%B4/">#运维</a>
+      
+    </div>
+  
 </div>
 
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
-              <a href="/tags/nginx/" rel="tag"># nginx</a>
-              <a href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag"># 运维</a>
-          </div>
+              
+  
 
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2022/08/12/selenium-%E6%A8%A1%E6%8B%9F%E7%82%B9%E5%87%BBhcaptcha%E5%92%8Crecaptcha%E9%AA%8C%E8%AF%81%E7%A0%81/" rel="prev" title="selenium 模拟点击hcaptcha和recaptcha验证码">
-      <i class="fa fa-chevron-left"></i> selenium 模拟点击hcaptcha和recaptcha验证码
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/08/16/nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-cloudflare-%E7%BD%91%E7%AB%99%E5%87%BA%E7%8E%B0-502-%E6%8A%A5%E9%94%99/" rel="next" title="nginx 反向代理 cloudflare 网站出现 502 报错">
-      nginx 反向代理 cloudflare 网站出现 502 报错 <i class="fa fa-chevron-right"></i>
-    </a></div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>nginx regex rules</div>
+      <div>https://pawswrite.xyz/2022/08/16/nginx-regex-rules/</div>
     </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-  <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">
-            ------------- 本文结束 <i class="fa fa-heart-o"></i> 感谢您的阅读-------------
-     </div>
-    
-  </div>
-
-
-          </div>
-          
-    <div class="comments" id="gitalk-container"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rainbow</div>
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
   </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E8%A7%84%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">常用规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE"><span class="nav-number">2.</span> <span class="nav-text">实际使用建议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flag%E6%A0%87%E5%BF%97%E4%BD%8D"><span class="nav-number">3.</span> <span class="nav-text">Flag标志位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#If-%E5%88%A4%E6%96%AD%E6%8C%87%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">If 判断指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="nav-number">5.</span> <span class="nav-text">全局变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99"><span class="nav-number">6.</span> <span class="nav-text">常用正则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Rewrite%E8%A7%84%E5%88%99"><span class="nav-number">7.</span> <span class="nav-text">Rewrite规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Rewrite%E5%AE%9E%E4%BE%8B"><span class="nav-number">8.</span> <span class="nav-text">Rewrite实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B1"><span class="nav-number">8.1.</span> <span class="nav-text">实例1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E4%BA%8C"><span class="nav-number">8.2.</span> <span class="nav-text">实例二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%AE%9E%E4%BE%8B"><span class="nav-number">9.</span> <span class="nav-text">项目实例</span></a></li></ol></div>
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/16/nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-cloudflare-%E7%BD%91%E7%AB%99%E5%87%BA%E7%8E%B0-502-%E6%8A%A5%E9%94%99/" title="nginx 反向代理 cloudflare 网站出现 502 报错">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">nginx 反向代理 cloudflare 网站出现 502 报错</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/12/selenium-%E6%A8%A1%E6%8B%9F%E7%82%B9%E5%87%BBhcaptcha%E5%92%8Crecaptcha%E9%AA%8C%E8%AF%81%E7%A0%81/" title="selenium 模拟点击hcaptcha和recaptcha验证码">
+                        <span class="hidden-mobile">selenium 模拟点击hcaptcha和recaptcha验证码</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
       </div>
-      <!--/noindex-->
+    </div>
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Rainbow"
-      src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">Rainbow</p>
-  <div class="site-description" itemprop="description">Tech Lover</div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">67</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">40</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="http://nz.pawswrite.xyz/" title="探针 → http:&#x2F;&#x2F;nz.pawswrite.xyz" rel="noopener" target="_blank"><i class="fas fa-server fa-fw"></i>探针</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://boringbay.com/" title="无聊湾 → https:&#x2F;&#x2F;boringbay.com" rel="noopener" target="_blank"><i class="fa-solid fa-face-meh fa-fw"></i>无聊湾</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
 
 
 
-      </div>
+  </aside>
+
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">@rainbow</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">227k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
-</div>
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
   </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
-<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
-<script src="/js/algolia-search.js"></script>
-
-
-
-
-
-
-
-
-
+</div>
 
 
 
@@ -649,27 +527,256 @@
 
   
 
+
+
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
 
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '416e004749a692890792',
-      clientSecret: 'a51d95d68a7fddba31072393540e0e2c3b09d91f',
-      repo        : 'Gitalk',
-      owner       : 'tech-fever',
-      admin       : ['tech-fever'],
-      id          : '9f97227c6d657f9755a6fd3828fd7b67',
-        language: 'zh-CN',
-      distractionFreeMode: true
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
     });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
+  });
 </script>
 
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

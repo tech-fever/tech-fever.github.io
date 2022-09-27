@@ -1,29 +1,22 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.1.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <meta name="google-site-verification" content="f4M613CNVfWg9fM_X3tG5jELt3D10Gk8E3R0ZUaMzd4">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"algolia":{"appID":"QVWTMTP22E","apiKey":"1a70640400cc23d9656c5fb60de60c0e","indexName":"dev_hexoBlog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="本文记录了国内的Linux系统如何用Clash代理上网，并配置web界面，来方便切换节点，查看连接和日志。 项目地址Clash GitHub地址为：https:&#x2F;&#x2F;github.com&#x2F;Dreamacro&#x2F;clash&#x2F;releases 常用的web界面有yacd和razord。本文讲了三种配置clash UI web界面的方法。  razord: 可以自建，也可以用本站的 - http:&#x2F;&#x2F;cla">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rainbow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本文记录了国内的Linux系统如何用Clash代理上网，并配置web界面，来方便切换节点，查看连接和日志。 项目地址Clash GitHub地址为：https:&#x2F;&#x2F;github.com&#x2F;Dreamacro&#x2F;clash&#x2F;releases 常用的web界面有yacd和razord。本文讲了三种配置clash UI web界面的方法。  razord: 可以自建，也可以用本站的 - http:&#x2F;&#x2F;cla">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【保姆级教程】Linux（树莓派）用代理上网并配置web界面">
 <meta property="og:url" content="https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/index.html">
@@ -43,267 +36,267 @@
 <meta property="article:author" content="Rainbow">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="RaspberryPi">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/razord.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【保姆级教程】Linux（树莓派）用代理上网并配置web界面 - Rainbow</title>
 
-<link rel="canonical" href="https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
 
-  <title>【保姆级教程】Linux（树莓派）用代理上网并配置web界面 | Rainbow</title>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
+<body>
+  
 
-  <div class="site-meta">
+  <header>
+    
 
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Rainbow</h1>
-      <span class="logo-line-after"><i></i></span>
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
     </a>
-      <p class="site-subtitle" itemprop="description">blog</p>
-  </div>
 
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-sitemap">
-
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
-
-  </li>
-        <li class="menu-item menu-item-commonweal">
-
-    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
 </nav>
 
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【保姆级教程】Linux（树莓派）用代理上网并配置web界面"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-30 16:02" pubdate>
+          2022年5月30日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          60 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container"></div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="algolia-results">
-  <div id="algolia-stats"></div>
-  <div id="algolia-hits"></div>
-  <div id="algolia-pagination" class="algolia-pagination"></div>
-</div>
+        
+      </div>
 
       
     </div>
   </div>
+</div>
 
 </div>
-    </header>
 
+  </header>
+
+  <main>
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-  <a href="https://github.com/tech-fever" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Rainbow">
-      <meta itemprop="description" content="Tech Lover">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rainbow">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          【保姆级教程】Linux（树莓派）用代理上网并配置web界面
-        </h1>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-05-30 16:02:46" itemprop="dateCreated datePublished" datetime="2022-05-30T16:02:46+08:00">2022-05-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-04 19:54:25" itemprop="dateModified" datetime="2022-08-04T19:54:25+08:00">2022-08-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>7.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-        <p>本文记录了国内的Linux系统如何用Clash代理上网，并配置web界面，来方便切换节点，查看连接和日志。</p>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【保姆级教程】Linux（树莓派）用代理上网并配置web界面</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>本文记录了国内的Linux系统如何用Clash代理上网，并配置web界面，来方便切换节点，查看连接和日志。</p>
 <h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p>Clash GitHub地址为：<a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases">https://github.com/Dreamacro/clash/releases</a></p>
 <p>常用的web界面有yacd和razord。本文讲了三种配置clash UI web界面的方法。</p>
 <ol>
-<li>razord: 可以自建，也可以用本站的 - <a target="_blank" rel="noopener" href="http://clash.pawswrite.xyz/">http://clash.pawswrite.xyz/</a><br><img src="/2022/05/30/RaspberryPi-using-proxy/razord.png"></li>
-<li>yacd GitHub 项目地址: <a target="_blank" rel="noopener" href="https://github.com/haishanh/yacd">https://github.com/haishanh/yacd</a><br><img src="/2022/05/30/RaspberryPi-using-proxy/yacd.png"></li>
+<li>razord: 可以自建，也可以用本站的 - <a target="_blank" rel="noopener" href="http://clash.pawswrite.xyz/">http://clash.pawswrite.xyz/</a><br><img src="/2022/05/30/RaspberryPi-using-proxy/razord.png" srcset="/img/loading.gif" lazyload></li>
+<li>yacd GitHub 项目地址: <a target="_blank" rel="noopener" href="https://github.com/haishanh/yacd">https://github.com/haishanh/yacd</a><br><img src="/2022/05/30/RaspberryPi-using-proxy/yacd.png" srcset="/img/loading.gif" lazyload></li>
 </ol>
 <span id="more"></span>
 
 <h1 id="安装Clash"><a href="#安装Clash" class="headerlink" title="安装Clash"></a>安装Clash</h1><p>树莓派是 <code>ARM</code> 架构的卡片电脑。请用 <code>arch</code> 或 <code>uname -m</code> 命令查看你的架构。（树莓派3&#x2F;4&#x2F;400的cpu虽然是64位，但可能官方装的系统是32位的），例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pi@raspberrypi:~$ arch</span><br><span class="line">armv7l</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs s">pi@raspberrypi:~$ arch<br>armv7l<br></code></pre></td></tr></table></figure>
 <p>然后找到服务器下载对应的版本，树莓派3&#x2F;4一般32位的就是<code>armv7</code>，64位就是<code>armv8</code>（<code>arch</code>命令显示<code>aarch64</code>）。</p>
 <p>一般的服务器，64位的都是<code>clash-linux-amd64</code>版本。国内服务器一般无法从GitHub下载clash，本站提供了下载链接。</p>
 <p><strong>本文写于2022&#x2F;5&#x2F;30，所提供的下载链接截至目前都是最新版本</strong></p>
@@ -354,7 +347,7 @@
 </tr>
 </tbody></table>
 <p>通过本站链接下载clash：<br><font color="orange">把第二条命令最后的 clash-linux-armv8-v1.10.6.gz 换成你需要的版本</font></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建clash文件夹并打开</span></span><br><span class="line"><span class="built_in">mkdir</span> /root/clash &amp;&amp; <span class="built_in">cd</span> /root/clash</span><br><span class="line"><span class="comment"># 下载压缩文件包，可以把最后的 clash-linux-armv8-v1.10.6.gz 换成你需要的版本即可，也可以通过在上面的表格里右键，复制链接地址，然后用复制的链接替换下面的链接</span></span><br><span class="line">curl https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/clash/clash-linux-armv8-v1.10.6.gz &gt; clash.gz</span><br><span class="line"><span class="comment"># 解压文件</span></span><br><span class="line">gzip -d clash.gz</span><br><span class="line"><span class="comment"># 赋予clash可执行权限</span></span><br><span class="line"><span class="built_in">chmod</span> +x clash</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建clash文件夹并打开</span><br><span class="hljs-built_in">mkdir</span> /root/clash &amp;&amp; <span class="hljs-built_in">cd</span> /root/clash<br><span class="hljs-comment"># 下载压缩文件包，可以把最后的 clash-linux-armv8-v1.10.6.gz 换成你需要的版本即可，也可以通过在上面的表格里右键，复制链接地址，然后用复制的链接替换下面的链接</span><br>curl https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/clash/clash-linux-armv8-v1.10.6.gz &gt; clash.gz<br><span class="hljs-comment"># 解压文件</span><br>gzip -d clash.gz<br><span class="hljs-comment"># 赋予clash可执行权限</span><br><span class="hljs-built_in">chmod</span> +x clash<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>其他查看系统架构的命令：<br>    1. <code>uname -a</code><br>    2. <code>cat /proc/cpuinfo</code><br>    3. <code>getconf LONG_BIT</code><br>    4. <code>file /bin/bash</code><br>    5. <code>cat /proc/version</code><br>    6. <code>dpkg --print-architecture</code></p>
@@ -367,67 +360,67 @@
 </li>
 </ol>
 <h2 id="下载Country-mmdb"><a href="#下载Country-mmdb" class="headerlink" title="下载Country.mmdb"></a>下载Country.mmdb</h2><p>将 Country.zip 文件下载到<code>/root/.config</code>文件夹中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 采用我站链接【推荐】</span></span><br><span class="line">curl -o /root/.config/clash/Country.mmdb --create-dirs https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/clash/Country.mmdb</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 采用我站链接【推荐】</span><br>curl -o /root/.config/clash/Country.mmdb --create-dirs https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/clash/Country.mmdb<br></code></pre></td></tr></table></figure>
 <p>如果采用其他链接下载【可能会被墙】：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 采用GitHub原项目地址</span></span><br><span class="line">curl -o /root/.config/clash/Country.mmdb --create-dirs https://github.com/Dreamacro/maxmind-geoip/releases/download/20220512/Country.mmdb</span><br><span class="line"><span class="comment"># 采用cdn加速GitHub</span></span><br><span class="line">curl -o /root/.config/clash/Country.mmdb --create-dirs https://cdn.jsdelivr.net/gh/Dreamacro/maxmind-geoip@release/Country.mmdb</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 采用GitHub原项目地址</span><br>curl -o /root/.config/clash/Country.mmdb --create-dirs https://github.com/Dreamacro/maxmind-geoip/releases/download/20220512/Country.mmdb<br><span class="hljs-comment"># 采用cdn加速GitHub</span><br>curl -o /root/.config/clash/Country.mmdb --create-dirs https://cdn.jsdelivr.net/gh/Dreamacro/maxmind-geoip@release/Country.mmdb<br></code></pre></td></tr></table></figure>
 <p>点击下载👉<a href="clash/Country.mmdb">Country.mmdb</a></p>
 <h2 id="下载配置文件"><a href="#下载配置文件" class="headerlink" title="下载配置文件"></a>下载配置文件</h2><p>这个就得找你的机场了。自行从机场下载相对应的配置文件<code>config.yaml</code>。这里推荐作者朋友用的机场 GLaDOS，盲猜机场老板是游戏传送门的粉丝，刚好我也很喜欢这个游戏。它提供了Linux版本的<a target="_blank" rel="noopener" href="https://glados.rocks/console/terminal">clash配置文件</a>。</p>
 <blockquote>
 <p><font color="red">注册GLaDOS(注册地址在 <a target="_blank" rel="noopener" href="https://github.com/glados-network/GLaDOS">https://github.com/glados-network/GLaDOS</a> 实时更新), 并输入邀请码:<br> <code>N3CMR-9H4SV-RE0Z6-LE1RZ</code> 激活</font></p>
 </blockquote>
 <p>请使用下面命令下载配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -o /root/.config/clash/config.yaml 你的clash配置文件url</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget -o /root/.config/clash/config.yaml 你的clash配置文件url<br></code></pre></td></tr></table></figure>
 
 <p>如果你的机场不提供clash的配置文件，可以用本站的订阅转换地址进行订阅转换（<strong>不要使用短链接</strong>）：</p>
 <p><a target="_blank" rel="noopener" href="https://sub.pawswrite.xyz/">https://sub.pawswrite.xyz/</a></p>
 <p>如果订阅下载不下来，可以浏览器打开，然后复制所有的订阅信息，再回到服务器或者树莓派，新建文件粘贴进去，注意粘贴之前要删空：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /root/.config/clash/config.yaml</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /root/.config/clash/config.yaml<br></code></pre></td></tr></table></figure>
 
 <h1 id="启动Clash"><a href="#启动Clash" class="headerlink" title="启动Clash"></a>启动Clash</h1><p>现在就可以<strong>直接启动clash</strong>了：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/clash/clash</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/root/clash/clash<br></code></pre></td></tr></table></figure>
 
 <p>如果出现类似下面的信息，就是启动成功：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@raspberrypi:/root/clash# /root/clash/clash</span><br><span class="line">INFO[0000] RESTful API listening at: [::]:9090</span><br><span class="line">INFO[0000] HTTP proxy listening at: [::]:7890</span><br><span class="line">INFO[0000] SOCKS proxy listening at: [::]:7891</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">root@raspberrypi:/root/clash# /root/clash/clash<br>INFO[0000] RESTful API listening at: [::]:9090<br>INFO[0000] HTTP proxy listening at: [::]:7890<br>INFO[0000] SOCKS proxy listening at: [::]:7891<br></code></pre></td></tr></table></figure>
 <p>日志提示已经开放了HTTP代理服务端口为7890, SOCK55服务端口为7891。后面设置其他程序(浏览器&#x2F;GIT等)通过7890&#x2F;7891来代理访问网络就可以了。</p>
 <p>检查是否启动成功，还可以开一个新的ssh session或者terminal，在新终端中输入<code>curl localhost:9090</code>并回车，出现下面信息则是成功：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pi@raspberrypi:~$ curl localhost:9090</span><br><span class="line">&#123;<span class="string">&quot;hello&quot;</span>:<span class="string">&quot;clash&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">pi@raspberrypi:~$ curl localhost:9090<br>&#123;<span class="hljs-string">&quot;hello&quot;</span>:<span class="hljs-string">&quot;clash&quot;</span>&#125;<br></code></pre></td></tr></table></figure>
 <p>这个时候就可以使用 <code>clash</code> ，只是需要另开一个terminal。</p>
 <p>如果想要配置 <code>clash.service</code> 来实现开机自启动，进行进程维护，以及配置web UI面板来管理Clash，在下面的章节有提到。</p>
 <h1 id="使用clash代理"><a href="#使用clash代理" class="headerlink" title="使用clash代理"></a>使用clash代理</h1><ol>
 <li><p>例如 Git:</p>
 <p> 新开一个Terminal:</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/twbs/bootstrap.git --config <span class="string">&quot;http.proxy=127.0.0.1:7890&quot;</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/twbs/bootstrap.git --config <span class="hljs-string">&quot;http.proxy=127.0.0.1:7890&quot;</span><br></code></pre></td></tr></table></figure>
 
 <p> clash 打印如下日志说明clash完成了工作<br> <code>INFO[0007] [TCP] 127.0.0.1:54875 --&gt; github.com:443 match DomainKeyword(github) using Proxy</code></p>
 </li>
 <li><p>例如 NPM:</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> proxy http://127.0.0.1:7890 </span><br><span class="line">npm install pm2 -g </span><br><span class="line">npm config delete proxy  <span class="comment">#取消代理设置</span></span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm config <span class="hljs-built_in">set</span> proxy http://127.0.0.1:7890 <br>npm install pm2 -g <br>npm config delete proxy  <span class="hljs-comment">#取消代理设置</span><br></code></pre></td></tr></table></figure></li>
 <li><p>通过设置Shell的环境变量, 例如 APT&#x2F;CURL:</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> https_proxy=<span class="string">&quot;socks5://127.0.0.1:7891&quot;</span></span><br><span class="line"><span class="built_in">export</span> http_proxy=<span class="string">&quot;http://127.0.0.1:7890&quot;</span></span><br><span class="line">apt update </span><br><span class="line">apt install wget </span><br><span class="line"><span class="built_in">export</span> http_proxy=<span class="string">&quot;&quot;</span> <span class="comment">#取消代理设置</span></span><br><span class="line"><span class="built_in">export</span> http_proxy=<span class="string">&quot;127.0.0.1:7890&quot;</span> </span><br><span class="line">curl https://ifconfig.me </span><br><span class="line"><span class="built_in">export</span> http_proxy=<span class="string">&quot;&quot;</span> <span class="comment">#取消代理设置</span></span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;socks5://127.0.0.1:7891&quot;</span><br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://127.0.0.1:7890&quot;</span><br>apt update <br>apt install wget <br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-comment">#取消代理设置</span><br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;127.0.0.1:7890&quot;</span> <br>curl https://ifconfig.me <br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-comment">#取消代理设置</span><br></code></pre></td></tr></table></figure></li>
 <li><p>SSH 通过代理连接服务器, 例如:</p>
 <p> ubuntu 下编辑 ~&#x2F;.ssh&#x2F;config 文件:</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host 1.1.1.1</span><br><span class="line">User root</span><br><span class="line">ProxyCommand /usr/bin/nc -X5 -x 127.0.0.1:7891  %h %p</span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">Host 1.1.1.1<br>User root<br>ProxyCommand /usr/bin/nc -X5 -x 127.0.0.1:7891  %h %p<br></code></pre></td></tr></table></figure>
 <p> 连接服务器</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@1.1.1.1</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh root@1.1.1.1<br></code></pre></td></tr></table></figure></li>
 <li><p>桌面型Linux(如Ubuntu 22.04)<br> 请打开设置-网络-设置网络代理为SOCK5, 地址为 127.0.0.1, 端口为7891.</p>
 </li>
 </ol>
 <p><strong>注意: ping 并不是 TCP 应用，因此无法使用Clash的HTTP&#x2F;SOCK5代理。</strong></p>
 <h1 id="【进阶】ProxyChains"><a href="#【进阶】ProxyChains" class="headerlink" title="【进阶】ProxyChains"></a>【进阶】ProxyChains</h1><p>个人认为ProxyChains是Linux上最好用的代理工具。配合Clash使用非常方便，具体可看另一篇文章：<br><a href="https://pawswrite.xyz/2022/05/31/ProxyChains/">https://pawswrite.xyz/2022/05/31/ProxyChains/</a></p>
 <h1 id="测试网络"><a href="#测试网络" class="headerlink" title="测试网络"></a>测试网络</h1><p>看看能不能上谷歌：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/clash/clash <span class="comment"># 启动clash</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/root/clash/clash <span class="hljs-comment"># 启动clash</span><br></code></pre></td></tr></table></figure>
 <p>新开一个terminal，并输入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> https_proxy=http://127.0.0.1:7890</span><br><span class="line">ping google.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> https_proxy=http://127.0.0.1:7890<br>ping google.com<br></code></pre></td></tr></table></figure>
 <p>若能ping通则能正常翻墙，如果不能的话，检查机场订阅有没有过期，配置文件还能不能用。</p>
 <h1 id="进阶：管理Clash【可选】"><a href="#进阶：管理Clash【可选】" class="headerlink" title="进阶：管理Clash【可选】"></a>进阶：管理Clash【可选】</h1><h1 id="service守护进程，配置开机自启"><a href="#service守护进程，配置开机自启" class="headerlink" title="service守护进程，配置开机自启"></a>service守护进程，配置开机自启</h1><p>不希望Clash专门占用一个terminal，希望关闭对话以后依然在后台运行，如果出错了自动重启，并实现开机重启。那么就可以照本章节来做。</p>
 <p>输入以下指令创建clash.service文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> /etc/systemd/system/clash.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">touch</span> /etc/systemd/system/clash.service<br></code></pre></td></tr></table></figure>
 <p>双击打开clash.service文件，粘贴以下内容：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=clash daemon</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">Restart=always</span><br><span class="line">ExecStart=/root/clash/clash -d /root/.config/clash</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">[Unit]<br>Description=clash daemon<br>After=network.target<br><br>[Service]<br>Type=simple<br>Restart=always<br>ExecStart=/root/clash/clash -d /root/.config/clash<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
 <p>然后设置clash开机自启动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> clash</span><br><span class="line">service clash start</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl daemon-reload<br>systemctl <span class="hljs-built_in">enable</span> clash<br>service clash start<br></code></pre></td></tr></table></figure>
 <p>查看状态：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status clash.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl status clash.service<br></code></pre></td></tr></table></figure>
 <h1 id="UI面板"><a href="#UI面板" class="headerlink" title="UI面板"></a>UI面板</h1><p>第1种选择的razord面板是最简单最方便的，并且可以和第2种选择里的yacd面板共存，第二种是yacd面板，较简单，第三种是自建razord面板。但是2、3种只能选一个，第2、3种面板都需要修改配置文件。但第1种用的是别人建的razord面板，<em><strong>不需要修改配置</strong></em>。</p>
 <h2 id="【第1种选择】本站面板（最方便）"><a href="#【第1种选择】本站面板（最方便）" class="headerlink" title="【第1种选择】本站面板（最方便）"></a>【第1种选择】本站面板（最方便）</h2><p>浏览器输入：</p>
 <ul>
@@ -444,26 +437,26 @@
 <li>如果你是用服务器，就输入公网IP</li>
 <li>如果你是用openwrt或者树莓派或者其他server版系统，没有公网IP，那就输入<code>ifconfig</code>，查看本机ip，然后在用同一个局域网下（比如说连到同一个WiFi）的其他设备下用浏览器打开，并且输入刚刚得到的ip</li>
 </ul>
-<p><img src="/2022/05/30/RaspberryPi-using-proxy/ip.png"></p>
-<p>关于端口：端口就是启动Clash以后打印的<code>RESTful API listening at: [::]:9090</code>这里的端口号，（默认9090）<br><img src="/2022/05/30/RaspberryPi-using-proxy/razord2.png"></p>
+<p><img src="/2022/05/30/RaspberryPi-using-proxy/ip.png" srcset="/img/loading.gif" lazyload></p>
+<p>关于端口：端口就是启动Clash以后打印的<code>RESTful API listening at: [::]:9090</code>这里的端口号，（默认9090）<br><img src="/2022/05/30/RaspberryPi-using-proxy/razord2.png" srcset="/img/loading.gif" lazyload></p>
 <p>关于密码：没有修改过配置文件的话一般留空。如果连不上就去配置文件查看，看开头是否有 <code>secret</code> 这一项。</p>
-<h2 id="【第2种选择】自建yacd面板"><a href="#【第2种选择】自建yacd面板" class="headerlink" title="【第2种选择】自建yacd面板"></a>【第2种选择】自建yacd面板</h2><p><a target="_blank" rel="noopener" href="https://github.com/haishanh/yacd/releases">yacd 项目地址</a>:<br><img src="/2022/05/30/RaspberryPi-using-proxy/yacd.png"><br><a target="_blank" rel="noopener" href="https://github.com/haishanh/yacd/releases">https://github.com/haishanh/yacd/releases</a></p>
+<h2 id="【第2种选择】自建yacd面板"><a href="#【第2种选择】自建yacd面板" class="headerlink" title="【第2种选择】自建yacd面板"></a>【第2种选择】自建yacd面板</h2><p><a target="_blank" rel="noopener" href="https://github.com/haishanh/yacd/releases">yacd 项目地址</a>:<br><img src="/2022/05/30/RaspberryPi-using-proxy/yacd.png" srcset="/img/loading.gif" lazyload><br><a target="_blank" rel="noopener" href="https://github.com/haishanh/yacd/releases">https://github.com/haishanh/yacd/releases</a></p>
 <p>首先，下载最新版<a href="clash/yacd.tar.xz">yacd</a>。<br>推荐：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -o /root/.config/clash/yacd.tar.xz https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/clash/yacd.tar.xz</span><br><span class="line">tar -xvJf /root/.config/clash/yacd.tar.xz -C /root/.config/clash/ </span><br><span class="line"><span class="built_in">mv</span> /root/.config/clash/public /root/.config/clash/dashboard</span><br><span class="line"><span class="built_in">rm</span> /root/.config/clash/yacd.tar.xz</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/05/30/RaspberryPi-using-proxy/yacd2.PNG"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -o /root/.config/clash/yacd.tar.xz https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/clash/yacd.tar.xz<br>tar -xvJf /root/.config/clash/yacd.tar.xz -C /root/.config/clash/ <br><span class="hljs-built_in">mv</span> /root/.config/clash/public /root/.config/clash/dashboard<br><span class="hljs-built_in">rm</span> /root/.config/clash/yacd.tar.xz<br></code></pre></td></tr></table></figure>
+<p><img src="/2022/05/30/RaspberryPi-using-proxy/yacd2.PNG" srcset="/img/loading.gif" lazyload></p>
 <p>备选：<br>点击下载👉<a href="clash/yacd.tar.xz">yacd</a>，下载到本地后再拖动上传到&#x2F;root&#x2F;.config&#x2F;clash目录解压</p>
 <h2 id="【第3种选择】自建razord面板"><a href="#【第3种选择】自建razord面板" class="headerlink" title="【第3种选择】自建razord面板"></a>【第3种选择】自建razord面板</h2><p>dashboard项目地址：<br><a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash-dashboard/tags">https://github.com/Dreamacro/clash-dashboard/tags</a></p>
 <p>从本站直接下载v0.3.0版本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/clash/dashboard.zip</span><br><span class="line">unzip -d /root/.config/clash/ dashboard.zip &amp;&amp; <span class="built_in">rm</span> dashboard.zip</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -O https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/clash/dashboard.zip<br>unzip -d /root/.config/clash/ dashboard.zip &amp;&amp; <span class="hljs-built_in">rm</span> dashboard.zip<br></code></pre></td></tr></table></figure>
 
 <h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>自建yacd界面和razord界面都需要在配置文件里修改后才能使用，<font color="red">但是用别人的不需要</font></p>
 <p>编辑配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /root/.config/clash/config.yaml</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /root/.config/clash/config.yaml<br></code></pre></td></tr></table></figure>
 <p>在配置文件开头加入下面几行：<br><em>如果配置文件已经有这几行就不用加了，比如GLaDOS提供的Linux版本配置文件就已经自带了</em></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 您可以将静态网页资源（如 clash-dashboard）放置在一个目录中，clash 将会服务于 `$&#123;API&#125;/ui`</span></span><br><span class="line"><span class="comment"># 参数应填写配置目录的相对路径或绝对路径。</span></span><br><span class="line"><span class="attr">external-ui:</span> <span class="string">dashboard</span></span><br><span class="line"><span class="comment"># A RESTful API for clash</span></span><br><span class="line"><span class="attr">external-controller:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:9090</span></span><br><span class="line"><span class="comment"># Secret for RESTful API (Optional)口令 (可选)留空就是没有</span></span><br><span class="line"><span class="attr">secret:</span> <span class="string">&quot;yourpassword&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># 您可以将静态网页资源（如 clash-dashboard）放置在一个目录中，clash 将会服务于 `$&#123;API&#125;/ui`</span><br><span class="hljs-comment"># 参数应填写配置目录的相对路径或绝对路径。</span><br><span class="hljs-attr">external-ui:</span> <span class="hljs-string">dashboard</span><br><span class="hljs-comment"># A RESTful API for clash</span><br><span class="hljs-attr">external-controller:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><span class="hljs-string">:9090</span><br><span class="hljs-comment"># Secret for RESTful API (Optional)口令 (可选)留空就是没有</span><br><span class="hljs-attr">secret:</span> <span class="hljs-string">&quot;yourpassword&quot;</span><br></code></pre></td></tr></table></figure>
 <p><font color="orange">记住自己配置的口令，后面会用上</font></p>
 <p>重启clash</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart clash</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl restart clash<br></code></pre></td></tr></table></figure>
 <p>在浏览器中输入 <code>http://你的ip:9090/ui/</code> 进行访问。如果有公网IP就填公网IP，可以在外网进行访问还可以配置Nginx进行反代。</p>
 <p>关于Host：</p>
 <ul>
@@ -471,271 +464,149 @@
 <li>如果你是用服务器，就输入公网IP</li>
 <li>如果你是用openwrt或者树莓派或者其他server版系统，没有公网IP，那就输入<code>ifconfig</code>，查看本机ip，然后在用同一个局域网下（比如说连到同一个WiFi）的其他设备下用浏览器打开，并且输入刚刚得到的ip</li>
 </ul>
-<p><img src="/2022/05/30/RaspberryPi-using-proxy/ip.png"></p>
-<p>关于端口：端口就是启动Clash以后打印的<code>RESTful API listening at: [::]:9090</code>这里的端口号，也就是配置文件里设置的<code>external-controller</code>（默认9090）<br>关于密码：去配置文件查看，看填入secret后面的内容，比如<code>yourpassword</code><br><img src="/2022/05/30/RaspberryPi-using-proxy/razord2.png"></p>
+<p><img src="/2022/05/30/RaspberryPi-using-proxy/ip.png" srcset="/img/loading.gif" lazyload></p>
+<p>关于端口：端口就是启动Clash以后打印的<code>RESTful API listening at: [::]:9090</code>这里的端口号，也就是配置文件里设置的<code>external-controller</code>（默认9090）<br>关于密码：去配置文件查看，看填入secret后面的内容，比如<code>yourpassword</code><br><img src="/2022/05/30/RaspberryPi-using-proxy/razord2.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
 
     </div>
-
-    
-    
-    
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Rainbow
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/" title="【保姆级教程】Linux（树莓派）用代理上网并配置web界面">https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+        <a href="/tags/RaspberryPi/">#RaspberryPi</a>
+      
+    </div>
+  
 </div>
 
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
-              <a href="/tags/RaspberryPi/" rel="tag"># RaspberryPi</a>
-          </div>
+              
+  
 
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2022/05/29/NextCloud-Set-Up-your-own-Cloud/" rel="prev" title="NextCloud: 配置你自己的云服务器【快速部署版】">
-      <i class="fa fa-chevron-left"></i> NextCloud: 配置你自己的云服务器【快速部署版】
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/05/31/ProxyChains/" rel="next" title="Linux 配置 ProxyChains 上网">
-      Linux 配置 ProxyChains 上网 <i class="fa fa-chevron-right"></i>
-    </a></div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【保姆级教程】Linux（树莓派）用代理上网并配置web界面</div>
+      <div>https://pawswrite.xyz/2022/05/30/RaspberryPi-using-proxy/</div>
     </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-  <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">
-            ------------- 本文结束 <i class="fa fa-heart-o"></i> 感谢您的阅读-------------
-     </div>
-    
-  </div>
-
-
-          </div>
-          
-    <div class="comments" id="gitalk-container"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rainbow</div>
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年5月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
   </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80"><span class="nav-number">1.</span> <span class="nav-text">项目地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Clash"><span class="nav-number">2.</span> <span class="nav-text">安装Clash</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDCountry-mmdb"><span class="nav-number">3.1.</span> <span class="nav-text">下载Country.mmdb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">下载配置文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8Clash"><span class="nav-number">4.</span> <span class="nav-text">启动Clash</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8clash%E4%BB%A3%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">使用clash代理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%90%E8%BF%9B%E9%98%B6%E3%80%91ProxyChains"><span class="nav-number">6.</span> <span class="nav-text">【进阶】ProxyChains</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C"><span class="nav-number">7.</span> <span class="nav-text">测试网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6%EF%BC%9A%E7%AE%A1%E7%90%86Clash%E3%80%90%E5%8F%AF%E9%80%89%E3%80%91"><span class="nav-number">8.</span> <span class="nav-text">进阶：管理Clash【可选】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#service%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%EF%BC%8C%E9%85%8D%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="nav-number">9.</span> <span class="nav-text">service守护进程，配置开机自启</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UI%E9%9D%A2%E6%9D%BF"><span class="nav-number">10.</span> <span class="nav-text">UI面板</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%90%E7%AC%AC1%E7%A7%8D%E9%80%89%E6%8B%A9%E3%80%91%E6%9C%AC%E7%AB%99%E9%9D%A2%E6%9D%BF%EF%BC%88%E6%9C%80%E6%96%B9%E4%BE%BF%EF%BC%89"><span class="nav-number">10.1.</span> <span class="nav-text">【第1种选择】本站面板（最方便）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%90%E7%AC%AC2%E7%A7%8D%E9%80%89%E6%8B%A9%E3%80%91%E8%87%AA%E5%BB%BAyacd%E9%9D%A2%E6%9D%BF"><span class="nav-number">10.2.</span> <span class="nav-text">【第2种选择】自建yacd面板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%90%E7%AC%AC3%E7%A7%8D%E9%80%89%E6%8B%A9%E3%80%91%E8%87%AA%E5%BB%BArazord%E9%9D%A2%E6%9D%BF"><span class="nav-number">10.3.</span> <span class="nav-text">【第3种选择】自建razord面板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">10.4.</span> <span class="nav-text">修改配置文件</span></a></li></ol></li></ol></div>
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/31/ProxyChains/" title="Linux 配置 ProxyChains 上网">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux 配置 ProxyChains 上网</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/29/NextCloud-Set-Up-your-own-Cloud/" title="NextCloud: 配置你自己的云服务器【快速部署版】">
+                        <span class="hidden-mobile">NextCloud: 配置你自己的云服务器【快速部署版】</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
       </div>
-      <!--/noindex-->
+    </div>
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Rainbow"
-      src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">Rainbow</p>
-  <div class="site-description" itemprop="description">Tech Lover</div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">67</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">40</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="http://nz.pawswrite.xyz/" title="探针 → http:&#x2F;&#x2F;nz.pawswrite.xyz" rel="noopener" target="_blank"><i class="fas fa-server fa-fw"></i>探针</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://boringbay.com/" title="无聊湾 → https:&#x2F;&#x2F;boringbay.com" rel="noopener" target="_blank"><i class="fa-solid fa-face-meh fa-fw"></i>无聊湾</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
 
 
 
-      </div>
+  </aside>
+
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">@rainbow</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">227k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
-</div>
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
   </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
-<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
-<script src="/js/algolia-search.js"></script>
-
-
-
-
-
-
-
-
-
+</div>
 
 
 
@@ -743,27 +614,256 @@
 
   
 
+
+
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
 
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '416e004749a692890792',
-      clientSecret: 'a51d95d68a7fddba31072393540e0e2c3b09d91f',
-      repo        : 'Gitalk',
-      owner       : 'tech-fever',
-      admin       : ['tech-fever'],
-      id          : 'be9ca53c0e76482629e162ddf87cc84a',
-        language: 'zh-CN',
-      distractionFreeMode: true
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
     });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
+  });
 </script>
 
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

@@ -1,29 +1,22 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.1.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <meta name="google-site-verification" content="f4M613CNVfWg9fM_X3tG5jELt3D10Gk8E3R0ZUaMzd4">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"algolia":{"appID":"QVWTMTP22E","apiKey":"1a70640400cc23d9656c5fb60de60c0e","indexName":"dev_hexoBlog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="Bark是一款开源的消息推送服务，用于给 iPhone 发送自定义的内容，支持文字和链接。我们可以使用Bark作者Fin提供的服务端来发送通知，也可以使用别人的。但通知过程所有数据都会保存在服务器，这样并不安全。通过部署自己的 Bark 服务端，我们可以安全地推送一些敏感信息。部署自己的 bark-server，来进行消息提醒。Bark 分为客户端和服务端。其中，客户端用于接收消息；服务端用于推送">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rainbow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Bark是一款开源的消息推送服务，用于给 iPhone 发送自定义的内容，支持文字和链接。我们可以使用Bark作者Fin提供的服务端来发送通知，也可以使用别人的。但通知过程所有数据都会保存在服务器，这样并不安全。通过部署自己的 Bark 服务端，我们可以安全地推送一些敏感信息。部署自己的 bark-server，来进行消息提醒。Bark 分为客户端和服务端。其中，客户端用于接收消息；服务端用于推送">
 <meta property="og:type" content="article">
 <meta property="og:title" content="部署自己的Bark服务端">
 <meta property="og:url" content="https://pawswrite.xyz/2022/05/17/set-up-your-own-bark-server/index.html">
@@ -41,570 +34,448 @@
 <meta property="article:author" content="Rainbow">
 <meta property="article:tag" content="VPS">
 <meta property="article:tag" content="Linux">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pawswrite.xyz/2022/05/17/set-up-your-own-bark-server/1.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>部署自己的Bark服务端 - Rainbow</title>
 
-<link rel="canonical" href="https://pawswrite.xyz/2022/05/17/set-up-your-own-bark-server/">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
 
-  <title>部署自己的Bark服务端 | Rainbow</title>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
+<body>
+  
 
-  <div class="site-meta">
+  <header>
+    
 
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Rainbow</h1>
-      <span class="logo-line-after"><i></i></span>
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
     </a>
-      <p class="site-subtitle" itemprop="description">blog</p>
-  </div>
 
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-sitemap">
-
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
-
-  </li>
-        <li class="menu-item menu-item-commonweal">
-
-    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
 </nav>
 
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="部署自己的Bark服务端"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-17 10:45" pubdate>
+          2022年5月17日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          27 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container"></div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="algolia-results">
-  <div id="algolia-stats"></div>
-  <div id="algolia-hits"></div>
-  <div id="algolia-pagination" class="algolia-pagination"></div>
-</div>
+        
+      </div>
 
       
     </div>
   </div>
+</div>
 
 </div>
-    </header>
 
+  </header>
+
+  <main>
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-  <a href="https://github.com/tech-fever" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://pawswrite.xyz/2022/05/17/set-up-your-own-bark-server/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Rainbow">
-      <meta itemprop="description" content="Tech Lover">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rainbow">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          部署自己的Bark服务端
-        </h1>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-05-17 10:45:34" itemprop="dateCreated datePublished" datetime="2022-05-17T10:45:34+08:00">2022-05-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-31 03:24:22" itemprop="dateModified" datetime="2022-05-31T03:24:22+08:00">2022-05-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-        <p>Bark是一款开源的消息推送服务，用于给 iPhone 发送自定义的内容，支持文字和链接。我们可以使用Bark作者Fin提供的服务端来发送通知，也可以使用别人的。但通知过程所有数据都会保存在服务器，这样并<strong>不安全</strong>。通过部署自己的 Bark 服务端，我们可以安全地推送一些敏感信息。部署自己的 <code>bark-server</code>，来进行消息提醒。Bark 分为客户端和服务端。其中，客户端用于接收消息；服务端用于推送消息。</p>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">部署自己的Bark服务端</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Bark是一款开源的消息推送服务，用于给 iPhone 发送自定义的内容，支持文字和链接。我们可以使用Bark作者Fin提供的服务端来发送通知，也可以使用别人的。但通知过程所有数据都会保存在服务器，这样并<strong>不安全</strong>。通过部署自己的 Bark 服务端，我们可以安全地推送一些敏感信息。部署自己的 <code>bark-server</code>，来进行消息提醒。Bark 分为客户端和服务端。其中，客户端用于接收消息；服务端用于推送消息。</p>
 <span id="more"></span>
 <p>官方项目地址：</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/Finb/bark-server">https://github.com/Finb/bark-server</a><br><a target="_blank" rel="noopener" href="https://github.com/Finb/Bark">https://github.com/Finb/Bark</a></p>
 </blockquote>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>最简单的，docker部署：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dt --name bark -p 8080:8080 -v `<span class="built_in">pwd</span>`/bark-data:/data finab/bark-server</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -dt --name bark -p 8080:8080 -v `<span class="hljs-built_in">pwd</span>`/bark-data:/data finab/bark-server<br></code></pre></td></tr></table></figure>
 
 <p>或者docker-compose启动，方便之后修改参数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> bark-server &amp;&amp; <span class="built_in">cd</span> bark-server</span><br><span class="line">curl -sL https://git.io/JvSRl &gt; docker-compose.yaml</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> bark-server &amp;&amp; <span class="hljs-built_in">cd</span> bark-server<br>curl -sL https://git.io/JvSRl &gt; docker-compose.yaml<br>docker-compose up -d<br></code></pre></td></tr></table></figure>
 
 <h3 id="【可选】健康检查"><a href="#【可选】健康检查" class="headerlink" title="【可选】健康检查"></a>【可选】健康检查</h3><p>为了监控，增加了一个健康检查，先修改<code>docker-compose.yml</code>文件。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.8&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">bark-server:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">finab/bark-server</span></span><br><span class="line">    <span class="attr">build:</span></span><br><span class="line">      <span class="attr">context:</span> <span class="string">./</span></span><br><span class="line">      <span class="attr">dockerfile:</span> <span class="string">Dockerfile</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">bark-server</span></span><br><span class="line">    <span class="attr">healthcheck:</span></span><br><span class="line">      <span class="attr">test:</span> <span class="string">curl</span> <span class="string">http://127.0.0.1:8080/healthz</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/data</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8080:8080&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.8&#x27;</span><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">bark-server:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">finab/bark-server</span><br>    <span class="hljs-attr">build:</span><br>      <span class="hljs-attr">context:</span> <span class="hljs-string">./</span><br>      <span class="hljs-attr">dockerfile:</span> <span class="hljs-string">Dockerfile</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">bark-server</span><br>    <span class="hljs-attr">healthcheck:</span><br>      <span class="hljs-attr">test:</span> <span class="hljs-string">curl</span> <span class="hljs-string">http://127.0.0.1:8080/healthz</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./data:/data</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;8080:8080&quot;</span><br></code></pre></td></tr></table></figure>
 
 <p>但是原镜像是没有curl这个命令的，我们需要加上，所以创建Dockerfile文件，写入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM finab/bark-server</span><br><span class="line">RUN apk --update --no-cache add curl</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">FROM finab/bark-server<br>RUN apk --update --no-cache add curl<br></code></pre></td></tr></table></figure>
 <p>然后启动即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d --build</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker-compose up -d --build<br></code></pre></td></tr></table></figure>
 
 <p>用<code>docker ps</code>查看：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CONTAINER ID   IMAGE               COMMAND         CREATED         STATUS                   PORTS                                       NAMES</span><br><span class="line">3dba0f99f5ea   finab/bark-server   &quot;bark-server&quot;   4 minutes ago   Up 4 minutes (healthy)   0.0.0.0:8080-&gt;8080/tcp, :::8080-&gt;8080/tcp   bark-server</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">CONTAINER ID   IMAGE               COMMAND         CREATED         STATUS                   PORTS                                       NAMES<br>3dba0f99f5ea   finab/bark-server   &quot;bark-server&quot;   4 minutes ago   Up 4 minutes (healthy)   0.0.0.0:8080-&gt;8080/tcp, :::8080-&gt;8080/tcp   bark-server<br></code></pre></td></tr></table></figure>
 
 <h2 id="打开防火墙"><a href="#打开防火墙" class="headerlink" title="打开防火墙"></a>打开防火墙</h2><p>如果你装了防火墙的话，不要忘记放开端口，否则不能外网访问：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --zone=public --add-port=8080/tcp</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">firewall-cmd --permanent --zone=public --add-port=8080/tcp<br>firewall-cmd --reload<br></code></pre></td></tr></table></figure>
 <p>iptables是另外的方法。</p>
 <h2 id="检查可用性"><a href="#检查可用性" class="headerlink" title="检查可用性"></a>检查可用性</h2><p>用 <code>safari</code> ，在网址一栏输入 <code>http://你的ip:8080/ping</code> 打开，看是否返回类似下面的信息：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;code&quot;</span><span class="punctuation">:</span><span class="number">200</span><span class="punctuation">,</span><span class="attr">&quot;message&quot;</span><span class="punctuation">:</span><span class="string">&quot;success&quot;</span><span class="punctuation">,</span><span class="attr">&quot;timestamp&quot;</span><span class="punctuation">:</span><span class="number">1652768076</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">200</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;success&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;timestamp&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1652768076</span><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="/2022/05/17/set-up-your-own-bark-server/1.jpg"></p>
+<p><img src="/2022/05/17/set-up-your-own-bark-server/1.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>或者输入 <code>http://你的ip:8080/healthz</code> ，看网页是否返回 <code>ok</code> 。</p>
-<p><img src="/2022/05/17/set-up-your-own-bark-server/2.jpg"></p>
+<p><img src="/2022/05/17/set-up-your-own-bark-server/2.jpg" srcset="/img/loading.gif" lazyload></p>
 <h2 id="添加nginx反代"><a href="#添加nginx反代" class="headerlink" title="添加nginx反代"></a>添加nginx反代</h2><p>用IP访问确实难看，换成域名访问还需要用nginx反代，这里准备一个域名，解析到你的服务器IP。<br>创建nginx配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/conf.d/bark.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/nginx/conf.d/bark.conf<br></code></pre></td></tr></table></figure>
 <p>填入一下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    listen [::]:80;</span><br><span class="line">    # Replace bark.app.dev with your real domain name.</span><br><span class="line">    server_name bark.app.dev;</span><br><span class="line"></span><br><span class="line">    return 301 https://$host$request_uri;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    listen [::]:443 ssl http2;</span><br><span class="line">    # Replace bark.app.dev with your real domain name.</span><br><span class="line">    server_name bark.app.dev;</span><br><span class="line"></span><br><span class="line">    # ssl_certificate /path/to/signed_cert_plus_intermediates;</span><br><span class="line">    # ssl_certificate_key /path/to/private_key;</span><br><span class="line">    ssl_session_timeout 1d;</span><br><span class="line">    ssl_session_cache shared:MozSSL:10m;  # about 40000 sessions</span><br><span class="line">    ssl_session_tickets off;</span><br><span class="line"></span><br><span class="line">    # modern configuration</span><br><span class="line">    ssl_protocols TLSv1.3;</span><br><span class="line">    ssl_prefer_server_ciphers off;</span><br><span class="line"></span><br><span class="line">    # HSTS (ngx_http_headers_module is required) (63072000 seconds)</span><br><span class="line">    add_header Strict-Transport-Security &quot;max-age=63072000&quot; always;</span><br><span class="line"></span><br><span class="line">    # OCSP stapling</span><br><span class="line">    ssl_stapling on;</span><br><span class="line">    ssl_stapling_verify on;</span><br><span class="line"></span><br><span class="line">    # verify chain of trust of OCSP response using Root CA and Intermediate certs</span><br><span class="line">    # ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates;</span><br><span class="line"></span><br><span class="line">    # replace with the IP address of your resolver</span><br><span class="line">    #resolver 127.0.0.1;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line"></span><br><span class="line">        log_not_found on;</span><br><span class="line">        # Replace http://192.168.1.123:8080 with the listening address of the bark server.</span><br><span class="line">        proxy_pass http://192.168.1.123:8080;</span><br><span class="line"></span><br><span class="line">        proxy_read_timeout 300;</span><br><span class="line">        proxy_connect_timeout 300;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line"></span><br><span class="line">        proxy_set_header Host              $host;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">        proxy_set_header X-Real-IP         $remote_addr;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs conf">server &#123;<br>    listen 80;<br>    listen [::]:80;<br>    # Replace bark.app.dev with your real domain name.<br>    server_name bark.app.dev;<br><br>    return 301 https://$host$request_uri;<br>&#125;<br><br>server &#123;<br>    listen 443 ssl http2;<br>    listen [::]:443 ssl http2;<br>    # Replace bark.app.dev with your real domain name.<br>    server_name bark.app.dev;<br><br>    # ssl_certificate /path/to/signed_cert_plus_intermediates;<br>    # ssl_certificate_key /path/to/private_key;<br>    ssl_session_timeout 1d;<br>    ssl_session_cache shared:MozSSL:10m;  # about 40000 sessions<br>    ssl_session_tickets off;<br><br>    # modern configuration<br>    ssl_protocols TLSv1.3;<br>    ssl_prefer_server_ciphers off;<br><br>    # HSTS (ngx_http_headers_module is required) (63072000 seconds)<br>    add_header Strict-Transport-Security &quot;max-age=63072000&quot; always;<br><br>    # OCSP stapling<br>    ssl_stapling on;<br>    ssl_stapling_verify on;<br><br>    # verify chain of trust of OCSP response using Root CA and Intermediate certs<br>    # ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates;<br><br>    # replace with the IP address of your resolver<br>    #resolver 127.0.0.1;<br><br>    location / &#123;<br><br>        log_not_found on;<br>        # Replace http://192.168.1.123:8080 with the listening address of the bark server.<br>        proxy_pass http://192.168.1.123:8080;<br><br>        proxy_read_timeout 300;<br>        proxy_connect_timeout 300;<br>        proxy_redirect off;<br><br>        proxy_set_header Host              $host;<br>        proxy_set_header X-Forwarded-Proto $scheme;<br>        proxy_set_header X-Real-IP         $remote_addr;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>用 <code>nginx -t</code> 验证一下是否有问题。</p>
 <h2 id="申请SSL证书"><a href="#申请SSL证书" class="headerlink" title="申请SSL证书"></a>申请SSL证书</h2><p>用<a target="_blank" rel="noopener" href="https://certbot.eff.org/">certbot</a>申请SSL证书，具体安装看官网👉<a target="_blank" rel="noopener" href="https://certbot.eff.org/">certbot</a></p>
 <p>我的是：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install certbot</span><br><span class="line">certbot --nginx</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum install certbot<br>certbot --nginx<br></code></pre></td></tr></table></figure>
 <p>按照指示来就好。</p>
 <h2 id="客户端使用"><a href="#客户端使用" class="headerlink" title="客户端使用"></a>客户端使用</h2><p>下载bark app，打开，点击右上角的 <code>+</code> 号，添加刚刚的域名或者ip</p>
-<p><img src="/2022/05/17/set-up-your-own-bark-server/4.jpg"></p>
+<p><img src="/2022/05/17/set-up-your-own-bark-server/4.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>域名格式： <code>https://你的域名</code> ，比如说 <code>https://api2.day.app</code> 。</p>
 <p>ip格式： <code>http://你的ip:你的端口</code> ，比如说 <code>https://123.45.67.89:8080</code> 。</p>
 <p>之后回到首页，点击 <code>注册设备</code> 获取你的 <code>Device Key</code></p>
-<p><img src="/2022/05/17/set-up-your-own-bark-server/3.png"></p>
+<p><img src="/2022/05/17/set-up-your-own-bark-server/3.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="获取key"><a href="#获取key" class="headerlink" title="获取key"></a>获取key</h2><p>打开bark，在界面点击☁云朵图案。</p>
-<p><img src="/2022/05/17/set-up-your-own-bark-server/server.jpg"></p>
+<p><img src="/2022/05/17/set-up-your-own-bark-server/server.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>然后点击要用的服务器，点击 <code>Copy address and key</code>。即可。</p>
-<p><img src="/2022/05/17/set-up-your-own-bark-server/key.jpg"></p>
+<p><img src="/2022/05/17/set-up-your-own-bark-server/key.jpg" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
 
     </div>
-
-    
-    
-    
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Rainbow
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://pawswrite.xyz/2022/05/17/set-up-your-own-bark-server/" title="部署自己的Bark服务端">https://pawswrite.xyz/2022/05/17/set-up-your-own-bark-server/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/VPS/">#VPS</a>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+    </div>
+  
 </div>
 
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/VPS/" rel="tag"># VPS</a>
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
-          </div>
+              
+  
 
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2022/05/17/Upload-Mastodon-Media-Files-to-Scaleway/" rel="prev" title="【个人笔记】将媒体文件同步到Scaleway存储桶（Docker部署长毛象）">
-      <i class="fa fa-chevron-left"></i> 【个人笔记】将媒体文件同步到Scaleway存储桶（Docker部署长毛象）
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/05/18/get-s3-storage-size-regularly-and-alert-by-bark/" rel="next" title="定时获取Scaleway的存储桶大小，并通过Bark每日推送到iPhone">
-      定时获取Scaleway的存储桶大小，并通过Bark每日推送到iPhone <i class="fa fa-chevron-right"></i>
-    </a></div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>部署自己的Bark服务端</div>
+      <div>https://pawswrite.xyz/2022/05/17/set-up-your-own-bark-server/</div>
     </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-  <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">
-            ------------- 本文结束 <i class="fa fa-heart-o"></i> 感谢您的阅读-------------
-     </div>
-    
-  </div>
-
-
-          </div>
-          
-    <div class="comments" id="gitalk-container"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rainbow</div>
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年5月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
   </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%8F%AF%E9%80%89%E3%80%91%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5"><span class="nav-number">1.1.</span> <span class="nav-text">【可选】健康检查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">2.</span> <span class="nav-text">打开防火墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E5%8F%AF%E7%94%A8%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">检查可用性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0nginx%E5%8F%8D%E4%BB%A3"><span class="nav-number">4.</span> <span class="nav-text">添加nginx反代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B3%E8%AF%B7SSL%E8%AF%81%E4%B9%A6"><span class="nav-number">5.</span> <span class="nav-text">申请SSL证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">客户端使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96key"><span class="nav-number">7.</span> <span class="nav-text">获取key</span></a></li></ol></div>
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/18/get-s3-storage-size-regularly-and-alert-by-bark/" title="定时获取Scaleway的存储桶大小，并通过Bark每日推送到iPhone">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">定时获取Scaleway的存储桶大小，并通过Bark每日推送到iPhone</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/17/Upload-Mastodon-Media-Files-to-Scaleway/" title="【个人笔记】将媒体文件同步到Scaleway存储桶（Docker部署长毛象）">
+                        <span class="hidden-mobile">【个人笔记】将媒体文件同步到Scaleway存储桶（Docker部署长毛象）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
       </div>
-      <!--/noindex-->
+    </div>
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Rainbow"
-      src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">Rainbow</p>
-  <div class="site-description" itemprop="description">Tech Lover</div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">67</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">40</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="http://nz.pawswrite.xyz/" title="探针 → http:&#x2F;&#x2F;nz.pawswrite.xyz" rel="noopener" target="_blank"><i class="fas fa-server fa-fw"></i>探针</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://boringbay.com/" title="无聊湾 → https:&#x2F;&#x2F;boringbay.com" rel="noopener" target="_blank"><i class="fa-solid fa-face-meh fa-fw"></i>无聊湾</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
 
 
 
-      </div>
+  </aside>
+
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">@rainbow</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">227k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
-</div>
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
   </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
-<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
-<script src="/js/algolia-search.js"></script>
-
-
-
-
-
-
-
-
-
+</div>
 
 
 
@@ -612,27 +483,256 @@
 
   
 
+
+
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
 
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '416e004749a692890792',
-      clientSecret: 'a51d95d68a7fddba31072393540e0e2c3b09d91f',
-      repo        : 'Gitalk',
-      owner       : 'tech-fever',
-      admin       : ['tech-fever'],
-      id          : '924bc5bb99e5477cf266d9d09fd700e3',
-        language: 'zh-CN',
-      distractionFreeMode: true
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
     });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
+  });
 </script>
 
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

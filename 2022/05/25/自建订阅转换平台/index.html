@@ -1,29 +1,22 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.1.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <meta name="google-site-verification" content="f4M613CNVfWg9fM_X3tG5jELt3D10Gk8E3R0ZUaMzd4">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"algolia":{"appID":"QVWTMTP22E","apiKey":"1a70640400cc23d9656c5fb60de60c0e","indexName":"dev_hexoBlog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="笔者的订阅转换链接：https:&#x2F;&#x2F;sub.pawswrite.xyz   订阅转换是说，把一份配置文件&#x2F;节点列表中的节点提取出来，配上一些好用的分流规则，适配Clash|ClashR|QuantumultX|ShadowRocket|Surge等等客户端。">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rainbow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="笔者的订阅转换链接：https:&#x2F;&#x2F;sub.pawswrite.xyz   订阅转换是说，把一份配置文件&#x2F;节点列表中的节点提取出来，配上一些好用的分流规则，适配Clash|ClashR|QuantumultX|ShadowRocket|Surge等等客户端。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自建订阅转换平台">
 <meta property="og:url" content="https://pawswrite.xyz/2022/05/25/%E8%87%AA%E5%BB%BA%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2%E5%B9%B3%E5%8F%B0/index.html">
@@ -38,257 +31,257 @@
 <meta property="article:author" content="Rainbow">
 <meta property="article:tag" content="VPS">
 <meta property="article:tag" content="Clash">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pawswrite.xyz/2022/05/25/%E8%87%AA%E5%BB%BA%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2%E5%B9%B3%E5%8F%B0/actions.PNG">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>自建订阅转换平台 - Rainbow</title>
 
-<link rel="canonical" href="https://pawswrite.xyz/2022/05/25/%E8%87%AA%E5%BB%BA%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2%E5%B9%B3%E5%8F%B0/">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
 
-  <title>自建订阅转换平台 | Rainbow</title>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pawswrite.xyz","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Rainbow" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
+<body>
+  
 
-  <div class="site-meta">
+  <header>
+    
 
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Rainbow</h1>
-      <span class="logo-line-after"><i></i></span>
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
     </a>
-      <p class="site-subtitle" itemprop="description">blog</p>
-  </div>
 
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-sitemap">
-
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
-
-  </li>
-        <li class="menu-item menu-item-commonweal">
-
-    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
 </nav>
 
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="自建订阅转换平台"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-25 12:05" pubdate>
+          2022年5月25日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          93 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container"></div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="algolia-results">
-  <div id="algolia-stats"></div>
-  <div id="algolia-hits"></div>
-  <div id="algolia-pagination" class="algolia-pagination"></div>
-</div>
+        
+      </div>
 
       
     </div>
   </div>
+</div>
 
 </div>
-    </header>
 
+  </header>
+
+  <main>
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-  <a href="https://github.com/tech-fever" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://pawswrite.xyz/2022/05/25/%E8%87%AA%E5%BB%BA%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2%E5%B9%B3%E5%8F%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Rainbow">
-      <meta itemprop="description" content="Tech Lover">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rainbow">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          自建订阅转换平台
-        </h1>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-05-25 12:05:39" itemprop="dateCreated datePublished" datetime="2022-05-25T12:05:39+08:00">2022-05-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-04 19:52:59" itemprop="dateModified" datetime="2022-08-04T19:52:59+08:00">2022-08-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" itemprop="url" rel="index"><span itemprop="name">科学上网</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>11k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-        <p>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">自建订阅转换平台</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>
     <strong><em><span style="color:#E53333;">笔者的订阅转换链接：<a href="https://sub.pawswrite.xyz" target="_blank">https://sub.pawswrite.xyz</a></span></em></strong>
 </p>
 
@@ -317,28 +310,28 @@
 </ol>
 <p><strong>开启CDN代理会更安全</strong></p>
 <h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p>使用<code>uname -a</code>看一下自己的服务器架构，如果是amd，直接使用官方镜像，如果是arm则需要自己构建镜像或者使用笔者构建的镜像：<code>docker push techfever/sub-web:latest</code></p>
-<h3 id="【amd架构】Docker运行"><a href="#【amd架构】Docker运行" class="headerlink" title="【amd架构】Docker运行"></a>【amd架构】Docker运行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 58080:80 --restart always --name subweb careywong/subweb:latest</span><br></pre></td></tr></table></figure>
+<h3 id="【amd架构】Docker运行"><a href="#【amd架构】Docker运行" class="headerlink" title="【amd架构】Docker运行"></a>【amd架构】Docker运行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d -p 58080:80 --restart always --name subweb careywong/subweb:latest<br></code></pre></td></tr></table></figure>
 
 <p>若需要对代码进行修改，你需要在本地构建镜像并运行。<br>注：每次修改代码，你都需要重新执行 <code>docker build</code> 来执行打包操作。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker build -t subweb-local:latest .</span><br><span class="line"></span><br><span class="line">docker run -d -p 58080:80 --restart always --name subweb subweb-local:latest</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker build -t subweb-local:latest .<br><br>docker run -d -p 58080:80 --restart always --name subweb subweb-local:latest<br></code></pre></td></tr></table></figure>
 <h3 id="【arm架构】利用GitHub-Actions自行build镜像并push到DockerHub"><a href="#【arm架构】利用GitHub-Actions自行build镜像并push到DockerHub" class="headerlink" title="【arm架构】利用GitHub Actions自行build镜像并push到DockerHub"></a>【arm架构】利用GitHub Actions自行build镜像并push到DockerHub</h3><p>因为笔者用的是<code>arm</code>架构的服务器，而作者的 <code>careywong/subweb:latest</code> 并不支持。因此可以自己编译镜像【推荐】。</p>
 <p><em>也可以用笔者的镜像：</em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 58080:80 --restart always --name subweb techfever/sub-web:latest</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">docker run -d -<span class="hljs-selector-tag">p</span> <span class="hljs-number">58080</span>:<span class="hljs-number">80</span> <span class="hljs-attr">--restart</span> always <span class="hljs-attr">--name</span> subweb techfever/sub-web:latest<br></code></pre></td></tr></table></figure>
 
 <p>下面讲解如何自行编译镜像：</p>
 <h3 id="自行编译镜像"><a href="#自行编译镜像" class="headerlink" title="自行编译镜像"></a>自行编译镜像</h3><h4 id="注册DockerHub"><a href="#注册DockerHub" class="headerlink" title="注册DockerHub"></a>注册DockerHub</h4><p>先注册<a target="_blank" rel="noopener" href="https://hub.docker.com/signup">DockerHub</a>，记住账号密码。</p>
-<h4 id="添加Secrets"><a href="#添加Secrets" class="headerlink" title="添加Secrets"></a>添加Secrets</h4><p>先登录自己的账号 <code>fork</code> 项目<a target="_blank" rel="noopener" href="https://github.com/CareyWang/sub-web">sub-web</a>，然后打开<code>Settings</code>，在<code>Secrets-Actions</code>下添加两个Secret，分别是 <code>DOCKER_USERNAME</code> 和 <code>DOCKER_PASSWORD</code>。请注意 <code>DOCKER_USERNAME</code> 需要<strong>全部小写</strong>。<br><img src="/2022/05/25/%E8%87%AA%E5%BB%BA%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2%E5%B9%B3%E5%8F%B0/actions.PNG"></p>
+<h4 id="添加Secrets"><a href="#添加Secrets" class="headerlink" title="添加Secrets"></a>添加Secrets</h4><p>先登录自己的账号 <code>fork</code> 项目<a target="_blank" rel="noopener" href="https://github.com/CareyWang/sub-web">sub-web</a>，然后打开<code>Settings</code>，在<code>Secrets-Actions</code>下添加两个Secret，分别是 <code>DOCKER_USERNAME</code> 和 <code>DOCKER_PASSWORD</code>。请注意 <code>DOCKER_USERNAME</code> 需要<strong>全部小写</strong>。<br><img src="/2022/05/25/%E8%87%AA%E5%BB%BA%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2%E5%B9%B3%E5%8F%B0/actions.PNG" srcset="/img/loading.gif" lazyload></p>
 <p>打开项目，点击<code>Actions</code>，选择<code>New workflow</code>，选择 <code>set up a workflow yourself</code> ，然后将下面的代码复制进去，你也可以选择复制<a target="_blank" rel="noopener" href="https://github.com/tech-fever/sub-web/blob/master/.github/workflows/docker-image.yml">我的yml文件</a>。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Docker</span> <span class="string">Image</span> <span class="string">CI</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span> [ <span class="string">master</span> ]</span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">Docker:</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Check</span> <span class="string">out</span> <span class="string">the</span> <span class="string">repo</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">        </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">docker/setup-qemu-action@v1</span></span><br><span class="line">      </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">docker/setup-buildx-action@v1</span></span><br><span class="line">      </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">docker/login-action@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">username:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.DOCKER_USERNAME</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">password:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.DOCKER_PASSWORD</span> <span class="string">&#125;&#125;</span></span><br><span class="line">      </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span> <span class="string">and</span> <span class="string">push</span> <span class="string">Docker</span> <span class="string">images</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">docker/build-push-action@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">context:</span> <span class="string">.</span></span><br><span class="line">          <span class="attr">platforms:</span> <span class="string">linux/amd64,linux/arm64</span></span><br><span class="line">          <span class="attr">push:</span> <span class="literal">true</span></span><br><span class="line">          <span class="attr">tags:</span> <span class="string">你的DockerHub用户名/sub-web:latest</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Docker</span> <span class="hljs-string">Image</span> <span class="hljs-string">CI</span><br><br><span class="hljs-attr">on:</span><br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span> [ <span class="hljs-string">master</span> ]<br><br><span class="hljs-attr">jobs:</span><br><br>  <span class="hljs-attr">Docker:</span><br><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br>    <br><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Check</span> <span class="hljs-string">out</span> <span class="hljs-string">the</span> <span class="hljs-string">repo</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span><br>        <br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">docker/setup-qemu-action@v1</span><br>      <br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">docker/setup-buildx-action@v1</span><br>      <br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">docker/login-action@v1</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">username:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.DOCKER_USERNAME</span> <span class="hljs-string">&#125;&#125;</span><br>          <span class="hljs-attr">password:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.DOCKER_PASSWORD</span> <span class="hljs-string">&#125;&#125;</span><br>      <br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Build</span> <span class="hljs-string">and</span> <span class="hljs-string">push</span> <span class="hljs-string">Docker</span> <span class="hljs-string">images</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">docker/build-push-action@v2</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">context:</span> <span class="hljs-string">.</span><br>          <span class="hljs-attr">platforms:</span> <span class="hljs-string">linux/amd64,linux/arm64</span><br>          <span class="hljs-attr">push:</span> <span class="hljs-literal">true</span><br>          <span class="hljs-attr">tags:</span> <span class="hljs-string">你的DockerHub用户名/sub-web:latest</span><br></code></pre></td></tr></table></figure>
 <p><strong>记得写入你的DockerHub用户名</strong></p>
 <p>保存以后，会自动运行actions（如果没有运行的话需要进入actions选择&#96;&#96;enable workflow&#96;），然后你的DockerHub就会出现新的镜像。</p>
 <h4 id="修改镜像"><a href="#修改镜像" class="headerlink" title="修改镜像"></a>修改镜像</h4><ol>
 <li>如果你是上一小节说的方法自行编译镜像，那么每次对镜像进行任何修改，都只需要将改变提交到GitHub，然后GitHub actions就会自动编译新的镜像并且推送到DockerHub，你只需要pull新镜像即可。</li>
-<li>如果你是使用别人的镜像，那么你需要先进入容器：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it subweb bash</span><br></pre></td></tr></table></figure>
+<li>如果你是使用别人的镜像，那么你需要先进入容器：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker <span class="hljs-built_in">exec</span> -it subweb bash<br></code></pre></td></tr></table></figure>
 之后在容器里进行修改。</li>
 </ol>
 <h4 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h4><p>运行自己的镜像：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 58080:80 --restart always --name subweb 你的dockerhub名字/sub-web:latest</span><br></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">docker run -d -p 58080<span class="hljs-function">:80</span> <span class="hljs-params">--restart</span> always <span class="hljs-params">--name</span> subweb 你的dockerhub名字<span class="hljs-string">/sub-web</span><span class="hljs-function">:latest</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="预览前端"><a href="#预览前端" class="headerlink" title="预览前端"></a>预览前端</h3><p>到目前为止，浏览器访问 http:&#x2F;&#x2F;服务器ip:58080&#x2F; 应该可以进行前端 sub-web 的预览了。</p>
 <p>如果需要用域名来访问，而不是ip:端口的形式来访问，那我们就需要反代前端，该内容在后面小节有提到。</p>
@@ -347,312 +340,190 @@
 <p>本节进行了修改以后，都需要删除原来的容器，并用修改后的镜像来运行。</p>
 </blockquote>
 <ul>
-<li>【推荐】如果你是通过 <code>GitHub Actions</code> 进行构建，那么直接修改以后push到GitHub，之后把Actions构建并推送到Docker Hub的最新镜像pull下来即可。  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker stop subweb &amp;&amp; docker <span class="built_in">rm</span> subweb</span><br><span class="line">docker rmi techfever/sub-web:latest &amp;&amp; docker pull techfever/sub-web:latest</span><br><span class="line">docker run -d -p 127.0.0.1:58080:80 --restart always --name subweb techfever/sub-web:latest</span><br></pre></td></tr></table></figure></li>
+<li>【推荐】如果你是通过 <code>GitHub Actions</code> 进行构建，那么直接修改以后push到GitHub，之后把Actions构建并推送到Docker Hub的最新镜像pull下来即可。  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker stop subweb &amp;&amp; docker <span class="hljs-built_in">rm</span> subweb<br>docker rmi techfever/sub-web:latest &amp;&amp; docker pull techfever/sub-web:latest<br>docker run -d -p 127.0.0.1:58080:80 --restart always --name subweb techfever/sub-web:latest<br></code></pre></td></tr></table></figure></li>
 <li>如果你是在本地构建镜像并运行。每次修改代码，你都需要重新执行 <code>docker build</code> 来执行打包操作。</li>
 </ul>
 <h4 id="修改默认后端地址"><a href="#修改默认后端地址" class="headerlink" title="修改默认后端地址"></a>修改默认后端地址</h4><p>如果你是使用自己构建Docker镜像的方式，首先打开<code>sub-web/.env</code>文件修改下面这项，把<code>https://api.wcc.best</code>改成你自己的后端地址（后面会配置，比如笔者的是<a href="https://suc.pawswrite.xyz）：">https://suc.pawswrite.xyz）：</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># API 后端</span><br><span class="line">VUE_APP_SUBCONVERTER_DEFAULT_BACKEND = &quot;https://api.wcc.best&quot;</span><br><span class="line"></span><br><span class="line"># 文本托管后端</span><br><span class="line">VUE_APP_CONFIG_UPLOAD_BACKEND = &quot;https://api.wcc.best&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># API 后端</span><br><span class="hljs-attr">VUE_APP_SUBCONVERTER_DEFAULT_BACKEND</span> = <span class="hljs-string">&quot;https://api.wcc.best&quot;</span><br><br><span class="hljs-comment"># 文本托管后端</span><br><span class="hljs-attr">VUE_APP_CONFIG_UPLOAD_BACKEND</span> = <span class="hljs-string">&quot;https://api.wcc.best&quot;</span><br></code></pre></td></tr></table></figure>
 <h4 id="增加远程配置【可选】"><a href="#增加远程配置【可选】" class="headerlink" title="增加远程配置【可选】"></a>增加远程配置【可选】</h4><p>找到 <code>sub-web/src/views/Subconverter.vue</code> 文件，找到 259 行 <code>remoteConfig: [</code>（写博客的时候是这行），敲下回车，插入下面内容。有不清楚的就参照我的<a target="_blank" rel="noopener" href="https://github.com/tech-fever/sub-web/blob/master/src/views/Subconverter.vue">Subconverter.vue</a>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">            label: <span class="string">&quot;ACL4SSR&quot;</span>,</span><br><span class="line">            options: [</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online 默认版 分组比较全 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online_AdblockPlus 更多去广告 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_AdblockPlus.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online_NoAuto 无自动测速 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoAuto.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online_NoReject 无广告拦截规则 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoReject.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online_Mini 精简版 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online_Mini_AdblockPlus.ini 精简版 更多去广告 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online_Mini_NoAuto.ini 精简版 不带自动测速 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_NoAuto.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online_Mini_Fallback.ini 精简版 带故障转移 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_Fallback.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online_Mini_MultiMode.ini 精简版 自动测速、故障转移、负载均衡 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiMode.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online_Full 全分组 重度用户使用 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online_Full_NoAuto.ini 全分组 无自动测速 重度用户使用 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online_Full_AdblockPlus 全分组 重度用户使用 更多去广告 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_AdblockPlus.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Online_Full_Netflix 全分组 重度用户使用 奈飞全量 (与Github同步)&quot;</span>,</span><br><span class="line">                value:</span><br><span class="line">                  <span class="string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_Netflix.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR 本地 默认版 分组比较全&quot;</span>,</span><br><span class="line">                value: <span class="string">&quot;config/ACL4SSR.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Mini 本地 精简版&quot;</span>,</span><br><span class="line">                value: <span class="string">&quot;config/ACL4SSR_Mini.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Mini_NoAuto.ini 本地 精简版+无自动测速&quot;</span>,</span><br><span class="line">                value: <span class="string">&quot;config/ACL4SSR_Mini_NoAuto.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_Mini_Fallback.ini 本地 精简版+fallback&quot;</span>,</span><br><span class="line">                value: <span class="string">&quot;config/ACL4SSR_Mini_Fallback.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_BackCN 本地 回国&quot;</span>,</span><br><span class="line">                value: <span class="string">&quot;config/ACL4SSR_BackCN.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_NoApple 本地 无苹果分流&quot;</span>,</span><br><span class="line">                value: <span class="string">&quot;config/ACL4SSR_NoApple.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_NoAuto 本地 无自动测速 &quot;</span>,</span><br><span class="line">                value: <span class="string">&quot;config/ACL4SSR_NoAuto.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_NoAuto_NoApple 本地 无自动测速&amp;无苹果分流&quot;</span>,</span><br><span class="line">                value: <span class="string">&quot;config/ACL4SSR_NoAuto_NoApple.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_NoMicrosoft 本地 无微软分流&quot;</span>,</span><br><span class="line">                value: <span class="string">&quot;config/ACL4SSR_NoMicrosoft.ini&quot;</span></span><br><span class="line">              &#125;,</span><br><span class="line">              &#123;</span><br><span class="line">                label: <span class="string">&quot;ACL4SSR_WithGFW 本地 GFW列表&quot;</span>,</span><br><span class="line">                value: <span class="string">&quot;config/ACL4SSR_WithGFW.ini&quot;</span></span><br><span class="line">              &#125;</span><br><span class="line">            ]</span><br><span class="line">          &#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><code class="hljs bash">&#123;<br>            label: <span class="hljs-string">&quot;ACL4SSR&quot;</span>,<br>            options: [<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online 默认版 分组比较全 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online_AdblockPlus 更多去广告 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_AdblockPlus.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online_NoAuto 无自动测速 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoAuto.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online_NoReject 无广告拦截规则 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoReject.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online_Mini 精简版 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online_Mini_AdblockPlus.ini 精简版 更多去广告 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online_Mini_NoAuto.ini 精简版 不带自动测速 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_NoAuto.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online_Mini_Fallback.ini 精简版 带故障转移 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_Fallback.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online_Mini_MultiMode.ini 精简版 自动测速、故障转移、负载均衡 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiMode.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online_Full 全分组 重度用户使用 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online_Full_NoAuto.ini 全分组 无自动测速 重度用户使用 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online_Full_AdblockPlus 全分组 重度用户使用 更多去广告 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_AdblockPlus.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Online_Full_Netflix 全分组 重度用户使用 奈飞全量 (与Github同步)&quot;</span>,<br>                value:<br>                  <span class="hljs-string">&quot;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_Netflix.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR 本地 默认版 分组比较全&quot;</span>,<br>                value: <span class="hljs-string">&quot;config/ACL4SSR.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Mini 本地 精简版&quot;</span>,<br>                value: <span class="hljs-string">&quot;config/ACL4SSR_Mini.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Mini_NoAuto.ini 本地 精简版+无自动测速&quot;</span>,<br>                value: <span class="hljs-string">&quot;config/ACL4SSR_Mini_NoAuto.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_Mini_Fallback.ini 本地 精简版+fallback&quot;</span>,<br>                value: <span class="hljs-string">&quot;config/ACL4SSR_Mini_Fallback.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_BackCN 本地 回国&quot;</span>,<br>                value: <span class="hljs-string">&quot;config/ACL4SSR_BackCN.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_NoApple 本地 无苹果分流&quot;</span>,<br>                value: <span class="hljs-string">&quot;config/ACL4SSR_NoApple.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_NoAuto 本地 无自动测速 &quot;</span>,<br>                value: <span class="hljs-string">&quot;config/ACL4SSR_NoAuto.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_NoAuto_NoApple 本地 无自动测速&amp;无苹果分流&quot;</span>,<br>                value: <span class="hljs-string">&quot;config/ACL4SSR_NoAuto_NoApple.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_NoMicrosoft 本地 无微软分流&quot;</span>,<br>                value: <span class="hljs-string">&quot;config/ACL4SSR_NoMicrosoft.ini&quot;</span><br>              &#125;,<br>              &#123;<br>                label: <span class="hljs-string">&quot;ACL4SSR_WithGFW 本地 GFW列表&quot;</span>,<br>                value: <span class="hljs-string">&quot;config/ACL4SSR_WithGFW.ini&quot;</span><br>              &#125;<br>            ]<br>          &#125;,<br></code></pre></td></tr></table></figure>
 
 <h3 id="nginx反代前端"><a href="#nginx反代前端" class="headerlink" title="nginx反代前端"></a>nginx反代前端</h3><p>为了之后再用nginx进行反代，可以停止之前的容器，再重新启动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker stop subweb &amp;&amp; docker <span class="built_in">rm</span> subweb</span><br><span class="line">docker run -d -p 127.0.0.1:58080:80 --restart always --name subweb techfever/sub-web:latest</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker stop subweb &amp;&amp; docker <span class="hljs-built_in">rm</span> subweb<br>docker run -d -p 127.0.0.1:58080:80 --restart always --name subweb techfever/sub-web:latest<br></code></pre></td></tr></table></figure>
 
 <p>创建新的nginx配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/conf.d/subconverter.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/nginx/conf.d/subconverter.conf<br></code></pre></td></tr></table></figure>
 <p>输入下列配置，将其中 <code>sub.pawswrite.xyz</code> 部分改成你的域名：：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">server</span> &#123;</span><br><span class="line">    <span class="string">listen</span> <span class="number">80</span><span class="string">;</span></span><br><span class="line">    <span class="string">listen</span> [<span class="string">::</span>]<span class="string">:80;</span></span><br><span class="line">    <span class="string">server_name</span> <span class="string">sub.pawswrite.xyz;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">return</span> <span class="number">301</span> <span class="string">https://$host$request_uri;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">server</span> &#123;</span><br><span class="line">    <span class="string">listen</span> <span class="number">443</span> <span class="string">ssl</span> <span class="string">http2;</span></span><br><span class="line">    <span class="string">listen</span> [<span class="string">::</span>]<span class="string">:443</span> <span class="string">ssl</span> <span class="string">http2;</span></span><br><span class="line">    <span class="comment"># Replace bark.app.dev with your real domain name.</span></span><br><span class="line">    <span class="string">server_name</span> <span class="string">sub.pawswrite.xyz;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ssl_certificate /path/to/signed_cert_plus_intermediates;</span></span><br><span class="line">    <span class="comment"># ssl_certificate_key /path/to/private_key;</span></span><br><span class="line">    <span class="string">ssl_session_timeout</span> <span class="string">1d;</span></span><br><span class="line">    <span class="string">ssl_session_cache</span> <span class="string">shared:MozSSL:10m;</span>  <span class="comment"># about 40000 sessions</span></span><br><span class="line">    <span class="string">ssl_session_tickets</span> <span class="string">off;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># modern configuration</span></span><br><span class="line">    <span class="string">ssl_protocols</span> <span class="string">TLSv1.3;</span></span><br><span class="line">    <span class="string">ssl_prefer_server_ciphers</span> <span class="string">off;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># HSTS (ngx_http_headers_module is required) (63072000 seconds)</span></span><br><span class="line">    <span class="string">add_header</span> <span class="string">Strict-Transport-Security</span> <span class="string">&quot;max-age=63072000&quot;</span> <span class="string">always;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># OCSP stapling</span></span><br><span class="line">    <span class="string">ssl_stapling</span> <span class="string">on;</span></span><br><span class="line">    <span class="string">ssl_stapling_verify</span> <span class="string">on;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># verify chain of trust of OCSP response using Root CA and Intermediate certs</span></span><br><span class="line">    <span class="comment"># ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># replace with the IP address of your resolver</span></span><br><span class="line">    <span class="comment">#resolver 127.0.0.1;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">location</span> <span class="string">/</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="string">log_not_found</span> <span class="string">on;</span></span><br><span class="line">        <span class="string">proxy_pass</span> <span class="string">http://127.0.0.1:58080;</span></span><br><span class="line"></span><br><span class="line">        <span class="string">proxy_read_timeout</span> <span class="number">300</span><span class="string">;</span></span><br><span class="line">        <span class="string">proxy_connect_timeout</span> <span class="number">300</span><span class="string">;</span></span><br><span class="line">        <span class="string">proxy_redirect</span> <span class="string">off;</span></span><br><span class="line"></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">Host</span>              <span class="string">$host;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Forwarded-Proto</span> <span class="string">$scheme;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Real-IP</span>         <span class="string">$remote_addr;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">server</span> &#123;<br>    <span class="hljs-string">listen</span> <span class="hljs-number">80</span><span class="hljs-string">;</span><br>    <span class="hljs-string">listen</span> [<span class="hljs-string">::</span>]<span class="hljs-string">:80;</span><br>    <span class="hljs-string">server_name</span> <span class="hljs-string">sub.pawswrite.xyz;</span><br><br>    <span class="hljs-string">return</span> <span class="hljs-number">301</span> <span class="hljs-string">https://$host$request_uri;</span><br>&#125;<br><br><span class="hljs-string">server</span> &#123;<br>    <span class="hljs-string">listen</span> <span class="hljs-number">443</span> <span class="hljs-string">ssl</span> <span class="hljs-string">http2;</span><br>    <span class="hljs-string">listen</span> [<span class="hljs-string">::</span>]<span class="hljs-string">:443</span> <span class="hljs-string">ssl</span> <span class="hljs-string">http2;</span><br>    <span class="hljs-comment"># Replace bark.app.dev with your real domain name.</span><br>    <span class="hljs-string">server_name</span> <span class="hljs-string">sub.pawswrite.xyz;</span><br><br>    <span class="hljs-comment"># ssl_certificate /path/to/signed_cert_plus_intermediates;</span><br>    <span class="hljs-comment"># ssl_certificate_key /path/to/private_key;</span><br>    <span class="hljs-string">ssl_session_timeout</span> <span class="hljs-string">1d;</span><br>    <span class="hljs-string">ssl_session_cache</span> <span class="hljs-string">shared:MozSSL:10m;</span>  <span class="hljs-comment"># about 40000 sessions</span><br>    <span class="hljs-string">ssl_session_tickets</span> <span class="hljs-string">off;</span><br><br>    <span class="hljs-comment"># modern configuration</span><br>    <span class="hljs-string">ssl_protocols</span> <span class="hljs-string">TLSv1.3;</span><br>    <span class="hljs-string">ssl_prefer_server_ciphers</span> <span class="hljs-string">off;</span><br><br>    <span class="hljs-comment"># HSTS (ngx_http_headers_module is required) (63072000 seconds)</span><br>    <span class="hljs-string">add_header</span> <span class="hljs-string">Strict-Transport-Security</span> <span class="hljs-string">&quot;max-age=63072000&quot;</span> <span class="hljs-string">always;</span><br><br>    <span class="hljs-comment"># OCSP stapling</span><br>    <span class="hljs-string">ssl_stapling</span> <span class="hljs-string">on;</span><br>    <span class="hljs-string">ssl_stapling_verify</span> <span class="hljs-string">on;</span><br><br>    <span class="hljs-comment"># verify chain of trust of OCSP response using Root CA and Intermediate certs</span><br>    <span class="hljs-comment"># ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates;</span><br><br>    <span class="hljs-comment"># replace with the IP address of your resolver</span><br>    <span class="hljs-comment">#resolver 127.0.0.1;</span><br><br>    <span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br><br>        <span class="hljs-string">log_not_found</span> <span class="hljs-string">on;</span><br>        <span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://127.0.0.1:58080;</span><br><br>        <span class="hljs-string">proxy_read_timeout</span> <span class="hljs-number">300</span><span class="hljs-string">;</span><br>        <span class="hljs-string">proxy_connect_timeout</span> <span class="hljs-number">300</span><span class="hljs-string">;</span><br>        <span class="hljs-string">proxy_redirect</span> <span class="hljs-string">off;</span><br><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">Host</span>              <span class="hljs-string">$host;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">X-Forwarded-Proto</span> <span class="hljs-string">$scheme;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">X-Real-IP</span>         <span class="hljs-string">$remote_addr;</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>之后就可以用域名来访问前端面板了。</p>
 <h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>先在GitHub上找到最新的<a target="_blank" rel="noopener" href="https://github.com/tindy2013/subconverter/releases">后端发布版本</a>，选择适配你服务器架构的压缩文件，如果不知道你服务器的架构，采用命令 <code>uname -m</code> 来查看，比如笔者就是 <code>aarch64</code> 。然后复制你对应的压缩文件链接：</p>
-<p><img src="/2022/05/25/%E8%87%AA%E5%BB%BA%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2%E5%B9%B3%E5%8F%B0/url.PNG"></p>
+<p><img src="/2022/05/25/%E8%87%AA%E5%BB%BA%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2%E5%B9%B3%E5%8F%B0/url.PNG" srcset="/img/loading.gif" lazyload></p>
 <p>在服务器上下载并解压后端程序：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line">wget https://github.com/tindy2013/subconverter/releases/download/v0.7.2/subconverter_aarch64.tar.gz</span><br><span class="line">tar -zxvf subconverter_aarch64.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /root<br>wget https://github.com/tindy2013/subconverter/releases/download/v0.7.2/subconverter_aarch64.tar.gz<br>tar -zxvf subconverter_aarch64.tar.gz<br></code></pre></td></tr></table></figure>
 <h3 id="修改配置文件参数"><a href="#修改配置文件参数" class="headerlink" title="修改配置文件参数"></a>修改配置文件参数</h3><p>现在我们需要修改后端配置文件中的一些参数。</p>
 <p>复制一份配置文件到本地：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span>  /root/subconverter/pref.example.ini /root/subconverter/pref.ini</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span>  /root/subconverter/pref.example.ini /root/subconverter/pref.ini<br></code></pre></td></tr></table></figure>
 
 <p>找到如下参数进行修改：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">api_access_token</span>=<span class="number">123123</span>dfsdsdfsdfsdf            <span class="comment">#随意设置自己知道就行</span></span><br><span class="line"><span class="attr">managed_config_prefix</span>=https://suc.v2rayssr.com  <span class="comment">#设置成我们刚刚解析的后端域名</span></span><br><span class="line"><span class="attr">listen</span>=<span class="number">127.0</span>.<span class="number">0.1</span>                                <span class="comment">#这里改成 127.0.0.1 进行反代</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">api_access_token</span>=<span class="hljs-number">123123</span>dfsdsdfsdfsdf            <span class="hljs-comment">#随意设置自己知道就行</span><br><span class="hljs-attr">managed_config_prefix</span>=https://suc.v2rayssr.com  <span class="hljs-comment">#设置成我们刚刚解析的后端域名</span><br><span class="hljs-attr">listen</span>=<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>                                <span class="hljs-comment">#这里改成 127.0.0.1 进行反代</span><br></code></pre></td></tr></table></figure>
 <p>创建服务进程并启动<br>接下来我们需要创建一个服务，让VPS每次重启或是开机自动运行后端程序</p>
 <p>找到VPS目录 &#x2F;etc&#x2F;systemd&#x2F;system，创建一个名为 sub.service 的文件</p>
 <p>打开文件，贴入以下内容，保存。</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=A API For Subscription Convert</span><br><span class="line"><span class="attr">After</span>=network.target</span><br><span class="line"> </span><br><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">Type</span>=simple</span><br><span class="line"><span class="attr">ExecStart</span>=/root/subconverter/subconverter</span><br><span class="line"><span class="attr">WorkingDirectory</span>=/root/subconverter</span><br><span class="line"><span class="attr">Restart</span>=always</span><br><span class="line"><span class="attr">RestartSec</span>=<span class="number">10</span></span><br><span class="line"> </span><br><span class="line"><span class="section">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=multi-user.target</span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span><br><span class="hljs-attr">Description</span>=A API For Subscription Convert<br><span class="hljs-attr">After</span>=network.target<br> <br><span class="hljs-section">[Service]</span><br><span class="hljs-attr">Type</span>=simple<br><span class="hljs-attr">ExecStart</span>=/root/subconverter/subconverter<br><span class="hljs-attr">WorkingDirectory</span>=/root/subconverter<br><span class="hljs-attr">Restart</span>=always<br><span class="hljs-attr">RestartSec</span>=<span class="hljs-number">10</span><br> <br><span class="hljs-section">[Install]</span><br><span class="hljs-attr">WantedBy</span>=multi-user.target<br></code></pre></td></tr></table></figure>
 <p>检查运行状态以及设置开机自启</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl start sub</span><br><span class="line">systemctl <span class="built_in">enable</span> sub</span><br><span class="line">systemctl status sub</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl daemon-reload<br>systemctl start sub<br>systemctl <span class="hljs-built_in">enable</span> sub<br>systemctl status sub<br></code></pre></td></tr></table></figure>
 <p>到这里，后端也就搭建完毕了，我们现在可以在浏览器里面访问我们的后端了 <a target="_blank" rel="noopener" href="https://suc.pawswrite.xyz/">https://suc.pawswrite.xyz</a> （正常的话，会返回下面的图例）</p>
-<p><img src="/2022/05/25/%E8%87%AA%E5%BB%BA%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2%E5%B9%B3%E5%8F%B0/suc.PNG"></p>
+<p><img src="/2022/05/25/%E8%87%AA%E5%BB%BA%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2%E5%B9%B3%E5%8F%B0/suc.PNG" srcset="/img/loading.gif" lazyload></p>
 <h3 id="nginx反代后端"><a href="#nginx反代后端" class="headerlink" title="nginx反代后端"></a>nginx反代后端</h3><p>创建新的nginx配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/conf.d/subconverter2.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/nginx/conf.d/subconverter2.conf<br></code></pre></td></tr></table></figure>
 <p>输入下列配置，将其中 <code>suc.pawswrite.xyz</code> 部分改成你的域名：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">server</span> &#123;</span><br><span class="line">    <span class="string">listen</span> <span class="number">80</span><span class="string">;</span></span><br><span class="line">    <span class="string">listen</span> [<span class="string">::</span>]<span class="string">:80;</span></span><br><span class="line">    <span class="string">server_name</span> <span class="string">suc.pawswrite.xyz;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">return</span> <span class="number">301</span> <span class="string">https://$host$request_uri;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">server</span> &#123;</span><br><span class="line">    <span class="string">listen</span> <span class="number">443</span> <span class="string">ssl</span> <span class="string">http2;</span></span><br><span class="line">    <span class="string">listen</span> [<span class="string">::</span>]<span class="string">:443</span> <span class="string">ssl</span> <span class="string">http2;</span></span><br><span class="line">    <span class="comment"># Replace bark.app.dev with your real domain name.</span></span><br><span class="line">    <span class="string">server_name</span> <span class="string">suc.pawswrite.xyz;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ssl_certificate /path/to/signed_cert_plus_intermediates;</span></span><br><span class="line">    <span class="comment"># ssl_certificate_key /path/to/private_key;</span></span><br><span class="line">    <span class="string">ssl_session_timeout</span> <span class="string">1d;</span></span><br><span class="line">    <span class="string">ssl_session_cache</span> <span class="string">shared:MozSSL:10m;</span>  <span class="comment"># about 40000 sessions</span></span><br><span class="line">    <span class="string">ssl_session_tickets</span> <span class="string">off;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># modern configuration</span></span><br><span class="line">    <span class="string">ssl_protocols</span> <span class="string">TLSv1.3;</span></span><br><span class="line">    <span class="string">ssl_prefer_server_ciphers</span> <span class="string">off;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># HSTS (ngx_http_headers_module is required) (63072000 seconds)</span></span><br><span class="line">    <span class="string">add_header</span> <span class="string">Strict-Transport-Security</span> <span class="string">&quot;max-age=63072000&quot;</span> <span class="string">always;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># OCSP stapling</span></span><br><span class="line">    <span class="string">ssl_stapling</span> <span class="string">on;</span></span><br><span class="line">    <span class="string">ssl_stapling_verify</span> <span class="string">on;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># verify chain of trust of OCSP response using Root CA and Intermediate certs</span></span><br><span class="line">    <span class="comment"># ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># replace with the IP address of your resolver</span></span><br><span class="line">    <span class="comment">#resolver 127.0.0.1;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">location</span> <span class="string">/</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="string">log_not_found</span> <span class="string">on;</span></span><br><span class="line">        <span class="string">proxy_pass</span> <span class="string">http://127.0.0.1:58080;</span></span><br><span class="line"></span><br><span class="line">        <span class="string">proxy_read_timeout</span> <span class="number">300</span><span class="string">;</span></span><br><span class="line">        <span class="string">proxy_connect_timeout</span> <span class="number">300</span><span class="string">;</span></span><br><span class="line">        <span class="string">proxy_redirect</span> <span class="string">off;</span></span><br><span class="line"></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">Host</span>              <span class="string">$host;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Forwarded-Proto</span> <span class="string">$scheme;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Real-IP</span>         <span class="string">$remote_addr;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">server</span> &#123;<br>    <span class="hljs-string">listen</span> <span class="hljs-number">80</span><span class="hljs-string">;</span><br>    <span class="hljs-string">listen</span> [<span class="hljs-string">::</span>]<span class="hljs-string">:80;</span><br>    <span class="hljs-string">server_name</span> <span class="hljs-string">suc.pawswrite.xyz;</span><br><br>    <span class="hljs-string">return</span> <span class="hljs-number">301</span> <span class="hljs-string">https://$host$request_uri;</span><br>&#125;<br><br><span class="hljs-string">server</span> &#123;<br>    <span class="hljs-string">listen</span> <span class="hljs-number">443</span> <span class="hljs-string">ssl</span> <span class="hljs-string">http2;</span><br>    <span class="hljs-string">listen</span> [<span class="hljs-string">::</span>]<span class="hljs-string">:443</span> <span class="hljs-string">ssl</span> <span class="hljs-string">http2;</span><br>    <span class="hljs-comment"># Replace bark.app.dev with your real domain name.</span><br>    <span class="hljs-string">server_name</span> <span class="hljs-string">suc.pawswrite.xyz;</span><br><br>    <span class="hljs-comment"># ssl_certificate /path/to/signed_cert_plus_intermediates;</span><br>    <span class="hljs-comment"># ssl_certificate_key /path/to/private_key;</span><br>    <span class="hljs-string">ssl_session_timeout</span> <span class="hljs-string">1d;</span><br>    <span class="hljs-string">ssl_session_cache</span> <span class="hljs-string">shared:MozSSL:10m;</span>  <span class="hljs-comment"># about 40000 sessions</span><br>    <span class="hljs-string">ssl_session_tickets</span> <span class="hljs-string">off;</span><br><br>    <span class="hljs-comment"># modern configuration</span><br>    <span class="hljs-string">ssl_protocols</span> <span class="hljs-string">TLSv1.3;</span><br>    <span class="hljs-string">ssl_prefer_server_ciphers</span> <span class="hljs-string">off;</span><br><br>    <span class="hljs-comment"># HSTS (ngx_http_headers_module is required) (63072000 seconds)</span><br>    <span class="hljs-string">add_header</span> <span class="hljs-string">Strict-Transport-Security</span> <span class="hljs-string">&quot;max-age=63072000&quot;</span> <span class="hljs-string">always;</span><br><br>    <span class="hljs-comment"># OCSP stapling</span><br>    <span class="hljs-string">ssl_stapling</span> <span class="hljs-string">on;</span><br>    <span class="hljs-string">ssl_stapling_verify</span> <span class="hljs-string">on;</span><br><br>    <span class="hljs-comment"># verify chain of trust of OCSP response using Root CA and Intermediate certs</span><br>    <span class="hljs-comment"># ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates;</span><br><br>    <span class="hljs-comment"># replace with the IP address of your resolver</span><br>    <span class="hljs-comment">#resolver 127.0.0.1;</span><br><br>    <span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br><br>        <span class="hljs-string">log_not_found</span> <span class="hljs-string">on;</span><br>        <span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://127.0.0.1:58080;</span><br><br>        <span class="hljs-string">proxy_read_timeout</span> <span class="hljs-number">300</span><span class="hljs-string">;</span><br>        <span class="hljs-string">proxy_connect_timeout</span> <span class="hljs-number">300</span><span class="hljs-string">;</span><br>        <span class="hljs-string">proxy_redirect</span> <span class="hljs-string">off;</span><br><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">Host</span>              <span class="hljs-string">$host;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">X-Forwarded-Proto</span> <span class="hljs-string">$scheme;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">X-Real-IP</span>         <span class="hljs-string">$remote_addr;</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h2 id="安装cerbot申请证书"><a href="#安装cerbot申请证书" class="headerlink" title="安装cerbot申请证书"></a>安装cerbot申请证书</h2><p>安装certbot的步骤参照：<a target="_blank" rel="noopener" href="https://certbot.eff.org/">https://certbot.eff.org</a></p>
 <p>申请证书使用命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certbot --nginx</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">certbot --nginx<br></code></pre></td></tr></table></figure>
 <p>按照步骤来即可</p>
 
-    </div>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
 
+<span class="category-chains">
+  
+  
     
-    
-    
+      <span class="category-chain">
         
+  <a href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" class="category-chain-item">科学上网</a>
+  
+  
 
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Rainbow
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://pawswrite.xyz/2022/05/25/%E8%87%AA%E5%BB%BA%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2%E5%B9%B3%E5%8F%B0/" title="自建订阅转换平台">https://pawswrite.xyz/2022/05/25/自建订阅转换平台/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/VPS/">#VPS</a>
+      
+        <a href="/tags/Clash/">#Clash</a>
+      
+    </div>
+  
 </div>
 
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/VPS/" rel="tag"># VPS</a>
-              <a href="/tags/Clash/" rel="tag"># Clash</a>
-          </div>
+              
+  
 
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2022/05/20/ip-check/" rel="prev" title="多出口ip检测">
-      <i class="fa fa-chevron-left"></i> 多出口ip检测
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/05/29/permanent-alias-Linux/" rel="next" title="permanent alias Linux">
-      permanent alias Linux <i class="fa fa-chevron-right"></i>
-    </a></div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>自建订阅转换平台</div>
+      <div>https://pawswrite.xyz/2022/05/25/自建订阅转换平台/</div>
     </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-  <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">
-            ------------- 本文结束 <i class="fa fa-heart-o"></i> 感谢您的阅读-------------
-     </div>
-    
-  </div>
-
-
-          </div>
-          
-    <div class="comments" id="gitalk-container"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rainbow</div>
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年5月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
   </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E9%9C%80%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">前期需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80"><span class="nav-number">2.</span> <span class="nav-text">项目地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">域名解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF"><span class="nav-number">4.</span> <span class="nav-text">前端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90amd%E6%9E%B6%E6%9E%84%E3%80%91Docker%E8%BF%90%E8%A1%8C"><span class="nav-number">4.1.</span> <span class="nav-text">【amd架构】Docker运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90arm%E6%9E%B6%E6%9E%84%E3%80%91%E5%88%A9%E7%94%A8GitHub-Actions%E8%87%AA%E8%A1%8Cbuild%E9%95%9C%E5%83%8F%E5%B9%B6push%E5%88%B0DockerHub"><span class="nav-number">4.2.</span> <span class="nav-text">【arm架构】利用GitHub Actions自行build镜像并push到DockerHub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E8%A1%8C%E7%BC%96%E8%AF%91%E9%95%9C%E5%83%8F"><span class="nav-number">4.3.</span> <span class="nav-text">自行编译镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E5%86%8CDockerHub"><span class="nav-number">4.3.1.</span> <span class="nav-text">注册DockerHub</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0Secrets"><span class="nav-number">4.3.2.</span> <span class="nav-text">添加Secrets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%95%9C%E5%83%8F"><span class="nav-number">4.3.3.</span> <span class="nav-text">修改镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E9%95%9C%E5%83%8F"><span class="nav-number">4.3.4.</span> <span class="nav-text">运行镜像</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E8%A7%88%E5%89%8D%E7%AB%AF"><span class="nav-number">4.4.</span> <span class="nav-text">预览前端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%BF%AE%E6%94%B9"><span class="nav-number">4.5.</span> <span class="nav-text">前端修改</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E5%90%8E%E7%AB%AF%E5%9C%B0%E5%9D%80"><span class="nav-number">4.5.1.</span> <span class="nav-text">修改默认后端地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E8%BF%9C%E7%A8%8B%E9%85%8D%E7%BD%AE%E3%80%90%E5%8F%AF%E9%80%89%E3%80%91"><span class="nav-number">4.5.2.</span> <span class="nav-text">增加远程配置【可选】</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx%E5%8F%8D%E4%BB%A3%E5%89%8D%E7%AB%AF"><span class="nav-number">4.6.</span> <span class="nav-text">nginx反代前端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF"><span class="nav-number">5.</span> <span class="nav-text">后端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">5.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8F%82%E6%95%B0"><span class="nav-number">5.2.</span> <span class="nav-text">修改配置文件参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx%E5%8F%8D%E4%BB%A3%E5%90%8E%E7%AB%AF"><span class="nav-number">5.3.</span> <span class="nav-text">nginx反代后端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85cerbot%E7%94%B3%E8%AF%B7%E8%AF%81%E4%B9%A6"><span class="nav-number">6.</span> <span class="nav-text">安装cerbot申请证书</span></a></li></ol></div>
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/29/permanent-alias-Linux/" title="permanent alias Linux">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">permanent alias Linux</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/20/ip-check/" title="多出口ip检测">
+                        <span class="hidden-mobile">多出口ip检测</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
       </div>
-      <!--/noindex-->
+    </div>
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Rainbow"
-      src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">Rainbow</p>
-  <div class="site-description" itemprop="description">Tech Lover</div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">67</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">40</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="http://nz.pawswrite.xyz/" title="探针 → http:&#x2F;&#x2F;nz.pawswrite.xyz" rel="noopener" target="_blank"><i class="fas fa-server fa-fw"></i>探针</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://boringbay.com/" title="无聊湾 → https:&#x2F;&#x2F;boringbay.com" rel="noopener" target="_blank"><i class="fa-solid fa-face-meh fa-fw"></i>无聊湾</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
 
 
 
-      </div>
+  </aside>
+
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">@rainbow</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">227k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
-</div>
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
   </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
-<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
-<script src="/js/algolia-search.js"></script>
-
-
-
-
-
-
-
-
-
+</div>
 
 
 
@@ -660,27 +531,256 @@
 
   
 
+
+
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
 
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '416e004749a692890792',
-      clientSecret: 'a51d95d68a7fddba31072393540e0e2c3b09d91f',
-      repo        : 'Gitalk',
-      owner       : 'tech-fever',
-      admin       : ['tech-fever'],
-      id          : '26c1bda923775404963d867172981dff',
-        language: 'zh-CN',
-      distractionFreeMode: true
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
     });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
+  });
 </script>
 
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
