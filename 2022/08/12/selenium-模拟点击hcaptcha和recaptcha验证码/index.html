@@ -27,10 +27,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/d/d5/Selenium_Logo.png">
 <meta property="article:published_time" content="2022-08-12T12:22:28.000Z">
-<meta property="article:modified_time" content="2022-09-27T15:09:38.403Z">
+<meta property="article:modified_time" content="2022-09-29T15:32:47.074Z">
 <meta property="article:author" content="Rainbow">
 <meta property="article:tag" content="学习">
-<meta property="article:tag" content="python">
+<meta property="article:tag" content="Python">
 <meta property="article:tag" content="selenium">
 <meta property="article:tag" content="爬虫">
 <meta name="twitter:card" content="summary_large_image">
@@ -605,7 +605,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月27日 晚上
+                    本文最后更新于：2022年9月29日 晚上
                   
                 
               </p>
@@ -631,12 +631,12 @@
 <p><img src="/2022/08/12/selenium-%E6%A8%A1%E6%8B%9F%E7%82%B9%E5%87%BBhcaptcha%E5%92%8Crecaptcha%E9%AA%8C%E8%AF%81%E7%A0%81/hcaptcha_content_iframe.png" srcset="/img/loading.gif" lazyload></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python">    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_captcha_entry_iframe</span>(<span class="hljs-params">self</span>) -&gt; WebElement:<br>        self.browser.switch_to.default_content()<br>        captcha_entry_iframe = self.browser.find_element_by_css_selector(<br>            <span class="hljs-string">&#x27;.h-captcha &gt; iframe&#x27;</span>)<br>        <span class="hljs-keyword">return</span> captcha_entry_iframe<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">switch_to_captcha_entry_iframe</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-literal">None</span>:<br>        captcha_entry_iframe: WebElement = self.get_captcha_entry_iframe()<br>        self.browser.switch_to.frame(captcha_entry_iframe)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_captcha_content_iframe</span>(<span class="hljs-params">self</span>) -&gt; WebElement:<br>        self.browser.switch_to.default_content()<br>        captcha_content_iframe = self.browser.find_element_by_xpath(<br>            <span class="hljs-string">&#x27;//iframe[contains(@title, &quot;Main content&quot;)]&#x27;</span>)<br>        <span class="hljs-keyword">return</span> captcha_content_iframe<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">switch_to_captcha_content_iframe</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-literal">None</span>:<br>        captcha_content_iframe: WebElement = self.get_captcha_content_iframe()<br>        self.browser.switch_to.frame(captcha_content_iframe)<br><br></code></pre></td></tr></table></figure>
 
-<h2 id="触发验证码"><a href="#触发验证码" class="headerlink" title="触发验证码"></a>触发验证码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python3">    def trigger_captcha(self) -&gt; None:<br>        self.switch_to_captcha_entry_iframe()<br>        captcha_entry = self.wait.until(EC.presence_of_element_located(<br>            (By.CSS_SELECTOR, &#x27;#anchor #checkbox&#x27;)))<br>        captcha_entry.click()<br>        time.sleep(2)<br>        self.switch_to_captcha_content_iframe()<br>        captcha_element: WebElement = self.get_captcha_element()<br>        if captcha_element.is_displayed:<br>            logger.debug(&#x27;trigged captcha successfully&#x27;)<br></code></pre></td></tr></table></figure>
+<h2 id="触发验证码"><a href="#触发验证码" class="headerlink" title="触发验证码"></a>触发验证码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python">    <span class="hljs-keyword">def</span> <span class="hljs-title function_">trigger_captcha</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-literal">None</span>:<br>        self.switch_to_captcha_entry_iframe()<br>        captcha_entry = self.wait.until(EC.presence_of_element_located(<br>            (By.CSS_SELECTOR, <span class="hljs-string">&#x27;#anchor #checkbox&#x27;</span>)))<br>        captcha_entry.click()<br>        time.sleep(<span class="hljs-number">2</span>)<br>        self.switch_to_captcha_content_iframe()<br>        captcha_element: WebElement = self.get_captcha_element()<br>        <span class="hljs-keyword">if</span> captcha_element.is_displayed:<br>            logger.debug(<span class="hljs-string">&#x27;trigged captcha successfully&#x27;</span>)<br></code></pre></td></tr></table></figure>
 
 <p>首先调用 switch_to_captcha_entry_iframe 进行了 iframe 的切换，然后找到那个入口框对应的节点，然后点击一下。</p>
 <p>点击完了之后我们再调用 switch_to_captcha_content_iframe 切换到验证码本身对应的 iframe 里面，查找验证码本身对应的节点是否加载出来了，如果加载出来了，那么就证明触发成功了。</p>
 <p>怎么查找问题呢呢？用 Selenium 常规的节点搜索就好了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python3">    def get_captcha_target_text(self) -&gt; WebElement:<br>        captcha_target_name_element: WebElement = self.wait.until(EC.presence_of_element_located(<br>            (By.CSS_SELECTOR, &#x27;.prompt-text&#x27;)))<br>        return captcha_target_name_element.text<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_captcha_target_text</span>(<span class="hljs-params">self</span>) -&gt; WebElement:<br>        captcha_target_name_element: WebElement = self.wait.until(EC.presence_of_element_located(<br>            (By.CSS_SELECTOR, <span class="hljs-string">&#x27;.prompt-text&#x27;</span>)))<br>        <span class="hljs-keyword">return</span> captcha_target_name_element.text<br></code></pre></td></tr></table></figure>
 <p>通过调用这个方法，我们就能得到上图中完整的问题文本了。</p>
 <h2 id="验证码识别"><a href="#验证码识别" class="headerlink" title="验证码识别"></a>验证码识别</h2><p>每张图片进行下载并转成 Base64 编码了，我们观察下它的 HTML 结构</p>
 <p><img src="/2022/08/12/selenium-%E6%A8%A1%E6%8B%9F%E7%82%B9%E5%87%BBhcaptcha%E5%92%8Crecaptcha%E9%AA%8C%E8%AF%81%E7%A0%81/image_html.png" srcset="/img/loading.gif" lazyload></p>
@@ -705,7 +705,7 @@
       
         <a href="/tags/%E5%AD%A6%E4%B9%A0/">#学习</a>
       
-        <a href="/tags/python/">#python</a>
+        <a href="/tags/Python/">#Python</a>
       
         <a href="/tags/selenium/">#selenium</a>
       
