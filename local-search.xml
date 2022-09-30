@@ -90,12 +90,14 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>git</category>
+      
     </categories>
     
     
     <tags>
       
-      <tag>Git</tag>
+      <tag>git</tag>
       
     </tags>
     
@@ -114,6 +116,8 @@
     <categories>
       
       <category>学习是人生第一要务</category>
+      
+      <category>git</category>
       
     </categories>
     
@@ -140,12 +144,14 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>git</category>
+      
     </categories>
     
     
     <tags>
       
-      <tag>Git</tag>
+      <tag>git</tag>
       
     </tags>
     
@@ -178,6 +184,8 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>Nginx</category>
+      
     </categories>
     
     
@@ -185,7 +193,7 @@
       
       <tag>Linux</tag>
       
-      <tag>nginx</tag>
+      <tag>Nginx</tag>
       
       <tag>运维</tag>
       
@@ -207,6 +215,8 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>Nginx</category>
+      
     </categories>
     
     
@@ -214,7 +224,7 @@
       
       <tag>Linux</tag>
       
-      <tag>nginx</tag>
+      <tag>Nginx</tag>
       
       <tag>运维</tag>
       
@@ -236,18 +246,18 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>selenium</category>
+      
     </categories>
     
     
     <tags>
       
-      <tag>学习</tag>
-      
       <tag>Python</tag>
       
-      <tag>selenium</tag>
-      
       <tag>爬虫</tag>
+      
+      <tag>selenium</tag>
       
     </tags>
     
@@ -267,18 +277,18 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>selenium</category>
+      
     </categories>
     
     
     <tags>
       
-      <tag>学习</tag>
-      
       <tag>Python</tag>
       
-      <tag>selenium</tag>
-      
       <tag>爬虫</tag>
+      
+      <tag>selenium</tag>
       
     </tags>
     
@@ -298,6 +308,8 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>Nginx</category>
+      
     </categories>
     
     
@@ -305,7 +317,9 @@
       
       <tag>Linux</tag>
       
-      <tag>学习</tag>
+      <tag>Nginx</tag>
+      
+      <tag>运维</tag>
       
     </tags>
     
@@ -325,6 +339,8 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>Nginx</category>
+      
     </categories>
     
     
@@ -332,7 +348,7 @@
       
       <tag>Linux</tag>
       
-      <tag>学习</tag>
+      <tag>Nginx</tag>
       
     </tags>
     
@@ -352,12 +368,18 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>pyppeteer</category>
+      
     </categories>
     
     
     <tags>
       
-      <tag>Linux</tag>
+      <tag>pyppeteer</tag>
+      
+      <tag>Python</tag>
+      
+      <tag>爬虫</tag>
       
     </tags>
     
@@ -377,14 +399,14 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>Azure</category>
+      
     </categories>
     
     
     <tags>
       
       <tag>Linux</tag>
-      
-      <tag>学习</tag>
       
       <tag>Azure</tag>
       
@@ -406,14 +428,14 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>Azure</category>
+      
     </categories>
     
     
     <tags>
       
       <tag>Linux</tag>
-      
-      <tag>学习</tag>
       
       <tag>Azure</tag>
       
@@ -586,6 +608,8 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>GitHub</category>
+      
     </categories>
     
     
@@ -615,6 +639,8 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>GitHub</category>
+      
     </categories>
     
     
@@ -643,6 +669,8 @@
     <categories>
       
       <category>学习是人生第一要务</category>
+      
+      <category>GitHub</category>
       
     </categories>
     
@@ -704,6 +732,8 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>Nginx</category>
+      
     </categories>
     
     
@@ -711,7 +741,9 @@
       
       <tag>Linux</tag>
       
-      <tag>VPS</tag>
+      <tag>Nginx</tag>
+      
+      <tag>运维</tag>
       
     </tags>
     
@@ -757,6 +789,8 @@
     <categories>
       
       <category>学习是人生第一要务</category>
+      
+      <category>Linux</category>
       
     </categories>
     
@@ -1001,14 +1035,14 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>Linux</category>
+      
     </categories>
     
     
     <tags>
       
       <tag>Linux</tag>
-      
-      <tag>VPS</tag>
       
     </tags>
     
@@ -1082,14 +1116,14 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>Python</category>
+      
     </categories>
     
     
     <tags>
       
       <tag>Linux</tag>
-      
-      <tag>VPS</tag>
       
       <tag>Python</tag>
       
@@ -1310,6 +1344,8 @@
       
       <category>学习是人生第一要务</category>
       
+      <category>GitHub</category>
+      
     </categories>
     
     
@@ -1375,9 +1411,9 @@
       
       <tag>笔记</tag>
       
-      <tag>fediverse</tag>
-      
       <tag>Notes</tag>
+      
+      <tag>fediverse</tag>
       
       <tag>长毛象运维</tag>
       
