@@ -722,14 +722,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Docker/</loc>
+    <loc>https://pawswrite.xyz/tags/Speedtest/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Speedtest/</loc>
+    <loc>https://pawswrite.xyz/tags/Docker/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -820,13 +820,6 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/git/</loc>
-    <lastmod>2022-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pawswrite.xyz/tags/%E5%8D%8E%E7%A1%95%E8%B7%AF%E7%94%B1%E5%99%A8/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -835,6 +828,13 @@
   
   <url>
     <loc>https://pawswrite.xyz/tags/%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0/</loc>
+    <lastmod>2022-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/git/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -911,14 +911,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/%E6%9C%BA%E5%9C%BA/</loc>
+    <loc>https://pawswrite.xyz/tags/%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6/</loc>
+    <loc>https://pawswrite.xyz/tags/%E6%9C%BA%E5%9C%BA/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -955,14 +955,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/</loc>
+    <loc>https://pawswrite.xyz/categories/%E9%95%BF%E6%AF%9B%E8%B1%A1%E8%BF%90%E7%BB%B4/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E9%95%BF%E6%AF%9B%E8%B1%A1%E8%BF%90%E7%BB%B4/</loc>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -997,14 +997,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Azure/</loc>
+    <loc>https://pawswrite.xyz/categories/VPS/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/VPS/</loc>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Azure/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1018,14 +1018,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/git/</loc>
+    <loc>https://pawswrite.xyz/categories/%E5%8D%8E%E7%A1%95%E8%B7%AF%E7%94%B1%E5%99%A8/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%8D%8E%E7%A1%95%E8%B7%AF%E7%94%B1%E5%99%A8/</loc>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/git/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1039,14 +1039,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Python/</loc>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Django/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Django/</loc>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Python/</loc>
     <lastmod>2022-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
