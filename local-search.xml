@@ -8,7 +8,7 @@
     <link href="/posts/f1b701c3.html"/>
     <url>/posts/f1b701c3.html</url>
     
-    <content type="html"><![CDATA[<p><a href="https://azure.microsoft.com/zh-cn/free/students/">Azure 学生订阅</a> 和其他大部分订阅都提供了免费的 <code>MySQL</code> 数据库和 应用服务(10 个 Web、移动或 API 应用，提供 1 GB 存储空间)，刚好可以用来托管博客的评论系统 Waline。</p><span id="more"></span><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><ul><li><a href="https://waline.js.org/">关于 Waline</a></li><li><a href="https://hexo.com/">关于 Hexo</a></li><li><a href="https://azure.microsoft.com/zh-cn/free/students/">关于Azure学生订阅</a></li></ul><p>参考文章：</p><ol><li><a href="https://blog.amjac.cn/2021/09/deploy-waline-in-azure/">【hexo博客】在Azure上搭建Waline评论服务</a></li></ol><h1 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h1><div class="note note-info">            <p>waline 支持 <code>MySQL</code> 和 <code>PostgreSQL</code> ，<code>Azure</code> 的学生订阅二者都支持。本文选择的是 <code>MySQL</code> 。</p>          </div><p>进入 <a href="https://portal.azure.com/#home">Azure 首页</a> ，选择 <a href="https://portal.azure.com/#create/hub">创建资源</a>。搜索 <code>Azure Database for MySQL</code> 或 【推荐】 <code>Azure Database for MySQL Flexible Server</code> 。</p><p>如果选择了 <code>Azure Database for MySQL</code> 记得在点击创建以后，再选择 <strong>灵活服务器</strong> </p><p><img src="/posts/f1b701c3/sql.png"><br><img src="/posts/f1b701c3/sql3.png"></p><p>或者直接选择 <code>Azure Database for MySQL Flexible Server</code> ：<br><img src="/posts/f1b701c3/sql2.png"></p><div class="note note-info">            <p>注意是 <code>Azure Database for MySQL</code> 而不是 <code>SQL Database</code> !<br>后者对学生订阅有免费额度。</p>          </div><p>填写创建配置：<br><img src="/posts/f1b701c3/sql_create.png"></p><p>资源组和服务器名称可以随便写，MySQL版本有 8.0 和 5.7 两种，区域推荐填写 east asia，距离中国更近。</p><span class="label label-info">提示</span> 计算 + 储存这里一定要选择 **B1ms** ，这样才是免费的。学生订阅有个 `B1s` 计算同样也免费，但它可以用于创建服务器，且配置低于 `B1ms` ，拿来创建数据库浪费了。<span class="label label-primary">重要</span> 下面的管理员用户名和密码，就是你访问SQL数据库的用户名密码，设置后**一定要记住**。<p>免费计划里，数据库最多有32 GB免费存储。需要的话可以点击 <strong>配置服务器</strong> ，然后拉满<br><img src="/posts/f1b701c3/sql_storage.png"></p><p>点击，<code>下一步：网络</code> ，为了能够让 <code>waline-server</code> 访问到数据库，在防火墙规则这里选择，<div>            <input type="checkbox" disabled checked="checked">允许从任何 Azure 内的任何 Azure 服务公开访问此服务器          </div><br><img src="https://blog.amjac.cn/2021/09/deploy-waline-in-azure/image-20210903141548743.png"></p><span class="label label-default">可选</span> 如果你需要从其他位置连接数据库，那么在下面填写相应的 IP 地址即可。比如说一键添加你当前使用的 IP到白名单： **+ 添加当前客户端 IP 地址(xxx.xxx.xxx.xxx)**。<div class="note note-danger">            <p>添加 0.0.0.0 - 255.255.255.255 可以使得数据库直接对公网开放，但这是危险的操作。</p>          </div><p>最后看一下网页右边的估计成本，点击创建即可。过程大概需要5分钟左右。静待完成后，点击 <code>转到资源</code>。</p><h1 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h1><p>根据 <code>Waline</code> 官方文档，使用时请先导入 <a href="https://github.com/walinejs/waline/blob/main/assets/waline.sql">waline.sql</a> 以完成表和表结构的创建。这里我们连接数据库后导入即可。</p><h2 id="创建数据库-1"><a href="#创建数据库-1" class="headerlink" title="创建数据库"></a>创建数据库</h2><p>在数据库资源界面，按照下图操作即可（我用的英文，大家注意对应）<br><img src="/posts/f1b701c3/db_create.png"></p><h2 id="使用-Azure-Cloud-shell-连接数据库"><a href="#使用-Azure-Cloud-shell-连接数据库" class="headerlink" title="使用 Azure Cloud shell 连接数据库"></a>使用 Azure Cloud shell 连接数据库</h2><p>首先连接数据库。有很多连接方式，只要连接 IP 在白名单内即可。（白名单除了在创建的时候配置，还可以在 <code>网络</code> 这里进行配置）</p><p>这里推荐使用 Azure 自带的 <code>Azure Cloud shell</code> 来进行连接。</p><p>进入 <a href="https://portal.azure.com/#home">Azure 首页</a> ，找到如下图标并点击。<br><img src="/posts/f1b701c3/AzureCloudshell.png"></p><p>页面下方会出现如下控制台，选择 <code>Bash</code> ，第一次使用需要选择订阅，并创建存储，之后等待创建完成：</p><p><img src="/posts/f1b701c3/AzureCloudshell2.png"><br><img src="/posts/f1b701c3/AzureCloudshell3.png"></p><h2 id="导入数据库"><a href="#导入数据库" class="headerlink" title="导入数据库"></a>导入数据库</h2><p>连接 + 初始化 数据库的命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://raw.githubusercontent.com/walinejs/waline/main/assets/waline.sql<br>mysql -h 数据库名称.mysql.database.azure.com -u 管理员账户 -p waline&lt;waline.sql<br></code></pre></td></tr></table></figure><p>解释一下， <code>数据库名称.mysql.database.azure.com</code> 是数据库的 <code>hostname</code> ，管理员用户名是你设置的。 <code>waline</code> 是导入后的数据库库名，可以随便写，建议写 <code>waline</code></p><p>如果不清楚上面说的这些，就去 <code>所有资源 - 刚刚创建的数据库 - 连接</code> 这里查看。<br><img src="/posts/f1b701c3/sql4.png"></p><p>之后会出现类似下面的界面让你输入密码，注意你输入密码的时候，控制台是<strong>不显示密码</strong>的，直接键盘输入然后回车即可。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">azureusername [ ~ ]$ mysql -h waline.mysql.database.azure.com -u waline -p waline&lt;waline.sql <br>Enter password:<br></code></pre></td></tr></table></figure><p>【可选】删除 Azure Cloud shell 中的 waline.sql 文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">rm</span> waline.sql<br></code></pre></td></tr></table></figure><h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><p>注册好 Azure 账户后，在 <a href="https://portal.azure.com/#home">Azure Portal</a> 中<a href="https://portal.azure.com/#create/hub">创建一个 Web 应用</a>：<br><img src="/posts/f1b701c3/web.png"></p><p>Docker 这里，按下图配置：<br><img src="/posts/f1b701c3/docker.png"><br>1<a href="https://blog.amjac.cn/2021/09/deploy-waline-in-azure/image-20210902154929384.png"></a></p><p>之后点击 <code>创建</code> 就好了。</p><h1 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h1><p>等 Web 应用创建完成，按照下面的步骤一个个填写下面表格里带 ✅ 的环境变量，全部填写完后记得点击<strong>保存</strong>。<br><img src="/posts/f1b701c3/env.png"></p><p>在项目中配置如下环境变量，其中有 ✅ 的是必须填写的。</p><table><thead><tr><th>环境变量名称</th><th>必填</th><th>填写的值</th><th>备注</th></tr></thead><tbody><tr><td><code>MYSQL_HOST</code></td><td>✅</td><td>上面说过的 hostname</td><td>MySQL 服务的地址</td></tr><tr><td><code>MYSQL_PORT</code></td><td></td><td><code>3306</code></td><td>MySQL 服务的端口</td></tr><tr><td><code>MYSQL_DB</code></td><td>✅</td><td><code>waline</code></td><td>MySQL 数据库库名</td></tr><tr><td><code>MYSQL_USER</code></td><td>✅</td><td>数据库的管理员用户名（waline）</td><td>MySQL 数据库的用户名</td></tr><tr><td><code>MYSQL_PASSWORD</code></td><td>✅</td><td>创建数据库的时候设定的</td><td>MySQL 数据库的密码</td></tr><tr><td><code>MYSQL_PREFIX</code></td><td></td><td><code>wl_</code></td><td>MySQL 数据表的表前缀</td></tr><tr><td><code>MYSQL_CHARSET</code></td><td></td><td><code>utf8mb4</code></td><td>MySQL 数据表的字符集</td></tr><tr><td><code>MYSQL_SSL</code></td><td>✅</td><td><code>true</code></td><td>是否使用 SSL MYSQL 连接数据库</td></tr></tbody></table><p>填写后效果如下<br><img src="https://blog.amjac.cn/2021/09/deploy-waline-in-azure/image-20210903142519857.png"></p><p>更多环境变量配置查看<a href="https://waline.js.org/reference/env.html">官方文档</a></p><h1 id="博客端配置"><a href="#博客端配置" class="headerlink" title="博客端配置"></a>博客端配置</h1><p>Hexo 有几个主题已经直接嵌入了 waline 评论系统。</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;//cdn.jsdelivr.net/npm/@waline/client&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;waline&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-title class_">Waline</span>(&#123;</span><br><span class="language-javascript">      <span class="hljs-attr">el</span>: <span class="hljs-string">&#x27;#waline&#x27;</span>,</span><br><span class="language-javascript">      <span class="hljs-attr">serverURL</span>: <span class="hljs-string">&#x27;https://xxxxxxxxxxxxx&#x27;</span>,</span><br><span class="language-javascript">      <span class="hljs-attr">dark</span>: <span class="hljs-string">&#x27;body.dark&#x27;</span>,</span><br><span class="language-javascript">      <span class="hljs-attr">meta</span>: [<span class="hljs-string">&#x27;nick&#x27;</span>, <span class="hljs-string">&#x27;mail&#x27;</span>],</span><br><span class="language-javascript">      <span class="hljs-attr">requiredMeta</span>: [<span class="hljs-string">&#x27;nick&#x27;</span>],</span><br><span class="language-javascript">    &#125;);</span><br><span class="language-javascript">  </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p><a href="https://azure.microsoft.com/zh-cn/free/students/">Azure 学生订阅</a> 和其他大部分订阅都提供了免费的 <code>MySQL</code> 数据库和 应用服务(10 个 Web、移动或 API 应用，提供 1 GB 存储空间)，刚好可以用来托管博客的评论系统 Waline。</p><span id="more"></span><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><ul><li><a href="https://waline.js.org/">关于 Waline</a></li><li><a href="https://hexo.com/">关于 Hexo</a></li><li><a href="https://azure.microsoft.com/zh-cn/free/students/">关于Azure学生订阅</a></li></ul><p>参考文章：</p><ol><li><a href="https://blog.amjac.cn/2021/09/deploy-waline-in-azure/">【hexo博客】在Azure上搭建Waline评论服务</a></li></ol><h1 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h1><div class="note note-info">            <p>waline 支持 <code>MySQL</code> 和 <code>PostgreSQL</code> ，<code>Azure</code> 的学生订阅二者都支持。本文选择的是 <code>MySQL</code> 。</p>          </div><p>进入 <a href="https://portal.azure.com/#home">Azure 首页</a> ，选择 <a href="https://portal.azure.com/#create/hub">创建资源</a>。搜索 <code>Azure Database for MySQL</code> 或 【推荐】 <code>Azure Database for MySQL Flexible Server</code> 。</p><p>如果选择了 <code>Azure Database for MySQL</code> 记得在点击创建以后，再选择 <strong>灵活服务器</strong> </p><p><img src="/posts/f1b701c3/sql.png"><br><img src="/posts/f1b701c3/sql3.png"></p><p>或者直接选择 <code>Azure Database for MySQL Flexible Server</code> ：<br><img src="/posts/f1b701c3/sql2.png"></p><div class="note note-info">            <p>注意是 <code>Azure Database for MySQL</code> 而不是 <code>SQL Database</code> !<br>后者对学生订阅没有免费额度。</p>          </div><p>填写创建配置：<br><img src="/posts/f1b701c3/sql_create.png"></p><p>资源组和服务器名称可以随便写，MySQL版本有 8.0 和 5.7 两种，区域推荐填写 east asia，距离中国更近。</p><span class="label label-info">提示</span> 计算 + 储存这里一定要选择 **B1ms** ，这样才是免费的。学生订阅有个 `B1s` 计算同样也免费，但它可以用于创建服务器，且配置低于 `B1ms` ，拿来创建数据库浪费了。<span class="label label-primary">重要</span> 下面的管理员用户名和密码，就是你访问SQL数据库的用户名密码，设置后**一定要记住**。<p>免费计划里，数据库最多有32 GB免费存储。需要的话可以点击 <strong>配置服务器</strong> ，然后拉满<br><img src="/posts/f1b701c3/sql_storage.png"></p><p>点击，<code>下一步：网络</code> ，为了能够让 <code>waline-server</code> 访问到数据库，在防火墙规则这里选择，<div>            <input type="checkbox" disabled checked="checked">允许从任何 Azure 内的任何 Azure 服务公开访问此服务器          </div></p><p><img src="https://blog.amjac.cn/2021/09/deploy-waline-in-azure/image-20210903141548743.png"></p><span class="label label-default">可选</span> 如果你需要从其他位置连接数据库，那么在下面填写相应的 IP 地址即可。比如说一键添加你当前使用的 IP到白名单： **+ 添加当前客户端 IP 地址(xxx.xxx.xxx.xxx)**。<div class="note note-danger">            <p>添加 0.0.0.0 - 255.255.255.255 可以使得数据库直接对公网开放，但这是危险的操作。</p>          </div><p>最后看一下网页右边的估计成本，点击创建即可。过程大概需要5分钟左右。静待完成后，点击 <code>转到资源</code>。</p><h1 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h1><p>根据 <code>Waline</code> 官方文档，使用时请先导入 <a href="https://github.com/walinejs/waline/blob/main/assets/waline.sql">waline.sql</a> 以完成表和表结构的创建。这里我们连接数据库后导入即可。</p><h2 id="创建数据库-1"><a href="#创建数据库-1" class="headerlink" title="创建数据库"></a>创建数据库</h2><p>在数据库资源界面，按照下图操作即可（我用的英文，大家注意对应）<br><img src="/posts/f1b701c3/db_create.png"></p><h2 id="使用-Azure-Cloud-shell-连接数据库"><a href="#使用-Azure-Cloud-shell-连接数据库" class="headerlink" title="使用 Azure Cloud shell 连接数据库"></a>使用 Azure Cloud shell 连接数据库</h2><p>首先连接数据库。有很多连接方式，只要连接 IP 在白名单内即可。（白名单除了在创建的时候配置，还可以在 <code>网络</code> 这里进行配置）</p><p>这里推荐使用 Azure 自带的 <code>Azure Cloud shell</code> 来进行连接。</p><p>进入 <a href="https://portal.azure.com/#home">Azure 首页</a> ，找到如下图标并点击。<br><img src="/posts/f1b701c3/AzureCloudshell.png"></p><p>页面下方会出现如下控制台，选择 <code>Bash</code> ，第一次使用需要选择订阅，并创建存储，之后等待创建完成：</p><p><img src="/posts/f1b701c3/AzureCloudshell2.png"><br><img src="/posts/f1b701c3/AzureCloudshell3.png"></p><h2 id="导入数据库"><a href="#导入数据库" class="headerlink" title="导入数据库"></a>导入数据库</h2><p>连接 + 初始化 数据库的命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://raw.githubusercontent.com/walinejs/waline/main/assets/waline.sql<br>mysql -h 数据库名称.mysql.database.azure.com -u 管理员账户 -p waline&lt;waline.sql<br></code></pre></td></tr></table></figure><p>解释一下， <code>数据库名称.mysql.database.azure.com</code> 是数据库的 <code>hostname</code> ，管理员用户名是你设置的。 <code>waline</code> 是导入后的数据库库名，可以随便写，建议写 <code>waline</code></p><p>如果不清楚上面说的这些，就去 <code>所有资源 - 刚刚创建的数据库 - 连接</code> 这里查看。<br><img src="/posts/f1b701c3/sql4.png"></p><p>之后会出现类似下面的界面让你输入密码，注意你输入密码的时候，控制台是<strong>不显示密码</strong>的，直接键盘输入然后回车即可。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">azureusername [ ~ ]$ mysql -h waline.mysql.database.azure.com -u waline -p waline&lt;waline.sql <br>Enter password:<br></code></pre></td></tr></table></figure><p>【可选】删除 Azure Cloud shell 中的 waline.sql 文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">rm</span> waline.sql<br></code></pre></td></tr></table></figure><h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><p>注册好 Azure 账户后，在 <a href="https://portal.azure.com/#home">Azure Portal</a> 中<a href="https://portal.azure.com/#create/hub">创建一个 Web 应用</a>：<br><img src="/posts/f1b701c3/web.png"></p><p>Docker 这里，按下图配置：<br><img src="/posts/f1b701c3/docker.png"><br>1<a href="https://blog.amjac.cn/2021/09/deploy-waline-in-azure/image-20210902154929384.png"></a></p><p>之后点击 <code>创建</code> 就好了。</p><h1 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h1><p>等 Web 应用创建完成，按照下面的步骤一个个填写下面表格里带 ✅ 的环境变量，全部填写完后记得点击<strong>保存</strong>。<br><img src="/posts/f1b701c3/env.png"></p><p>在项目中配置如下环境变量，其中有 ✅ 的是必须填写的。</p><table><thead><tr><th>环境变量名称</th><th>必填</th><th>填写的值</th><th>备注</th></tr></thead><tbody><tr><td><code>MYSQL_HOST</code></td><td>✅</td><td>上面说过的 hostname</td><td>MySQL 服务的地址</td></tr><tr><td><code>MYSQL_PORT</code></td><td></td><td><code>3306</code></td><td>MySQL 服务的端口</td></tr><tr><td><code>MYSQL_DB</code></td><td>✅</td><td><code>waline</code></td><td>MySQL 数据库库名</td></tr><tr><td><code>MYSQL_USER</code></td><td>✅</td><td>数据库的管理员用户名（waline）</td><td>MySQL 数据库的用户名</td></tr><tr><td><code>MYSQL_PASSWORD</code></td><td>✅</td><td>创建数据库的时候设定的</td><td>MySQL 数据库的密码</td></tr><tr><td><code>MYSQL_PREFIX</code></td><td></td><td><code>wl_</code></td><td>MySQL 数据表的表前缀</td></tr><tr><td><code>MYSQL_CHARSET</code></td><td></td><td><code>utf8mb4</code></td><td>MySQL 数据表的字符集</td></tr><tr><td><code>MYSQL_SSL</code></td><td>✅</td><td><code>true</code></td><td>是否使用 SSL MYSQL 连接数据库</td></tr></tbody></table><p>填写后效果如下<br><img src="https://blog.amjac.cn/2021/09/deploy-waline-in-azure/image-20210903142519857.png"></p><p>更多环境变量配置查看<a href="https://waline.js.org/reference/env.html">官方文档</a></p><h1 id="博客端配置"><a href="#博客端配置" class="headerlink" title="博客端配置"></a>博客端配置</h1><p>Hexo 有几个主题已经直接嵌入了 waline 评论系统。</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;//cdn.jsdelivr.net/npm/@waline/client&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;waline&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-title class_">Waline</span>(&#123;</span><br><span class="language-javascript">      <span class="hljs-attr">el</span>: <span class="hljs-string">&#x27;#waline&#x27;</span>,</span><br><span class="language-javascript">      <span class="hljs-attr">serverURL</span>: <span class="hljs-string">&#x27;https://xxxxxxxxxxxxx&#x27;</span>,</span><br><span class="language-javascript">      <span class="hljs-attr">dark</span>: <span class="hljs-string">&#x27;body.dark&#x27;</span>,</span><br><span class="language-javascript">      <span class="hljs-attr">meta</span>: [<span class="hljs-string">&#x27;nick&#x27;</span>, <span class="hljs-string">&#x27;mail&#x27;</span>],</span><br><span class="language-javascript">      <span class="hljs-attr">requiredMeta</span>: [<span class="hljs-string">&#x27;nick&#x27;</span>],</span><br><span class="language-javascript">    &#125;);</span><br><span class="language-javascript">  </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>]]></content>
     
     
     <categories>
@@ -508,9 +508,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -539,9 +539,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -568,9 +568,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象</tag>
       
@@ -601,9 +601,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -630,9 +630,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -754,9 +754,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>翻墙</tag>
       
@@ -814,9 +814,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -868,9 +868,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -922,9 +922,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -949,9 +949,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Speedtest</tag>
       
@@ -978,9 +978,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1059,9 +1059,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1196,9 +1196,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>CloudFlare</tag>
       
@@ -1246,9 +1246,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -1275,9 +1275,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Object Storage</tag>
       
@@ -1304,9 +1304,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1331,9 +1331,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象</tag>
       
@@ -1362,9 +1362,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>笔记</tag>
       
@@ -1602,9 +1602,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Notes</tag>
       
@@ -1631,9 +1631,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1658,9 +1658,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -1687,9 +1687,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1743,9 +1743,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1770,9 +1770,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1797,9 +1797,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>解锁网易云音乐</tag>
       
@@ -1826,9 +1826,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -1855,9 +1855,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -1884,9 +1884,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
