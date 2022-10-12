@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>服务器自建 seafile pro 网盘</title>
+    <link href="/posts/5921bbff.html"/>
+    <url>/posts/5921bbff.html</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>免费的 Azure 数据库和 Web 应用搭建 Waline 评论系统</title>
     <link href="/posts/f1b701c3.html"/>
     <url>/posts/f1b701c3.html</url>
@@ -421,9 +434,9 @@
     
     <tags>
       
-      <tag>pyppeteer</tag>
-      
       <tag>Python</tag>
+      
+      <tag>pyppeteer</tag>
       
       <tag>爬虫</tag>
       
@@ -508,9 +521,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -539,9 +552,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象运维</tag>
       
@@ -568,9 +581,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象</tag>
       
@@ -601,9 +614,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象运维</tag>
       
@@ -630,9 +643,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -754,9 +767,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>翻墙</tag>
       
@@ -814,9 +827,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -868,9 +881,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -922,9 +935,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -949,9 +962,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Speedtest</tag>
       
@@ -978,9 +991,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1059,9 +1072,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1196,9 +1209,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>CloudFlare</tag>
       
@@ -1215,7 +1228,7 @@
     <link href="/posts/64380.html"/>
     <url>/posts/64380.html</url>
     
-    <content type="html"><![CDATA[<p>收藏一些奇怪的文章</p><span id="more"></span><p>grafana+prometheus+node_exporter  监控 在prometheus上面还可以添加alertmanage微信报警<br><a href="https://i4t.com/4741.html">https://i4t.com/4741.html</a><br>示例: grafana.frps.cn<br>来自 <a href="https://hostloc.com/space-uid-18261.html">https://hostloc.com/space-uid-18261.html</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">firewall-cmd --permanent --zone=public --add-port=22/tcp<br>systemctl <span class="hljs-built_in">enable</span> --now cockpit.socket<br>nmap -T4 -A -v -Pn IP<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>收藏一些奇怪的文章</p><span id="more"></span><p>grafana+prometheus+node_exporter  监控 在prometheus上面还可以添加alertmanage微信报警<br><a href="https://i4t.com/4741.html">https://i4t.com/4741.html</a><br>示例: grafana.frps.cn<br>来自 <a href="https://hostloc.com/space-uid-18261.html">https://hostloc.com/space-uid-18261.html</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">firewall-cmd --permanent --zone=public --add-port=22/tcp<br>systemctl <span class="hljs-built_in">enable</span> --now cockpit.socket<br>nmap -T4 -A -v -Pn IP<br></code></pre></td></tr></table></figure><p>ipv6 无法自动获取ip netplan配置脚本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash &lt;(wget -qO- https://github.com/Aniverse/aBox/raw/master/scripts/ipv6)<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -1246,9 +1259,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象运维</tag>
       
@@ -1275,9 +1288,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Object Storage</tag>
       
@@ -1304,9 +1317,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1331,9 +1344,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象</tag>
       
@@ -1362,9 +1375,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>笔记</tag>
       
@@ -1602,9 +1615,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Notes</tag>
       
@@ -1631,9 +1644,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1658,9 +1671,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -1687,9 +1700,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1743,9 +1756,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1770,9 +1783,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1797,9 +1810,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>解锁网易云音乐</tag>
       
@@ -1826,9 +1839,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -1855,9 +1868,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -1884,9 +1897,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
