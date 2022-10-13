@@ -8,7 +8,7 @@
     <link href="/posts/d4c31257.html"/>
     <url>/posts/d4c31257.html</url>
     
-    <content type="html"><![CDATA[<p>整合 OnlyOffice 就可以在线打开各种办公文档进行编辑。</p><span id="more"></span><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>首先 <code>Seafile pro</code> 版支持多种 Office 在线预览和编辑的方式。</p><table><thead><tr><th></th><th>预览</th><th>编辑</th><th>安装方式</th></tr></thead><tbody><tr><td>office-preview</td><td>✔️</td><td></td><td><strong>专业版</strong>7.1 ~ 8.0 版本自带，9.0 及以后版本对接镜像 office</td></tr><tr><td>Microsoft Office Online Server</td><td>✔️</td><td>✔️</td><td><a href="https://learn.microsoft.com/zh-cn/officeonlineserver/deploy-office-online-server?redirectedfrom=MSDN" title="点击跳转">仅 Windows 服务器可部署</a></td></tr><tr><td>Collabora Online (LibreOffice Online)</td><td>✔️</td><td>✔️</td><td><a href="https://www.collaboraoffice.com/" title="点击跳转">docker 部署</a>，<strong>必须启用 https</strong></td></tr><tr><td><a href="https://www.onlyoffice.com/">OnlyOffice</a>【推荐】</td><td>✔️</td><td>✔️</td><td><a href="https://cloud.seafile.com/published/seafile-manual-cn/deploy/only_office.md" title="点击跳转">docker部署</a></td></tr></tbody></table><h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1><ol><li><a href="https://manual.seafile.com/deploy/only_office/">Seafile 整合 OnlyOffice 官方文档</a></li><li><a href="https://cloud.seafile.com/published/seafile-manual-cn/docker/pro-edition/%E7%94%A8Docker%E9%83%A8%E7%BD%B2Seafile.md">用 Docker 部署 Seafile 专业版</a></li><li><a href="https://cloud.seafile.com/published/seafile-manual-cn/docker/pro-edition/%E7%94%A8Docker%E9%83%A8%E7%BD%B2OnlyOffice.md">用 Docker 部署 OnlyOffice</a></li></ol><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul><li>本文是基于本博客另一篇文章《<a href="https://pawswrite.xyz/posts/5921bbff.html">服务器自建 seafile pro 网盘</a>》而写的教程</li><li>确保服务器已经安装 <code>Nginx certbot docker docker-compose</code> 并放开 <code>80 443</code> 端口</li></ul><h1 id="将-OnlyOffice-加入到"><a href="#将-OnlyOffice-加入到" class="headerlink" title="将 OnlyOffice 加入到"></a>将 OnlyOffice 加入到</h1><p>将以下内容添加到 <code>docker-compose.yml</code> 的 <code>services</code> 中</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">services:</span><br>  <span class="hljs-string">...</span><br>  <span class="hljs-attr">oods:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">onlyoffice/documentserver:latest</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">seafile-oods</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/seafile/oods/DocumentServer/logs:/var/log/onlyoffice</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/seafile/oods/DocumentServer/data:/var/www/onlyoffice/Data</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/seafile/oods/DocumentServer/lib:/var/lib/onlyoffice</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/seafile/oods/DocumentServer/local-production-linux.json:/etc/onlyoffice/documentserver/local-production-linux.json</span><br><br>    <span class="hljs-attr">networks:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">seafile-net</span><br>    <span class="hljs-attr">environment:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">JWT_ENABLED=true</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">JWT_SECRET=your-secret-string</span><br></code></pre></td></tr></table></figure><p>并且在 seafile 部分加入一行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">seafile:<br>  image: docker.seadrive.org/seafileltd/seafile-pro-mc:latest<br>  container_name: seafile<br>  ports:<br>    - <span class="hljs-string">&quot;127.0.0.1:8000:80&quot;</span><br>          <span class="hljs-comment">#- &quot;127.0.0.1:8000:443&quot;  # If https is enabled, cancel the comment.</span><br>  volumes:<br>    - /opt/seafile/data:/shared   <span class="hljs-comment"># Requested, specifies the path to Seafile data persistent store.</span><br>  environment:<br>    ...<br>  depends_on:<br>    - db<br>    - memcached<br>    - elasticsearch<br>    <span class="hljs-comment"># ！加入下面这行！</span><br>    - oods<br>  networks:<br>    - seafile-net<br></code></pre></td></tr></table></figure><div class="note note-success">            <p>记得把 <code>JWT_SECRET</code> 改成一堆乱码并记住</p>          </div><h1 id="初始化-OnlyOffice-配置文件"><a href="#初始化-OnlyOffice-配置文件" class="headerlink" title="初始化 OnlyOffice 配置文件"></a>初始化 OnlyOffice 配置文件</h1><p>设置OnlyOffice自动保存</p><p>执行以下命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /opt/seafile/oods/DocumentServer/<br>vim /opt/seafile/oods/DocumentServer/local-production-linux.json<br></code></pre></td></tr></table></figure><p>并为 local-production-linux.json 添加内容</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;services&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;CoAuthoring&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;autoAssembly&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;enable&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;interval&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;5m&quot;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;FileConverter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;converter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;downloadAttemptMaxCount&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure><h1 id="将-OnlyOffice-加入到-nginx-conf-中"><a href="#将-OnlyOffice-加入到-nginx-conf-中" class="headerlink" title="将 OnlyOffice 加入到 nginx conf 中"></a>将 OnlyOffice 加入到 nginx conf 中</h1><p>修改容器的Nginx文件，而不是宿主机的文件！</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /opt/seafile/data/nginx/conf/seafile.nginx.conf<br></code></pre></td></tr></table></figure><p><code>seafile.nginx.conf</code></p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># Required for only office document server</span><br><span class="hljs-string">map</span> <span class="hljs-string">$http_x_forwarded_proto</span> <span class="hljs-string">$the_scheme</span> &#123;<br>    <span class="hljs-string">default</span> <span class="hljs-string">$http_x_forwarded_proto;</span><br>    <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">$scheme;</span><br>&#125;<br><span class="hljs-string">map</span> <span class="hljs-string">$http_x_forwarded_host</span> <span class="hljs-string">$the_host</span> &#123;<br>    <span class="hljs-string">default</span> <span class="hljs-string">$http_x_forwarded_host;</span><br>    <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">$host;</span><br>&#125;<br><span class="hljs-string">map</span> <span class="hljs-string">$http_upgrade</span> <span class="hljs-string">$proxy_connection</span> &#123;<br>    <span class="hljs-string">default</span> <span class="hljs-string">upgrade;</span><br>    <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">close;</span><br>&#125;<br><span class="hljs-string">server</span> &#123;<br>    <span class="hljs-string">listen</span> <span class="hljs-number">80</span><span class="hljs-string">;</span><br>    <span class="hljs-string">...</span><br><br>    <span class="hljs-string">location</span> <span class="hljs-string">/onlyofficeds/</span> &#123;<br>        <span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://oods/;</span><br>        <span class="hljs-string">proxy_http_version</span> <span class="hljs-number">1.1</span><span class="hljs-string">;</span><br>        <span class="hljs-string">client_max_body_size</span> <span class="hljs-string">100M;</span><br>        <span class="hljs-string">proxy_read_timeout</span> <span class="hljs-string">3600s;</span><br>        <span class="hljs-string">proxy_connect_timeout</span> <span class="hljs-string">3600s;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">Upgrade</span> <span class="hljs-string">$http_upgrade;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">Connection</span> <span class="hljs-string">$proxy_connection;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">X-Forwarded-Host</span> <span class="hljs-string">$the_host/onlyofficeds;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">X-Forwarded-Proto</span> <span class="hljs-string">$the_scheme;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">X-Forwarded-For</span> <span class="hljs-string">$proxy_add_x_forwarded_for;</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h1 id="修改-seahub-settings-py"><a href="#修改-seahub-settings-py" class="headerlink" title="修改 seahub_settings.py"></a>修改 seahub_settings.py</h1><p>seahub_settings.py</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /opt/seafile/data/seafile/conf/seahub_settings.py<br></code></pre></td></tr></table></figure><p>在最后面加入下面内容</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs conf"># OnlyOffice<br>ENABLE_ONLYOFFICE = True<br>VERIFY_ONLYOFFICE_CERTIFICATE = True<br>ONLYOFFICE_APIJS_URL = &#x27;https://你的seafile域名/onlyofficeds/web-apps/apps/api/documents/api.js&#x27;<br>ONLYOFFICE_FILE_EXTENSION = (&#x27;doc&#x27;, &#x27;docx&#x27;, &#x27;ppt&#x27;, &#x27;pptx&#x27;, &#x27;xls&#x27;, &#x27;xlsx&#x27;, &#x27;odt&#x27;,<br>&#x27;fodt&#x27;, &#x27;odp&#x27;, &#x27;fodp&#x27;, &#x27;ods&#x27;, &#x27;fods&#x27;)<br>ONLYOFFICE_EDIT_FILE_EXTENSION = (&#x27;docx&#x27;, &#x27;pptx&#x27;, &#x27;xlsx&#x27;)<br>ONLYOFFICE_JWT_SECRET = &#x27;your-secret-string&#x27;<br></code></pre></td></tr></table></figure><div class="note note-success">            <p>记得把 <code>JWT_SECRET</code> 改成之前的那堆乱码</p>          </div><h1 id="重启-Seafile-容器"><a href="#重启-Seafile-容器" class="headerlink" title="重启 Seafile 容器"></a>重启 Seafile 容器</h1><p>执行以下命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker-compose down<br>docker-compose up -d<br></code></pre></td></tr></table></figure><p>等待几分钟让 OnlyOffice 容器完成初始化。然后便可以使用 OnlyOffice。</p>]]></content>
+    <content type="html"><![CDATA[<p>整合 OnlyOffice 就可以在线打开各种办公文档进行编辑。</p><span id="more"></span><p><img src="/posts/d4c31257/onlyoffice.png"></p><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>首先 <code>Seafile pro</code> 版支持多种 Office 在线预览和编辑的方式。</p><table><thead><tr><th></th><th>预览</th><th>编辑</th><th>安装方式</th></tr></thead><tbody><tr><td>office-preview</td><td>✔️</td><td></td><td><strong>专业版</strong>7.1 ~ 8.0 版本自带，9.0 及以后版本对接镜像 office</td></tr><tr><td>Microsoft Office Online Server</td><td>✔️</td><td>✔️</td><td><a href="https://learn.microsoft.com/zh-cn/officeonlineserver/deploy-office-online-server?redirectedfrom=MSDN" title="点击跳转">仅 Windows 服务器可部署</a></td></tr><tr><td>Collabora Online (LibreOffice Online)</td><td>✔️</td><td>✔️</td><td><a href="https://www.collaboraoffice.com/" title="点击跳转">docker 部署</a>，<strong>必须启用 https</strong></td></tr><tr><td><a href="https://www.onlyoffice.com/">OnlyOffice</a>【推荐】</td><td>✔️</td><td>✔️</td><td><a href="https://cloud.seafile.com/published/seafile-manual-cn/deploy/only_office.md" title="点击跳转">docker部署</a></td></tr></tbody></table><h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1><ol><li><a href="https://manual.seafile.com/deploy/only_office/">Seafile 整合 OnlyOffice 官方文档</a></li><li><a href="https://cloud.seafile.com/published/seafile-manual-cn/docker/pro-edition/%E7%94%A8Docker%E9%83%A8%E7%BD%B2Seafile.md">用 Docker 部署 Seafile 专业版</a></li><li><a href="https://cloud.seafile.com/published/seafile-manual-cn/docker/pro-edition/%E7%94%A8Docker%E9%83%A8%E7%BD%B2OnlyOffice.md">用 Docker 部署 OnlyOffice</a></li></ol><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul><li>本文是基于本博客另一篇文章《<a href="https://pawswrite.xyz/posts/5921bbff.html">服务器自建 seafile pro 网盘</a>》而写的教程</li><li>确保服务器已经安装 <code>Nginx certbot docker docker-compose</code> 并放开 <code>80 443</code> 端口</li></ul><h1 id="将-OnlyOffice-加入到"><a href="#将-OnlyOffice-加入到" class="headerlink" title="将 OnlyOffice 加入到"></a>将 OnlyOffice 加入到</h1><p>将以下内容添加到 <code>docker-compose.yml</code> 的 <code>services</code> 中</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">services:</span><br>  <span class="hljs-string">...</span><br>  <span class="hljs-attr">oods:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">onlyoffice/documentserver:latest</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">seafile-oods</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/seafile/oods/DocumentServer/logs:/var/log/onlyoffice</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/seafile/oods/DocumentServer/data:/var/www/onlyoffice/Data</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/seafile/oods/DocumentServer/lib:/var/lib/onlyoffice</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/seafile/oods/DocumentServer/local-production-linux.json:/etc/onlyoffice/documentserver/local-production-linux.json</span><br><br>    <span class="hljs-attr">networks:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">seafile-net</span><br>    <span class="hljs-attr">environment:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">JWT_ENABLED=true</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">JWT_SECRET=your-secret-string</span><br></code></pre></td></tr></table></figure><p>并且在 seafile 部分加入一行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">seafile:<br>  image: docker.seadrive.org/seafileltd/seafile-pro-mc:latest<br>  container_name: seafile<br>  ports:<br>    - <span class="hljs-string">&quot;127.0.0.1:8000:80&quot;</span><br>          <span class="hljs-comment">#- &quot;127.0.0.1:8000:443&quot;  # If https is enabled, cancel the comment.</span><br>  volumes:<br>    - /opt/seafile/data:/shared   <span class="hljs-comment"># Requested, specifies the path to Seafile data persistent store.</span><br>  environment:<br>    ...<br>  depends_on:<br>    - db<br>    - memcached<br>    - elasticsearch<br>    <span class="hljs-comment"># ！加入下面这行！</span><br>    - oods<br>  networks:<br>    - seafile-net<br></code></pre></td></tr></table></figure><div class="note note-success">            <p>记得把 <code>JWT_SECRET</code> 改成一堆乱码并记住</p>          </div><h1 id="初始化-OnlyOffice-配置文件"><a href="#初始化-OnlyOffice-配置文件" class="headerlink" title="初始化 OnlyOffice 配置文件"></a>初始化 OnlyOffice 配置文件</h1><p>设置OnlyOffice自动保存</p><p>执行以下命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /opt/seafile/oods/DocumentServer/<br>vim /opt/seafile/oods/DocumentServer/local-production-linux.json<br></code></pre></td></tr></table></figure><p>并为 local-production-linux.json 添加内容</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;services&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;CoAuthoring&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;autoAssembly&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;enable&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;interval&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;5m&quot;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;FileConverter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;converter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;downloadAttemptMaxCount&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure><h1 id="将-OnlyOffice-加入到-nginx-conf-中"><a href="#将-OnlyOffice-加入到-nginx-conf-中" class="headerlink" title="将 OnlyOffice 加入到 nginx conf 中"></a>将 OnlyOffice 加入到 nginx conf 中</h1><p>修改容器的Nginx文件，而不是宿主机的文件！</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /opt/seafile/data/nginx/conf/seafile.nginx.conf<br></code></pre></td></tr></table></figure><p><code>seafile.nginx.conf</code></p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># Required for only office document server</span><br><span class="hljs-string">map</span> <span class="hljs-string">$http_x_forwarded_proto</span> <span class="hljs-string">$the_scheme</span> &#123;<br>    <span class="hljs-string">default</span> <span class="hljs-string">$http_x_forwarded_proto;</span><br>    <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">$scheme;</span><br>&#125;<br><span class="hljs-string">map</span> <span class="hljs-string">$http_x_forwarded_host</span> <span class="hljs-string">$the_host</span> &#123;<br>    <span class="hljs-string">default</span> <span class="hljs-string">$http_x_forwarded_host;</span><br>    <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">$host;</span><br>&#125;<br><span class="hljs-string">map</span> <span class="hljs-string">$http_upgrade</span> <span class="hljs-string">$proxy_connection</span> &#123;<br>    <span class="hljs-string">default</span> <span class="hljs-string">upgrade;</span><br>    <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">close;</span><br>&#125;<br><span class="hljs-string">server</span> &#123;<br>    <span class="hljs-string">listen</span> <span class="hljs-number">80</span><span class="hljs-string">;</span><br>    <span class="hljs-string">...</span><br><br>    <span class="hljs-string">location</span> <span class="hljs-string">/onlyofficeds/</span> &#123;<br>        <span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://oods/;</span><br>        <span class="hljs-string">proxy_http_version</span> <span class="hljs-number">1.1</span><span class="hljs-string">;</span><br>        <span class="hljs-string">client_max_body_size</span> <span class="hljs-string">100M;</span><br>        <span class="hljs-string">proxy_read_timeout</span> <span class="hljs-string">3600s;</span><br>        <span class="hljs-string">proxy_connect_timeout</span> <span class="hljs-string">3600s;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">Upgrade</span> <span class="hljs-string">$http_upgrade;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">Connection</span> <span class="hljs-string">$proxy_connection;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">X-Forwarded-Host</span> <span class="hljs-string">$the_host/onlyofficeds;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">X-Forwarded-Proto</span> <span class="hljs-string">$the_scheme;</span><br>        <span class="hljs-string">proxy_set_header</span> <span class="hljs-string">X-Forwarded-For</span> <span class="hljs-string">$proxy_add_x_forwarded_for;</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h1 id="修改-seahub-settings-py"><a href="#修改-seahub-settings-py" class="headerlink" title="修改 seahub_settings.py"></a>修改 seahub_settings.py</h1><p>seahub_settings.py</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /opt/seafile/data/seafile/conf/seahub_settings.py<br></code></pre></td></tr></table></figure><p>在最后面加入下面内容</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs conf"># OnlyOffice<br>ENABLE_ONLYOFFICE = True<br>VERIFY_ONLYOFFICE_CERTIFICATE = True<br>ONLYOFFICE_APIJS_URL = &#x27;https://你的seafile域名/onlyofficeds/web-apps/apps/api/documents/api.js&#x27;<br>ONLYOFFICE_FILE_EXTENSION = (&#x27;doc&#x27;, &#x27;docx&#x27;, &#x27;ppt&#x27;, &#x27;pptx&#x27;, &#x27;xls&#x27;, &#x27;xlsx&#x27;, &#x27;odt&#x27;,<br>&#x27;fodt&#x27;, &#x27;odp&#x27;, &#x27;fodp&#x27;, &#x27;ods&#x27;, &#x27;fods&#x27;)<br>ONLYOFFICE_EDIT_FILE_EXTENSION = (&#x27;docx&#x27;, &#x27;pptx&#x27;, &#x27;xlsx&#x27;)<br>ONLYOFFICE_JWT_SECRET = &#x27;your-secret-string&#x27;<br></code></pre></td></tr></table></figure><div class="note note-success">            <p>记得把 <code>JWT_SECRET</code> 改成之前的那堆乱码</p>          </div><h1 id="重启-Seafile-容器"><a href="#重启-Seafile-容器" class="headerlink" title="重启 Seafile 容器"></a>重启 Seafile 容器</h1><p>执行以下命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker-compose down<br>docker-compose up -d<br></code></pre></td></tr></table></figure><p>等待几分钟让 OnlyOffice 容器完成初始化。然后便可以使用 OnlyOffice。</p>]]></content>
     
     
     <categories>
@@ -22,9 +22,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -51,9 +51,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -479,9 +479,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>pyppeteer</tag>
+      
+      <tag>Python</tag>
       
       <tag>爬虫</tag>
       
@@ -510,9 +510,9 @@
     
     <tags>
       
-      <tag>Azure</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>Azure</tag>
       
     </tags>
     
@@ -539,9 +539,9 @@
     
     <tags>
       
-      <tag>Azure</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>Azure</tag>
       
     </tags>
     
@@ -566,13 +566,13 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
-      <tag>Notes</tag>
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
+      
+      <tag>Notes</tag>
       
     </tags>
     
@@ -597,9 +597,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象运维</tag>
       
@@ -626,15 +626,15 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
-      <tag>长毛象运维</tag>
+      <tag>Linux</tag>
       
       <tag>长毛象</tag>
       
       <tag>Notes</tag>
+      
+      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -659,9 +659,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象运维</tag>
       
@@ -688,9 +688,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -812,9 +812,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>翻墙</tag>
       
@@ -872,9 +872,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -926,9 +926,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -980,9 +980,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1007,9 +1007,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Speedtest</tag>
       
@@ -1036,9 +1036,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1119,9 +1119,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1256,11 +1256,11 @@
     
     <tags>
       
+      <tag>VPS</tag>
+      
       <tag>Linux</tag>
       
       <tag>CloudFlare</tag>
-      
-      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -1306,9 +1306,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象运维</tag>
       
@@ -1335,9 +1335,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Object Storage</tag>
       
@@ -1364,9 +1364,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1391,13 +1391,13 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
-      <tag>长毛象运维</tag>
+      <tag>Linux</tag>
       
       <tag>长毛象</tag>
+      
+      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -1422,15 +1422,15 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
-      <tag>长毛象运维</tag>
+      <tag>Linux</tag>
+      
+      <tag>笔记</tag>
       
       <tag>Notes</tag>
       
-      <tag>笔记</tag>
+      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -1515,15 +1515,15 @@
     
     <tags>
       
-      <tag>长毛象运维</tag>
+      <tag>笔记</tag>
       
       <tag>Notes</tag>
       
-      <tag>Mastodon</tag>
-      
       <tag>fediverse</tag>
       
-      <tag>笔记</tag>
+      <tag>长毛象运维</tag>
+      
+      <tag>Mastodon</tag>
       
     </tags>
     
@@ -1604,11 +1604,11 @@
     
     <tags>
       
+      <tag>科学上网</tag>
+      
       <tag>游戏</tag>
       
       <tag>Steam</tag>
-      
-      <tag>科学上网</tag>
       
     </tags>
     
@@ -1662,9 +1662,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Notes</tag>
       
@@ -1691,9 +1691,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1718,9 +1718,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -1747,9 +1747,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1803,9 +1803,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1830,9 +1830,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1857,9 +1857,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>解锁网易云音乐</tag>
       
@@ -1886,9 +1886,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -1915,9 +1915,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -1944,9 +1944,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
