@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>【FireFox Send】自建文件加密分享传输网站</title>
+    <link href="/posts/4ae3f173.html"/>
+    <url>/posts/4ae3f173.html</url>
+    
+    <content type="html"><![CDATA[<p><code>Firefox Send</code> 服务于2019年3月上线，提供了<strong>安全、私密</strong>的文件托管和文件共享服务。无需注册。但因为这种安全特性，被黑客滥用传播黑客工具。2020 年 7 月，<code>Mozilla</code> 宣布暂时中止 <code>Firefox Send</code> 服务。虽然官方网站很可惜不能用了，但 <code>Firefox</code> 慷慨地开源了网站，我们可以自建来使用。</p><span id="more"></span><h1 id="文件分享服务"><a href="#文件分享服务" class="headerlink" title="文件分享服务"></a>文件分享服务</h1><p>可能大家听得比较多的是奶牛快传、<code>sendAnywhere</code> 这些。但其实文件分享服务还有很多，不过基本上我都没用过，所以只是分享一下：</p><ul><li><a href="https://transfer.sh/" target="_blank" rel="noopener external nofollow noreferrer">https://transfer.sh/</a></li><li><a href="https://uguu.se/" target="_blank" rel="noopener external nofollow noreferrer">https://uguu.se/</a> 单次上限100MB</li><li><a href="https://anonfiles.com/" target="_blank" rel="noopener external nofollow noreferrer">https://anonfiles.com/</a></li><li><a href="https://letsupload.co/" target="_blank" rel="noopener external nofollow noreferrer">https://letsupload.co/</a></li><li><a href="https://secufiles.com/" target="_blank" rel="noopener external nofollow noreferrer">https://secufiles.com/</a></li><li><a href="https://wetransfer.com/" target="_blank" rel="noopener external nofollow noreferrer">https://wetransfer.com/</a></li><li><a href="https://wormhole.app/" target="_blank" rel="noopener external nofollow noreferrer">https://wormhole.app/</a></li><li><a href="https://filedoge.com/" target="_blank" rel="noopener external nofollow noreferrer">https://filedoge.com/</a></li><li><a href="https://demo.jirafeau.net/" target="_blank" rel="noopener external nofollow noreferrer">https://demo.jirafeau.net/</a> 也能自建 <a href="https://gitlab.com/mojo42/Jirafeau" target="_blank" rel="noopener external nofollow noreferrer">https://gitlab.com/mojo42/Jirafeau</a></li><li><a href="https://plik.root.gg/" target="_blank" rel="noopener external nofollow noreferrer">https://plik.root.gg</a> 也能自建 <a href="https://github.com/root-gg/plik" target="_blank" rel="noopener external nofollow noreferrer">https://github.com/root-gg/plik</a></li><li><a href="https://oshi.at/" target="_blank" rel="noopener external nofollow noreferrer">https://oshi.at/</a></li><li><a href="https://anonfiles.com/" target="_blank" rel="noopener external nofollow noreferrer">https://anonfiles.com/</a> <a href="https://filechan.org/" target="_blank" rel="noopener external nofollow noreferrer">https://filechan.org/</a></li><li><a href="https://ttm.sh/" target="_blank" rel="noopener external nofollow noreferrer">https://ttm.sh/</a></li><li><a href="https://send.internxt.com/" target="_blank" rel="noopener external nofollow noreferrer">https://send.internxt.com/</a></li><li><a href="https://bashupload.com/" target="_blank" rel="noopener external nofollow noreferrer">https://bashupload.com/</a> 有效期3天，只能下载一次</li><li><a href="https://airportal.cn/" target="_blank" rel="noopener external nofollow noreferrer">https://airportal.cn/</a></li><li><a href="https://musetransfer.com/" target="_blank" rel="noopener external nofollow noreferrer">https://musetransfer.com/</a></li><li><a href="https://snapdrop.net/" target="_blank" rel="noopener external nofollow noreferrer">https://snapdrop.net/</a> 无需APP，仅局域网</li><li><a href="https://termbin.com/" target="_blank" rel="noopener external nofollow noreferrer">https://termbin.com/</a></li><li><a href="https://temp.sh/" target="_blank" rel="noopener external nofollow noreferrer">https://temp.sh/</a></li></ul><h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><ul><li><a href="https://github.com/mozilla/send" target="_blank" rel="noopener external nofollow noreferrer">https://github.com/mozilla/send</a></li></ul><h1 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h1><ul><li>Node.js 12.x</li><li>Redis server (可选)</li><li>AWS S3 or compatible service (可选)</li><li>git</li></ul><p>本文教程假设</p><ul><li>你有一个服务器</li><li>你懂基本的 Linux 命令行操作</li></ul><p>本文基于 Ubuntu 20.04 系统，其他 Linux 系统类似，但不保证可行性。</p><h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt update &amp;&amp; apt upgrade -y<br>apt install git nginx nodejs npm<br></code></pre></td></tr></table></figure><h1 id="安装-redi是【可选】"><a href="#安装-redi是【可选】" class="headerlink" title="安装 redi是【可选】"></a>安装 redi是【可选】</h1><h2 id="docker-compose-安装"><a href="#docker-compose-安装" class="headerlink" title="docker-compose 安装"></a>docker-compose 安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /opt/redis &amp;&amp; <span class="hljs-built_in">cd</span> /opt/redis<br>vim /opt/redis/docker-compose.yml<br></code></pre></td></tr></table></figure><p>输入：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">version: <span class="hljs-string">&#x27;3&#x27;</span><br>services:<br>  cache:<br>    image: redis:6.2-alpine<br>    restart: always<br>    ports:<br>      - <span class="hljs-string">&#x27;127.0.0.1:6379:6379&#x27;</span><br>    <span class="hljs-built_in">command</span>: redis-server --save 20 1 --loglevel warning --requirepass 输入随机密码<br>    volumes:<br>      - ./data:/data<br></code></pre></td></tr></table></figure><p>启动</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /opt/redis &amp;&amp; docker-compose up -d<br></code></pre></td></tr></table></figure><h1 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> /opt/send/ &amp;&amp; <span class="hljs-built_in">cd</span> /opt/send<br>git <span class="hljs-built_in">clone</span> https://github.com/mozilla/send.git htdocs<br><span class="hljs-built_in">chown</span> -R www-data:www-data *<br><span class="hljs-built_in">cd</span> /opt/send/htdocs<br><span class="hljs-comment"># 安装依赖</span><br>npm install webcrypto-core --save<br>npm install<br><span class="hljs-comment"># 构建生产环境</span><br>sudo -u www-data npm run build<br><span class="hljs-comment"># 运行</span><br>sudo -u www-data npm run prod<br></code></pre></td></tr></table></figure><div class="note note-warning">            <p>根据官方文档，是使用 <code>su www-data -c</code> ，但会出现提示 <code>This account is currently not available.</code> </p>          </div><p>不过这个运行办法不能持久，我们这里用 <code>nohup</code> 运行就行，运行脚本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /opt/send<br>vim run.sh<br></code></pre></td></tr></table></figure><p>输入：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-built_in">nohup</span> sudo -u www-data npm run prod 2&gt;/dev/null &amp;<br></code></pre></td></tr></table></figure><p>之后</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x run.sh &amp;&amp; ./run.sh<br></code></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">```<br>```bash<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>自建项目</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>VPS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【seafile】配置全文搜索</title>
     <link href="/posts/bdb7672.html"/>
     <url>/posts/bdb7672.html</url>
@@ -596,7 +621,7 @@
     
     <categories>
       
-      <category>Linux</category>
+      <category>自建项目</category>
       
     </categories>
     
@@ -842,7 +867,7 @@
     
     <categories>
       
-      <category>Linux</category>
+      <category>自建项目</category>
       
     </categories>
     
@@ -852,8 +877,6 @@
       <tag>VPS</tag>
       
       <tag>Linux</tag>
-      
-      <tag>翻墙</tag>
       
     </tags>
     
@@ -1037,7 +1060,7 @@
     
     <categories>
       
-      <category>Linux</category>
+      <category>自建项目</category>
       
     </categories>
     
@@ -1066,7 +1089,7 @@
     
     <categories>
       
-      <category>Linux</category>
+      <category>VPS</category>
       
     </categories>
     
