@@ -6,7 +6,7 @@
   <link href="https://pawswrite.xyz/atom.xml" rel="self"/>
   
   <link href="https://pawswrite.xyz/"/>
-  <updated>2022-10-15T16:18:19.002Z</updated>
+  <updated>2022-10-21T12:43:23.054Z</updated>
   <id>https://pawswrite.xyz/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ink iplc stair speed note</title>
+    <link href="https://pawswrite.xyz/posts/2a20baca.html"/>
+    <id>https://pawswrite.xyz/posts/2a20baca.html</id>
+    <published>2022-10-21T12:41:04.000Z</published>
+    <updated>2022-10-21T12:43:23.054Z</updated>
+    
+    <content type="html"><![CDATA[<p>某iplc测评</p><span id="more"></span><p><img src="/posts/undefined/1.png"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;某iplc测评&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/categories/VPS/"/>
+    
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+  </entry>
   
   <entry>
     <title>【FireFox Send】自建文件加密分享传输网站</title>
@@ -56,9 +79,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E7%BD%91%E7%9B%98/Seafile/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -83,9 +106,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E7%BD%91%E7%9B%98/Seafile/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -112,9 +135,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E7%BD%91%E7%9B%98/Seafile/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -486,33 +509,6 @@
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="Nginx" scheme="https://pawswrite.xyz/tags/Nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>boring Bay clicker(linux 运行pyppeteer报错pyppeteer.errors.BrowserError Browser closed unexpectedly的解决办法)</title>
-    <link href="https://pawswrite.xyz/posts/20093.html"/>
-    <id>https://pawswrite.xyz/posts/20093.html</id>
-    <published>2022-08-02T09:37:14.000Z</published>
-    <updated>2022-10-04T15:51:38.648Z</updated>
-    
-    <content type="html"><![CDATA[<p>一个很无聊的项目~~ 使用 <code>pyppeteer</code> 模拟点击本博客的无聊湾链接，来刷点击量。</p><span id="more"></span><h1 id="代码仓库"><a href="#代码仓库" class="headerlink" title="代码仓库"></a>代码仓库</h1><p>仓库：<br><a href="https://github.com/tech-fever/boringBayClicker" target="_blank" rel="noopener external nofollow noreferrer">https://github.com/tech-fever/boringBayClicker</a></p><h1 id="部署到VPS"><a href="#部署到VPS" class="headerlink" title="部署到VPS"></a>部署到VPS</h1><p>发现 <code>debian/ubuntu</code> 要运行的话缺少很多依赖：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget libcairo-gobject2 libxinerama1 libgtk2.0-0 libpangoft2-1.0-0 libthai0 libpixman-1-0 libxcb-render0 libharfbuzz0b libdatrie1 libgraphite2-3 libgbm1<br></code></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/tech-fever/boringBayClicker &amp;&amp; <span class="hljs-built_in">cd</span> boringBayClicker<br>pip install -r requirements.txt<br>python main<br></code></pre></td></tr></table></figure><h1 id="一些查看"><a href="#一些查看" class="headerlink" title="一些查看"></a>一些查看</h1><p>查看对应系统下的 <code>chromium</code> 安装路径和相关参数</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pyppeteer.launcher <span class="hljs-keyword">import</span> Launcher<br><span class="hljs-keyword">import</span> pyppeteer.chromium_downloader<br> <span class="hljs-string">&#x27; &#x27;</span>.join(Launcher().cmd)<br><span class="hljs-built_in">print</span>(pyppeteer.chromium_downloader.chromiumExecutable.get(<span class="hljs-string">&quot;linux&quot;</span>))<br><span class="hljs-built_in">print</span>(pyppeteer.chromium_downloader.chromiumExecutable.get(<span class="hljs-string">&quot;mac&quot;</span>))<br><span class="hljs-built_in">print</span>(pyppeteer.chromium_downloader.chromiumExecutable.get(<span class="hljs-string">&quot;win32&quot;</span>))<br><span class="hljs-built_in">print</span>(pyppeteer.chromium_downloader.chromiumExecutable.get(<span class="hljs-string">&quot;win64&quot;</span>))<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;一个很无聊的项目~~ 使用 &lt;code&gt;pyppeteer&lt;/code&gt; 模拟点击本博客的无聊湾链接，来刷点击量。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="学习是人生第一要务" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/"/>
-    
-    <category term="pyppeteer" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/pyppeteer/"/>
-    
-    
-    <category term="Python" scheme="https://pawswrite.xyz/tags/Python/"/>
-    
-    <category term="pyppeteer" scheme="https://pawswrite.xyz/tags/pyppeteer/"/>
-    
-    <category term="爬虫" scheme="https://pawswrite.xyz/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
