@@ -8,7 +8,7 @@
     <link href="/posts/cd7a4445.html"/>
     <url>/posts/cd7a4445.html</url>
     
-    <content type="html"><![CDATA[<p>非脚本开启bbr</p><span id="more"></span><h1 id="开启bbr的效果"><a href="#开启bbr的效果" class="headerlink" title="开启bbr的效果"></a>开启bbr的效果</h1><p>给一个直观对比：<br><img src="/posts/undefined/before.jpg" alt="开启前"></p><p><img src="/posts/undefined/after.jpg" alt="开启后"></p><h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><p>使用 root 权限运行下面代码查看内核版本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">uname</span> -r<br></code></pre></td></tr></table></figure><p>内核版本高于 4.9 就行。</p><p>开启BBR，生效更改</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;net.core.default_qdisc=fq&quot;</span> &gt;&gt; /etc/sysctl.conf<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;net.ipv4.tcp_congestion_control=bbr&quot;</span> &gt;&gt; /etc/sysctl.conf<br>sysctl -p<br></code></pre></td></tr></table></figure><p>执行下面命令，如果结果中带有bbr，则证明你的内核已开启bbr。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sysctl net.ipv4.tcp_available_congestion_control<br></code></pre></td></tr></table></figure><p>注：也可以执行下面命令，如果结果中有bbr，也可以证明你的内核已开启bbr。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsmod | grep bbr<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>非脚本开启bbr</p><span id="more"></span><h1 id="开启bbr的效果"><a href="#开启bbr的效果" class="headerlink" title="开启bbr的效果"></a>开启bbr的效果</h1><p>给一个直观对比：<br><img src="/posts/cd7a4445/before.jpg" alt="before"></p><p><img src="/posts/cd7a4445/after.jpg" alt="after"></p><h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><p>使用 root 权限运行下面代码查看内核版本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">uname</span> -r<br></code></pre></td></tr></table></figure><p>内核版本高于 4.9 就行。</p><p>开启BBR，生效更改</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;net.core.default_qdisc=fq&quot;</span> &gt;&gt; /etc/sysctl.conf<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;net.ipv4.tcp_congestion_control=bbr&quot;</span> &gt;&gt; /etc/sysctl.conf<br>sysctl -p<br></code></pre></td></tr></table></figure><p>执行下面命令，如果结果中带有bbr，则证明你的内核已开启bbr。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sysctl net.ipv4.tcp_available_congestion_control<br></code></pre></td></tr></table></figure><p>注：也可以执行下面命令，如果结果中有bbr，也可以证明你的内核已开启bbr。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsmod | grep bbr<br></code></pre></td></tr></table></figure>]]></content>
     
     
     <categories>
@@ -20,9 +20,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -49,9 +49,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -103,9 +103,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Seafile</tag>
       
@@ -134,9 +134,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Seafile</tag>
       
@@ -167,9 +167,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Seafile</tag>
       
@@ -597,9 +597,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>pyppeteer</tag>
+      
+      <tag>Python</tag>
       
       <tag>爬虫</tag>
       
@@ -684,9 +684,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -715,11 +715,11 @@
     
     <tags>
       
+      <tag>Linux</tag>
+      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
-      
-      <tag>Linux</tag>
       
     </tags>
     
@@ -744,15 +744,15 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
-      <tag>长毛象运维</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象</tag>
       
       <tag>Notes</tag>
+      
+      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -777,11 +777,11 @@
     
     <tags>
       
+      <tag>Linux</tag>
+      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
-      
-      <tag>Linux</tag>
       
     </tags>
     
@@ -806,9 +806,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -930,9 +930,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -988,9 +988,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1042,9 +1042,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1096,9 +1096,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1123,9 +1123,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Speedtest</tag>
       
@@ -1152,9 +1152,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1235,9 +1235,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1372,13 +1372,13 @@
     
     <tags>
       
-      <tag>CloudFlare</tag>
+      <tag>Linux</tag>
       
       <tag>VPS</tag>
       
-      <tag>长毛象运维</tag>
+      <tag>CloudFlare</tag>
       
-      <tag>Linux</tag>
+      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -1422,11 +1422,11 @@
     
     <tags>
       
+      <tag>Linux</tag>
+      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
-      
-      <tag>Linux</tag>
       
     </tags>
     
@@ -1451,9 +1451,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Object Storage</tag>
       
@@ -1480,9 +1480,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1507,13 +1507,13 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
-      <tag>长毛象运维</tag>
-      
       <tag>Linux</tag>
       
+      <tag>VPS</tag>
+      
       <tag>长毛象</tag>
+      
+      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -1538,15 +1538,15 @@
     
     <tags>
       
+      <tag>Linux</tag>
+      
       <tag>VPS</tag>
       
-      <tag>长毛象运维</tag>
-      
-      <tag>Linux</tag>
+      <tag>笔记</tag>
       
       <tag>Notes</tag>
       
-      <tag>笔记</tag>
+      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -1631,15 +1631,15 @@
     
     <tags>
       
-      <tag>长毛象运维</tag>
+      <tag>笔记</tag>
       
       <tag>Notes</tag>
       
-      <tag>Mastodon</tag>
-      
       <tag>fediverse</tag>
       
-      <tag>笔记</tag>
+      <tag>长毛象运维</tag>
+      
+      <tag>Mastodon</tag>
       
     </tags>
     
@@ -1720,11 +1720,11 @@
     
     <tags>
       
+      <tag>科学上网</tag>
+      
       <tag>游戏</tag>
       
       <tag>Steam</tag>
-      
-      <tag>科学上网</tag>
       
     </tags>
     
@@ -1778,9 +1778,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Notes</tag>
       
@@ -1807,9 +1807,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1834,9 +1834,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -1863,9 +1863,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1919,9 +1919,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1946,9 +1946,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1973,9 +1973,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>解锁网易云音乐</tag>
       
@@ -2002,9 +2002,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -2031,9 +2031,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -2060,9 +2060,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
