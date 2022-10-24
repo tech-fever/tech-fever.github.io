@@ -6,7 +6,7 @@
   <link href="https://pawswrite.xyz/atom.xml" rel="self"/>
   
   <link href="https://pawswrite.xyz/"/>
-  <updated>2022-10-21T12:50:28.342Z</updated>
+  <updated>2022-10-24T17:16:04.061Z</updated>
   <id>https://pawswrite.xyz/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux 开启原版 bbr</title>
+    <link href="https://pawswrite.xyz/posts/cd7a4445.html"/>
+    <id>https://pawswrite.xyz/posts/cd7a4445.html</id>
+    <published>2022-10-24T16:43:31.000Z</published>
+    <updated>2022-10-24T17:16:04.061Z</updated>
+    
+    <content type="html"><![CDATA[<p>非脚本开启bbr</p><span id="more"></span><h1 id="开启bbr的效果"><a href="#开启bbr的效果" class="headerlink" title="开启bbr的效果"></a>开启bbr的效果</h1><p>给一个直观对比：<br><img src="/posts/undefined/before.jpg" alt="开启前"></p><p><img src="/posts/undefined/after.jpg" alt="开启后"></p><h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><p>使用 root 权限运行下面代码查看内核版本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">uname</span> -r<br></code></pre></td></tr></table></figure><p>内核版本高于 4.9 就行。</p><p>开启BBR，生效更改</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;net.core.default_qdisc=fq&quot;</span> &gt;&gt; /etc/sysctl.conf<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;net.ipv4.tcp_congestion_control=bbr&quot;</span> &gt;&gt; /etc/sysctl.conf<br>sysctl -p<br></code></pre></td></tr></table></figure><p>执行下面命令，如果结果中带有bbr，则证明你的内核已开启bbr。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sysctl net.ipv4.tcp_available_congestion_control<br></code></pre></td></tr></table></figure><p>注：也可以执行下面命令，如果结果中有bbr，也可以证明你的内核已开启bbr。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsmod | grep bbr<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;非脚本开启bbr&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/categories/Linux/"/>
+    
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="科学上网" scheme="https://pawswrite.xyz/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+  </entry>
   
   <entry>
     <title>ink iplc stair speed note</title>
@@ -483,32 +508,6 @@
     <category term="Nginx" scheme="https://pawswrite.xyz/tags/Nginx/"/>
     
     <category term="运维" scheme="https://pawswrite.xyz/tags/%E8%BF%90%E7%BB%B4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解决Skipping acquire of configured file &#39;main/binary-i386/Packages&#39; as repository &#39;xxx&#39; doesn&#39;t support architecture &#39;i386&#39;</title>
-    <link href="https://pawswrite.xyz/posts/47269.html"/>
-    <id>https://pawswrite.xyz/posts/47269.html</id>
-    <published>2022-08-04T07:23:12.000Z</published>
-    <updated>2022-10-04T15:51:38.676Z</updated>
-    
-    <content type="html"><![CDATA[<p>在<a href="https://www.linuxcapable.com/how-to-install-upgrade-latest-nginx-mainline-stable-on-ubuntu-20-04/#gsc.tab=0" target="_blank" rel="noopener external nofollow noreferrer">安装1.22版nginx</a>的时候遇到了个问题。编辑 <code>/etc/apt/sources.list.d/nginx.list</code> 的时候加进去的库，在 <code>apt update</code> 的时候报错：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">N: Skipping acquire of configured file <span class="hljs-string">&#x27;nginx/binary-i386/Packages&#x27;</span> as repository <span class="hljs-string">&#x27;http://nginx.org/packages/ubuntu focal InRelease&#x27;</span> doesn<span class="hljs-string">&#x27;t support architecture &#x27;</span>i386<span class="hljs-string">&#x27;</span><br></code></pre></td></tr></table></figure><span id="more"></span><h1 id="解决办法1"><a href="#解决办法1" class="headerlink" title="解决办法1"></a>解决办法1</h1><p>首先找到的解决办法是在 <code>nginx.list</code> 指定arch为amd，也就是：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb [arch=amd64] [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \</span><br><span class="hljs-string">http://nginx.org/packages/ubuntu `lsb_release -cs` nginx&quot;</span> \<br>    | sudo <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/nginx.list<br></code></pre></td></tr></table></figure><p>但这样运行 <code>apt update</code> 依然会报错</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">E: Malformed entry 1 <span class="hljs-keyword">in</span> list file /etc/apt/sources.list.d/nginx.list (URI parse)<br>E: The list of sources could not be <span class="hljs-built_in">read</span>.<br></code></pre></td></tr></table></figure><h1 id="根本解决办法"><a href="#根本解决办法" class="headerlink" title="根本解决办法"></a>根本解决办法</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul><li><a href="https://askubuntu.com/questions/741410/skipping-acquire-of-configured-file-main-binary-i386-packages-as-repository-x" target="_blank" rel="noopener external nofollow noreferrer">Skipping acquire of configured file ‘main&#x2F;binary-i386&#x2F;Packages’ as repository ‘xxx’ doesn’t support architecture ‘i386’</a></li><li><a href="https://blog.csdn.net/Leo_whj/article/details/111639223" target="_blank" rel="noopener external nofollow noreferrer">Ubuntu dpkg查看与修改architecture</a></li></ul><h2 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h2><p>先找到出问题的库，比如说 <code>repository &#39;xxx&#39; doesn&#39;t support architecture &#39;i386&#39;</code> ，那么我们就运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /etc/apt/sources.list.d<br>grep -r xxx（出问题的库）  /etc/apt | grep -v amd64 <br><span class="hljs-comment"># 或者</span><br>grep xxx（出问题的库） * | grep -v amd64<br></code></pre></td></tr></table></figure><p>例如我这里可以用</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /etc/apt/sources.list.d<br>grep nginx * | grep -v amd64<br><span class="hljs-comment"># 或者</span><br>grep nginx * | grep -v amd64<br></code></pre></td></tr></table></figure><p>输出：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/etc/apt/sources.list.d/nginx.list:deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/ubuntu focal nginx<br></code></pre></td></tr></table></figure><p>那么我们就得到了.list文件名+路径 ： <code>/etc/apt/sources.list.d/nginx.list</code></p><p>这个就是出问题的。可以先试试在这个文件里面加上 <code>[arch=amd64]</code></p><p>例如我的例子，编辑 <code>/etc/apt/sources.list.d/nginx.list</code> 文件为：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">deb [<span class="hljs-built_in">arch</span>=amd64] [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/ubuntu focal nginx<br></code></pre></td></tr></table></figure><p>我这样失败了。因为这个语法会被判定为木马，那我们先取消这个解决办法，来找找根本原因</p><h2 id="根本原因"><a href="#根本原因" class="headerlink" title="根本原因"></a>根本原因</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看本机的架构内核</span><br>dpkg --print-architecture<br><span class="hljs-comment"># 查看多架构支持内核</span><br>dpkg --print-foreign-architectures<br></code></pre></td></tr></table></figure><p>第二条命令输出i386是让64位ubuntu运行32位程序，也就是多架构支持。也就是这个地方，导致了我们会出现这样的报错。</p><p>如果你不想要多架构支持，可以移除。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dpkg --remove-architecture i386<br></code></pre></td></tr></table></figure><p>之后再运行 <code>apt update</code> 即可。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;在&lt;a href=&quot;https://www.linuxcapable.com/how-to-install-upgrade-latest-nginx-mainline-stable-on-ubuntu-20-04/#gsc.tab=0&quot; target=&quot;_blank&quot; rel=&quot;noopener external nofollow noreferrer&quot;&gt;安装1.22版nginx&lt;/a&gt;的时候遇到了个问题。编辑 &lt;code&gt;/etc/apt/sources.list.d/nginx.list&lt;/code&gt; 的时候加进去的库，在 &lt;code&gt;apt update&lt;/code&gt; 的时候报错：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs bash&quot;&gt;N: Skipping acquire of configured file &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;nginx/binary-i386/Packages&amp;#x27;&lt;/span&gt; as repository &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;http://nginx.org/packages/ubuntu focal InRelease&amp;#x27;&lt;/span&gt; doesn&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;t support architecture &amp;#x27;&lt;/span&gt;i386&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="学习是人生第一要务" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/"/>
-    
-    <category term="Nginx" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Nginx/"/>
-    
-    
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
-    <category term="Nginx" scheme="https://pawswrite.xyz/tags/Nginx/"/>
     
   </entry>
   
