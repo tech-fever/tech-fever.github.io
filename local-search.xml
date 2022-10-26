@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>监控不同网站的流量：nginx 监控模块 module_vts 编译安装</title>
+    <link href="/posts/ef56ef76.html"/>
+    <url>/posts/ef56ef76.html</url>
+    
+    <content type="html"><![CDATA[<p>用 <code>Prometheus</code> 来监控Nginx的状态，所以看了一下有个module可以支持。项目地址在：<a href="https://github.com/vozlt/nginx-module-vts.git" target="_blank" rel="noopener external nofollow noreferrer">https://github.com/vozlt/nginx-module-vts.git</a></p><span id="more"></span><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul><li><a href="https://zahui.fan/posts/c6a32841/" target="_blank" rel="noopener external nofollow noreferrer">Nginx使用module_vts模块来做监控</a></li></ul><h1 id="下载-nginx-源码和模块"><a href="#下载-nginx-源码和模块" class="headerlink" title="下载 nginx 源码和模块"></a>下载 nginx 源码和模块</h1><p>如果已经安装了，首先执行 <code>nginx -V</code> 查看编译参数，记录一下, 比如</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">--prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt=<span class="hljs-string">&#x27;-g -O2 -ffile-prefix-map=/data/builder/debuild/nginx-1.22.1/debian/debuild-base/nginx-1.22.1=. -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC&#x27;</span> --with-ld-opt=<span class="hljs-string">&#x27;-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie&#x27;</span><br></code></pre></td></tr></table></figure><div class="note note-primary">            <p>如果安装了nginx，这里需要Nginx源码包和当前安装的Nginx<strong>版本相同</strong>，关于安装最新版本Nignx请看：<a href="https://www.linuxcapable.com/how-to-install-upgrade-latest-nginx-mainline-stable-on-ubuntu-20-04/#gsc.tab=0" target="_blank" rel="noopener external nofollow noreferrer">How to Upgrade&#x2F;Install Nginx Stable&#x2F;Mainline on Ubuntu 20.04 LTS</a></p>          </div><p>nginx 源码<a href="http://nginx.org/en/download.html" target="_blank" rel="noopener external nofollow noreferrer">下载地址</a>。目前最新的Stable版为1.22</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget http://nginx.org/download/nginx-1.22.1.tar.gz<br>tar -zxvf nginx-1.22.1.tar.gz<br>git <span class="hljs-built_in">clone</span> https://github.com/vozlt/nginx-module-vts.git<br><span class="hljs-built_in">cd</span> nginx-1.22.1<br></code></pre></td></tr></table></figure><h1 id="开始编译"><a href="#开始编译" class="headerlink" title="开始编译"></a>开始编译</h1><h2 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h2><p>开始编译，编译时增加一条参数</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">--add-module=../nginx-module-vts<br></code></pre></td></tr></table></figure><p>结合上面记录的编译参数，完整的编译参数是：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt=<span class="hljs-string">&#x27;-g -O2 -ffile-prefix-map=/data/builder/debuild/nginx-1.22.1/debian/debuild-base/nginx-1.22.1=. -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC&#x27;</span> --with-ld-opt=<span class="hljs-string">&#x27;-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie&#x27;</span> --add-module=../nginx-module-vts<br></code></pre></td></tr></table></figure><p>如果遇到问题：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure: error: the HTTP rewrite module requires the PCRE library.<br>You can either <span class="hljs-built_in">disable</span> the module by using --without-http_rewrite_module<br>option, or install the PCRE library into the system, or build the PCRE library<br>statically from the <span class="hljs-built_in">source</span> with nginx by using --with-pcre=&lt;path&gt; option.<br></code></pre></td></tr></table></figure><p>下载安装 libpcre 和 libpcre-dev 包</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Ubuntu/Debian</span><br>sudo apt-get install libpcre3-dev<br><span class="hljs-comment"># RHEL / CentOS</span><br>sudo yum install pcre-devel<br></code></pre></td></tr></table></figure><p>如果遇到：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure: error: SSL modules require the OpenSSL library.<br>You can either <span class="hljs-keyword">do</span> not <span class="hljs-built_in">enable</span> the modules, or install the OpenSSL library<br>into the system, or build the OpenSSL library statically from the <span class="hljs-built_in">source</span><br>with nginx by using --with-openssl=&lt;path&gt; option.<br></code></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Ubuntu/Debian</span><br>sudo apt-get install libssl-dev<br><span class="hljs-comment"># RHEL / CentOS</span><br>yum -y install openssl openssl-devel<br></code></pre></td></tr></table></figure><h3 id="可能的报错："><a href="#可能的报错：" class="headerlink" title="可能的报错："></a>可能的报错：</h3><p>如果报错：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">checking <span class="hljs-keyword">for</span> C compiler ... not found<br><br>./configure: error: C compiler cc is not found<br></code></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install gcc<br></code></pre></td></tr></table></figure><p>如果遇到：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure: error: the HTTP gzip module requires the zlib library.<br>You can either <span class="hljs-built_in">disable</span> the module by using --without-http_gzip_module<br>option, or install the zlib library into the system, or build the zlib library<br>statically from the <span class="hljs-built_in">source</span> with nginx by using --with-zlib=&lt;path&gt; option.<br></code></pre></td></tr></table></figure><p>安装zlib</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Ubuntu/Debian</span><br>sudo apt-get install zlib1g-dev<br><span class="hljs-comment"># RHEL / CentOS</span><br>sudo yum install zlib-devel<br></code></pre></td></tr></table></figure><h3 id="正确输出"><a href="#正确输出" class="headerlink" title="正确输出"></a>正确输出</h3><p>直到出现类似下面的输出：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash">Configuration summary<br>  + using threads<br>  + using system PCRE library<br>  + using system OpenSSL library<br>  + using system zlib library<br><br>  nginx path prefix: <span class="hljs-string">&quot;/etc/nginx&quot;</span><br>  nginx binary file: <span class="hljs-string">&quot;/usr/sbin/nginx&quot;</span><br>  nginx modules path: <span class="hljs-string">&quot;/usr/lib/nginx/modules&quot;</span><br>  nginx configuration prefix: <span class="hljs-string">&quot;/etc/nginx&quot;</span><br>  nginx configuration file: <span class="hljs-string">&quot;/etc/nginx/nginx.conf&quot;</span><br>  nginx pid file: <span class="hljs-string">&quot;/var/run/nginx.pid&quot;</span><br>  nginx error <span class="hljs-built_in">log</span> file: <span class="hljs-string">&quot;/var/log/nginx/error.log&quot;</span><br>  nginx http access <span class="hljs-built_in">log</span> file: <span class="hljs-string">&quot;/var/log/nginx/access.log&quot;</span><br>  nginx http client request body temporary files: <span class="hljs-string">&quot;/var/cache/nginx/client_temp&quot;</span><br>  nginx http proxy temporary files: <span class="hljs-string">&quot;/var/cache/nginx/proxy_temp&quot;</span><br>  nginx http fastcgi temporary files: <span class="hljs-string">&quot;/var/cache/nginx/fastcgi_temp&quot;</span><br>  nginx http uwsgi temporary files: <span class="hljs-string">&quot;/var/cache/nginx/uwsgi_temp&quot;</span><br>  nginx http scgi temporary files: <span class="hljs-string">&quot;/var/cache/nginx/scgi_temp&quot;</span><br></code></pre></td></tr></table></figure><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make<br></code></pre></td></tr></table></figure><p>如果报错</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">-bash: make: <span class="hljs-built_in">command</span> not found<br></code></pre></td></tr></table></figure><p>对于 Ubuntu：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-get update &amp;&amp; apt-get install -y make<br></code></pre></td></tr></table></figure><p>如果在 Debian 上安装make失败，运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install -y build-essential<br></code></pre></td></tr></table></figure><h1 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h1><p>如果之前安装过 nginx：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">which</span> nginx<br></code></pre></td></tr></table></figure><p>然后将编译好的二进制文件替换现有的nginx</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mv</span> objs/nginx /usr/sbin/nginx<br></code></pre></td></tr></table></figure><div class="note note-primary">            <p>之前没安装过nginx的可以直接 <code>make &amp;&amp; make install</code></p>          </div><blockquote><p><code>nginx-module-vts</code> 模块从0.1.17+版本之后原生支持 prometheus 数据格式，可跳过 nginx-vts-exporter 的安装。</p></blockquote><h1 id="开启监控"><a href="#开启监控" class="headerlink" title="开启监控"></a>开启监控</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs conf"># 在 http 和 server 块中加入如下信息<br>http &#123;<br>    vhost_traffic_status_zone;<br>    ...<br>    server &#123;<br>        ...<br>        location /metrics &#123;<br>            vhost_traffic_status_display;<br>            vhost_traffic_status_display_format prometheus;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>比如，编辑conf文件：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/nginx/conf.d/vhost_traffic_status_zone.conf<br></code></pre></td></tr></table></figure><p>添加：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs conf">vhost_traffic_status_zone;<br>vhost_traffic_status_filter_by_host on;<br>vhost_traffic_status_filter on;<br>vhost_traffic_status_filter_by_set_key $status $server_name;<br>server &#123;<br>    listen       80;<br>    server_name  localhost;<br>    location /status &#123;<br>            vhost_traffic_status_display;<br>            vhost_traffic_status_display_format html;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>如果你想用域名访问：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs conf">vhost_traffic_status_zone;<br>vhost_traffic_status_filter_by_host on;<br>vhost_traffic_status_filter on;<br>vhost_traffic_status_filter_by_set_key $status $server_name;<br>server &#123;<br>    listen 80;<br>    server_name www.pawswrite.xyz;<br>    return 301 https://$host$request_uri;<br>&#125;<br><br>server &#123;<br>    listen 443;<br>    server_name www.pawswrite.xyz;<br>    #allow 你的IP;<br>    #deny  all;<br>    location /status &#123;<br>            vhost_traffic_status_display;<br>            vhost_traffic_status_display_format html;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>监控接口为：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">支持的输出格式有json html和 Prometheus<br><br>localhost/metrics<br>localhost/metrics/format/json<br>localhost/metrics/format/prometheus<br></code></pre></td></tr></table></figure><h1 id="acme申请证书"><a href="#acme申请证书" class="headerlink" title="acme申请证书"></a>acme申请证书</h1><p>安装 acme.sh</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl https://get.acme.sh | sh -s email=你的邮箱<br></code></pre></td></tr></table></figure><p>申请证书：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">acme.sh --issue -d 你的域名 --nginx<br></code></pre></td></tr></table></figure><p>之后修改配置，修改下面几处：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs conf">listen 443 ssl;<br>server_name your.example.com;<br>ssl_certificate /root/.acme.sh/your.example.com/your.example.com.cer;<br>ssl_certificate_key /root/.acme.sh/your.example.com/your.example.com.key;<br></code></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl https://get.acme.sh | sh -s email=my@pawswrite.xyz<br></code></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl https://get.acme.sh | sh -s email=my@pawswrite.xyz<br></code></pre></td></tr></table></figure><h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>添加在nginx.conf中的http段落下。</p><table><thead><tr><th>功能</th><th>配置</th></tr></thead><tbody><tr><td>开启基础监控</td><td><code>vhost_traffic_status_zone;</code></td></tr><tr><td>开启详细状态码统计</td><td><code>vhost_traffic_status_filter on;</code></td></tr><tr><td>开启详细状态码统计</td><td><code>vhost_traffic_status_filter_by_set_key $status $server_name;</code></td></tr><tr><td>开启URL统计</td><td><code>vhost_traffic_status_filter on;</code></td></tr><tr><td>开启URL统计</td><td><code>vhost_traffic_status_filter_by_set_key $uri uris::$server_name;</code></td></tr></tbody></table><p>打开vhost过滤，开启此功能，在Nginx配置有多个server_name的情况下，会根据不同的server_name进行流量的统计，否则默认会把流量全部计算到第一个server_name上。在不想统计流量的server区域禁用vhost_traffic_status，配置示例：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs conf">server &#123;<br>...<br>vhost_traffic_status off;<br>...<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习是人生第一要务</category>
+      
+      <category>Nginx</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>Nginx</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linux 开启原版 bbr</title>
     <link href="/posts/cd7a4445.html"/>
     <url>/posts/cd7a4445.html</url>
@@ -20,9 +49,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -49,9 +78,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -103,9 +132,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Seafile</tag>
       
@@ -134,9 +163,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Seafile</tag>
       
@@ -167,9 +196,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Seafile</tag>
       
@@ -628,9 +657,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>Azure</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -657,9 +686,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>Azure</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -684,9 +713,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -715,11 +744,11 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -744,15 +773,15 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象</tag>
       
       <tag>Notes</tag>
-      
-      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -777,11 +806,11 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -806,9 +835,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -930,9 +959,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -988,9 +1017,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1042,9 +1071,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1096,9 +1125,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1123,9 +1152,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Speedtest</tag>
       
@@ -1152,9 +1181,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1235,9 +1264,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1372,13 +1401,13 @@
     
     <tags>
       
-      <tag>Linux</tag>
+      <tag>CloudFlare</tag>
       
       <tag>VPS</tag>
       
-      <tag>CloudFlare</tag>
-      
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1422,11 +1451,11 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1451,9 +1480,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Object Storage</tag>
       
@@ -1480,9 +1509,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1507,13 +1536,13 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
-      <tag>长毛象</tag>
-      
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
+      
+      <tag>长毛象</tag>
       
     </tags>
     
@@ -1538,15 +1567,15 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
-      <tag>笔记</tag>
+      <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Notes</tag>
       
-      <tag>长毛象运维</tag>
+      <tag>笔记</tag>
       
     </tags>
     
@@ -1631,15 +1660,15 @@
     
     <tags>
       
-      <tag>笔记</tag>
+      <tag>长毛象运维</tag>
       
       <tag>Notes</tag>
       
+      <tag>Mastodon</tag>
+      
       <tag>fediverse</tag>
       
-      <tag>长毛象运维</tag>
-      
-      <tag>Mastodon</tag>
+      <tag>笔记</tag>
       
     </tags>
     
@@ -1720,11 +1749,11 @@
     
     <tags>
       
-      <tag>科学上网</tag>
-      
       <tag>游戏</tag>
       
       <tag>Steam</tag>
+      
+      <tag>科学上网</tag>
       
     </tags>
     
@@ -1778,9 +1807,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Notes</tag>
       
@@ -1807,9 +1836,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1834,9 +1863,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -1863,9 +1892,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1919,9 +1948,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1946,9 +1975,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1973,9 +2002,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>解锁网易云音乐</tag>
       
@@ -2002,9 +2031,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -2031,9 +2060,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -2060,9 +2089,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
