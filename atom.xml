@@ -6,7 +6,7 @@
   <link href="https://pawswrite.xyz/atom.xml" rel="self"/>
   
   <link href="https://pawswrite.xyz/"/>
-  <updated>2022-10-26T12:41:17.525Z</updated>
+  <updated>2022-11-02T07:40:57.931Z</updated>
   <id>https://pawswrite.xyz/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux 开启 warp team （ZeroTrust）代理</title>
+    <link href="https://pawswrite.xyz/posts/725256a7.html"/>
+    <id>https://pawswrite.xyz/posts/725256a7.html</id>
+    <published>2022-11-02T02:59:22.000Z</published>
+    <updated>2022-11-02T07:40:57.931Z</updated>
+    
+    <content type="html"><![CDATA[<p>Cloudflare的 <a href="https://1.1.1.1/" target="_blank" rel="noopener external nofollow noreferrer">warp</a> 可以代理你的出站流量，并提供了多种模式，包括代理模式和warp模式，其中代理模式可以在本地开启一个socks5代理端口。</p><span id="more"></span><h1 id="安装官方客户端"><a href="#安装官方客户端" class="headerlink" title="安装官方客户端"></a>安装官方客户端</h1><blockquote><p>目前Linux上有两种使用warp的方式，一种是官方客户端<code>warp-cli</code>，另一种是<a href="https://github.com/ViRb3/wgcf" target="_blank" rel="noopener external nofollow noreferrer">wgcf</a>非官方脚本。<code>wgcf</code>暂时还不支持 zero trust</p></blockquote><h2 id="【方法1】【推荐】一键脚本安装"><a href="#【方法1】【推荐】一键脚本安装" class="headerlink" title="【方法1】【推荐】一键脚本安装"></a>【方法1】【推荐】一键脚本安装</h2><p>使用以下命令一把梭后将自动安装 WARP 官方客户端并开启 SOCKS5 代理端口 (<code>127.0.0.1:40000</code>)：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 自动配置 WARP 官方客户端 SOCKS5 代理</span><br>bash &lt;(curl -fsSL git.io/warp.sh) s5<br></code></pre></td></tr></table></figure><h2 id="【方法2】手动安装"><a href="#【方法2】手动安装" class="headerlink" title="【方法2】手动安装"></a>【方法2】手动安装</h2><p><a href="https://blog.cloudflare.com/zh-cn/announcing-warp-for-linux-and-proxy-mode-zh-cn/" target="_blank" rel="noopener external nofollow noreferrer">官方文档</a></p><p>首先根据你的Linux系统发行版本配置repository，官方教程：<a href="https://pkg.cloudflareclient.com/install" target="_blank" rel="noopener external nofollow noreferrer">https://pkg.cloudflareclient.com/install</a></p><p>对于 Ubuntu amd64</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --<span class="hljs-built_in">yes</span> --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ <span class="hljs-subst">$(lsb_release -cs)</span> main&quot;</span> | sudo <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/cloudflare-client.list<br>sudo apt update<br>sudo apt install cloudflare-warp<br></code></pre></td></tr></table></figure><h1 id="验证登录-Zero-Trust"><a href="#验证登录-Zero-Trust" class="headerlink" title="验证登录 Zero Trust"></a>验证登录 Zero Trust</h1><p>用你申请zero trust的时候使用的名字，替换下面的team名。</p><p>打开下面的网页：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">https://你的team名.cloudflareaccess.com/warp<br></code></pre></td></tr></table></figure><p>按照步骤验证登录。之后在最后一步，在浏览器点击F12，抓取JWT token </p><p>格式如下：<br><code>com.cloudflare.warp://你的team名.cloudflareaccess.com/auth?token=&lt;JWT token&gt;</code></p><p>抓取这一串URL。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">warp-cli teams-enroll-tokens <span class="hljs-string">&quot;&lt;抓取的URL&gt;&quot;</span><br></code></pre></td></tr></table></figure><p>出现 <code>Success</code> 即可。注意JWT的exp很短，要尽快抓，如果失败就刷新网页重新抓取。</p><h1 id="设置并连接"><a href="#设置并连接" class="headerlink" title="设置并连接"></a>设置并连接</h1><p>warp team无法自主切换模式。</p><p>如果不想失联，<strong>一定</strong>要在 <code>zero trust</code> 中设置为 <code>proxy</code> 模式。（或者<code>add-excluded-route</code>、<code>add-excluded-host</code>）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">warp-cli --accept-tos connect<br></code></pre></td></tr></table></figure><h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>用 proxychains 来配置使用 socks5 代理上网，教程《<a href="https://pawswrite.xyz/posts/34687.html">Linux 配置 ProxyChains 上网</a>》</p><p>观察输出 <code>warp=</code> 后面的显示</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">proxychains curl https://www.cloudflare.com/cdn-cgi/trace/<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Cloudflare的 &lt;a href=&quot;https://1.1.1.1/&quot; target=&quot;_blank&quot; rel=&quot;noopener external nofollow noreferrer&quot;&gt;warp&lt;/a&gt; 可以代理你的出站流量，并提供了多种模式，包括代理模式和warp模式，其中代理模式可以在本地开启一个socks5代理端口。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/categories/Linux/"/>
+    
+    <category term="科学上网" scheme="https://pawswrite.xyz/categories/Linux/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+    
+    <category term="科学上网" scheme="https://pawswrite.xyz/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+  </entry>
   
   <entry>
     <title>监控不同网站的流量：nginx 监控模块 module_vts 编译安装</title>
@@ -58,9 +81,9 @@
     <category term="Linux" scheme="https://pawswrite.xyz/categories/Linux/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="科学上网" scheme="https://pawswrite.xyz/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     
@@ -83,9 +106,9 @@
     <category term="VPS" scheme="https://pawswrite.xyz/categories/VPS/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
   </entry>
   
@@ -129,9 +152,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E7%BD%91%E7%9B%98/Seafile/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -156,9 +179,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E7%BD%91%E7%9B%98/Seafile/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -185,9 +208,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E7%BD%91%E7%9B%98/Seafile/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -466,33 +489,6 @@
 &lt;blockquote&gt;
 &lt;p&gt;本文非原创，而是作者的学习笔记&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="学习是人生第一要务" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/"/>
-    
-    <category term="selenium" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/selenium/"/>
-    
-    
-    <category term="Python" scheme="https://pawswrite.xyz/tags/Python/"/>
-    
-    <category term="爬虫" scheme="https://pawswrite.xyz/tags/%E7%88%AC%E8%99%AB/"/>
-    
-    <category term="selenium" scheme="https://pawswrite.xyz/tags/selenium/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>selenium识别验证码是否通过</title>
-    <link href="https://pawswrite.xyz/posts/21451.html"/>
-    <id>https://pawswrite.xyz/posts/21451.html</id>
-    <published>2022-08-12T10:54:30.000Z</published>
-    <updated>2022-10-04T15:51:38.664Z</updated>
-    
-    <content type="html"><![CDATA[<p>其实就是识别验证码勾选框有没有打勾。</p><span id="more"></span><h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>切换到验证码的iframe页anchor，获取元素recaptcha-anchor的属性aria-checked就可以了。<code>false</code> 和 <code>true</code> </p><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python3">import time<br>import requests<br>from selenium import webdriver<br><br>options = webdriver.ChromeOptions()<br>driver = webdriver.Chrome(&#x27;selenium/chromedriver.exe&#x27;, options=options)<br><br>driver.get(&quot;https://www.google.com/recaptcha/api2/demo&quot;)<br><br># 切换到勾选框<br>iframe = driver.find_element_by_css_selector(&#x27;iframe[src*=&quot;anchor&quot;]&#x27;)<br>driver.switch_to.frame(iframe)<br><br># 获取勾选框的打勾状态<br>for i in range(30):<br>    anchor = driver.find_element_by_id(&#x27;recaptcha-anchor&#x27;)<br>    is_checked = anchor.get_attribute(&quot;aria-checked&quot;)<br>    print(&#x27;当前识别状态：&#x27;, is_checked)<br>    time.sleep(3)<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;其实就是识别验证码勾选框有没有打勾。&lt;/p&gt;</summary>
     
     
     

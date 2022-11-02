@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Linux 开启 warp team （ZeroTrust）代理</title>
+    <link href="/posts/725256a7.html"/>
+    <url>/posts/725256a7.html</url>
+    
+    <content type="html"><![CDATA[<p>Cloudflare的 <a href="https://1.1.1.1/" target="_blank" rel="noopener external nofollow noreferrer">warp</a> 可以代理你的出站流量，并提供了多种模式，包括代理模式和warp模式，其中代理模式可以在本地开启一个socks5代理端口。</p><span id="more"></span><h1 id="安装官方客户端"><a href="#安装官方客户端" class="headerlink" title="安装官方客户端"></a>安装官方客户端</h1><blockquote><p>目前Linux上有两种使用warp的方式，一种是官方客户端<code>warp-cli</code>，另一种是<a href="https://github.com/ViRb3/wgcf" target="_blank" rel="noopener external nofollow noreferrer">wgcf</a>非官方脚本。<code>wgcf</code>暂时还不支持 zero trust</p></blockquote><h2 id="【方法1】【推荐】一键脚本安装"><a href="#【方法1】【推荐】一键脚本安装" class="headerlink" title="【方法1】【推荐】一键脚本安装"></a>【方法1】【推荐】一键脚本安装</h2><p>使用以下命令一把梭后将自动安装 WARP 官方客户端并开启 SOCKS5 代理端口 (<code>127.0.0.1:40000</code>)：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 自动配置 WARP 官方客户端 SOCKS5 代理</span><br>bash &lt;(curl -fsSL git.io/warp.sh) s5<br></code></pre></td></tr></table></figure><h2 id="【方法2】手动安装"><a href="#【方法2】手动安装" class="headerlink" title="【方法2】手动安装"></a>【方法2】手动安装</h2><p><a href="https://blog.cloudflare.com/zh-cn/announcing-warp-for-linux-and-proxy-mode-zh-cn/" target="_blank" rel="noopener external nofollow noreferrer">官方文档</a></p><p>首先根据你的Linux系统发行版本配置repository，官方教程：<a href="https://pkg.cloudflareclient.com/install" target="_blank" rel="noopener external nofollow noreferrer">https://pkg.cloudflareclient.com/install</a></p><p>对于 Ubuntu amd64</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --<span class="hljs-built_in">yes</span> --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ <span class="hljs-subst">$(lsb_release -cs)</span> main&quot;</span> | sudo <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/cloudflare-client.list<br>sudo apt update<br>sudo apt install cloudflare-warp<br></code></pre></td></tr></table></figure><h1 id="验证登录-Zero-Trust"><a href="#验证登录-Zero-Trust" class="headerlink" title="验证登录 Zero Trust"></a>验证登录 Zero Trust</h1><p>用你申请zero trust的时候使用的名字，替换下面的team名。</p><p>打开下面的网页：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">https://你的team名.cloudflareaccess.com/warp<br></code></pre></td></tr></table></figure><p>按照步骤验证登录。之后在最后一步，在浏览器点击F12，抓取JWT token </p><p>格式如下：<br><code>com.cloudflare.warp://你的team名.cloudflareaccess.com/auth?token=&lt;JWT token&gt;</code></p><p>抓取这一串URL。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">warp-cli teams-enroll-tokens <span class="hljs-string">&quot;&lt;抓取的URL&gt;&quot;</span><br></code></pre></td></tr></table></figure><p>出现 <code>Success</code> 即可。注意JWT的exp很短，要尽快抓，如果失败就刷新网页重新抓取。</p><h1 id="设置并连接"><a href="#设置并连接" class="headerlink" title="设置并连接"></a>设置并连接</h1><p>warp team无法自主切换模式。</p><p>如果不想失联，<strong>一定</strong>要在 <code>zero trust</code> 中设置为 <code>proxy</code> 模式。（或者<code>add-excluded-route</code>、<code>add-excluded-host</code>）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">warp-cli --accept-tos connect<br></code></pre></td></tr></table></figure><h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>用 proxychains 来配置使用 socks5 代理上网，教程《<a href="https://pawswrite.xyz/posts/34687.html">Linux 配置 ProxyChains 上网</a>》</p><p>观察输出 <code>warp=</code> 后面的显示</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">proxychains curl https://www.cloudflare.com/cdn-cgi/trace/<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+      <category>科学上网</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>科学上网</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>监控不同网站的流量：nginx 监控模块 module_vts 编译安装</title>
     <link href="/posts/ef56ef76.html"/>
     <url>/posts/ef56ef76.html</url>
@@ -49,9 +76,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -78,9 +105,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -132,9 +159,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Seafile</tag>
       
@@ -163,9 +190,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Seafile</tag>
       
@@ -196,9 +223,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Seafile</tag>
       
@@ -626,9 +653,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>pyppeteer</tag>
+      
+      <tag>Python</tag>
       
       <tag>爬虫</tag>
       
@@ -657,9 +684,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>Azure</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -686,9 +713,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>Azure</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -713,9 +740,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -744,9 +771,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -773,15 +800,15 @@
     
     <tags>
       
-      <tag>长毛象</tag>
+      <tag>Linux</tag>
       
       <tag>VPS</tag>
       
-      <tag>Linux</tag>
+      <tag>长毛象运维</tag>
+      
+      <tag>长毛象</tag>
       
       <tag>Notes</tag>
-      
-      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -806,9 +833,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -835,9 +862,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -959,9 +986,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1017,9 +1044,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1071,9 +1098,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1125,9 +1152,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1152,9 +1179,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Speedtest</tag>
       
@@ -1181,9 +1208,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1264,9 +1291,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1401,11 +1428,11 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
       
       <tag>CloudFlare</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -1451,9 +1478,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -1480,9 +1507,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Object Storage</tag>
       
@@ -1509,9 +1536,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1536,13 +1563,13 @@
     
     <tags>
       
-      <tag>长毛象</tag>
+      <tag>Linux</tag>
       
       <tag>VPS</tag>
       
-      <tag>Linux</tag>
-      
       <tag>长毛象运维</tag>
+      
+      <tag>长毛象</tag>
       
     </tags>
     
@@ -1567,15 +1594,15 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
       
-      <tag>笔记</tag>
+      <tag>VPS</tag>
+      
+      <tag>长毛象运维</tag>
       
       <tag>Notes</tag>
       
-      <tag>长毛象运维</tag>
+      <tag>笔记</tag>
       
     </tags>
     
@@ -1660,15 +1687,15 @@
     
     <tags>
       
-      <tag>笔记</tag>
+      <tag>长毛象运维</tag>
       
       <tag>Notes</tag>
       
+      <tag>Mastodon</tag>
+      
       <tag>fediverse</tag>
       
-      <tag>长毛象运维</tag>
-      
-      <tag>Mastodon</tag>
+      <tag>笔记</tag>
       
     </tags>
     
@@ -1749,11 +1776,11 @@
     
     <tags>
       
-      <tag>科学上网</tag>
-      
       <tag>游戏</tag>
       
       <tag>Steam</tag>
+      
+      <tag>科学上网</tag>
       
     </tags>
     
@@ -1807,9 +1834,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Notes</tag>
       
@@ -1836,9 +1863,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1863,9 +1890,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -1892,9 +1919,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1948,9 +1975,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1975,9 +2002,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -2002,9 +2029,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>解锁网易云音乐</tag>
       
@@ -2031,9 +2058,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -2060,9 +2087,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -2089,9 +2116,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
