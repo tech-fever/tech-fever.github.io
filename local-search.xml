@@ -20,9 +20,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -49,9 +49,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Bitwarden</tag>
       
@@ -136,9 +136,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -165,9 +165,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -221,9 +221,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Seafile</tag>
       
@@ -252,9 +252,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Seafile</tag>
       
@@ -285,9 +285,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Seafile</tag>
       
@@ -341,9 +341,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -383,7 +383,7 @@
     <link href="/posts/33840.html"/>
     <url>/posts/33840.html</url>
     
-    <content type="html"><![CDATA[<p>全年稳定高速解锁Netflix的机场很少，大部分都很贵。推荐一个我自用了挺久的高性价比机场。</p><p>注册GLaDOS(<a href="https://glados.rocks/register" target="_blank" rel="noopener external nofollow noreferrer">注册地址</a>), 并输入邀请码激活:</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">SPV54-EMK9S-HUH77-QXWB0<br></code></pre></td></tr></table></figure><span id="more"></span><div class="note note-info">            <p>机场：简单理解就是全平台可用的梯子。</p>          </div><h1 id="测速结果"><a href="#测速结果" class="headerlink" title="测速结果"></a>测速结果</h1><p>Speedtest stair高峰期测速结果（多线程测速），我本地带宽在500Mbps：<br><img src="/posts/33840/speedtest-stair.png"></p><p>Youtube 高峰期（下午六点多）测速，能稳定在十万左右：<br><img src="/posts/33840/youtube.png"></p><h1 id="节点价格"><a href="#节点价格" class="headerlink" title="节点价格"></a>节点价格</h1><p>他家有三个套餐，写着限速但实际我使用并没发现限速。<br><img src="/posts/33840/price.png"></p><p>用 <code>PORTALGUN</code> 优惠码可以满100-20：<br><img src="/posts/33840/pricing.png"></p><p>支持Paypal、Visa&#x2F;MasterCard信用卡和支付宝三种支付方式，其中Paypal和信用卡可以9折，7天内可退款（通过 PayPal 支付的需要支付每笔 5 美元手续费）。<br><img src="/posts/33840/payment.png"></p><p>也就是说200天套餐仅需 (119 - 20) * 0.9 &#x3D; 88 ，大概13一月。</p><p>但我说这个机场性价比极高的原因在于，他家可以<strong>无限签到</strong>，付费用户每次签到100%延长一天（免费用户好像不能无限延长）。</p><p>而签到呢，又是可以用脚本自动的。所以。。。一次付费，<del>理论上无限使用，只要机场不改变政策</del>。</p><p>脚本自动签到看我的</p><h1 id="注册流程"><a href="#注册流程" class="headerlink" title="注册流程"></a>注册流程</h1><ul><li>官网：<a href="https://glados.rocks/" target="_blank" rel="noopener external nofollow noreferrer">https://glados.rocks</a></li><li>注册：<a href="https://glados.rocks/register" target="_blank" rel="noopener external nofollow noreferrer">https://glados.rocks/register</a></li></ul><p>首先进入 <a href="https://glados.rocks/register" target="_blank" rel="noopener external nofollow noreferrer">GLaDOS 注册 </a>：<br><img src="/posts/33840/register.png"></p><p>输入自己的邮箱，点击send passcode to email，再进入邮箱查看收到的验证码，将验证码填入 Passcode 输入框。最后点击 <strong>Register</strong> 按钮：<br><img src="/posts/33840/CD-KEY.PNG"></p><p>在这里输入笔者的邀请码，点击Next，即可获得<strong>三天免费</strong>，</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">SPV54-EMK9S-HUH77-QXWB0<br></code></pre></td></tr></table></figure><p>之后就等待账号设置完成：<br><img src="/posts/33840/setup.png"></p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>机场不仅有工作日工作时间在线的客服，还有详尽的教程。照着使用就好啦。</p><h1 id="Netflix解锁"><a href="#Netflix解锁" class="headerlink" title="Netflix解锁"></a>Netflix解锁</h1><p>机场提供 Netflix 美国、台湾解锁节点，平均速度大于40MB&#x2F;s，看4k毫无压力。<br><img src="/posts/33840/netflix.png"></p>]]></content>
+    <content type="html"><![CDATA[<p>全年稳定高速解锁Netflix的机场很少，大部分都很贵。推荐一个我自用了挺久的高性价比机场。</p><p>注册GLaDOS(<a href="https://glados.rocks/register" target="_blank" rel="noopener external nofollow noreferrer">注册地址</a>), 并输入邀请码激活:</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">SPV54-EMK9S-HUH77-QXWB0<br></code></pre></td></tr></table></figure><span id="more"></span><p class="note note-info">机场：简单理解就是全平台可用的梯子。</p><h1 id="测速结果"><a href="#测速结果" class="headerlink" title="测速结果"></a>测速结果</h1><p>Speedtest stair高峰期测速结果（多线程测速），我本地带宽在500Mbps：<br><img src="/posts/33840/speedtest-stair.png"></p><p>Youtube 高峰期（下午六点多）测速，能稳定在十万左右：<br><img src="/posts/33840/youtube.png"></p><h1 id="节点价格"><a href="#节点价格" class="headerlink" title="节点价格"></a>节点价格</h1><p>他家有三个套餐，写着限速但实际我使用并没发现限速。<br><img src="/posts/33840/price.png"></p><p>用 <code>PORTALGUN</code> 优惠码可以满100-20：<br><img src="/posts/33840/pricing.png"></p><p>用 <code>CYBERCAT</code> 优惠码可以<b><font color=red>满60减20</font></b></p><p>支持Paypal、Visa&#x2F;MasterCard信用卡和支付宝三种支付方式，其中Paypal和信用卡可以9折，7天内可退款（通过 PayPal 支付的需要支付每笔 5 美元手续费）。<br><img src="/posts/33840/payment.png"></p><p>也就是说200天套餐仅需 (119 - 20) * 0.9 &#x3D; 88 ，大概13一月。</p><p>但我说这个机场性价比极高的原因在于，他家可以<strong>无限签到</strong>，付费用户每次签到100%延长一天（免费用户好像不能无限延长）。</p><p>而签到呢，又是可以用脚本自动的。所以。。。一次付费，<del>理论上无限使用，只要机场不改变政策</del>。</p><p class="note note-light">自动签到脚本可留言获取</p><h1 id="注册流程"><a href="#注册流程" class="headerlink" title="注册流程"></a>注册流程</h1><ul><li>官网：<a href="https://glados.rocks/" target="_blank" rel="noopener external nofollow noreferrer">https://glados.rocks</a></li><li>注册：<a href="https://glados.rocks/register" target="_blank" rel="noopener external nofollow noreferrer">https://glados.rocks/register</a></li></ul><p>首先进入 <a href="https://glados.rocks/register" target="_blank" rel="noopener external nofollow noreferrer">GLaDOS 注册 </a>：<br><img src="/posts/33840/register.png"></p><p>输入自己的邮箱，点击send passcode to email，再进入邮箱查看收到的验证码，将验证码填入 Passcode 输入框。最后点击 <strong>Register</strong> 按钮：<br><img src="/posts/33840/CD-KEY.PNG"></p><p>在这里输入笔者的邀请码，点击Next，即可获得<strong>三天免费</strong>，</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">SPV54-EMK9S-HUH77-QXWB0<br></code></pre></td></tr></table></figure><p>之后就等待账号设置完成：<br><img src="/posts/33840/setup.png"></p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>机场不仅有工作日工作时间在线的客服，还有详尽的教程。照着使用就好啦。</p><h1 id="Netflix解锁"><a href="#Netflix解锁" class="headerlink" title="Netflix解锁"></a>Netflix解锁</h1><p>机场提供 Netflix 美国、台湾解锁节点，平均速度大于40MB&#x2F;s，看4k毫无压力。<br><img src="/posts/33840/netflix.png"></p>]]></content>
     
     
     <categories>
@@ -416,9 +416,9 @@
     
     <tags>
       
-      <tag>Django</tag>
-      
       <tag>Python</tag>
+      
+      <tag>Django</tag>
       
     </tags>
     
@@ -723,9 +723,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>pyppeteer</tag>
+      
+      <tag>Python</tag>
       
       <tag>爬虫</tag>
       
@@ -810,9 +810,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -845,11 +845,11 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -874,11 +874,11 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象</tag>
       
@@ -909,11 +909,11 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -940,9 +940,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -1066,9 +1066,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1124,9 +1124,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1180,9 +1180,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1240,9 +1240,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1269,9 +1269,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Speedtest</tag>
       
@@ -1298,9 +1298,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1385,9 +1385,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1524,13 +1524,13 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>CloudFlare</tag>
       
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1576,11 +1576,11 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1605,9 +1605,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Object Storage</tag>
       
@@ -1636,9 +1636,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1663,11 +1663,11 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象</tag>
       
@@ -1694,11 +1694,11 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Notes</tag>
       
@@ -1936,9 +1936,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Notes</tag>
       
@@ -1965,9 +1965,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1994,9 +1994,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -2023,9 +2023,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -2079,9 +2079,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -2106,9 +2106,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -2133,9 +2133,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>解锁网易云音乐</tag>
       
@@ -2162,9 +2162,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -2193,9 +2193,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -2222,9 +2222,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
