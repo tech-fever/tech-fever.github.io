@@ -802,14 +802,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Azure/</loc>
+    <loc>https://pawswrite.xyz/tags/Notes/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Notes/</loc>
+    <loc>https://pawswrite.xyz/tags/Azure/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -949,14 +949,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/pyppeteer/</loc>
+    <loc>https://pawswrite.xyz/tags/Python/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Python/</loc>
+    <loc>https://pawswrite.xyz/tags/pyppeteer/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1077,14 +1077,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E9%95%BF%E6%AF%9B%E8%B1%A1%E8%BF%90%E7%BB%B4/</loc>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/</loc>
+    <loc>https://pawswrite.xyz/categories/%E9%95%BF%E6%AF%9B%E8%B1%A1%E8%BF%90%E7%BB%B4/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1105,6 +1105,13 @@
   </url>
   
   <url>
+    <loc>https://pawswrite.xyz/categories/Linux/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
+    <lastmod>2022-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -1112,7 +1119,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/Linux/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Linux/</loc>
+    <lastmod>2022-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Nginx/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1126,7 +1140,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Linux/</loc>
+    <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Telegram-Bot/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1141,13 +1155,6 @@
   
   <url>
     <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Seafile/</loc>
-    <lastmod>2022-11-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Nginx/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1210,7 +1217,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/NextCloud/</loc>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Python/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1224,14 +1231,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Django/</loc>
+    <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/NextCloud/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Python/</loc>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Django/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1253,13 +1260,6 @@
   
   <url>
     <loc>https://pawswrite.xyz/categories/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2022-11-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Telegram-Bot/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1308,14 +1308,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%95%99%E7%A8%8B/</loc>
+    <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/</loc>
+    <loc>https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%95%99%E7%A8%8B/</loc>
     <lastmod>2022-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
