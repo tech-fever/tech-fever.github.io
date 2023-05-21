@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>django 学习笔记</title>
+    <link href="/posts/87db3555.html"/>
+    <url>/posts/87db3555.html</url>
+    
+    <content type="html"><![CDATA[<p>Django 个人学习笔记</p><span id="more"></span><h1 id="Django-内建"><a href="#Django-内建" class="headerlink" title="Django 内建"></a>Django 内建</h1><h2 id="站点-site"><a href="#站点-site" class="headerlink" title="站点 site"></a>站点 site</h2><ul><li>在<code>INSTALLED_APPS</code>列表中添加<code>&#39;django.contrib.sites&#39;</code>应用程序。</li><li>在<code>MIDDLEWARE</code>列表中添加<code>&#39;django.contrib.sites.middleware.CurrentSiteMiddleware&#39;</code>中间件。</li><li>项目的settings.py文件中添加<code>SITE_NAME = &#39;My Site Name&#39;</code>和<code>SITE_ID = 1</code></li><li>打开Django管理后台，转到“Sites”（站点）部分，并确保站点名称已设置为您在代码中设置的名称。</li></ul><p>现在，您可以在代码中使用<code>Site.objects.get_current().name</code>来获取当前站点的名称，或在模板中使用<code>&#123;&#123; request.site.name &#125;&#125;</code>来获取当前站点的名称。</p><h2 id="Auth-视图"><a href="#Auth-视图" class="headerlink" title="Auth 视图"></a>Auth 视图</h2><p><code>django.contrib.auth</code> 自带</p><ul><li>登录 <code>LoginView</code>：模板 <code>&quot;registration/login.html&quot;</code></li><li>登出 <code>LogoutView</code>：</li><li>重置密码 <code>PasswordResetView</code>：</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习食人鲨第一要务</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+      <tag>Django</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>SpeedyPage VPS 全方位测评</title>
     <link href="/posts/a3057227.html"/>
     <url>/posts/a3057227.html</url>

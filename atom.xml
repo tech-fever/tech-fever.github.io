@@ -6,7 +6,7 @@
   <link href="https://pawswrite.xyz/atom.xml" rel="self"/>
   
   <link href="https://pawswrite.xyz/"/>
-  <updated>2022-11-17T11:57:42.994Z</updated>
+  <updated>2023-05-21T10:04:08.015Z</updated>
   <id>https://pawswrite.xyz/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>django 学习笔记</title>
+    <link href="https://pawswrite.xyz/posts/87db3555.html"/>
+    <id>https://pawswrite.xyz/posts/87db3555.html</id>
+    <published>2023-05-21T08:53:45.000Z</published>
+    <updated>2023-05-21T10:04:08.015Z</updated>
+    
+    <content type="html"><![CDATA[<p>Django 个人学习笔记</p><span id="more"></span><h1 id="Django-内建"><a href="#Django-内建" class="headerlink" title="Django 内建"></a>Django 内建</h1><h2 id="站点-site"><a href="#站点-site" class="headerlink" title="站点 site"></a>站点 site</h2><ul><li>在<code>INSTALLED_APPS</code>列表中添加<code>&#39;django.contrib.sites&#39;</code>应用程序。</li><li>在<code>MIDDLEWARE</code>列表中添加<code>&#39;django.contrib.sites.middleware.CurrentSiteMiddleware&#39;</code>中间件。</li><li>项目的settings.py文件中添加<code>SITE_NAME = &#39;My Site Name&#39;</code>和<code>SITE_ID = 1</code></li><li>打开Django管理后台，转到“Sites”（站点）部分，并确保站点名称已设置为您在代码中设置的名称。</li></ul><p>现在，您可以在代码中使用<code>Site.objects.get_current().name</code>来获取当前站点的名称，或在模板中使用<code>&#123;&#123; request.site.name &#125;&#125;</code>来获取当前站点的名称。</p><h2 id="Auth-视图"><a href="#Auth-视图" class="headerlink" title="Auth 视图"></a>Auth 视图</h2><p><code>django.contrib.auth</code> 自带</p><ul><li>登录 <code>LoginView</code>：模板 <code>&quot;registration/login.html&quot;</code></li><li>登出 <code>LogoutView</code>：</li><li>重置密码 <code>PasswordResetView</code>：</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Django 个人学习笔记&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="学习食人鲨第一要务" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E9%A3%9F%E4%BA%BA%E9%B2%A8%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/"/>
+    
+    
+    <category term="Python" scheme="https://pawswrite.xyz/tags/Python/"/>
+    
+    <category term="Django" scheme="https://pawswrite.xyz/tags/Django/"/>
+    
+  </entry>
   
   <entry>
     <title>SpeedyPage VPS 全方位测评</title>
@@ -477,33 +500,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>nginx 反向代理 cloudflare 网站出现 502 报错</title>
-    <link href="https://pawswrite.xyz/posts/55676.html"/>
-    <id>https://pawswrite.xyz/posts/55676.html</id>
-    <published>2022-08-15T18:54:40.000Z</published>
-    <updated>2022-10-04T15:51:38.662Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>【非原创，学习笔记】</strong><br>反代一个网站，一直502</p><span id="more"></span><p>error_log 输出</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs log">SSL_do_handshake() failed (SSL: error:14094410:SSL routines:ssl3_read_bytes:sslv3 ale                                 rt handshake failure:SSL alert number 40) while SSL handshaking to upstream, <br></code></pre></td></tr></table></figure><p>解决办法：nginx反代时启动SNI以避免反代CF时出现问题。在反向代理块增加一行<code>proxy_ssl_server_name on;</code>即可解决问题。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;strong&gt;【非原创，学习笔记】&lt;/strong&gt;&lt;br&gt;反代一个网站，一直502&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="学习是人生第一要务" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/"/>
-    
-    <category term="Nginx" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Nginx/"/>
-    
-    
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
-    <category term="Nginx" scheme="https://pawswrite.xyz/tags/Nginx/"/>
-    
-    <category term="运维" scheme="https://pawswrite.xyz/tags/%E8%BF%90%E7%BB%B4/"/>
     
   </entry>
   
