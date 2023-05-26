@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Hyper-V 或 Docker 占用端口导致 Jetbrain IDE 无法启动或 Clash 端口为 0</title>
+    <link href="/posts/1326aa90.html"/>
+    <url>/posts/1326aa90.html</url>
+    
+    <content type="html"><![CDATA[<p>其实本文应该是：</p><ul><li>IDEA Start Failed: Address already in use 的解决办法</li><li>Clash 端口为 0 的解决办法</li></ul><span id="more"></span><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>最近遇到了两次端口无法使用的问题，第一次是 Pycharm 无法启动。报错如下图，第二次是 Clash 无法使用默认端口 7890 从而变成端口 0 ，但实际上 0 并不是一个合法的端口，所以最终会导致代理无法使用。</p><p><img src="/posts/undefined/pycharm.png" alt="pycharm"></p><p>发现两个问题的根源都是同一个。就是 tcp 动态端口占用某个区间，而我们需要的端口比如 7890 刚好在这个区间范围内。</p><h2 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h2><p>先打开 <code>powershell</code> 或者 <code>cmd</code></p><p>查看端口占用：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">netstat <span class="hljs-literal">-ano</span><br></code></pre></td></tr></table></figure><p>查找某个端口是否被占用：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">netstat <span class="hljs-literal">-aon</span>|findstr <span class="hljs-string">&quot;8081&quot;</span><br></code></pre></td></tr></table></figure><p>发现我们需要的端口明明没被占用啊。</p><p>然后查看 Windows 操作系统中 TCP 协议的动态端口范围：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">netsh int ipv4 show dynamicport tcp<br></code></pre></td></tr></table></figure><p>使用命令查看被系统排除在可用范围外的端口：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">netsh interface ipv4 show excludedportrange protocol=tcp<br></code></pre></td></tr></table></figure><p><img src="https://siegelion-blog.oss-cn-beijing.aliyuncs.com/blog/image-20220131102147660.png" alt="port"></p><p>也就是说在第一条命令范围的端口且不在第二条命令的范围的端口，是不可以用的。</p><h1 id="Clash-问题解决"><a href="#Clash-问题解决" class="headerlink" title="Clash 问题解决"></a>Clash 问题解决</h1><p>有几种方法都可以解决</p><h2 id="修改软件的端口"><a href="#修改软件的端口" class="headerlink" title="修改软件的端口"></a>修改软件的端口</h2><p>山不动我动。既然 7890 被占用，那就换一个，比如说换成 7980</p><blockquote><p>解决方法参考：《<a href="https://siegelion.cn/2022/01/31/Clash%20For%20Windows%E4%BB%A3%E7%90%86%E7%AB%AF%E5%8F%A3%E4%B8%BA0%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener external nofollow noreferrer">Clash For Windows代理端口为0问题</a>》</p></blockquote><h2 id="修改-tcp-动态端口范围"><a href="#修改-tcp-动态端口范围" class="headerlink" title="修改 tcp 动态端口范围"></a>修改 tcp 动态端口范围</h2><p>看个人需求。你可以关掉，那就关。</p><p>先禁用 Hyper-V （需要重启）</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">dism.exe <span class="hljs-regexp">/Online /</span>Disable-Feature:Microsoft-Hyper-V<br></code></pre></td></tr></table></figure><p>重启完成后，增加被排除端口范围，其中 7890 就是希望被添加的排除在范围内的端口：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">netsh int ipv4 <span class="hljs-built_in">add</span> excludedportrange <span class="hljs-attribute">protocol</span>=tcp <span class="hljs-attribute">startport</span>=7890 <span class="hljs-attribute">numberofports</span>=1<br></code></pre></td></tr></table></figure><p>如果要保存的话，加上 <code>store=persistant</code></p><p>也就是：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">netsh int ipv4 <span class="hljs-built_in">add</span> excludedportrange <span class="hljs-attribute">protocol</span>=tcp <span class="hljs-attribute">startport</span>=7890 <span class="hljs-attribute">numberofports</span>=1 <span class="hljs-attribute">store</span>=persistant<br></code></pre></td></tr></table></figure><p>重新启用 Hyper-V</p><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">dism.exe <span class="hljs-string">/Online</span> <span class="hljs-string">/Enable-Feature</span><span class="hljs-function">:Microsoft-Hyper-V</span> <span class="hljs-string">/All</span><br></code></pre></td></tr></table></figure><h1 id="Jetbrains-IDE-问题解决"><a href="#Jetbrains-IDE-问题解决" class="headerlink" title="Jetbrains IDE 问题解决"></a>Jetbrains IDE 问题解决</h1><p>其实我对于为什么会出问题还是有点迷思。</p><p>通过搜索我找到 JetBrains 论坛<a href="https://intellij-support.jetbrains.com/hc/en-us/community/posts/360010020399-Pycharm-2020-3-Internal-Error-java-net-BindException-Address-already-in-use-bind-Windows-10" target="_blank" rel="noopener external nofollow noreferrer">相关帖子</a></p><p>其中有一段：</p><blockquote><p>To lock folders IDE is starting a server on localhost, it tries to bind on the first available port between 6942 and 6991</p></blockquote><p>就是说 IDE 启动的时候会在本地起一个 server，并且绑定 <strong>6942 到 6991</strong> 之间第一个可用的端口。但明明这个段的端口是被排除了的。</p><p>我又查看了 tcp 实际占用的端口，在 <code>Task Manager -&gt; Performance -&gt; Resource Monitor -&gt; TCP connections</code></p><p><img src="/posts/undefined/tcp.png" alt="tcp"></p><p>这个范围内确实没有使用端口。</p><blockquote><p>但很多人都反映卸载 docker 和 Hyper-V 就可以重新启动 IDE 了。所以很明显这俩还是罪魁祸首</p></blockquote><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>以管理员身份运行 powershell</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell">net stop winnat<br>net <span class="hljs-built_in">start</span> winnat<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习是人生第一要务</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>django 学习笔记</title>
     <link href="/posts/87db3555.html"/>
     <url>/posts/87db3555.html</url>
@@ -13,7 +32,7 @@
     
     <categories>
       
-      <category>学习食人鲨第一要务</category>
+      <category>学习是人生第一要务</category>
       
     </categories>
     
@@ -781,9 +800,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>Azure</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -810,9 +829,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>Azure</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -874,9 +893,9 @@
       
       <tag>VPS</tag>
       
-      <tag>Linux</tag>
-      
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -903,13 +922,13 @@
       
       <tag>VPS</tag>
       
+      <tag>长毛象运维</tag>
+      
       <tag>Linux</tag>
       
       <tag>长毛象</tag>
       
       <tag>Notes</tag>
-      
-      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -938,9 +957,9 @@
       
       <tag>VPS</tag>
       
-      <tag>Linux</tag>
-      
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1551,13 +1570,13 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
-      <tag>Linux</tag>
-      
       <tag>CloudFlare</tag>
       
+      <tag>VPS</tag>
+      
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1605,9 +1624,9 @@
       
       <tag>VPS</tag>
       
-      <tag>Linux</tag>
-      
       <tag>长毛象运维</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1692,11 +1711,11 @@
       
       <tag>VPS</tag>
       
+      <tag>长毛象运维</tag>
+      
       <tag>Linux</tag>
       
       <tag>长毛象</tag>
-      
-      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -1723,13 +1742,13 @@
       
       <tag>VPS</tag>
       
-      <tag>Linux</tag>
+      <tag>长毛象运维</tag>
       
-      <tag>笔记</tag>
+      <tag>Linux</tag>
       
       <tag>Notes</tag>
       
-      <tag>长毛象运维</tag>
+      <tag>笔记</tag>
       
     </tags>
     
@@ -1814,15 +1833,15 @@
     
     <tags>
       
-      <tag>笔记</tag>
-      
-      <tag>fediverse</tag>
+      <tag>长毛象运维</tag>
       
       <tag>Notes</tag>
       
-      <tag>长毛象运维</tag>
-      
       <tag>Mastodon</tag>
+      
+      <tag>fediverse</tag>
+      
+      <tag>笔记</tag>
       
     </tags>
     
@@ -1903,11 +1922,11 @@
     
     <tags>
       
-      <tag>科学上网</tag>
-      
       <tag>游戏</tag>
       
       <tag>Steam</tag>
+      
+      <tag>科学上网</tag>
       
     </tags>
     
