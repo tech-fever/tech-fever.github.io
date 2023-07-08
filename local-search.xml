@@ -4,11 +4,40 @@
   
   
   <entry>
+    <title>VPS指南：【新版】解锁网易云灰色歌曲之服务器端搭建</title>
+    <link href="/posts/82ea911d.html"/>
+    <url>/posts/82ea911d.html</url>
+    
+    <content type="html"><![CDATA[<p>UnblockNeteaseMusic 是一款可以让网易云曲库里的灰色歌曲能够正常播放的神器。原作者不再更新，目前交由 Unblock Netease Music 维护小组进行更新维护。</p><span id="more"></span><img src="https://user-images.githubusercontent.com/26399680/47980314-0e3f1700-e102-11e8-8857-e3436ecc8beb.png" alt="logo" width="140" height="140" align="right"><h1 id="UnblockNeteaseMusic-介绍"><a href="#UnblockNeteaseMusic-介绍" class="headerlink" title="UnblockNeteaseMusic 介绍"></a>UnblockNeteaseMusic 介绍</h1><p>解锁网易云音乐客户端变灰歌曲，可听 VIP 歌曲。</p><p><a href="https://app.fossa.com/projects/git%2Bgithub.com%2FUnblockNeteaseMusic%2Fserver?ref=badge_shield" target="_blank" rel="noopener external nofollow noreferrer"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FUnblockNeteaseMusic%2Fserver.svg?type=shield" alt="FOSSA Status"></a></p><h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><blockquote><p>仓库地址：<a href="https://github.com/UnblockNeteaseMusic/server" target="_blank" rel="noopener external nofollow noreferrer">https://github.com/UnblockNeteaseMusic/server</a></p></blockquote><ul><li>支援多个音源，替换变灰歌曲链接</li><li>为请求增加 <code>X-Real-IP</code> 参数解锁海外限制，支持指定网易云服务器 IP，支持设置上游 HTTP &#x2F; HTTPS 代理</li><li>完整的流量代理功能 (HTTP &#x2F; HTTPS)，可直接作为系统代理 (同时支持 PAC)</li></ul><h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1><p>本教程是基于 Ubuntu 22.04.2 LTS 的服务端搭建，其他 Linux 系统搭建方法类似。</p><p>其余使用方法可查询互联网其他博文。</p><h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul><li>一台 VPS</li><li>基础的 Linux 知识</li></ul><h2 id="安装-nodejs"><a href="#安装-nodejs" class="headerlink" title="安装 nodejs"></a>安装 nodejs</h2><p>Ubuntu 系统命令行输入以下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -<br>sudo apt-get install -y nodejs<br></code></pre></td></tr></table></figure><p>Debian 系统命令行输入以下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -fsSL https://deb.nodesource.com/setup_20.x | bash -<br>apt-get install -y nodejs<br></code></pre></td></tr></table></figure><p>其中 20 为版本。其他版本或其他系统请参考 <a href="https://nodejs.org/en/download/package-manager/" target="_blank" rel="noopener external nofollow noreferrer">Node.js 官方文档</a> 和 <a href="https://github.com/nodesource/distributions" target="_blank" rel="noopener external nofollow noreferrer">GitHub</a>。</p><p>Windows 或 MacOS 系统请参考 <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener external nofollow noreferrer">Node.js 官方文档</a>。</p><p>使用 <code>node -v</code> 命令查看是否安装成功。</p><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir">root<span class="hljs-variable">@ubuntu</span><span class="hljs-symbol">:~</span><span class="hljs-comment"># node -v</span><br>v20.<span class="hljs-number">4.0</span><br></code></pre></td></tr></table></figure><p>有输出版本号则安装成功。</p><h2 id="安装-UnblockNeteaseMusic"><a href="#安装-UnblockNeteaseMusic" class="headerlink" title="安装 UnblockNeteaseMusic"></a>安装 UnblockNeteaseMusic</h2><p>git 安装：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/UnblockNeteaseMusic/server.git UnblockNeteaseMusic<br><span class="hljs-built_in">cd</span> UnblockNeteaseMusic <span class="hljs-comment">#进入项目根目录</span><br></code></pre></td></tr></table></figure><p><del>或者直接下载 <a href="https://github.com/UnblockNeteaseMusic/server/releases" target="_blank" rel="noopener external nofollow noreferrer">release</a></del></p><p>没有安装git的，使用下面命令安装：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># CentoS</span><br>yum install git<br><br><span class="hljs-comment"># debian or ubuntu</span><br>apt-get install git<br></code></pre></td></tr></table></figure><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>有多种启动方式，可根据自己的需求选择。</p><h3 id="【可选】node-直接启动"><a href="#【可选】node-直接启动" class="headerlink" title="【可选】node 直接启动"></a>【可选】node 直接启动</h3><p>建议先 node 直接运行，检查是否有报错。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">node app.js -s -e https://music.163.com<br></code></pre></td></tr></table></figure><p>其中 <code>-s</code> 是严格模式，<code>-e</code> 是 <code>--endpoint</code> 指定网易云服务器地址。</p><p>传递环境变量：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ENABLE_FLAC=<span class="hljs-literal">true</span> ENABLE_LOCAL_VIP=<span class="hljs-literal">true</span> BLOCK_ADS=<span class="hljs-literal">true</span> DISABLE_UPGRADE_CHECK=<span class="hljs-literal">true</span> node app.js -s -e https://music.163.com<br></code></pre></td></tr></table></figure><h3 id="【推荐】使用pm2启动项目"><a href="#【推荐】使用pm2启动项目" class="headerlink" title="【推荐】使用pm2启动项目"></a>【推荐】使用pm2启动项目</h3><p>用nodejs不能一直在后台运行，关闭窗口就会中断进程。<br>新建 <code>.env</code> 来传递环境变量：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">ENABLE_FLAC=<span class="hljs-literal">true</span><br>ENABLE_LOCAL_VIP=<span class="hljs-literal">true</span><br>BLOCK_ADS=<span class="hljs-literal">true</span><br>DISABLE_UPGRADE_CHECK=<span class="hljs-literal">true</span><br>SIGN_CERT=<span class="hljs-string">&quot;ca/ca.crt&quot;</span><br>SIGN_KEY=<span class="hljs-string">&quot;ca/ca.key&quot;</span><br></code></pre></td></tr></table></figure><p>运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 全局安装pm2</span><br>npm install -g pm2<br>pm2 start app.js --name=<span class="hljs-string">&quot;UnblockNeteaseMusic&quot;</span> --<span class="hljs-built_in">env</span> .<span class="hljs-built_in">env</span> -- -a 127.0.0.1 -s -e https://music.163.com<br>pm2 save<br>pm2 startup<br></code></pre></td></tr></table></figure><h2 id="证书配置"><a href="#证书配置" class="headerlink" title="证书配置"></a>证书配置</h2><h3 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h3><p>配置HTTPS监听时，可以使用项目的证书，但这并不安全，建议使用自签名的CA证书，并且使用该CA证书为客户端证书签名。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> ca &amp;&amp; <span class="hljs-built_in">cd</span> ca<br><span class="hljs-comment"># 生成CA私钥</span><br>openssl genrsa -out ca.key 2048<br><span class="hljs-comment"># 生成 CA 证书 (&quot;YOURNAME&quot; 处填上你自己的名字)</span><br>openssl req -x509 -new -nodes -key ca.key -sha256 -days 1825 -out ca.crt -subj <span class="hljs-string">&quot;/C=CN/CN=UnblockNeteaseMusic Root CA/O=YOURNAME&quot;</span><br></code></pre></td></tr></table></figure><p>因此需要添加两个环境变量</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> SIGN_CERT=<span class="hljs-string">&quot;ca/ca.crt&quot;</span><br><span class="hljs-built_in">export</span> SIGN_KEY=<span class="hljs-string">&quot;ca/ca.key&quot;</span><br></code></pre></td></tr></table></figure><p>或者</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">SIGN_CERT=<span class="hljs-string">&quot;ca/ca.crt&quot;</span> SIGN_KEY=<span class="hljs-string">&quot;ca/ca.key&quot;</span> ENABLE_FLAC=<span class="hljs-literal">true</span> ENABLE_LOCAL_VIP=<span class="hljs-literal">true</span> BLOCK_ADS=<span class="hljs-literal">true</span> DISABLE_UPGRADE_CHECK=<span class="hljs-literal">true</span> node app.js -s -e https://music.163.com<br></code></pre></td></tr></table></figure><h3 id="信任证书"><a href="#信任证书" class="headerlink" title="信任证书"></a>信任证书</h3><p>将 <code>ca/ca.crt</code> 证书导入系统或浏览器的证书信任列表中。</p><blockquote><p>建议参考：<a href="https://github.com/UnblockNeteaseMusic/server/discussions/426" target="_blank" rel="noopener external nofollow noreferrer">https://github.com/UnblockNeteaseMusic/server/discussions/426</a></p></blockquote><h4 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h4><p>将 <code>ca/ca.crt</code> 证书下载下来，打开，点击安装证书，选择当前用户，选择将所有的证书都放入下列存储，点击浏览，选择受信任的根证书颁发机构，点击确定，完成安装。</p><h2 id="代理链"><a href="#代理链" class="headerlink" title="代理链"></a>代理链</h2><h3 id="xrayr"><a href="#xrayr" class="headerlink" title="xrayr"></a>xrayr</h3><p>新建 <code>route.json</code>:</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;domainStrategy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;AsIs&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;domainMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;hybrid&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;rules&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;field&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;outboundTag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;netease&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;domain&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>                <span class="hljs-string">&quot;music.163.com&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-string">&quot;music.126.net&quot;</span><br>            <span class="hljs-punctuation">]</span><br>        <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure><p>新建 <code>custom_outbound.json</code></p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;tag&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;netease&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;protocol&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;settings&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;servers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>                <span class="hljs-punctuation">&#123;</span><br>                    <span class="hljs-attr">&quot;address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;127.0.0.1&quot;</span><span class="hljs-punctuation">,</span><br>                    <span class="hljs-attr">&quot;port&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8080</span><br>                <span class="hljs-punctuation">&#125;</span><br>            <span class="hljs-punctuation">]</span><br>        <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure><p>修改 <code>config.yaml</code>:</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">RouteConfigPath:</span> <span class="hljs-string">/etc/XrayR/route.json</span><br><span class="hljs-attr">OutboundConfigPath:</span> <span class="hljs-string">/etc/XrayR/custom_outbound.json</span><br></code></pre></td></tr></table></figure><p>重启</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker-compose down &amp;&amp; docker-compose up -d<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>VPS</tag>
+      
+      <tag>解锁网易云音乐</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hyper-V 或 Docker 占用端口导致 Jetbrain IDE 无法启动或 Clash 端口为 0</title>
     <link href="/posts/1326aa90.html"/>
     <url>/posts/1326aa90.html</url>
     
-    <content type="html"><![CDATA[<p>其实本文应该是：</p><ul><li>IDEA Start Failed: Address already in use 的解决办法</li><li>Clash 端口为 0 的解决办法</li></ul><span id="more"></span><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>最近遇到了两次端口无法使用的问题，第一次是 Pycharm 无法启动。报错如下图，第二次是 Clash 无法使用默认端口 7890 从而变成端口 0 ，但实际上 0 并不是一个合法的端口，所以最终会导致代理无法使用。</p><p><img src="/posts/undefined/pycharm.png" alt="pycharm"></p><p>发现两个问题的根源都是同一个。就是 tcp 动态端口占用某个区间，而我们需要的端口比如 7890 刚好在这个区间范围内。</p><h2 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h2><p>先打开 <code>powershell</code> 或者 <code>cmd</code></p><p>查看端口占用：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">netstat <span class="hljs-literal">-ano</span><br></code></pre></td></tr></table></figure><p>查找某个端口是否被占用：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">netstat <span class="hljs-literal">-aon</span>|findstr <span class="hljs-string">&quot;8081&quot;</span><br></code></pre></td></tr></table></figure><p>发现我们需要的端口明明没被占用啊。</p><p>然后查看 Windows 操作系统中 TCP 协议的动态端口范围：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">netsh int ipv4 show dynamicport tcp<br></code></pre></td></tr></table></figure><p>使用命令查看被系统排除在可用范围外的端口：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">netsh interface ipv4 show excludedportrange protocol=tcp<br></code></pre></td></tr></table></figure><p><img src="https://siegelion-blog.oss-cn-beijing.aliyuncs.com/blog/image-20220131102147660.png" alt="port"></p><p>也就是说在第一条命令范围的端口且不在第二条命令的范围的端口，是不可以用的。</p><h1 id="Clash-问题解决"><a href="#Clash-问题解决" class="headerlink" title="Clash 问题解决"></a>Clash 问题解决</h1><p>有几种方法都可以解决</p><h2 id="修改软件的端口"><a href="#修改软件的端口" class="headerlink" title="修改软件的端口"></a>修改软件的端口</h2><p>山不动我动。既然 7890 被占用，那就换一个，比如说换成 7980</p><blockquote><p>解决方法参考：《<a href="https://siegelion.cn/2022/01/31/Clash%20For%20Windows%E4%BB%A3%E7%90%86%E7%AB%AF%E5%8F%A3%E4%B8%BA0%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener external nofollow noreferrer">Clash For Windows代理端口为0问题</a>》</p></blockquote><h2 id="修改-tcp-动态端口范围"><a href="#修改-tcp-动态端口范围" class="headerlink" title="修改 tcp 动态端口范围"></a>修改 tcp 动态端口范围</h2><p>看个人需求。你可以关掉，那就关。</p><p>先禁用 Hyper-V （需要重启）</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">dism.exe <span class="hljs-regexp">/Online /</span>Disable-Feature:Microsoft-Hyper-V<br></code></pre></td></tr></table></figure><p>重启完成后，增加被排除端口范围，其中 7890 就是希望被添加的排除在范围内的端口：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">netsh int ipv4 <span class="hljs-built_in">add</span> excludedportrange <span class="hljs-attribute">protocol</span>=tcp <span class="hljs-attribute">startport</span>=7890 <span class="hljs-attribute">numberofports</span>=1<br></code></pre></td></tr></table></figure><p>如果要保存的话，加上 <code>store=persistant</code></p><p>也就是：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">netsh int ipv4 <span class="hljs-built_in">add</span> excludedportrange <span class="hljs-attribute">protocol</span>=tcp <span class="hljs-attribute">startport</span>=7890 <span class="hljs-attribute">numberofports</span>=1 <span class="hljs-attribute">store</span>=persistant<br></code></pre></td></tr></table></figure><p>重新启用 Hyper-V</p><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">dism.exe <span class="hljs-string">/Online</span> <span class="hljs-string">/Enable-Feature</span><span class="hljs-function">:Microsoft-Hyper-V</span> <span class="hljs-string">/All</span><br></code></pre></td></tr></table></figure><h1 id="Jetbrains-IDE-问题解决"><a href="#Jetbrains-IDE-问题解决" class="headerlink" title="Jetbrains IDE 问题解决"></a>Jetbrains IDE 问题解决</h1><p>其实我对于为什么会出问题还是有点迷思。</p><p>通过搜索我找到 JetBrains 论坛<a href="https://intellij-support.jetbrains.com/hc/en-us/community/posts/360010020399-Pycharm-2020-3-Internal-Error-java-net-BindException-Address-already-in-use-bind-Windows-10" target="_blank" rel="noopener external nofollow noreferrer">相关帖子</a></p><p>其中有一段：</p><blockquote><p>To lock folders IDE is starting a server on localhost, it tries to bind on the first available port between 6942 and 6991</p></blockquote><p>就是说 IDE 启动的时候会在本地起一个 server，并且绑定 <strong>6942 到 6991</strong> 之间第一个可用的端口。但明明这个段的端口是被排除了的。</p><p>我又查看了 tcp 实际占用的端口，在 <code>Task Manager -&gt; Performance -&gt; Resource Monitor -&gt; TCP connections</code></p><p><img src="/posts/undefined/tcp.png" alt="tcp"></p><p>这个范围内确实没有使用端口。</p><blockquote><p>但很多人都反映卸载 docker 和 Hyper-V 就可以重新启动 IDE 了。所以很明显这俩还是罪魁祸首</p></blockquote><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>以管理员身份运行 powershell</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell">net stop winnat<br>net <span class="hljs-built_in">start</span> winnat<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>其实本文应该是：</p><ul><li>IDEA Start Failed: Address already in use 的解决办法</li><li>Clash 端口为 0 的解决办法</li></ul><span id="more"></span><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>最近遇到了两次端口无法使用的问题，第一次是 Pycharm 无法启动。报错如下图，第二次是 Clash 无法使用默认端口 7890 从而变成端口 0 ，但实际上 0 并不是一个合法的端口，所以最终会导致代理无法使用。</p><p><img src="/posts/1326aa90/pycharm.png" alt="pycharm"></p><p>发现两个问题的根源都是同一个。就是 tcp 动态端口占用某个区间，而我们需要的端口比如 7890 刚好在这个区间范围内。</p><h2 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h2><p>先打开 <code>powershell</code> 或者 <code>cmd</code></p><p>查看端口占用：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">netstat <span class="hljs-literal">-ano</span><br></code></pre></td></tr></table></figure><p>查找某个端口是否被占用：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">netstat <span class="hljs-literal">-aon</span>|findstr <span class="hljs-string">&quot;8081&quot;</span><br></code></pre></td></tr></table></figure><p>发现我们需要的端口明明没被占用啊。</p><p>然后查看 Windows 操作系统中 TCP 协议的动态端口范围：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">netsh int ipv4 show dynamicport tcp<br></code></pre></td></tr></table></figure><p>使用命令查看被系统排除在可用范围外的端口：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">netsh interface ipv4 show excludedportrange protocol=tcp<br></code></pre></td></tr></table></figure><p><img src="https://siegelion-blog.oss-cn-beijing.aliyuncs.com/blog/image-20220131102147660.png" alt="port"></p><p>也就是说在第一条命令范围的端口且不在第二条命令的范围的端口，是不可以用的。</p><h1 id="Clash-问题解决"><a href="#Clash-问题解决" class="headerlink" title="Clash 问题解决"></a>Clash 问题解决</h1><p>有几种方法都可以解决</p><h2 id="修改软件的端口"><a href="#修改软件的端口" class="headerlink" title="修改软件的端口"></a>修改软件的端口</h2><p>山不动我动。既然 7890 被占用，那就换一个，比如说换成 7980</p><blockquote><p>解决方法参考：《<a href="https://siegelion.cn/2022/01/31/Clash%20For%20Windows%E4%BB%A3%E7%90%86%E7%AB%AF%E5%8F%A3%E4%B8%BA0%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener external nofollow noreferrer">Clash For Windows代理端口为0问题</a>》</p></blockquote><h2 id="修改-tcp-动态端口范围"><a href="#修改-tcp-动态端口范围" class="headerlink" title="修改 tcp 动态端口范围"></a>修改 tcp 动态端口范围</h2><p>看个人需求。你可以关掉，那就关。</p><p>先禁用 Hyper-V （需要重启）</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">dism.exe <span class="hljs-regexp">/Online /</span>Disable-Feature:Microsoft-Hyper-V<br></code></pre></td></tr></table></figure><p>重启完成后，增加被排除端口范围，其中 7890 就是希望被添加的排除在范围内的端口：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">netsh int ipv4 <span class="hljs-built_in">add</span> excludedportrange <span class="hljs-attribute">protocol</span>=tcp <span class="hljs-attribute">startport</span>=7890 <span class="hljs-attribute">numberofports</span>=1<br></code></pre></td></tr></table></figure><p>如果要保存的话，加上 <code>store=persistant</code></p><p>也就是：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">netsh int ipv4 <span class="hljs-built_in">add</span> excludedportrange <span class="hljs-attribute">protocol</span>=tcp <span class="hljs-attribute">startport</span>=7890 <span class="hljs-attribute">numberofports</span>=1 <span class="hljs-attribute">store</span>=persistant<br></code></pre></td></tr></table></figure><p>重新启用 Hyper-V</p><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">dism.exe <span class="hljs-string">/Online</span> <span class="hljs-string">/Enable-Feature</span><span class="hljs-function">:Microsoft-Hyper-V</span> <span class="hljs-string">/All</span><br></code></pre></td></tr></table></figure><h1 id="Jetbrains-IDE-问题解决"><a href="#Jetbrains-IDE-问题解决" class="headerlink" title="Jetbrains IDE 问题解决"></a>Jetbrains IDE 问题解决</h1><p>其实我对于为什么会出问题还是有点迷思。</p><p>通过搜索我找到 JetBrains 论坛<a href="https://intellij-support.jetbrains.com/hc/en-us/community/posts/360010020399-Pycharm-2020-3-Internal-Error-java-net-BindException-Address-already-in-use-bind-Windows-10" target="_blank" rel="noopener external nofollow noreferrer">相关帖子</a></p><p>其中有一段：</p><blockquote><p>To lock folders IDE is starting a server on localhost, it tries to bind on the first available port between 6942 and 6991</p></blockquote><p>就是说 IDE 启动的时候会在本地起一个 server，并且绑定 <strong>6942 到 6991</strong> 之间第一个可用的端口。但明明这个段的端口是被排除了的。</p><p>我又查看了 tcp 实际占用的端口，在 <code>Task Manager -&gt; Performance -&gt; Resource Monitor -&gt; TCP connections</code></p><p><img src="/posts/1326aa90/tcp.png" alt="tcp"></p><p>这个范围内确实没有使用端口。</p><blockquote><p>但很多人都反映卸载 docker 和 Hyper-V 就可以重新启动 IDE 了。所以很明显这俩还是罪魁祸首</p></blockquote><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>以管理员身份运行 powershell</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell">net stop winnat<br>net <span class="hljs-built_in">start</span> winnat<br></code></pre></td></tr></table></figure>]]></content>
     
     
     <categories>
@@ -66,9 +95,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -95,9 +124,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Bitwarden</tag>
       
@@ -182,9 +211,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -195,11 +224,11 @@
   
   
   <entry>
-    <title>ink iplc stair speed note</title>
+    <title>垃圾水墨云（已跑路）测评</title>
     <link href="/posts/2a20baca.html"/>
     <url>/posts/2a20baca.html</url>
     
-    <content type="html"><![CDATA[<p>某iplc测评</p><span id="more"></span><h1 id="Stair-Speed-测速结果"><a href="#Stair-Speed-测速结果" class="headerlink" title="Stair Speed 测速结果"></a>Stair Speed 测速结果</h1><p><img src="/posts/2a20baca/1.png" alt="测速结果"></p>]]></content>
+    <content type="html"><![CDATA[<p>某iplc测评，已经<strong>跑路</strong>。权当记录吧。</p><span id="more"></span><h1 id="Stair-Speed-测速结果"><a href="#Stair-Speed-测速结果" class="headerlink" title="Stair Speed 测速结果"></a>Stair Speed 测速结果</h1><p><img src="/posts/2a20baca/1.png" alt="测速结果"></p>]]></content>
     
     
     <categories>
@@ -211,9 +240,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -267,9 +296,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Seafile</tag>
       
@@ -298,9 +327,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Seafile</tag>
       
@@ -331,9 +360,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Seafile</tag>
       
@@ -387,9 +416,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -856,9 +885,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -891,11 +920,11 @@
     
     <tags>
       
+      <tag>Linux</tag>
+      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
-      
-      <tag>Linux</tag>
       
     </tags>
     
@@ -920,11 +949,11 @@
     
     <tags>
       
+      <tag>Linux</tag>
+      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
-      
-      <tag>Linux</tag>
       
       <tag>长毛象</tag>
       
@@ -955,11 +984,11 @@
     
     <tags>
       
+      <tag>Linux</tag>
+      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
-      
-      <tag>Linux</tag>
       
     </tags>
     
@@ -986,9 +1015,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -1112,9 +1141,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1170,9 +1199,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1226,9 +1255,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1286,9 +1315,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1315,9 +1344,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Speedtest</tag>
       
@@ -1344,9 +1373,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1431,9 +1460,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1570,13 +1599,13 @@
     
     <tags>
       
-      <tag>CloudFlare</tag>
+      <tag>Linux</tag>
       
       <tag>VPS</tag>
       
-      <tag>长毛象运维</tag>
+      <tag>CloudFlare</tag>
       
-      <tag>Linux</tag>
+      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -1622,11 +1651,11 @@
     
     <tags>
       
+      <tag>Linux</tag>
+      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
-      
-      <tag>Linux</tag>
       
     </tags>
     
@@ -1651,9 +1680,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Object Storage</tag>
       
@@ -1682,9 +1711,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1709,11 +1738,11 @@
     
     <tags>
       
+      <tag>Linux</tag>
+      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
-      
-      <tag>Linux</tag>
       
       <tag>长毛象</tag>
       
@@ -1740,11 +1769,11 @@
     
     <tags>
       
+      <tag>Linux</tag>
+      
       <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
-      
-      <tag>Linux</tag>
       
       <tag>Notes</tag>
       
@@ -1982,9 +2011,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Notes</tag>
       
@@ -2011,9 +2040,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -2040,9 +2069,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -2069,9 +2098,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -2125,9 +2154,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -2152,9 +2181,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -2163,7 +2192,7 @@
   
   
   <entry>
-    <title>VPS指南：解锁网易云灰色歌曲之服务器端搭建</title>
+    <title>VPS指南：【旧版】解锁网易云灰色歌曲之服务器端搭建</title>
     <link href="/posts/55183.html"/>
     <url>/posts/55183.html</url>
     
@@ -2179,9 +2208,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>解锁网易云音乐</tag>
       
@@ -2208,9 +2237,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -2239,9 +2268,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -2268,9 +2297,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
