@@ -6,7 +6,7 @@
   <link href="https://pawswrite.xyz/atom.xml" rel="self"/>
   
   <link href="https://pawswrite.xyz/"/>
-  <updated>2023-07-08T16:29:53.333Z</updated>
+  <updated>2024-01-16T08:18:34.955Z</updated>
   <id>https://pawswrite.xyz/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>dpkt报错:invalid tcpdump header</title>
+    <link href="https://pawswrite.xyz/posts/f309c2f5.html"/>
+    <id>https://pawswrite.xyz/posts/f309c2f5.html</id>
+    <published>2024-01-16T08:06:13.000Z</published>
+    <updated>2024-01-16T08:18:34.955Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用dpkt解析pcap文件时，报错：<code>invalid tcpdump header</code>，原因是pcap文件的头部格式不对，需要将pcap文件的头部格式转换为标准格式。</p><span id="more"></span><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>Wireshark 收集到的数据包太大，用 <code>editcap</code> 命令拆分，发现拆分后的文件无法用 dpkt 解析，报错：<code>invalid tcpdump header</code>。</p><p>拆分命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">editcap -c 10000 20200116.pcap 20200116.pcap<br></code></pre></td></tr></table></figure><p>其中 <code>-c</code> 指定每个文件包含的数据包数量，<code>20200116.pcap</code> 是输入文件，<code>20200116.pcap</code> 是输出文件。</p><h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p><code>editcap</code> 命令拆分后的文件格式是 <code>pcapng</code>，而 dpkt 只支持 <code>pcap</code> 格式，也就是 <code>libpcap</code> 格式。</p><h2 id="原因确认"><a href="#原因确认" class="headerlink" title="原因确认"></a>原因确认</h2><p>使用 <code>capinfos</code> 命令查看文件格式：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">capinfos -t 20200116.pcap<br></code></pre></td></tr></table></figure><p>输出：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">File name:           20200116.pcap<br>File <span class="hljs-built_in">type</span>:           Wireshark/... - pcapng<br></code></pre></td></tr></table></figure><p>其中 <code>pcapng</code> 就是 <code>pcap next generation</code> 的意思，是 <code>libpcap</code> 的下一代格式。</p><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>使用 <code>editcap</code> 命令将 <code>pcapng</code> 格式转换为 <code>pcap</code> 格式：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">editcap -F pcap 20200116.pcap 20200116.pcap<br></code></pre></td></tr></table></figure><p>其中 <code>-F pcap</code> 指定输出格式为 <code>pcap</code>，第一个 <code>20200116.pcap</code> 是输入文件，第二个 <code>20200116.pcap</code> 是输出文件。<br>再次使用 <code>capinfos</code> 命令查看文件格式：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">capinfos -t 20200116.pcap<br></code></pre></td></tr></table></figure><p>输出：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">File name:           20200116.pcap<br>File <span class="hljs-built_in">type</span>:           Wireshark/... - pcap<br></code></pre></td></tr></table></figure><p>可以看到文件格式已经转换为 <code>pcap</code> 格式了。</p><h2 id="其他解决办法"><a href="#其他解决办法" class="headerlink" title="其他解决办法"></a>其他解决办法</h2><p>任何能够将 <code>pcapng</code> 转换为 <code>pcap</code> 的工具都可以，但我没有尝试。仅作记录。</p><h3 id="tshark"><a href="#tshark" class="headerlink" title="tshark"></a>tshark</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tshark -F pcap -r 20200116.pcap -w 20200116.pcap<br></code></pre></td></tr></table></figure><p>其中 <code>-F pcap</code> 指定输出格式为 <code>pcap</code>，<code>-r</code> 指定输入文件，<code>-w</code> 指定输出文件。</p><h3 id="Wireshark-【最简单】"><a href="#Wireshark-【最简单】" class="headerlink" title="Wireshark 【最简单】"></a>Wireshark 【最简单】</h3><p>使用 <code>wireshark</code> 打开 <code>pcapng</code> 文件，然后另存为 <code>pcap</code> 格式。</p><h3 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tcpdump -r 20200116.pcap -w 20200116.pcap<br></code></pre></td></tr></table></figure><p>其中 <code>-r</code> 指定输入文件，<code>-w</code> 指定输出文件。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul><li><a href="https://www.coder.work/article/5018343" target="_blank" rel="noopener external nofollow noreferrer">python - 使用 dpkt 解析时，由于使用 mergecap 生成 pcap，导致 tcpdump header 无效 </a></li><li><a href="https://stackoverflow.com/questions/23523524/dpkt-invalid-tcpdump-header-error" target="_blank" rel="noopener external nofollow noreferrer">dpkt invalid tcpdump header error</a></li><li><a href="https://zhuanlan.zhihu.com/p/523929241" target="_blank" rel="noopener external nofollow noreferrer">Wireshark CLI | Capinfos 篇</a></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;使用dpkt解析pcap文件时，报错：&lt;code&gt;invalid tcpdump header&lt;/code&gt;，原因是pcap文件的头部格式不对，需要将pcap文件的头部格式转换为标准格式。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Python" scheme="https://pawswrite.xyz/categories/Python/"/>
+    
+    
+    <category term="Python" scheme="https://pawswrite.xyz/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>VPS指南：【新版】解锁网易云灰色歌曲之服务器端搭建</title>
@@ -33,9 +54,9 @@
     <category term="Linux" scheme="https://pawswrite.xyz/categories/Linux/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="解锁网易云音乐" scheme="https://pawswrite.xyz/tags/%E8%A7%A3%E9%94%81%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90/"/>
     
@@ -104,9 +125,9 @@
     <category term="VPS" scheme="https://pawswrite.xyz/categories/VPS/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
   </entry>
   
@@ -130,9 +151,9 @@
     <category term="Bitwarden" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Bitwarden/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="Bitwarden" scheme="https://pawswrite.xyz/tags/Bitwarden/"/>
     
@@ -205,9 +226,9 @@
     <category term="自建" scheme="https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E8%87%AA%E5%BB%BA/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="科学上网" scheme="https://pawswrite.xyz/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     
@@ -230,9 +251,9 @@
     <category term="VPS" scheme="https://pawswrite.xyz/categories/VPS/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
   </entry>
   
@@ -278,9 +299,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Seafile/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -305,9 +326,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Seafile/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -334,9 +355,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Seafile/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -382,9 +403,9 @@
     <category term="VPS" scheme="https://pawswrite.xyz/categories/VPS/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
   </entry>
   
@@ -472,29 +493,6 @@
     
     
     <summary type="html">&lt;p&gt;上一篇教程已经将远程的repository clone到了本地并进行了配置，我们来进行第一次提交和修改。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="学习是人生第一要务" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/"/>
-    
-    <category term="git" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/git/"/>
-    
-    
-    <category term="git" scheme="https://pawswrite.xyz/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>防止GitHub邮箱泄露</title>
-    <link href="https://pawswrite.xyz/posts/43272.html"/>
-    <id>https://pawswrite.xyz/posts/43272.html</id>
-    <published>2022-09-24T08:41:58.000Z</published>
-    <updated>2022-10-04T15:51:38.646Z</updated>
-    
-    <content type="html"><![CDATA[<p>公开仓库的git commit都是可以被查询到用户名和邮箱的，那要如何避免自己邮箱泄露。</p><span id="more"></span><p>当然，在我们进行提交的时候，我们完全可以用一个伪造的邮箱，但这样，当别人查看GitHub上的commit的时候，就不能方便地知道commit是我们提交的。这credit怎能给别人。</p><h1 id="配置匿名邮箱"><a href="#配置匿名邮箱" class="headerlink" title="配置匿名邮箱"></a>配置匿名邮箱</h1><p>首先进入<a href="https://github.com/settings/emails" target="_blank" rel="noopener external nofollow noreferrer">设置</a>，找到下面这项并勾选：</p><ul><li><input checked="" disabled="" type="checkbox"> Keep my email addresses private</li></ul><p>然后找到下面加粗的电子邮件地址，是一个七位数的 ID 号以及格式为 <code>ID+username@users.noreply.github.com</code> 格式的一串邮箱地址，这就是 GitHub 给你的匿名邮箱地址。</p><blockquote><p> 如果于 2017 年 7 月 18 日之前在 GitHub.com 上创建了帐户，则来自 GitHub 的 noreply 电子邮件地址是 <code>username@users.noreply.github.com</code></p></blockquote><p>根据<a href="https://docs.github.com/cn/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address" target="_blank" rel="noopener external nofollow noreferrer"> GitHub 官方文档</a></p><blockquote><p>如果想将个人电子邮件地址设为私密，则可以使用 GitHub 的 noreply 电子邮件地址作为提交电子邮件地址。 要将 noreply 电子邮件地址用于从命令行推送的提交，请在 Git 中设置提交电子邮件地址时使用该电子邮件地址。 要将 noreply 地址用于基于 Web 的 Git 操作，请在 GitHub 上设置提交电子邮件地址并选择“对我的电子邮件地址保密”。</p></blockquote><p>也就是说，在用命令行提交时，请使用下面命令来全局更改邮箱地址：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config --global user.email <span class="hljs-string">&quot;ID+username@users.noreply.github.com&quot;</span><br></code></pre></td></tr></table></figure><p>确认一下是不是改成功了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config --global user.email<br></code></pre></td></tr></table></figure><h1 id="查找过往有没有泄露过信息"><a href="#查找过往有没有泄露过信息" class="headerlink" title="查找过往有没有泄露过信息"></a>查找过往有没有泄露过信息</h1><p>查看一些过往公开信息：<br><code>https://api.github.com/users/用户名</code><br><code>https://api.github.com/users/用户名/events/public</code></p><p>使用Github提供的GraphQL来查询所有提交过的commits来查询用户邮箱：<br>参考：《<a href="https://juejin.cn/post/6951642072935825439" target="_blank" rel="noopener external nofollow noreferrer">怎么知道Github仓库所有者的联系方式</a>》</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;公开仓库的git commit都是可以被查询到用户名和邮箱的，那要如何避免自己邮箱泄露。&lt;/p&gt;</summary>
     
     
     

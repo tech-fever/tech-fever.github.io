@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>dpkt报错:invalid tcpdump header</title>
+    <link href="/posts/f309c2f5.html"/>
+    <url>/posts/f309c2f5.html</url>
+    
+    <content type="html"><![CDATA[<p>使用dpkt解析pcap文件时，报错：<code>invalid tcpdump header</code>，原因是pcap文件的头部格式不对，需要将pcap文件的头部格式转换为标准格式。</p><span id="more"></span><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>Wireshark 收集到的数据包太大，用 <code>editcap</code> 命令拆分，发现拆分后的文件无法用 dpkt 解析，报错：<code>invalid tcpdump header</code>。</p><p>拆分命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">editcap -c 10000 20200116.pcap 20200116.pcap<br></code></pre></td></tr></table></figure><p>其中 <code>-c</code> 指定每个文件包含的数据包数量，<code>20200116.pcap</code> 是输入文件，<code>20200116.pcap</code> 是输出文件。</p><h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p><code>editcap</code> 命令拆分后的文件格式是 <code>pcapng</code>，而 dpkt 只支持 <code>pcap</code> 格式，也就是 <code>libpcap</code> 格式。</p><h2 id="原因确认"><a href="#原因确认" class="headerlink" title="原因确认"></a>原因确认</h2><p>使用 <code>capinfos</code> 命令查看文件格式：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">capinfos -t 20200116.pcap<br></code></pre></td></tr></table></figure><p>输出：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">File name:           20200116.pcap<br>File <span class="hljs-built_in">type</span>:           Wireshark/... - pcapng<br></code></pre></td></tr></table></figure><p>其中 <code>pcapng</code> 就是 <code>pcap next generation</code> 的意思，是 <code>libpcap</code> 的下一代格式。</p><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>使用 <code>editcap</code> 命令将 <code>pcapng</code> 格式转换为 <code>pcap</code> 格式：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">editcap -F pcap 20200116.pcap 20200116.pcap<br></code></pre></td></tr></table></figure><p>其中 <code>-F pcap</code> 指定输出格式为 <code>pcap</code>，第一个 <code>20200116.pcap</code> 是输入文件，第二个 <code>20200116.pcap</code> 是输出文件。<br>再次使用 <code>capinfos</code> 命令查看文件格式：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">capinfos -t 20200116.pcap<br></code></pre></td></tr></table></figure><p>输出：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">File name:           20200116.pcap<br>File <span class="hljs-built_in">type</span>:           Wireshark/... - pcap<br></code></pre></td></tr></table></figure><p>可以看到文件格式已经转换为 <code>pcap</code> 格式了。</p><h2 id="其他解决办法"><a href="#其他解决办法" class="headerlink" title="其他解决办法"></a>其他解决办法</h2><p>任何能够将 <code>pcapng</code> 转换为 <code>pcap</code> 的工具都可以，但我没有尝试。仅作记录。</p><h3 id="tshark"><a href="#tshark" class="headerlink" title="tshark"></a>tshark</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tshark -F pcap -r 20200116.pcap -w 20200116.pcap<br></code></pre></td></tr></table></figure><p>其中 <code>-F pcap</code> 指定输出格式为 <code>pcap</code>，<code>-r</code> 指定输入文件，<code>-w</code> 指定输出文件。</p><h3 id="Wireshark-【最简单】"><a href="#Wireshark-【最简单】" class="headerlink" title="Wireshark 【最简单】"></a>Wireshark 【最简单】</h3><p>使用 <code>wireshark</code> 打开 <code>pcapng</code> 文件，然后另存为 <code>pcap</code> 格式。</p><h3 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tcpdump -r 20200116.pcap -w 20200116.pcap<br></code></pre></td></tr></table></figure><p>其中 <code>-r</code> 指定输入文件，<code>-w</code> 指定输出文件。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul><li><a href="https://www.coder.work/article/5018343" target="_blank" rel="noopener external nofollow noreferrer">python - 使用 dpkt 解析时，由于使用 mergecap 生成 pcap，导致 tcpdump header 无效 </a></li><li><a href="https://stackoverflow.com/questions/23523524/dpkt-invalid-tcpdump-header-error" target="_blank" rel="noopener external nofollow noreferrer">dpkt invalid tcpdump header error</a></li><li><a href="https://zhuanlan.zhihu.com/p/523929241" target="_blank" rel="noopener external nofollow noreferrer">Wireshark CLI | Capinfos 篇</a></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>VPS指南：【新版】解锁网易云灰色歌曲之服务器端搭建</title>
     <link href="/posts/82ea911d.html"/>
     <url>/posts/82ea911d.html</url>
@@ -20,9 +45,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>解锁网易云音乐</tag>
       
@@ -95,9 +120,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -124,9 +149,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Bitwarden</tag>
       
@@ -211,9 +236,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -240,9 +265,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -296,9 +321,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Seafile</tag>
       
@@ -327,9 +352,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Seafile</tag>
       
@@ -360,9 +385,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Seafile</tag>
       
@@ -416,9 +441,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -829,9 +854,9 @@
     
     <tags>
       
-      <tag>Azure</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>Azure</tag>
       
     </tags>
     
@@ -858,9 +883,9 @@
     
     <tags>
       
-      <tag>Azure</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>Azure</tag>
       
     </tags>
     
@@ -885,9 +910,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -920,9 +945,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象运维</tag>
       
@@ -949,15 +974,15 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
-      <tag>长毛象运维</tag>
+      <tag>Linux</tag>
       
       <tag>长毛象</tag>
       
       <tag>Notes</tag>
+      
+      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -984,9 +1009,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象运维</tag>
       
@@ -1015,9 +1040,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -1141,9 +1166,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1199,9 +1224,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1255,9 +1280,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1315,9 +1340,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1344,9 +1369,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Speedtest</tag>
       
@@ -1373,9 +1398,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1460,9 +1485,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1599,11 +1624,11 @@
     
     <tags>
       
+      <tag>VPS</tag>
+      
       <tag>Linux</tag>
       
       <tag>CloudFlare</tag>
-      
-      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -1651,9 +1676,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>长毛象运维</tag>
       
@@ -1680,9 +1705,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Object Storage</tag>
       
@@ -1711,9 +1736,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -1738,13 +1763,13 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
-      <tag>长毛象运维</tag>
+      <tag>Linux</tag>
       
       <tag>长毛象</tag>
+      
+      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -1769,15 +1794,15 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
       
-      <tag>长毛象运维</tag>
+      <tag>Linux</tag>
+      
+      <tag>笔记</tag>
       
       <tag>Notes</tag>
       
-      <tag>笔记</tag>
+      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -1862,15 +1887,15 @@
     
     <tags>
       
-      <tag>长毛象运维</tag>
+      <tag>笔记</tag>
       
       <tag>Notes</tag>
       
-      <tag>Mastodon</tag>
-      
       <tag>fediverse</tag>
       
-      <tag>笔记</tag>
+      <tag>长毛象运维</tag>
+      
+      <tag>Mastodon</tag>
       
     </tags>
     
@@ -1951,11 +1976,11 @@
     
     <tags>
       
+      <tag>科学上网</tag>
+      
       <tag>游戏</tag>
       
       <tag>Steam</tag>
-      
-      <tag>科学上网</tag>
       
     </tags>
     
@@ -2011,9 +2036,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Notes</tag>
       
@@ -2040,9 +2065,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -2069,9 +2094,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -2098,9 +2123,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -2154,9 +2179,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -2181,9 +2206,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -2208,9 +2233,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>解锁网易云音乐</tag>
       
@@ -2237,9 +2262,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -2268,9 +2293,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
@@ -2297,9 +2322,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>VPS</tag>
+      
+      <tag>Linux</tag>
       
       <tag>科学上网</tag>
       
