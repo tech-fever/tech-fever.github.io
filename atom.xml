@@ -6,7 +6,7 @@
   <link href="https://pawswrite.xyz/atom.xml" rel="self"/>
   
   <link href="https://pawswrite.xyz/"/>
-  <updated>2024-01-16T13:52:24.577Z</updated>
+  <updated>2024-01-17T08:54:50.920Z</updated>
   <id>https://pawswrite.xyz/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux笔记：ufw使用教程</title>
+    <link href="https://pawswrite.xyz/posts/ad88c346.html"/>
+    <id>https://pawswrite.xyz/posts/ad88c346.html</id>
+    <published>2024-01-17T08:32:36.000Z</published>
+    <updated>2024-01-17T08:54:50.920Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>本文非原创</strong></p><p><code>UFW</code> 是 <code>Ubuntu</code> 的一款防火墙工具，它提供了一套管理网络过滤器的框架，又提供了控制防火墙的命令行界面接口。它给那些不熟悉防火墙概念的 Linux 新用户提供了友好、易使用的用户界面，用来设置复杂的防火墙规则。</p><span id="more"></span><h1 id="安装-UFW"><a href="#安装-UFW" class="headerlink" title="安装 UFW"></a>安装 UFW</h1><p>检查下系统上是否已经安装了 UFW</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo dpkg --get-selections | grep ufw<br></code></pre></td></tr></table></figure><p>如还没有安装，通过 apt-get install 命令来安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get update<br>sudo apt-get install ufw<br></code></pre></td></tr></table></figure><h1 id="配置-UFW"><a href="#配置-UFW" class="headerlink" title="配置 UFW"></a>配置 UFW</h1><h2 id="开启-IPv6-支持"><a href="#开启-IPv6-支持" class="headerlink" title="开启 IPv6 支持"></a>开启 IPv6 支持</h2><p>若不启用 IPv6 支持，默认情况 ufw 防火墙只针对 IPv4。若要启用 IPv6 支持，请使用 nano、vim 或者其他您喜欢的编辑器打开 UFW 配置：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo vim /etc/default/ufw<br></code></pre></td></tr></table></figure><p>然后确定 IPV6 的值为 yes。它应该如下所示：</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">IPV6</span>=<span class="hljs-literal">yes</span><br></code></pre></td></tr></table></figure><p>保存并关闭文件。</p><h2 id="默认策略"><a href="#默认策略" class="headerlink" title="默认策略"></a>默认策略</h2><p>刚开始使用 UFW 防火墙，则要定义的第一个规则是您的默认策略</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw default deny incoming<br>sudo ufw default allow outgoing<br></code></pre></td></tr></table></figure><p>默认策略为拒绝传入并允许传出连接。</p><h2 id="启用-x2F-禁用"><a href="#启用-x2F-禁用" class="headerlink" title="启用&#x2F;禁用"></a>启用&#x2F;禁用</h2><p>在使用前，你应该检查下 UFW 是否已经在运行。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw status<br></code></pre></td></tr></table></figure><p>启用 ufw 前，请添加允许 ssh 连接的相关规则，如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw allow ssh<br></code></pre></td></tr></table></figure><p>如果你发现状态是 inactive ，意思是没有被激活或不起作用。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw <span class="hljs-built_in">enable</span>  <span class="hljs-comment">#启用</span><br>sudo ufw <span class="hljs-built_in">disable</span>  <span class="hljs-comment">#禁用</span><br>sudo ufw reset  <span class="hljs-comment">#重置</span><br></code></pre></td></tr></table></figure><h2 id="列出当前UFW规则"><a href="#列出当前UFW规则" class="headerlink" title="列出当前UFW规则"></a>列出当前UFW规则</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw status verbose<br></code></pre></td></tr></table></figure><h2 id="允许入站（allow）"><a href="#允许入站（allow）" class="headerlink" title="允许入站（allow）"></a>允许入站（allow）</h2><p>默认情况，没有允许就是拒绝（入站），使用 ufw allow &lt;端口&gt; 来添加允许访问的端口或协议。规则中未明确指定 tcp 或 udp 协议，默认将对 tcp 或 udp 协议同时生效。</p><p>示例如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#添加22端口</span><br>sudo ufw allow ssh<br><br><span class="hljs-comment">#添加80端口</span><br>sudo ufw allow http<br><br><span class="hljs-comment">#添加443端口</span><br>sudo ufw allow https<br><br><span class="hljs-comment">#添加2333端口，仅TCP协议</span><br>sudo ufw allow 2333/tcp<br><br><span class="hljs-comment">#添加6666端口，仅UDP协议</span><br>sudo ufw allow 6666/udp<br><br><span class="hljs-comment">#添加8888到9999之间的端口</span><br>sudo ufw allow 8888:9999<br><br><span class="hljs-comment"># 允许来自特定 IP 地址的连接</span><br>sudo ufw allow from 203.0.113.4<br><br><span class="hljs-comment"># 允许特定ip连接特定的端口</span><br>sudo ufw allow from 203.0.113.4 to any port 22<br><br><span class="hljs-comment"># 允许 203.0.113.1 到 203.0.113.254 连接</span><br>sudo ufw allow from 203.0.113.0/24<br><br><span class="hljs-comment"># 允许 203.0.113.1 到 203.0.113.254 连接指定端口</span><br>sudo ufw allow from 203.0.113.0/24 to any port 22<br></code></pre></td></tr></table></figure><h2 id="拒绝访问（deny）"><a href="#拒绝访问（deny）" class="headerlink" title="拒绝访问（deny）"></a>拒绝访问（deny）</h2><p>使用 <code>sudo ufw deny &lt;端口&gt;</code> 来添加拒绝入站的端和协议，与添加允许的类似，差别只是 <code>allow</code> 换成了 <code>deny</code> 。</p><h2 id="删除规则"><a href="#删除规则" class="headerlink" title="删除规则"></a>删除规则</h2><h3 id="普通删除"><a href="#普通删除" class="headerlink" title="普通删除"></a>普通删除</h3><p>先使用 <code>sudo ufw status</code> 查看规则，再使用 <code>sudo ufw delete [规则] &lt;端口&gt;</code> 来删除规则。此方法将删除 <code>IPv4</code> 和 <code>IPv6</code> 规则（如果存在）。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw delete allow 2333/tcp<br></code></pre></td></tr></table></figure><h4 id="通过编号删除"><a href="#通过编号删除" class="headerlink" title="通过编号删除"></a>通过编号删除</h4><p>如果你有很多条规则，则在运行 <code>sudo ufw status</code> 命令查看规则时通过追加 <code>numbered</code> 参数，来给每条规则显示编号。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">To      Action          From<br>--      -----------         ------<br>[1] 22/tcp      ALLOW           192.168.0.104<br>[2] 21/tcp      ALLOW           Anywhere<br>[3] 21/tcp      ALLOW           Anywhere (v6)<br></code></pre></td></tr></table></figure><p>然后使用 <code>sudo ufw delete &lt;编号&gt;</code> 来删除规则会是更方便的选择。但需要注意的是，如果启用了 <code>IPv6</code> ，则还需要删除相应的 <code>IPv6</code> 规则。</p><p>关于 <code>ufw</code> 防火墙工具的更多用法，输入 <code>man ufw</code> 查看 <code>ufw</code> 用户手册。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><a href="https://www.moewah.com/archives/4544.html" target="_blank" rel="noopener external nofollow noreferrer">Ubuntu&#x2F;Debian 系统安装配置 UFW 简单防火墙</a></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;strong&gt;本文非原创&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;UFW&lt;/code&gt; 是 &lt;code&gt;Ubuntu&lt;/code&gt; 的一款防火墙工具，它提供了一套管理网络过滤器的框架，又提供了控制防火墙的命令行界面接口。它给那些不熟悉防火墙概念的 Linux 新用户提供了友好、易使用的用户界面，用来设置复杂的防火墙规则。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>dpkt报错:invalid tcpdump header</title>
@@ -54,9 +76,9 @@
     <category term="Linux" scheme="https://pawswrite.xyz/categories/Linux/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="解锁网易云音乐" scheme="https://pawswrite.xyz/tags/%E8%A7%A3%E9%94%81%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90/"/>
     
@@ -125,9 +147,9 @@
     <category term="VPS" scheme="https://pawswrite.xyz/categories/VPS/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
   </entry>
   
@@ -151,9 +173,9 @@
     <category term="Bitwarden" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Bitwarden/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="Bitwarden" scheme="https://pawswrite.xyz/tags/Bitwarden/"/>
     
@@ -226,9 +248,9 @@
     <category term="自建" scheme="https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E8%87%AA%E5%BB%BA/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="科学上网" scheme="https://pawswrite.xyz/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     
@@ -251,9 +273,9 @@
     <category term="VPS" scheme="https://pawswrite.xyz/categories/VPS/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
   </entry>
   
@@ -299,9 +321,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Seafile/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -326,9 +348,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Seafile/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -355,9 +377,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Seafile/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -403,9 +425,9 @@
     <category term="VPS" scheme="https://pawswrite.xyz/categories/VPS/"/>
     
     
-    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
-    
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
+    
+    <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
   </entry>
   
@@ -479,29 +501,6 @@
     <category term="Python" scheme="https://pawswrite.xyz/tags/Python/"/>
     
     <category term="Django" scheme="https://pawswrite.xyz/tags/Django/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【git实战入门】2. 小白的第一次提交</title>
-    <link href="https://pawswrite.xyz/posts/10342.html"/>
-    <id>https://pawswrite.xyz/posts/10342.html</id>
-    <published>2022-09-24T09:24:40.000Z</published>
-    <updated>2022-10-04T15:51:38.669Z</updated>
-    
-    <content type="html"><![CDATA[<p>上一篇教程已经将远程的repository clone到了本地并进行了配置，我们来进行第一次提交和修改。</p><span id="more"></span><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>要成功将修改提交到仓库，前提是要证明你对仓库有修改的权力，毕竟不是什么阿猫阿狗都能随便改的。</p><p>一般验证的方式有三种：<br>验证你是你（对你所有的仓库都可以进行修改）：</p><ul><li><a href="https://github.com/settings/tokens" target="_blank" rel="noopener external nofollow noreferrer">Personal access tokens</a></li><li><a href="https://github.com/settings/keys" target="_blank" rel="noopener external nofollow noreferrer">SSH keys</a></li><li>账号密码（已经弃用）</li></ul><p>验证你可以修改这个仓库（仅针对这一个仓库）</p><ul><li>Deploy keys</li></ul><p>本文先讲如何优雅地配置SSH keys</p><h1 id="通过SSH-keys连接到GitHub"><a href="#通过SSH-keys连接到GitHub" class="headerlink" title="通过SSH keys连接到GitHub"></a>通过SSH keys连接到GitHub</h1><p>官方文档：《<a href="https://docs.github.com/cn/authentication/connecting-to-github-with-ssh" target="_blank" rel="noopener external nofollow noreferrer">通过 SSH 连接到 GitHub</a>》</p><h2 id="检查SSH-keys"><a href="#检查SSH-keys" class="headerlink" title="检查SSH keys"></a>检查SSH keys</h2><p>打开终端或者 git bash：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span> -al ~/.ssh<br></code></pre></td></tr></table></figure><p>检查有没有 id_dsa 和 id_dsa.pub 文件。免得之后将其覆盖。</p><p>如果有的话，你可以跳过下一步。</p><h2 id="生成密钥对"><a href="#生成密钥对" class="headerlink" title="生成密钥对"></a>生成密钥对</h2><p>打开终端输入以下命令（修改你的邮箱）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-keygen -t rsa -C <span class="hljs-string">&quot;your_email@example.com&quot;</span><br></code></pre></td></tr></table></figure><p>会出现下面的内容</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">Generating public/private rsa key pair.<br>Enter file <span class="hljs-keyword">in</span> <span class="hljs-built_in">which</span> to save the key (/c/Users/user/.ssh/id_rsa): 回车<br>Enter passphrase (empty <span class="hljs-keyword">for</span> no passphrase): 回车<br></code></pre></td></tr></table></figure><p>这里你可以重新命名密钥名字，也可以用<code>id_rsa</code>默认的密钥名，所以直接回车两次就好。</p><p>然后如果输出下面内容，表示key创建成功。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">Your identification has been saved <span class="hljs-keyword">in</span> /home/you/.ssh/id_rsa<br></code></pre></td></tr></table></figure><h2 id="添加ssh-agent"><a href="#添加ssh-agent" class="headerlink" title="添加ssh-agent"></a>添加ssh-agent</h2><p>Windows上，如果生成的是默认的id-rsa，那么无需执行此步。</p><p>首先我们要把密钥添加到后台的ssh-agent代理，让他帮我们在需要的时候完成授权任务，运行如下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(ssh-agent -s)</span>&quot;</span><br>ssh-add ~/.ssh/id_rsa<br></code></pre></td></tr></table></figure><h2 id="SSH公钥加入Github账号"><a href="#SSH公钥加入Github账号" class="headerlink" title="SSH公钥加入Github账号"></a>SSH公钥加入Github账号</h2><p>最后一步，我们需要把公钥信息加入到Github的SSH管理中，使用如入命令查看ssh公钥信息：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> ~/.ssh/id_rsa.pub<br></code></pre></td></tr></table></figure><p>复制公钥信息后，点此<a href="https://github.com/settings/ssh/new" target="_blank" rel="noopener external nofollow noreferrer">添加SSH密钥</a>：<br><img src="/posts/10342/pub-key.png"></p><p>粘贴公钥到此处即可。</p><p>随后测试下有没有授权成功，运行如下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh -T git@github.com<br></code></pre></td></tr></table></figure><p>出现以下信息则算成功：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">Hi 你的用户名! You<span class="hljs-string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br></code></pre></td></tr></table></figure><h1 id="修改并提交"><a href="#修改并提交" class="headerlink" title="修改并提交"></a>修改并提交</h1><p>clone下来仓库，用 vscode 进行编辑 README 文件。</p><p>提交的方式太多了，VSCode可以就可以提交并push，GitHub Desktop也可以。但既然是教程，那还是先讲命令行方式。</p><div class="note note-info">            <p>vscode 有很多有意思的插件，比如说 Git Lens ，让你快速使用 git blame，也就是找到每一行代码最后编辑的人是谁。<br>GitHub desktop可以让你直观看到有哪些文件进行了修改，以前的commit记录，等等。</p>          </div><h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><h3 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h3><p>所谓commit，就是我某个功能改完啦，暂时不需要改了。那么我先把这个修改提交到暂存区，也就是commit。</p><p>修改后，在项目目录下打开Git Bash，输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git commit -m [message]<br></code></pre></td></tr></table></figure><p>[message] 可以是一些备注信息。</p><p>那如果我改了三个文件，但只有两个想提交，第三个还妹改完咋整，可以提交暂存区的指定文件到仓库区：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git commit [file1] [file2] ... -m [message]<br></code></pre></td></tr></table></figure><p>如果你没有设置 -m 选项，Git 会尝试为你打开一个编辑器以填写提交信息。 如果 Git 在你对它的配置中找不到相关信息，默认会打开 vim。屏幕会像这样：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Please enter the commit message for your changes. Lines starting</span><br><span class="hljs-comment"># with &#x27;#&#x27; will be ignored, and an empty message aborts the commit.</span><br><span class="hljs-comment"># On branch master</span><br><span class="hljs-comment"># Changes to be committed:</span><br><span class="hljs-comment">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># modified:   hello.php</span><br><span class="hljs-comment">#</span><br>~<br>~<br><span class="hljs-string">&quot;.git/COMMIT_EDITMSG&quot;</span> 9L, 257C<br></code></pre></td></tr></table></figure><p>这时就使用vim来编辑这里的提交信息就好了，先按i来编辑，编辑好后按esc，然后输入 :wq 按回车退出。</p><p>如果我的修改是新增文件，怎么办？需要先将文件加入git仓库：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git add 文件名<br></code></pre></td></tr></table></figure><p>你觉得 git add 提交缓存的流程太过繁琐，Git 也允许你用 -a 选项跳过这一步。命令格式如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git commit -a<br></code></pre></td></tr></table></figure><p>比如说</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git commit -am <span class="hljs-string">&#x27;小白的第一次提交，修改README文件&#x27;</span><br></code></pre></td></tr></table></figure><h3 id="push"><a href="#push" class="headerlink" title="push"></a>push</h3><p>所谓push，就是把之前用commit保存下来的改变，推送到远程仓库。可以多次commit，然后一次push上去。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git push<br></code></pre></td></tr></table></figure><p>查看远程仓库：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git remote --verbose<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;上一篇教程已经将远程的repository clone到了本地并进行了配置，我们来进行第一次提交和修改。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="学习是人生第一要务" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/"/>
-    
-    <category term="git" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/git/"/>
-    
-    
-    <category term="git" scheme="https://pawswrite.xyz/tags/git/"/>
     
   </entry>
   

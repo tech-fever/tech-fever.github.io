@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Linux笔记：ufw使用教程</title>
+    <link href="/posts/ad88c346.html"/>
+    <url>/posts/ad88c346.html</url>
+    
+    <content type="html"><![CDATA[<p><strong>本文非原创</strong></p><p><code>UFW</code> 是 <code>Ubuntu</code> 的一款防火墙工具，它提供了一套管理网络过滤器的框架，又提供了控制防火墙的命令行界面接口。它给那些不熟悉防火墙概念的 Linux 新用户提供了友好、易使用的用户界面，用来设置复杂的防火墙规则。</p><span id="more"></span><h1 id="安装-UFW"><a href="#安装-UFW" class="headerlink" title="安装 UFW"></a>安装 UFW</h1><p>检查下系统上是否已经安装了 UFW</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo dpkg --get-selections | grep ufw<br></code></pre></td></tr></table></figure><p>如还没有安装，通过 apt-get install 命令来安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get update<br>sudo apt-get install ufw<br></code></pre></td></tr></table></figure><h1 id="配置-UFW"><a href="#配置-UFW" class="headerlink" title="配置 UFW"></a>配置 UFW</h1><h2 id="开启-IPv6-支持"><a href="#开启-IPv6-支持" class="headerlink" title="开启 IPv6 支持"></a>开启 IPv6 支持</h2><p>若不启用 IPv6 支持，默认情况 ufw 防火墙只针对 IPv4。若要启用 IPv6 支持，请使用 nano、vim 或者其他您喜欢的编辑器打开 UFW 配置：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo vim /etc/default/ufw<br></code></pre></td></tr></table></figure><p>然后确定 IPV6 的值为 yes。它应该如下所示：</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">IPV6</span>=<span class="hljs-literal">yes</span><br></code></pre></td></tr></table></figure><p>保存并关闭文件。</p><h2 id="默认策略"><a href="#默认策略" class="headerlink" title="默认策略"></a>默认策略</h2><p>刚开始使用 UFW 防火墙，则要定义的第一个规则是您的默认策略</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw default deny incoming<br>sudo ufw default allow outgoing<br></code></pre></td></tr></table></figure><p>默认策略为拒绝传入并允许传出连接。</p><h2 id="启用-x2F-禁用"><a href="#启用-x2F-禁用" class="headerlink" title="启用&#x2F;禁用"></a>启用&#x2F;禁用</h2><p>在使用前，你应该检查下 UFW 是否已经在运行。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw status<br></code></pre></td></tr></table></figure><p>启用 ufw 前，请添加允许 ssh 连接的相关规则，如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw allow ssh<br></code></pre></td></tr></table></figure><p>如果你发现状态是 inactive ，意思是没有被激活或不起作用。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw <span class="hljs-built_in">enable</span>  <span class="hljs-comment">#启用</span><br>sudo ufw <span class="hljs-built_in">disable</span>  <span class="hljs-comment">#禁用</span><br>sudo ufw reset  <span class="hljs-comment">#重置</span><br></code></pre></td></tr></table></figure><h2 id="列出当前UFW规则"><a href="#列出当前UFW规则" class="headerlink" title="列出当前UFW规则"></a>列出当前UFW规则</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw status verbose<br></code></pre></td></tr></table></figure><h2 id="允许入站（allow）"><a href="#允许入站（allow）" class="headerlink" title="允许入站（allow）"></a>允许入站（allow）</h2><p>默认情况，没有允许就是拒绝（入站），使用 ufw allow &lt;端口&gt; 来添加允许访问的端口或协议。规则中未明确指定 tcp 或 udp 协议，默认将对 tcp 或 udp 协议同时生效。</p><p>示例如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#添加22端口</span><br>sudo ufw allow ssh<br><br><span class="hljs-comment">#添加80端口</span><br>sudo ufw allow http<br><br><span class="hljs-comment">#添加443端口</span><br>sudo ufw allow https<br><br><span class="hljs-comment">#添加2333端口，仅TCP协议</span><br>sudo ufw allow 2333/tcp<br><br><span class="hljs-comment">#添加6666端口，仅UDP协议</span><br>sudo ufw allow 6666/udp<br><br><span class="hljs-comment">#添加8888到9999之间的端口</span><br>sudo ufw allow 8888:9999<br><br><span class="hljs-comment"># 允许来自特定 IP 地址的连接</span><br>sudo ufw allow from 203.0.113.4<br><br><span class="hljs-comment"># 允许特定ip连接特定的端口</span><br>sudo ufw allow from 203.0.113.4 to any port 22<br><br><span class="hljs-comment"># 允许 203.0.113.1 到 203.0.113.254 连接</span><br>sudo ufw allow from 203.0.113.0/24<br><br><span class="hljs-comment"># 允许 203.0.113.1 到 203.0.113.254 连接指定端口</span><br>sudo ufw allow from 203.0.113.0/24 to any port 22<br></code></pre></td></tr></table></figure><h2 id="拒绝访问（deny）"><a href="#拒绝访问（deny）" class="headerlink" title="拒绝访问（deny）"></a>拒绝访问（deny）</h2><p>使用 <code>sudo ufw deny &lt;端口&gt;</code> 来添加拒绝入站的端和协议，与添加允许的类似，差别只是 <code>allow</code> 换成了 <code>deny</code> 。</p><h2 id="删除规则"><a href="#删除规则" class="headerlink" title="删除规则"></a>删除规则</h2><h3 id="普通删除"><a href="#普通删除" class="headerlink" title="普通删除"></a>普通删除</h3><p>先使用 <code>sudo ufw status</code> 查看规则，再使用 <code>sudo ufw delete [规则] &lt;端口&gt;</code> 来删除规则。此方法将删除 <code>IPv4</code> 和 <code>IPv6</code> 规则（如果存在）。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw delete allow 2333/tcp<br></code></pre></td></tr></table></figure><h4 id="通过编号删除"><a href="#通过编号删除" class="headerlink" title="通过编号删除"></a>通过编号删除</h4><p>如果你有很多条规则，则在运行 <code>sudo ufw status</code> 命令查看规则时通过追加 <code>numbered</code> 参数，来给每条规则显示编号。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">To      Action          From<br>--      -----------         ------<br>[1] 22/tcp      ALLOW           192.168.0.104<br>[2] 21/tcp      ALLOW           Anywhere<br>[3] 21/tcp      ALLOW           Anywhere (v6)<br></code></pre></td></tr></table></figure><p>然后使用 <code>sudo ufw delete &lt;编号&gt;</code> 来删除规则会是更方便的选择。但需要注意的是，如果启用了 <code>IPv6</code> ，则还需要删除相应的 <code>IPv6</code> 规则。</p><p>关于 <code>ufw</code> 防火墙工具的更多用法，输入 <code>man ufw</code> 查看 <code>ufw</code> 用户手册。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><a href="https://www.moewah.com/archives/4544.html" target="_blank" rel="noopener external nofollow noreferrer">Ubuntu&#x2F;Debian 系统安装配置 UFW 简单防火墙</a></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>dpkt报错:invalid tcpdump header</title>
     <link href="/posts/f309c2f5.html"/>
     <url>/posts/f309c2f5.html</url>
@@ -45,9 +70,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>解锁网易云音乐</tag>
       
@@ -120,9 +145,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -149,9 +174,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Bitwarden</tag>
       
@@ -236,9 +261,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -265,9 +290,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -321,9 +346,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Seafile</tag>
       
@@ -352,9 +377,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Seafile</tag>
       
@@ -385,9 +410,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Seafile</tag>
       
@@ -441,9 +466,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -823,9 +848,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>pyppeteer</tag>
+      
+      <tag>Python</tag>
       
       <tag>爬虫</tag>
       
@@ -854,9 +879,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>Azure</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -883,9 +908,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>Azure</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -910,9 +935,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -945,9 +970,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -974,15 +999,15 @@
     
     <tags>
       
-      <tag>长毛象</tag>
+      <tag>Linux</tag>
       
       <tag>VPS</tag>
       
-      <tag>Linux</tag>
+      <tag>长毛象运维</tag>
+      
+      <tag>长毛象</tag>
       
       <tag>Notes</tag>
-      
-      <tag>长毛象运维</tag>
       
     </tags>
     
@@ -1009,9 +1034,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -1040,9 +1065,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -1166,9 +1191,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1224,9 +1249,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1280,9 +1305,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1340,9 +1365,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1369,9 +1394,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Speedtest</tag>
       
@@ -1398,9 +1423,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1485,9 +1510,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1624,11 +1649,11 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
       
       <tag>CloudFlare</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -1676,9 +1701,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>长毛象运维</tag>
       
@@ -1705,9 +1730,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Object Storage</tag>
       
@@ -1736,9 +1761,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -1763,13 +1788,13 @@
     
     <tags>
       
-      <tag>长毛象</tag>
+      <tag>Linux</tag>
       
       <tag>VPS</tag>
       
-      <tag>Linux</tag>
-      
       <tag>长毛象运维</tag>
+      
+      <tag>长毛象</tag>
       
     </tags>
     
@@ -1794,15 +1819,15 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
       
-      <tag>笔记</tag>
+      <tag>VPS</tag>
+      
+      <tag>长毛象运维</tag>
       
       <tag>Notes</tag>
       
-      <tag>长毛象运维</tag>
+      <tag>笔记</tag>
       
     </tags>
     
@@ -1887,15 +1912,15 @@
     
     <tags>
       
-      <tag>笔记</tag>
+      <tag>长毛象运维</tag>
       
       <tag>Notes</tag>
       
+      <tag>Mastodon</tag>
+      
       <tag>fediverse</tag>
       
-      <tag>长毛象运维</tag>
-      
-      <tag>Mastodon</tag>
+      <tag>笔记</tag>
       
     </tags>
     
@@ -1976,11 +2001,11 @@
     
     <tags>
       
-      <tag>科学上网</tag>
-      
       <tag>游戏</tag>
       
       <tag>Steam</tag>
+      
+      <tag>科学上网</tag>
       
     </tags>
     
@@ -2036,9 +2061,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>Notes</tag>
       
@@ -2065,9 +2090,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -2094,9 +2119,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -2123,9 +2148,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -2179,9 +2204,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -2206,9 +2231,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
     </tags>
     
@@ -2233,9 +2258,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>解锁网易云音乐</tag>
       
@@ -2262,9 +2287,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -2293,9 +2318,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
@@ -2322,9 +2347,9 @@
     
     <tags>
       
-      <tag>VPS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>VPS</tag>
       
       <tag>科学上网</tag>
       
