@@ -6,7 +6,7 @@
   <link href="https://pawswrite.xyz/atom.xml" rel="self"/>
   
   <link href="https://pawswrite.xyz/"/>
-  <updated>2024-02-27T08:40:28.667Z</updated>
+  <updated>2024-02-27T08:49:27.419Z</updated>
   <id>https://pawswrite.xyz/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MySQL Tutorial</title>
+    <link href="https://pawswrite.xyz/posts/b4042542.html"/>
+    <id>https://pawswrite.xyz/posts/b4042542.html</id>
+    <published>2024-02-27T08:45:29.000Z</published>
+    <updated>2024-02-27T08:49:27.419Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt update<br>sudo apt install mysql-server<br>sudo mysql_secure_installation<br></code></pre></td></tr></table></figure><h1 id="配置-MySQL"><a href="#配置-MySQL" class="headerlink" title="配置 MySQL"></a>配置 MySQL</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo mysql -u root -p<br></code></pre></td></tr></table></figure><p>如果有密码的话，这个时候会提示输入密码，输入刚刚设置的密码。</p><p>之后进入 MySQL 控制台，可以进行数据库的操作，也就是如下显示：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql<span class="hljs-operator">&gt;</span> <br></code></pre></td></tr></table></figure><h1 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h1><p>以 WordPress 为例，下面命令全都在 MySQL 控制台中执行。</p><p>创建一个名为 <code>wordpress</code> 的数据库</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> DATABASE wordpress;<br></code></pre></td></tr></table></figure><p>创建一个名为 <code>wordpress</code> 的用户并设置密码为 <code>wordpress-pwd</code>，并赋予 <code>wordpress</code> 数据库的所有权限</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;wordpress&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;wordpress-pwd&#x27;</span>;<br></code></pre></td></tr></table></figure><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> PRIVILEGES <span class="hljs-keyword">ON</span> wordpress.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;wordpress&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;安装-MySQL&quot;&gt;&lt;a href=&quot;#安装-MySQL&quot; class=&quot;headerlink&quot; title=&quot;安装 MySQL&quot;&gt;&lt;/a&gt;安装 MySQL&lt;/h1&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td cla</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>WordPress 指南：安装</title>
+    <link href="https://pawswrite.xyz/posts/7ab1ada0.html"/>
+    <id>https://pawswrite.xyz/posts/7ab1ada0.html</id>
+    <published>2024-02-27T08:43:56.000Z</published>
+    <updated>2024-02-27T08:53:06.247Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="MySQL-部分"><a href="#MySQL-部分" class="headerlink" title="MySQL 部分"></a>MySQL 部分</h1><p>请参见 <a href="https://www.runoob.com/mysql/mysql-install.html" target="_blank" rel="noopener external nofollow noreferrer">MySQL 安装</a>。</p><h1 id="安装-WordPress"><a href="#安装-WordPress" class="headerlink" title="安装 WordPress"></a>安装 WordPress</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://wordpress.org/latest.tar.gz<br><span class="hljs-comment"># 解压</span><br>tar -xzvf latest.tar.gz &amp;&amp; <span class="hljs-built_in">rm</span> latest.tar.gz<br></code></pre></td></tr></table></figure><h1 id="配置-WordPress"><a href="#配置-WordPress" class="headerlink" title="配置 WordPress"></a>配置 WordPress</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 移动到网站根目录</span><br>sudo <span class="hljs-built_in">mv</span> wordpress /var/www/html/<br></code></pre></td></tr></table></figure><h1 id="配置-WordPress-1"><a href="#配置-WordPress-1" class="headerlink" title="配置 WordPress"></a>配置 WordPress</h1><p>配置 wp-config.php 文件。</p><blockquote><p>参考 <a href="https://developer.wordpress.org/advanced-administration/wordpress/wp-config/" target="_blank" rel="noopener external nofollow noreferrer">WordPress 官方文档</a>。</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br><span class="hljs-comment"># 修改文件夹权限</span><br>sudo <span class="hljs-built_in">chown</span> -R www-data:www-data /var/www/html/wordpress<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;MySQL-部分&quot;&gt;&lt;a href=&quot;#MySQL-部分&quot; class=&quot;headerlink&quot; title=&quot;MySQL 部分&quot;&gt;&lt;/a&gt;MySQL 部分&lt;/h1&gt;&lt;p&gt;请参见 &lt;a href=&quot;https://www.runoob.com/mysql/mysq</summary>
+      
+    
+    
+    
+    <category term="WordPress" scheme="https://pawswrite.xyz/categories/WordPress/"/>
+    
+    
+    <category term="WordPress" scheme="https://pawswrite.xyz/tags/WordPress/"/>
+    
+    <category term="博客" scheme="https://pawswrite.xyz/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>Appium 指南：入门准备</title>
@@ -451,50 +497,6 @@
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
     
     <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>给对象安排微信早安推送</title>
-    <link href="https://pawswrite.xyz/posts/21.html"/>
-    <id>https://pawswrite.xyz/posts/21.html</id>
-    <published>2022-09-29T11:28:26.000Z</published>
-    <updated>2022-10-04T15:51:38.667Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近对象给我看了小红书上挺火的那个程序员做的早安公众号。试了下，碍于微信限制，只有服务号能发模板消息，如果用测试号，收到的消息很不显眼。本文实现了测试号和pushplus来发送早安推送。</p><span id="more"></span><h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p>GitHub: <a class="btn" href="https://github.com/tech-fever/wechat_push"  title="点此打开项目" target="_blank">项目地址</a></p><p><a href="https://github.com/tech-fever/wechat_push" target="_blank" rel="noopener external nofollow noreferrer">https://github.com/tech-fever/wechat_push</a></p><p>首先将项目下载到本地，</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/tech-fever/wechat_push.git<br><span class="hljs-built_in">cd</span> wechat_push<br></code></pre></td></tr></table></figure><p>将 <code>config.json.example</code> 复制一份命名为 <code>config.json</code></p><p>如果你 测试号 和 pushplus 都需要，那就都填，如果有不需要的，就在 <code>config.json</code> 删除对应的部分。</p><h1 id="测试号-x2F-服务号"><a href="#测试号-x2F-服务号" class="headerlink" title="测试号&#x2F;服务号"></a>测试号&#x2F;服务号</h1><div class="note note-primary">            <p>个人公众号无法发送模板消息，只能48小时内回复，不能主动给用户发消息。服务号需要营业执照需要法人身份需要公章，还需要300块，所以直接放弃。</p>          </div><p>测试号获取：<a href="https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login" target="_blank" rel="noopener external nofollow noreferrer">https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login</a></p><p>先登录，找到app_id，app_secret，再添加模板，拿到模板id</p><a class="btn" href="https://raw.githubusercontent.com/tech-fever/wechat_push/main/template"  title="模板链接" target="_blank">点此打开模板</a><p>再让对象关注公众号，关注后在用户列表里获取对象微信号。</p><p>编辑 <code>config.json</code> 填入 <code>app_id app_secret template_id touser</code>。</p><h1 id="pushplus"><a href="#pushplus" class="headerlink" title="pushplus"></a>pushplus</h1><p>pushplus: <a class="btn" href="https://www.pushplus.plus/login.html"  title="pushplus" target="_blank">点此登录pushplus</a></p><p>登录后获取token，填入 <code>config.json</code> </p><h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>friends 下面支持添加多个收信息的朋友，<code>birthday</code> 和 <code>love_date</code> 可以留空，<code>to</code> 是pushplus好友token，可以留空， <code>touser</code> 是好友关注测试公众号后用户列表里的微信号，可以留空。</p><h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>需要python3以上</p><p>Linux:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install python3<br></code></pre></td></tr></table></figure><p>Windows : <a class="btn" href="https://www.python.org/downloads/"  title="python3 官网" target="_blank">python3 下载</a></p><p>运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 main.py<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;最近对象给我看了小红书上挺火的那个程序员做的早安公众号。试了下，碍于微信限制，只有服务号能发模板消息，如果用测试号，收到的消息很不显眼。本文实现了测试号和pushplus来发送早安推送。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="有趣的小项目" scheme="https://pawswrite.xyz/categories/%E6%9C%89%E8%B6%A3%E7%9A%84%E5%B0%8F%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-    <category term="学习" scheme="https://pawswrite.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-    <category term="Python" scheme="https://pawswrite.xyz/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机场推荐</title>
-    <link href="https://pawswrite.xyz/posts/33840.html"/>
-    <id>https://pawswrite.xyz/posts/33840.html</id>
-    <published>2022-09-25T05:11:47.000Z</published>
-    <updated>2022-11-24T11:39:38.105Z</updated>
-    
-    <content type="html"><![CDATA[<p>全年稳定高速解锁Netflix的机场很少，大部分都很贵。推荐一个我自用了挺久的高性价比机场。</p><p>注册GLaDOS(<a href="https://glados.rocks/register" target="_blank" rel="noopener external nofollow noreferrer">注册地址</a>), 并输入邀请码激活:</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">SPV54-EMK9S-HUH77-QXWB0<br></code></pre></td></tr></table></figure><span id="more"></span><p class="note note-info">机场：简单理解就是全平台可用的梯子。</p><h1 id="测速结果"><a href="#测速结果" class="headerlink" title="测速结果"></a>测速结果</h1><p>Speedtest stair高峰期测速结果（多线程测速），我本地带宽在500Mbps：<br><img src="/posts/33840/speedtest-stair.png"></p><p>Youtube 高峰期（下午六点多）测速，能稳定在十万左右：<br><img src="/posts/33840/youtube.png"></p><h1 id="节点价格"><a href="#节点价格" class="headerlink" title="节点价格"></a>节点价格</h1><p>他家有三个套餐，写着限速但实际我使用并没发现限速。<br><img src="/posts/33840/price.png"></p><p>用 <code>PORTALGUN</code> 优惠码可以满100-20：<br><img src="/posts/33840/pricing.png"></p><p>用 <code>CYBERCAT</code> 优惠码可以<b><font color=red>满60减20</font></b></p><p>支持Paypal、Visa&#x2F;MasterCard信用卡和支付宝三种支付方式，其中Paypal和信用卡可以9折，7天内可退款（通过 PayPal 支付的需要支付每笔 5 美元手续费）。<br><img src="/posts/33840/payment.png"></p><p>也就是说200天套餐仅需 (119 - 20) * 0.9 &#x3D; 88 ，大概13一月。</p><p>但我说这个机场性价比极高的原因在于，他家可以<strong>无限签到</strong>，付费用户每次签到100%延长一天（免费用户好像不能无限延长）。</p><p>而签到呢，又是可以用脚本自动的。所以。。。一次付费，<del>理论上无限使用，只要机场不改变政策</del>。</p><p class="note note-light">自动签到脚本可留言获取</p><h1 id="注册流程"><a href="#注册流程" class="headerlink" title="注册流程"></a>注册流程</h1><ul><li>官网：<a href="https://glados.rocks/" target="_blank" rel="noopener external nofollow noreferrer">https://glados.rocks</a></li><li>注册：<a href="https://glados.rocks/register" target="_blank" rel="noopener external nofollow noreferrer">https://glados.rocks/register</a></li></ul><p>首先进入 <a href="https://glados.rocks/register" target="_blank" rel="noopener external nofollow noreferrer">GLaDOS 注册 </a>：<br><img src="/posts/33840/register.png"></p><p>输入自己的邮箱，点击send passcode to email，再进入邮箱查看收到的验证码，将验证码填入 Passcode 输入框。最后点击 <strong>Register</strong> 按钮：<br><img src="/posts/33840/CD-KEY.PNG"></p><p>在这里输入笔者的邀请码，点击Next，即可获得<strong>三天免费</strong>，</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">SPV54-EMK9S-HUH77-QXWB0<br></code></pre></td></tr></table></figure><p>之后就等待账号设置完成：<br><img src="/posts/33840/setup.png"></p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>机场不仅有工作日工作时间在线的客服，还有详尽的教程。照着使用就好啦。</p><h1 id="Netflix解锁"><a href="#Netflix解锁" class="headerlink" title="Netflix解锁"></a>Netflix解锁</h1><p>机场提供 Netflix 美国、台湾解锁节点，平均速度大于40MB&#x2F;s，看4k毫无压力。<br><img src="/posts/33840/netflix.png"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;全年稳定高速解锁Netflix的机场很少，大部分都很贵。推荐一个我自用了挺久的高性价比机场。&lt;/p&gt;
-&lt;p&gt;注册GLaDOS(&lt;a href=&quot;https://glados.rocks/register&quot; target=&quot;_blank&quot; rel=&quot;noopener external nofollow noreferrer&quot;&gt;注册地址&lt;/a&gt;), 并输入邀请码激活:&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs&quot;&gt;SPV54-EMK9S-HUH77-QXWB0&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="科学上网" scheme="https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
-    
     
   </entry>
   

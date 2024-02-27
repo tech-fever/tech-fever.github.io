@@ -4,6 +4,46 @@
   
   
   <entry>
+    <title>MySQL Tutorial</title>
+    <link href="/posts/b4042542.html"/>
+    <url>/posts/b4042542.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt update<br>sudo apt install mysql-server<br>sudo mysql_secure_installation<br></code></pre></td></tr></table></figure><h1 id="配置-MySQL"><a href="#配置-MySQL" class="headerlink" title="配置 MySQL"></a>配置 MySQL</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo mysql -u root -p<br></code></pre></td></tr></table></figure><p>如果有密码的话，这个时候会提示输入密码，输入刚刚设置的密码。</p><p>之后进入 MySQL 控制台，可以进行数据库的操作，也就是如下显示：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql<span class="hljs-operator">&gt;</span> <br></code></pre></td></tr></table></figure><h1 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h1><p>以 WordPress 为例，下面命令全都在 MySQL 控制台中执行。</p><p>创建一个名为 <code>wordpress</code> 的数据库</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> DATABASE wordpress;<br></code></pre></td></tr></table></figure><p>创建一个名为 <code>wordpress</code> 的用户并设置密码为 <code>wordpress-pwd</code>，并赋予 <code>wordpress</code> 数据库的所有权限</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;wordpress&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;wordpress-pwd&#x27;</span>;<br></code></pre></td></tr></table></figure><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> PRIVILEGES <span class="hljs-keyword">ON</span> wordpress.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;wordpress&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>WordPress 指南：安装</title>
+    <link href="/posts/7ab1ada0.html"/>
+    <url>/posts/7ab1ada0.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="MySQL-部分"><a href="#MySQL-部分" class="headerlink" title="MySQL 部分"></a>MySQL 部分</h1><p>请参见 <a href="https://www.runoob.com/mysql/mysql-install.html" target="_blank" rel="noopener external nofollow noreferrer">MySQL 安装</a>。</p><h1 id="安装-WordPress"><a href="#安装-WordPress" class="headerlink" title="安装 WordPress"></a>安装 WordPress</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://wordpress.org/latest.tar.gz<br><span class="hljs-comment"># 解压</span><br>tar -xzvf latest.tar.gz &amp;&amp; <span class="hljs-built_in">rm</span> latest.tar.gz<br></code></pre></td></tr></table></figure><h1 id="配置-WordPress"><a href="#配置-WordPress" class="headerlink" title="配置 WordPress"></a>配置 WordPress</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 移动到网站根目录</span><br>sudo <span class="hljs-built_in">mv</span> wordpress /var/www/html/<br></code></pre></td></tr></table></figure><h1 id="配置-WordPress-1"><a href="#配置-WordPress-1" class="headerlink" title="配置 WordPress"></a>配置 WordPress</h1><p>配置 wp-config.php 文件。</p><blockquote><p>参考 <a href="https://developer.wordpress.org/advanced-administration/wordpress/wp-config/" target="_blank" rel="noopener external nofollow noreferrer">WordPress 官方文档</a>。</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br><span class="hljs-comment"># 修改文件夹权限</span><br>sudo <span class="hljs-built_in">chown</span> -R www-data:www-data /var/www/html/wordpress<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>WordPress</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>WordPress</tag>
+      
+      <tag>博客</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Appium 指南：入门准备</title>
     <link href="/posts/a8effc2e.html"/>
     <url>/posts/a8effc2e.html</url>

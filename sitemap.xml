@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://pawswrite.xyz/posts/7ab1ada0.html</loc>
+    
+    <lastmod>2024-02-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/posts/b4042542.html</loc>
+    
+    <lastmod>2024-02-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://pawswrite.xyz/posts/a8effc2e.html</loc>
     
     <lastmod>2024-02-27</lastmod>
@@ -863,14 +881,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/Azure/</loc>
+    <loc>https://pawswrite.xyz/tags/fediverse/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/tags/fediverse/</loc>
+    <loc>https://pawswrite.xyz/tags/Azure/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -982,6 +1000,20 @@
   </url>
   
   <url>
+    <loc>https://pawswrite.xyz/tags/WordPress/</loc>
+    <lastmod>2024-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/tags/%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2024-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://pawswrite.xyz/tags/Python/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -1087,6 +1119,13 @@
   </url>
   
   <url>
+    <loc>https://pawswrite.xyz/tags/Clash/</loc>
+    <lastmod>2024-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://pawswrite.xyz/tags/Bitwarden/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -1095,13 +1134,6 @@
   
   <url>
     <loc>https://pawswrite.xyz/tags/OnlyOffice/</loc>
-    <lastmod>2024-02-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pawswrite.xyz/tags/Clash/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1138,14 +1170,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/</loc>
+    <loc>https://pawswrite.xyz/categories/%E9%95%BF%E6%AF%9B%E8%B1%A1%E8%BF%90%E7%BB%B4/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E9%95%BF%E6%AF%9B%E8%B1%A1%E8%BF%90%E7%BB%B4/</loc>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1173,13 +1205,6 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Azure/</loc>
-    <lastmod>2024-02-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Speedtest/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -1194,13 +1219,6 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
-    <lastmod>2024-02-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Docker/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -1208,7 +1226,21 @@
   </url>
   
   <url>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Azure/</loc>
+    <lastmod>2024-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://pawswrite.xyz/categories/Linux/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
+    <lastmod>2024-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1229,13 +1261,6 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Linux/%E9%98%B2%E7%81%AB%E5%A2%99/</loc>
-    <lastmod>2024-02-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Telegram-Bot/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -1243,7 +1268,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Seafile/</loc>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Linux/%E9%98%B2%E7%81%AB%E5%A2%99/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1257,7 +1282,7 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E8%87%AA%E5%BB%BA/</loc>
+    <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Seafile/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1265,6 +1290,20 @@
   
   <url>
     <loc>https://pawswrite.xyz/categories/Linux/%E8%87%AA%E5%BB%BA/</loc>
+    <lastmod>2024-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E8%87%AA%E5%BB%BA/</loc>
+    <lastmod>2024-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/categories/WordPress/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1320,13 +1359,6 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/aws/</loc>
-    <lastmod>2024-02-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pawswrite.xyz/categories/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -1335,6 +1367,13 @@
   
   <url>
     <loc>https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2024-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/aws/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1369,14 +1408,14 @@
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Bitwarden/</loc>
+    <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/</loc>
+    <loc>https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Bitwarden/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
