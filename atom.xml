@@ -6,7 +6,7 @@
   <link href="https://pawswrite.xyz/atom.xml" rel="self"/>
   
   <link href="https://pawswrite.xyz/"/>
-  <updated>2024-01-17T08:54:50.920Z</updated>
+  <updated>2024-02-27T08:08:25.404Z</updated>
   <id>https://pawswrite.xyz/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Appium 指南：入门准备</title>
+    <link href="https://pawswrite.xyz/posts/a8effc2e.html"/>
+    <id>https://pawswrite.xyz/posts/a8effc2e.html</id>
+    <published>2024-02-27T08:07:06.000Z</published>
+    <updated>2024-02-27T08:08:25.404Z</updated>
+    
+    <content type="html"><![CDATA[<p>普通网络爬虫很简单，但有的时候需要爬取手机端的内容，比如安卓，就需要用到 Appium。Appium 是一个跨平台的开源的自动化测试工具，支持 iOS 和 Android 平台，支持多种编程语言，包括 Python。Appium 本质是一个 HTTP 服务器，使用 WebDriver 协议。</p><span id="more"></span><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>参考 <a href="https://appium.io/docs/en/2.3/quickstart" target="_blank" rel="noopener external nofollow noreferrer">https://appium.io/docs/en/2.3/quickstart</a></p><p>参考 <a href="https://zhuanlan.zhihu.com/p/625290555" target="_blank" rel="noopener external nofollow noreferrer">https://zhuanlan.zhihu.com/p/625290555</a></p><h2 id="安装-nodejs"><a href="#安装-nodejs" class="headerlink" title="安装 nodejs"></a>安装 nodejs</h2><p>网址 <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener external nofollow noreferrer">https://nodejs.org/en/download/</a> 点击 windows installer 下载。</p><p>安装 nodejs 之后，会自动安装 npm。</p><p>打开 cmd 运行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">node -v<br>npm -v<br></code></pre></td></tr></table></figure><p>检查是否安装成功。</p><h2 id="安装-appium"><a href="#安装-appium" class="headerlink" title="安装 appium"></a>安装 appium</h2><p>打开 cmd 运行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i --location=global appium<br></code></pre></td></tr></table></figure><p>安装完成后，运行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">appium -v<br></code></pre></td></tr></table></figure><p>检查是否安装成功。</p><h2 id="安装驱动-uiautomator2"><a href="#安装驱动-uiautomator2" class="headerlink" title="安装驱动 uiautomator2"></a>安装驱动 uiautomator2</h2><p>appium 安装完成后，打开 cmd 运行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm config <span class="hljs-built_in">set</span> registry http://mirrors.cloud.tencent.com/npm/<br><span class="hljs-built_in">set</span> APPIUM_SKIP_CHROMEDRIVER_INSTALL=<span class="hljs-literal">true</span><br>appium driver install uiautomator2<br></code></pre></td></tr></table></figure><p>如果输出类似下面的内容，说明安装成功。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">√ Installing <span class="hljs-string">&#x27;uiautomator2&#x27;</span> using NPM install spec <span class="hljs-string">&#x27;appium-uiautomator2-driver&#x27;</span><br>i Driver uiautomator2@2.36.0 successfully installed<br>- automationName: UiAutomator2<br>- platformNames: [<span class="hljs-string">&quot;Android&quot;</span>]<br></code></pre></td></tr></table></figure><h2 id="安装-Java-JDK"><a href="#安装-Java-JDK" class="headerlink" title="安装 Java JDK"></a>安装 Java JDK</h2><ul><li><del>网址 <a href="https://www.oracle.com/java/technologies/downloads/" target="_blank" rel="noopener external nofollow noreferrer">https://www.oracle.com/java/technologies/downloads/</a> 下载</del></li><li><del>或者 <a href="https://adoptium.net/en-GB/temurin/releases/" target="_blank" rel="noopener external nofollow noreferrer">https://adoptium.net/en-GB/temurin/releases/</a> 下载</del></li><li>直接使用我提供的安装包 <code>OpenJDK21U-jdk_x64_windows_hotspot_21.0.1_12.msi</code></li></ul><p>安装的时候，记得选择配置环境变量 JAVA_HOME 和 PATH</p><p>JAVA_HOME 为 JDK 的安装目录，例如 <code>C:\Program Files\Java\jdk-21.0.1</code></p><p>PATH 添加 <code>%JAVA_HOME%\bin</code></p><h2 id="安装-Android-SDK"><a href="#安装-Android-SDK" class="headerlink" title="安装 Android SDK"></a>安装 Android SDK</h2><p><del>网址 <a href="https://developer.android.com/studio#downloads" target="_blank" rel="noopener external nofollow noreferrer">https://developer.android.com/studio#downloads</a> 下载 <code>commandlinetools-win-10406996_latest.zip</code> ，</del><br>解压 commandlinetools-win-10406996_latest.zip 到 <code>D:\meituanpachong\SDK\</code> 目录下，这个新目录就是您的 Android SDK 目录。</p><p>在解压缩的 cmdline-tools 目录中，创建一个名为 latest 的子目录。将原始 cmdline-tools 目录内容（包括 lib 目录、bin 目录、NOTICE.txt 文件和 source.properties 文件）移动到新创建的 latest 目录中。现在，您就可以从这个位置使用命令行工具了。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sdkmanager <span class="hljs-string">&quot;platform-tools&quot;</span> <span class="hljs-string">&quot;platforms;android-34&quot;</span> <span class="hljs-string">&quot;build-tools;34.0.0&quot;</span><br>sdkmanager --licenses<br></code></pre></td></tr></table></figure><p>配置环境变量 ANDROID_HOME 和 PATH</p><p>ANDROID_HOME 为 SDK 的安装目录，例如 <code>C:\Android\Sdk</code></p><p>Path 中添加 <code>%ANDROID_HOME%\platform-tools</code></p><h2 id="安卓手机模拟器"><a href="#安卓手机模拟器" class="headerlink" title="安卓手机模拟器"></a>安卓手机模拟器</h2><p>如果没有安卓手机，可以使用安卓模拟器。如果有安卓手机，可以跳过这一步。</p><h3 id="模拟器-avdmanager"><a href="#模拟器-avdmanager" class="headerlink" title="模拟器 avdmanager"></a>模拟器 avdmanager</h3><p><del>打开 cmd 运行</del></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sdkmanager <span class="hljs-string">&quot;system-images;android-34;google_apis;x86_64&quot;</span><br>sdkmanager --licenses<br>avdmanager create avd -n <span class="hljs-built_in">test</span> -k <span class="hljs-string">&quot;system-images;android-34;google_apis;x86_64&quot;</span><br></code></pre></td></tr></table></figure><h2 id="配置手机"><a href="#配置手机" class="headerlink" title="配置手机"></a>配置手机</h2><p>打开手机的开发者模式，打开 USB 调试。</p><ol><li>在关于手机页面，连续点击版本号直到激活开发者模式。</li><li>再进入开发者模式，点击开发人员选项，将USB调试打开（否则Appium无法自动执行）</li><li>手机通过USB连接电脑，并在手机允许电脑USB调试</li></ol><h2 id="安装-appium-doctor"><a href="#安装-appium-doctor" class="headerlink" title="安装 appium-doctor"></a>安装 appium-doctor</h2><p>检查您的系统环境是否满足运行 Appium 所需的所有依赖项。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i --location=global appium-doctor<br></code></pre></td></tr></table></figure><h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>cmd 输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">appium --allow-cors<br></code></pre></td></tr></table></figure><p>在浏览器输入 <a href="http://localhost:4723/wd/hub" target="_blank" rel="noopener external nofollow noreferrer">http://localhost:4723/wd/hub</a></p><h2 id="连接手机"><a href="#连接手机" class="headerlink" title="连接手机"></a>连接手机</h2><p>打开 cmd 运行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb devices<br></code></pre></td></tr></table></figure><p>查看手机是否连接成功。如果有输出类似下面的内容，说明连接成功。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">List of devices attached<br>emulator-5554   device<br></code></pre></td></tr></table></figure><p>其中 <code>emulator-5554</code> 就是手机的 deviceName。</p><p>在手机上会自动安装 <code>io.appium.uiautomator2.server</code> 和 <code>Appnium Settings</code></p><h2 id="获取-app-的-package-和-activity"><a href="#获取-app-的-package-和-activity" class="headerlink" title="获取 app 的 package 和 activity"></a>获取 app 的 package 和 activity</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb shell dumpsys window | findstr mCurrentFocus<br>adb shell dumpsys activity | findstr mFocusedActivity<br></code></pre></td></tr></table></figure><h2 id="安装-python"><a href="#安装-python" class="headerlink" title="安装 python"></a>安装 python</h2><p>网址 <a href="https://www.python.org/downloads/" target="_blank" rel="noopener external nofollow noreferrer">https://www.python.org/downloads/</a> 下载</p><p>安装的时候，记得选择配置环境变量 PATH</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple Appium-Python-Client<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;普通网络爬虫很简单，但有的时候需要爬取手机端的内容，比如安卓，就需要用到 Appium。Appium 是一个跨平台的开源的自动化测试工具，支持 iOS 和 Android 平台，支持多种编程语言，包括 Python。Appium 本质是一个 HTTP 服务器，使用 WebDriver 协议。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Python" scheme="https://pawswrite.xyz/categories/Python/"/>
+    
+    
+    <category term="Python" scheme="https://pawswrite.xyz/tags/Python/"/>
+    
+    <category term="爬虫" scheme="https://pawswrite.xyz/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Linux笔记：ufw使用教程</title>
     <link href="https://pawswrite.xyz/posts/ad88c346.html"/>
     <id>https://pawswrite.xyz/posts/ad88c346.html</id>
     <published>2024-01-17T08:32:36.000Z</published>
-    <updated>2024-01-17T08:54:50.920Z</updated>
+    <updated>2024-01-17T08:55:06.603Z</updated>
     
     <content type="html"><![CDATA[<p><strong>本文非原创</strong></p><p><code>UFW</code> 是 <code>Ubuntu</code> 的一款防火墙工具，它提供了一套管理网络过滤器的框架，又提供了控制防火墙的命令行界面接口。它给那些不熟悉防火墙概念的 Linux 新用户提供了友好、易使用的用户界面，用来设置复杂的防火墙规则。</p><span id="more"></span><h1 id="安装-UFW"><a href="#安装-UFW" class="headerlink" title="安装 UFW"></a>安装 UFW</h1><p>检查下系统上是否已经安装了 UFW</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo dpkg --get-selections | grep ufw<br></code></pre></td></tr></table></figure><p>如还没有安装，通过 apt-get install 命令来安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get update<br>sudo apt-get install ufw<br></code></pre></td></tr></table></figure><h1 id="配置-UFW"><a href="#配置-UFW" class="headerlink" title="配置 UFW"></a>配置 UFW</h1><h2 id="开启-IPv6-支持"><a href="#开启-IPv6-支持" class="headerlink" title="开启 IPv6 支持"></a>开启 IPv6 支持</h2><p>若不启用 IPv6 支持，默认情况 ufw 防火墙只针对 IPv4。若要启用 IPv6 支持，请使用 nano、vim 或者其他您喜欢的编辑器打开 UFW 配置：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo vim /etc/default/ufw<br></code></pre></td></tr></table></figure><p>然后确定 IPV6 的值为 yes。它应该如下所示：</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">IPV6</span>=<span class="hljs-literal">yes</span><br></code></pre></td></tr></table></figure><p>保存并关闭文件。</p><h2 id="默认策略"><a href="#默认策略" class="headerlink" title="默认策略"></a>默认策略</h2><p>刚开始使用 UFW 防火墙，则要定义的第一个规则是您的默认策略</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw default deny incoming<br>sudo ufw default allow outgoing<br></code></pre></td></tr></table></figure><p>默认策略为拒绝传入并允许传出连接。</p><h2 id="启用-x2F-禁用"><a href="#启用-x2F-禁用" class="headerlink" title="启用&#x2F;禁用"></a>启用&#x2F;禁用</h2><p>在使用前，你应该检查下 UFW 是否已经在运行。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw status<br></code></pre></td></tr></table></figure><p>启用 ufw 前，请添加允许 ssh 连接的相关规则，如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw allow ssh<br></code></pre></td></tr></table></figure><p>如果你发现状态是 inactive ，意思是没有被激活或不起作用。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw <span class="hljs-built_in">enable</span>  <span class="hljs-comment">#启用</span><br>sudo ufw <span class="hljs-built_in">disable</span>  <span class="hljs-comment">#禁用</span><br>sudo ufw reset  <span class="hljs-comment">#重置</span><br></code></pre></td></tr></table></figure><h2 id="列出当前UFW规则"><a href="#列出当前UFW规则" class="headerlink" title="列出当前UFW规则"></a>列出当前UFW规则</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw status verbose<br></code></pre></td></tr></table></figure><h2 id="允许入站（allow）"><a href="#允许入站（allow）" class="headerlink" title="允许入站（allow）"></a>允许入站（allow）</h2><p>默认情况，没有允许就是拒绝（入站），使用 ufw allow &lt;端口&gt; 来添加允许访问的端口或协议。规则中未明确指定 tcp 或 udp 协议，默认将对 tcp 或 udp 协议同时生效。</p><p>示例如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#添加22端口</span><br>sudo ufw allow ssh<br><br><span class="hljs-comment">#添加80端口</span><br>sudo ufw allow http<br><br><span class="hljs-comment">#添加443端口</span><br>sudo ufw allow https<br><br><span class="hljs-comment">#添加2333端口，仅TCP协议</span><br>sudo ufw allow 2333/tcp<br><br><span class="hljs-comment">#添加6666端口，仅UDP协议</span><br>sudo ufw allow 6666/udp<br><br><span class="hljs-comment">#添加8888到9999之间的端口</span><br>sudo ufw allow 8888:9999<br><br><span class="hljs-comment"># 允许来自特定 IP 地址的连接</span><br>sudo ufw allow from 203.0.113.4<br><br><span class="hljs-comment"># 允许特定ip连接特定的端口</span><br>sudo ufw allow from 203.0.113.4 to any port 22<br><br><span class="hljs-comment"># 允许 203.0.113.1 到 203.0.113.254 连接</span><br>sudo ufw allow from 203.0.113.0/24<br><br><span class="hljs-comment"># 允许 203.0.113.1 到 203.0.113.254 连接指定端口</span><br>sudo ufw allow from 203.0.113.0/24 to any port 22<br></code></pre></td></tr></table></figure><h2 id="拒绝访问（deny）"><a href="#拒绝访问（deny）" class="headerlink" title="拒绝访问（deny）"></a>拒绝访问（deny）</h2><p>使用 <code>sudo ufw deny &lt;端口&gt;</code> 来添加拒绝入站的端和协议，与添加允许的类似，差别只是 <code>allow</code> 换成了 <code>deny</code> 。</p><h2 id="删除规则"><a href="#删除规则" class="headerlink" title="删除规则"></a>删除规则</h2><h3 id="普通删除"><a href="#普通删除" class="headerlink" title="普通删除"></a>普通删除</h3><p>先使用 <code>sudo ufw status</code> 查看规则，再使用 <code>sudo ufw delete [规则] &lt;端口&gt;</code> 来删除规则。此方法将删除 <code>IPv4</code> 和 <code>IPv6</code> 规则（如果存在）。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw delete allow 2333/tcp<br></code></pre></td></tr></table></figure><h4 id="通过编号删除"><a href="#通过编号删除" class="headerlink" title="通过编号删除"></a>通过编号删除</h4><p>如果你有很多条规则，则在运行 <code>sudo ufw status</code> 命令查看规则时通过追加 <code>numbered</code> 参数，来给每条规则显示编号。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">To      Action          From<br>--      -----------         ------<br>[1] 22/tcp      ALLOW           192.168.0.104<br>[2] 21/tcp      ALLOW           Anywhere<br>[3] 21/tcp      ALLOW           Anywhere (v6)<br></code></pre></td></tr></table></figure><p>然后使用 <code>sudo ufw delete &lt;编号&gt;</code> 来删除规则会是更方便的选择。但需要注意的是，如果启用了 <code>IPv6</code> ，则还需要删除相应的 <code>IPv6</code> 规则。</p><p>关于 <code>ufw</code> 防火墙工具的更多用法，输入 <code>man ufw</code> 查看 <code>ufw</code> 用户手册。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><a href="https://www.moewah.com/archives/4544.html" target="_blank" rel="noopener external nofollow noreferrer">Ubuntu&#x2F;Debian 系统安装配置 UFW 简单防火墙</a></li></ul>]]></content>
     
@@ -76,9 +99,9 @@
     <category term="Linux" scheme="https://pawswrite.xyz/categories/Linux/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="解锁网易云音乐" scheme="https://pawswrite.xyz/tags/%E8%A7%A3%E9%94%81%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90/"/>
     
@@ -147,9 +170,9 @@
     <category term="VPS" scheme="https://pawswrite.xyz/categories/VPS/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
   </entry>
   
@@ -173,9 +196,9 @@
     <category term="Bitwarden" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Bitwarden/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="Bitwarden" scheme="https://pawswrite.xyz/tags/Bitwarden/"/>
     
@@ -248,9 +271,9 @@
     <category term="自建" scheme="https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E8%87%AA%E5%BB%BA/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="科学上网" scheme="https://pawswrite.xyz/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     
@@ -273,9 +296,9 @@
     <category term="VPS" scheme="https://pawswrite.xyz/categories/VPS/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
   </entry>
   
@@ -321,9 +344,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Seafile/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -348,9 +371,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Seafile/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -377,9 +400,9 @@
     <category term="Seafile" scheme="https://pawswrite.xyz/categories/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE/Seafile/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
     <category term="Seafile" scheme="https://pawswrite.xyz/tags/Seafile/"/>
     
@@ -425,9 +448,9 @@
     <category term="VPS" scheme="https://pawswrite.xyz/categories/VPS/"/>
     
     
-    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
-    
     <category term="VPS" scheme="https://pawswrite.xyz/tags/VPS/"/>
+    
+    <category term="Linux" scheme="https://pawswrite.xyz/tags/Linux/"/>
     
   </entry>
   
@@ -472,35 +495,6 @@
     
     <category term="科学上网" scheme="https://pawswrite.xyz/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>笔记：Django时区问题【非原创】</title>
-    <link href="https://pawswrite.xyz/posts/13647.html"/>
-    <id>https://pawswrite.xyz/posts/13647.html</id>
-    <published>2022-09-25T05:04:12.000Z</published>
-    <updated>2022-10-04T15:51:38.651Z</updated>
-    
-    <content type="html"><![CDATA[<p>Python的时区问题一直很烦，找到篇讲Django时区讲的很好的文章，存档一下。</p><p>《<a href="https://www.leavesongs.com/PYTHON/django-timezone-detail.html" target="_blank" rel="noopener external nofollow noreferrer">Django中与时区相关的安全问题</a>》</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Python的时区问题一直很烦，找到篇讲Django时区讲的很好的文章，存档一下。&lt;/p&gt;
-&lt;p&gt;《&lt;a href=&quot;https://www.leavesongs.com/PYTHON/django-timezone-detail.html&quot; target=&quot;_blank&quot;</summary>
-      
-    
-    
-    
-    <category term="学习是人生第一要务" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/"/>
-    
-    <category term="Django" scheme="https://pawswrite.xyz/categories/%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BA%BA%E7%94%9F%E7%AC%AC%E4%B8%80%E8%A6%81%E5%8A%A1/Django/"/>
-    
-    
-    <category term="Python" scheme="https://pawswrite.xyz/tags/Python/"/>
-    
-    <category term="Django" scheme="https://pawswrite.xyz/tags/Django/"/>
     
   </entry>
   
